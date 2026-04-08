@@ -250,7 +250,7 @@ export default function ClientsPage() {
 
         {/* Logo Grid */}
         {filtered.length > 0 ? (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
             {filtered.map((client) => (
               <LogoCard key={client.name} client={client} />
             ))}
@@ -310,33 +310,33 @@ function LogoCard({ client }) {
   const meta = CATEGORY_META[client.category];
 
   return (
-    <div className="group bg-white rounded-2xl border border-slate-100 hover:border-slate-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 p-4 sm:p-5 flex flex-col items-center relative overflow-hidden">
+    <div className="group bg-white rounded-2xl border border-slate-100 hover:border-slate-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 p-5 sm:p-7 flex flex-col items-center relative overflow-hidden">
       {/* Category accent dot */}
       <div className={`absolute top-3 right-3 w-1.5 h-1.5 rounded-full ${meta.color} opacity-60`}></div>
 
       {/* Logo */}
-      <div className="w-full h-14 sm:h-16 flex items-center justify-center px-2 mb-3">
+      <div className="w-full h-20 sm:h-24 flex items-center justify-center px-3 mb-4">
         <img
           src={client.image}
           alt={client.name}
           loading="lazy"
-          className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
+          className="max-w-full max-h-full object-contain"
         />
       </div>
 
       {/* Name */}
-      <div className="text-center min-h-[38px] flex flex-col justify-center w-full">
-        <p className="text-[11px] sm:text-xs font-black text-slate-800 leading-snug tracking-tight truncate px-1">
+      <div className="text-center min-h-[48px] flex flex-col justify-center w-full">
+        <p className="text-sm sm:text-base font-black text-slate-900 leading-snug tracking-tight truncate px-1">
           {client.name}
         </p>
-        <p className="text-[9px] sm:text-[10px] text-slate-400 mt-0.5 leading-tight font-bold truncate px-1">
+        <p className="text-[10px] sm:text-xs text-slate-400 mt-1 leading-tight font-bold truncate px-1">
           {client.nameEn}
         </p>
       </div>
 
-      {/* Bottom category tag (always visible on mobile, fades in on hover for desktop) */}
+      {/* Bottom category tag */}
       <div
-        className={`mt-2 text-[8px] sm:text-[9px] font-black uppercase tracking-widest ${meta.text} sm:opacity-0 sm:group-hover:opacity-100 transition-opacity`}
+        className={`mt-3 text-[9px] sm:text-[10px] font-black uppercase tracking-widest ${meta.text}`}
       >
         {meta.tag}
       </div>

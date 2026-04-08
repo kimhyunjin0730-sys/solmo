@@ -45,27 +45,32 @@ export default function HistoryPage() {
   const filteredData = filter === "All" ? historyData : historyData.filter(item => item.category === filter);
 
   return (
-    <div className="pb-40">
+    <div className="pb-24 sm:pb-32">
       {/* Visual Header */}
-      <section className="relative h-[400px] mb-20 flex items-center justify-center overflow-hidden">
-         <Image src="/office-bg.png" alt="Office Background" fill className="object-cover opacity-20" />
+      <section className="relative h-[260px] sm:h-[320px] mb-12 sm:mb-20 flex items-center justify-center overflow-hidden">
+         <Image src="/office-bg.png" alt="Office Background" fill className="object-cover opacity-15" />
          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white"></div>
-         <div className="relative z-10 text-center px-8">
-            <span className="text-blue-600 font-black text-xs uppercase tracking-[0.5em] mb-4 block">Our Journey</span>
-            <h3 className="text-6xl font-black text-slate-900 tracking-tighter leading-tight italic">연혁 및 실적</h3>
+         <div className="relative z-10 text-center px-6">
+            <span className="text-blue-600 font-bold text-[11px] sm:text-xs uppercase tracking-[0.35em] mb-3 sm:mb-4 block">Our Journey</span>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              연혁 및 실적
+            </h1>
+            <p className="mt-3 sm:mt-4 text-sm sm:text-base text-slate-500 font-medium max-w-xl mx-auto">
+              20년 이상 축적된 솔모정보기술의 발자취
+            </p>
          </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-8">
-         <div className="flex gap-3 flex-wrap mb-16">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+         <div className="flex gap-2 sm:gap-3 flex-wrap mb-10 sm:mb-14">
             {categories.map(cat => (
-               <button 
+               <button
                  key={cat}
                  onClick={() => setFilter(cat)}
-                 className={`px-8 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
-                   filter === cat 
-                     ? "bg-[#001F5B] text-white shadow-xl" 
-                     : "bg-slate-50 text-slate-400 hover:bg-slate-100"
+                 className={`px-5 sm:px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold tracking-tight transition-all ${
+                   filter === cat
+                     ? "bg-[#001F5B] text-white shadow-md shadow-blue-900/15"
+                     : "bg-slate-100 text-slate-500 hover:bg-slate-200"
                  }`}
                >
                  {cat === "Project" ? "주요 실적" : cat === "Partner" ? "파트너십" : cat === "Innovation" ? "기술 혁신" : cat === "Foundation" ? "설립 기초" : "전체"}
@@ -73,33 +78,34 @@ export default function HistoryPage() {
             ))}
          </div>
 
-         <div className="space-y-32">
+         <div className="space-y-16 sm:space-y-24">
             {["2019 - Present", "2017 - 2018", "2013 - 2016", "2002 - 2012"].map((period) => {
                const periodItems = filteredData.filter(item => item.year === period);
                if (periodItems.length === 0) return null;
-               
+
                return (
-                  <div key={period} className="grid lg:grid-cols-12 gap-16">
+                  <div key={period} className="grid lg:grid-cols-12 gap-6 sm:gap-10 lg:gap-16">
                      <div className="lg:col-span-3">
-                        <div className="sticky top-40 bg-slate-50 p-10 rounded-[3rem] border border-slate-100">
-                           <div className="text-sm font-black text-blue-600 mb-2 uppercase tracking-widest">Period</div>
-                           <div className="text-3xl font-black text-[#001F5B] italic leading-none">{period}</div>
-                           <div className="mt-8 w-12 h-1 bg-blue-600 rounded-full"></div>
+                        <div className="lg:sticky lg:top-40 bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100">
+                           <div className="text-[11px] font-bold text-blue-600 mb-2 uppercase tracking-[0.2em]">Period</div>
+                           <div className="text-xl sm:text-2xl font-extrabold text-[#001F5B] leading-tight tracking-tight">{period}</div>
+                           <div className="mt-5 w-10 h-0.5 bg-blue-600 rounded-full"></div>
+                           <div className="mt-3 text-xs font-medium text-slate-400">{periodItems.length} entries</div>
                         </div>
                      </div>
-                     <div className="lg:col-span-9 space-y-4">
+                     <div className="lg:col-span-9 space-y-2">
                         {periodItems.map((item, idx) => (
-                           <div key={idx} className="flex gap-8 group">
-                              <div className="flex flex-col items-center">
-                                 <div className="w-4 h-4 rounded-full border-4 border-blue-600 group-hover:bg-blue-600 transition-colors"></div>
-                                 <div className="w-px h-full bg-slate-100 min-h-[40px]"></div>
+                           <div key={idx} className="flex gap-5 sm:gap-6 group">
+                              <div className="flex flex-col items-center pt-1">
+                                 <div className="w-3 h-3 rounded-full border-2 border-blue-600 group-hover:bg-blue-600 transition-colors shrink-0"></div>
+                                 <div className="w-px flex-1 bg-slate-100 min-h-[28px]"></div>
                               </div>
-                              <div className="pb-8">
-                                 <div className="flex items-center gap-4 mb-2">
-                                    <span className="text-[9px] font-black text-slate-300 uppercase tracking-widest">{item.category}</span>
-                                    <div className="h-px flex-grow bg-slate-50"></div>
+                              <div className="pb-5 sm:pb-6 min-w-0 flex-1">
+                                 <div className="flex items-center gap-3 mb-1.5">
+                                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{item.category}</span>
+                                    <div className="h-px flex-grow bg-slate-100"></div>
                                  </div>
-                                 <p className="text-xl font-bold text-slate-800 tracking-tight group-hover:text-blue-600 transition-colors leading-tight">{item.title}</p>
+                                 <p className="text-sm sm:text-base font-semibold text-slate-800 tracking-tight group-hover:text-blue-600 transition-colors leading-relaxed">{item.title}</p>
                               </div>
                            </div>
                         ))}

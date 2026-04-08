@@ -1,18 +1,49 @@
 @import "tailwindcss";
 
+/* ───────── Pretendard (한국어 모던 웹 표준 폰트) ───────── */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
 :root {
   --background: #ffffff;
   --foreground: #0f172a;
+  --font-sans:
+    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "맑은 고딕",
+    system-ui, sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+}
+
+html {
+  font-family: var(--font-sans);
+  /* 한글에서 너무 빡빡한 자간을 살짝 풀어줌 */
+  letter-spacing: -0.01em;
+  /* 모바일에서 폰트 자동 확대 방지 */
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "ss06" on, "ss07" on; /* Pretendard 한글 OpenType 최적화 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* 헤딩의 한글은 italic이 어색함 → 영문에만 적용되도록 기본은 normal */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+  font-style: normal;
+}
+
+/* 긴 본문의 한글 줄바꿈 자연스럽게 */
+p, li {
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
