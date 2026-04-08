@@ -16,13 +16,18 @@ export const metadata = {
   description: "20년 이상의 업력, 금융·공공·대기업 보안 솔루션 전문 기업 (주)솔모정보기술입니다. X-Securitas 등 혁신적인 보안 기술을 제공합니다.",
 };
 
+import Header from "@/components/Header";
+
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Header />
+        <main className="flex-grow">{children}</main>
+      </body>
     </html>
   );
 }
