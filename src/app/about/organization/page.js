@@ -1,125 +1,90 @@
-'use client';
-import Image from "next/image";
-
 export default function OrganizationPage() {
-  const departments = [
-    {
-      name: "기업부설연구소",
-      role: "자체 솔루션 개발 및 기술 연구",
-      desc: "X-Securitas 등 핵심 보안 솔루션 R&D",
-      color: "border-blue-600 bg-blue-50"
-    },
-    {
-      name: "경영관리부",
-      role: "경영 지원 및 기업 운영",
-      desc: "인사, 재무, 기획 등 전반적 경영 관리",
-      color: "border-slate-400 bg-slate-50"
-    },
-    {
-      name: "사업 1부",
-      role: "솔루션사업팀",
-      desc: "보안 솔루션 영업 및 전문 컨설팅",
-      color: "border-[#001F5B] bg-white"
-    },
-    {
-      name: "사업 2부",
-      role: "NW기술팀",
-      desc: "네트워크 보안 인프라 기술 지원",
-      color: "border-[#001F5B] bg-white"
-    },
-    {
-      name: "사업 3부",
-      role: "보안관제사업팀",
-      desc: "보안 운영 및 상시 수탁 관제 서비스",
-      color: "border-[#001F5B] bg-white"
-    },
-    {
-      name: "SI 사업부",
-      role: "SI사업팀",
-      desc: "시스템 통합 및 대규모 인프라 구축",
-      color: "border-[#001F5B] bg-white"
-    }
-  ];
-
   return (
-    <div className="animate-reveal">
-      <div className="mb-16">
-        <h2 className="text-3xl font-black text-slate-900 mb-6">조직도</h2>
-        <p className="text-slate-500 font-medium leading-relaxed max-w-2xl">
-          (주)솔모정보기술은 각 부서 간의 유기적인 협력 체계를 통해 <br />
-          신속한 의사결정과 전문적인 보안 서비스를 제공하고 있습니다.
-        </p>
+    <div className="max-w-6xl mx-auto">
+      <div className="text-center mb-24">
+         <span className="text-blue-600 font-black text-xs uppercase tracking-widest mb-4 block">Structure</span>
+         <h3 className="text-5xl font-black tracking-tighter mb-8">조직도 및 인력인프라</h3>
+         <p className="text-slate-500 max-w-2xl mx-auto font-medium leading-relaxed">
+            (주)솔모정보기술은 유기적인 협력 체계를 통해 신속한 의사결정과 <br />
+            전문적인 보안 서비스를 제공하고 있습니다.
+         </p>
       </div>
 
-      {/* Organizational Hierarchy Chart */}
-      <div className="bg-slate-50 rounded-[3rem] p-12 md:p-20 relative overflow-hidden mb-24 border border-slate-100 shadow-inner">
-         <div className="flex flex-col items-center relative z-10">
-            {/* CEO Node */}
-            <div className="w-64 p-8 bg-[#001F5B] text-white rounded-3xl shadow-2xl text-center relative z-20 mb-20 transform hover:scale-105 transition-transform">
-               <span className="text-[10px] font-black tracking-widest opacity-60 uppercase mb-2 block">Leadership</span>
-               <h3 className="text-2xl font-black italic tracking-widest">대표이사</h3>
-               <div className="mt-2 text-[11px] font-bold opacity-40">CEO</div>
-               {/* Vertical Connector */}
-               <div className="absolute top-full left-1/2 -translate-x-1/2 w-0.5 h-20 bg-gradient-to-b from-[#001F5B] to-slate-200"></div>
-            </div>
-
-            {/* Departments Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full relative">
-               {/* Horizontal branch line for big screens */}
-               <div className="hidden lg:block absolute top-0 left-[16.6%] right-[16.6%] h-0.5 bg-slate-200 -translate-y-px"></div>
-               
-               {departments.map((dept, idx) => (
-                 <div key={dept.name} className="relative group">
-                    {/* Vertical Connector to branch line */}
-                    <div className="hidden lg:block absolute bottom-full left-1/2 -translate-x-1/2 w-0.5 h-8 bg-slate-200"></div>
-                    
-                    <div className={`p-8 rounded-[2rem] border-2 shadow-sm transition-all hover:-translate-y-2 hover:shadow-xl ${dept.color} relative z-10`}>
-                       <h4 className="text-lg font-black text-slate-900 mb-2">{dept.name}</h4>
-                       <div className="text-sm font-black text-blue-600 mb-4">{dept.role}</div>
-                       <p className="text-xs font-bold text-slate-400 leading-relaxed">{dept.desc}</p>
-                    </div>
-                 </div>
-               ))}
+      {/* Organization Tree Visualization */}
+      <div className="relative pt-12 mb-40">
+         <div className="flex justify-center mb-20 md:mb-32">
+            <div className="bg-[#001F5B] text-white px-16 py-8 rounded-3xl font-black text-2xl shadow-2xl relative z-10 transition-transform hover:scale-105 border border-white/10 uppercase italic tracking-tighter">
+               대표이사 <span className="text-blue-400 ml-2 text-sm not-italic opacity-60">CEO</span>
             </div>
          </div>
          
-         {/* Background Decor */}
-         <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full blur-[120px] opacity-20 -mr-48 -mt-48"></div>
-         <div className="absolute bottom-0 left-0 w-96 h-96 bg-slate-200 rounded-full blur-[120px] opacity-30 -ml-48 -mb-48"></div>
+         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 relative">
+            {/* Connection Lines (Desktop) */}
+            <div className="hidden xl:block absolute top-0 left-1/2 -translate-x-1/2 w-[90%] h-px bg-slate-200 -translate-y-16"></div>
+            
+            <OrgNode title="기업부설연구소" desc="자체 솔루션 개발 및 기술 연구" accent />
+            <OrgNode title="경영관리부" desc="기업 운영 및 경영 지원" />
+            <OrgNode title="사업 1부" desc="솔루션사업팀 / 컨설팅" />
+            <OrgNode title="사업 2부" desc="NW기술팀 / 기술지원" />
+            <OrgNode title="사업 3부" desc="보안관제사업팀 / 수탁관리" />
+            <OrgNode title="SI 사업부" desc="SI사업팀 / 인프라구축" />
+         </div>
       </div>
 
-      {/* Manpower Statistics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      {/* Manpower Stats section */}
+      <div className="pt-24 border-t border-slate-100 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
          <div>
-            <h3 className="text-2xl font-black text-slate-900 mb-6">전문 인력 현황</h3>
-            <p className="text-slate-500 font-medium leading-relaxed mb-8">
-               전체 47명의 인력 중 대다수가 국가 공인 자격 및 전문 기술 등급을 보유하고 있으며, 
-               수많은 보안 프로젝트 수행 경험을 바탕으로 최상의 성능을 보장합니다.
+            <h4 className="text-3xl font-black text-slate-900 mb-8">전문 인력 인프라</h4>
+            <div className="flex items-baseline gap-6 mb-10">
+               <span className="text-7xl font-black text-blue-600 tracking-tighter italic">47</span>
+               <span className="text-xl font-bold text-slate-400">Total Security Experts</span>
+            </div>
+            <p className="text-slate-500 font-medium leading-relaxed mb-10 text-lg">
+               전체 인원의 90% 이상이 기술직으로 구성된 엔지니어 중심의 기업입니다. 
+               특급 및 고급 전문가 비중이 높아 기술 난이도가 높은 프로젝트를 안정적으로 수행합니다.
             </p>
-            <div className="inline-flex items-center gap-4 px-6 py-4 bg-slate-900 text-white rounded-2xl shadow-xl">
-               <span className="text-xs font-bold opacity-60 uppercase tracking-widest">Total Force</span>
-               <span className="text-2xl font-black italic">47</span>
-               <span className="text-xs font-bold opacity-60 uppercase tracking-widest">Technicians</span>
+            <div className="bg-blue-50 border border-blue-100 p-8 rounded-[2.5rem]">
+               <div className="flex justify-between items-center mb-4">
+                  <span className="font-black text-[#001F5B]">기술 전문성 만족도</span>
+                  <span className="text-blue-600 font-black italic text-xl">98%</span>
+               </div>
+               <div className="w-full h-3 bg-white rounded-full overflow-hidden shadow-inner">
+                  <div className="w-[98%] h-full bg-blue-500"></div>
+               </div>
             </div>
          </div>
-
-         <div className="grid grid-cols-2 gap-4">
-            <StatBox label="특급" value="9" desc="수석 엔지니어" border="border-blue-600" />
-            <StatBox label="고급" value="15" desc="선임 엔지니어" border="border-blue-400" />
-            <StatBox label="중급" value="10" desc="전임 엔지니어" border="border-slate-300" />
-            <StatBox label="초급" value="13" desc="주니어 엔지니어" border="border-slate-200" />
+         
+         <div className="grid grid-cols-2 gap-6">
+            <StatCard label="Expert Class" title="특급전문가" value="9" color="bg-[#001F5B]" />
+            <StatCard label="High Class" title="고급전문가" value="15" color="bg-blue-800" />
+            <StatCard label="Middle Class" title="중급전문가" value="10" color="bg-blue-600" />
+            <StatCard label="Junior Class" title="초급전문가" value="13" color="bg-blue-400" />
          </div>
       </div>
     </div>
   );
 }
 
-function StatBox({ label, value, desc, border }) {
+function OrgNode({ title, desc, accent }) {
   return (
-    <div className={`p-8 rounded-3xl bg-white border-b-4 ${border} shadow-lg shadow-slate-100 text-center transition-transform hover:scale-105`}>
-       <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 block">{label}</span>
-       <div className="text-3xl font-black text-slate-900 mb-1">{value}<span className="text-sm ml-1 opacity-40 italic">명</span></div>
-       <span className="text-[10px] font-bold text-slate-400">{desc}</span>
+    <div className="relative group">
+       <div className={`p-8 rounded-[2rem] border transition-all h-full ${accent ? "bg-blue-600 border-transparent text-white" : "bg-white border-slate-100 hover:border-blue-500 text-slate-900"}`}>
+          <h4 className={`text-lg font-black mb-3 ${accent ? "text-white" : "text-[#001F5B]"}`}>{title}</h4>
+          <p className={`text-xs font-bold leading-relaxed ${accent ? "text-white/70" : "text-slate-400"}`}>{desc}</p>
+       </div>
+    </div>
+  );
+}
+
+function StatCard({ label, title, value, color }) {
+  return (
+    <div className="p-10 rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:bg-white hover:shadow-2xl transition-all group">
+       <span className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4">{label}</span>
+       <h4 className="text-xl font-black text-slate-800 mb-6 tracking-tight">{title}</h4>
+       <div className="flex items-baseline gap-2">
+          <span className={`text-4xl font-black italic tracking-tighter ${color.replace('bg-', 'text-')}`}>{value}</span>
+          <span className="text-sm font-bold text-slate-300">명</span>
+       </div>
     </div>
   );
 }

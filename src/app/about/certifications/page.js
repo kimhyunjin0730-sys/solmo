@@ -1,53 +1,43 @@
-'use client';
-
-const certs = [
-  { id: "gs", name: "GS인증 (1등급)", desc: "Software Quality Certificate", icon: "GS" },
-  { id: "venture", name: "벤처기업확인", desc: "Venture Business Certification", icon: "V" },
-  { id: "comm", name: "정보통신공사업 면허", desc: "IT Communication Business License", icon: "C" },
-  { id: "patent", name: "특허 및 지적재산권", desc: "Multiple Patents & IP Rights", icon: "P" },
-  { id: "credit", name: "신용등급 BB+", desc: "2025.04 기준 (한국평가데이타)", icon: "R" }
-];
-
 export default function CertificationsPage() {
   return (
-    <div className="max-w-6xl mx-auto space-y-24">
-      <header className="mb-20 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-[10px] font-black text-blue-700 mb-6 tracking-widest uppercase">
-          Certifications & Patents
-        </div>
-        <h2 className="text-4xl md:text-5xl font-black text-[#1d1d1d] tracking-tight leading-tight">
-          검증된 기술력과 <br />
-          <span className="text-[#004a99]">공신력 있는 인증</span>
-        </h2>
-      </header>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {certs.map((cert) => (
-          <div key={cert.id} className="group relative p-10 rounded-[2.5rem] bg-white border border-slate-100 shadow-[0_15px_30px_-10px_rgba(15,23,42,0.05)] hover:shadow-[0_40px_80px_-20px_rgba(15,23,42,0.15)] hover:border-blue-200 transition-all duration-500 overflow-hidden">
-            {/* Visual Header */}
-            <div className={`w-16 h-16 rounded-[1.5rem] flex items-center justify-center mb-10 transition-transform group-hover:scale-110 duration-500 bg-gradient-to-br from-blue-700 to-indigo-800 text-white font-black text-2xl shadow-xl shadow-blue-900/10`}>
-              {cert.icon}
-            </div>
-            
-            <h3 className="text-2xl font-black text-slate-800 mb-4 tracking-tighter group-hover:text-blue-700 transition-colors">{cert.name}</h3>
-            <p className="text-slate-400 text-xs font-bold uppercase tracking-widest mb-6 opacity-60">{cert.desc}</p>
-            
-            <p className="text-slate-500 text-[14px] leading-relaxed font-medium">
-               (주)솔모정보기술은 공신력 있는 기관의 인증을 통해 정보보안 분야의 전문적 기술 역량을 지속적으로 검증받고 있습니다.
-            </p>
-
-            {/* Ambient Background Logo */}
-            <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 opacity-0 group-hover:opacity-100 blur-[40px] rounded-full pointer-events-none transition-opacity duration-700"></div>
-          </div>
-        ))}
+    <div className="max-w-6xl mx-auto">
+      <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+         <div>
+           <span className="text-blue-600 font-black text-xs uppercase tracking-widest mb-4 block">Competency</span>
+           <h3 className="text-5xl font-black text-slate-900 tracking-tighter">인증 및 특허</h3>
+         </div>
+         <p className="text-slate-400 font-bold text-lg max-w-md">최고의 기술력을 증명하는 대내외 인증 현황입니다.</p>
       </div>
 
-      {/* Philosophy Callout */}
-      <div className="pt-24 text-center">
-         <p className="text-slate-400 font-bold text-sm tracking-tight leading-relaxed max-w-2xl mx-auto">
-            솔모정보기술은 단순한 자격 획득을 넘어, 모든 프로젝트에서 최상의 품질과 신뢰를 보장하기 위해 엄격한 표준을 준수합니다.
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+         <CertCard title="기업 인증" items={["벤처기업확인서", "정보통신공사업 등록증", "소프트웨어사업자 신고", "중소기업확인서", "직접생산확인증명서"]} icon="🏢" />
+         <CertCard title="기술 및 품질" items={["GS(Good Software) 인증 1등급 보유", "기업부설연구소 인정서", "신용평가등급 BB+ (한국평가데이타)", "기술역량 우수기업"]} icon="🏆" />
+         <CertCard title="보유 특허" items={["무선랜 관련 특허", "다기능 인터폰 특허", "수배전반 안전관리 특허", "도어락 보안 특허", "정보 유출 방지 시스템 특허"]} icon="💡" />
+      </div>
+
+      <div className="mt-32 p-12 rounded-[3rem] bg-slate-50 border border-slate-100 text-center">
+         <p className="text-slate-500 font-medium text-lg leading-relaxed max-w-3xl mx-auto">
+            (주)솔모정보기술은 단순한 자격 획득을 넘어, <br />
+            실제 프로젝트 현장에서 검증된 기술력으로 최고의 보안 품질을 보장합니다.
          </p>
       </div>
+    </div>
+  );
+}
+
+function CertCard({ title, items, icon }) {
+  return (
+    <div className="bg-white p-10 rounded-[3rem] border border-slate-100 hover:border-blue-500 hover:shadow-2xl transition-all group">
+       <div className="text-5xl mb-8 grayscale group-hover:grayscale-0 transition-all duration-500">{icon}</div>
+       <h4 className="text-2xl font-black text-[#001F5B] mb-8 tracking-tight">{title}</h4>
+       <ul className="space-y-4">
+          {items.map((item, idx) => (
+             <li key={idx} className="flex items-center gap-4 text-[15px] font-bold text-slate-500">
+                <div className="w-2 h-2 rounded-full bg-blue-500/20 group-hover:bg-blue-500 transition-colors"></div>
+                {item}
+             </li>
+          ))}
+       </ul>
     </div>
   );
 }

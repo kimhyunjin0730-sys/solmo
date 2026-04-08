@@ -1,76 +1,101 @@
-'use client';
-
-const history = [
-  { year: "2025", items: ["(주)솔모정보기술 주요 솔루션 고도화 및 공공/금융 레퍼런스 확충", "한국평가데이타 신용등급 BB+ 달성 (2025.04)"] },
-  { year: "2020", items: ["X-Securitas 스크린 워터마크 GS인증 1등급 획득", "데이터 보안 및 정보 유출 방지 특화 솔루션 시장 진입"] },
-  { year: "2015", items: ["침입방지시스템(IPS) 및 네트워크 접근제어(NAC) 통합 보안 SI 사업 확대", "주요 공공기관 및 대기업 보안 파트너십 구축"] },
-  { year: "2009", items: ["(주)솔모정보기술 법인명 변경", "보안관제 솔루션 구축 및 정보보안 컨설팅 사업 본격화"] },
-  { year: "2002", items: ["(주)에이투지정보기술 설립 (2002.10.09)", "기업 전산실 구축 및 유지보수 서비스 개시"] }
-];
-
 export default function HistoryPage() {
   return (
-    <div className="max-w-4xl mx-auto space-y-24">
-      <header className="mb-20 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-200 bg-blue-50 text-[10px] font-black text-blue-700 mb-6 tracking-widest uppercase">
-          Corporate History
-        </div>
-        <h2 className="text-4xl md:text-5xl font-black text-[#1d1d1d] tracking-tight leading-tight">
-          신뢰로 쌓아온 <br />
-          <span className="text-[#004a99]">솔모의 20년</span>
-        </h2>
-      </header>
-
-      <section className="relative px-4">
-        {/* Continuous Timeline Line */}
-        <div className="absolute left-1/2 top-0 bottom-0 w-px bg-slate-200 hidden md:block"></div>
-        <div className="absolute left-6 top-0 bottom-0 w-px bg-slate-200 md:hidden"></div>
-
-        <div className="space-y-24">
-          {history.map((h, i) => (
-            <div key={h.year} className="relative flex flex-col md:flex-row items-center gap-12 group transition-all">
-              {/* Year Marker Desktop */}
-              <div className="hidden md:flex flex-1 justify-end">
-                <div className="text-right pr-20 pt-2 transition-transform group-hover:-translate-x-2">
-                  <span className="text-[12px] font-black text-slate-300 uppercase tracking-widest block mb-2 opacity-50">MILESTONE</span>
-                  <span className="text-6xl font-black text-[#004a99] tracking-tighter tabular-nums drop-shadow-sm">{h.year}</span>
-                </div>
-              </div>
-
-              {/* Central Point */}
-              <div className="absolute left-6 md:left-1/2 -ml-3 md:-ml-3.5 z-10">
-                <div className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-white border-4 border-[#004a99] shadow-lg shadow-blue-900/10 transition-transform group-hover:scale-125"></div>
-              </div>
-
-              {/* Content Panel */}
-              <div className="flex-1 w-full pl-16 md:pl-20 relative">
-                <div className="md:hidden mb-4">
-                   <span className="text-4xl font-black text-[#004a99] uppercase tracking-tighter">{h.year}</span>
-                </div>
-                <div className="p-8 md:p-10 rounded-[2.5rem] bg-white border border-slate-100 shadow-[0_20px_40px_-20px_rgba(15,23,42,0.1)] group-hover:shadow-[0_40px_80px_-20px_rgba(15,23,42,0.15)] transition-all">
-                   <ul className="space-y-6">
-                      {h.items.map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-4">
-                           <div className="mt-2.5 w-1.5 h-1.5 rounded-full bg-blue-600 flex-shrink-0"></div>
-                           <p className="text-slate-600 font-bold leading-relaxed text-[15px]">{item}</p>
-                        </li>
-                      ))}
-                   </ul>
-                </div>
-              </div>
+    <div className="max-w-5xl mx-auto">
+      <div className="text-center mb-24">
+         <span className="text-blue-600 font-black text-xs uppercase tracking-widest mb-4 block">Our Journey</span>
+         <h3 className="text-5xl font-black text-slate-900 tracking-tighter">솔모정보기술 22년 역사</h3>
+      </div>
+      
+      <div className="relative">
+         {/* Vertical line for desktop */}
+         <div className="hidden lg:block absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-px bg-slate-200"></div>
+         
+         <div className="space-y-16 lg:space-y-0">
+            {/* Recent Activity */}
+            <div className="lg:grid lg:grid-cols-2 gap-24 items-center relative">
+               <div className="lg:text-right">
+                  <h4 className="text-4xl font-black text-blue-600 mb-2 italic">2019 - Present</h4>
+                  <p className="text-slate-400 font-bold mb-8 uppercase tracking-widest text-xs">Innovation & Growth</p>
+               </div>
+               <div className="relative pl-8 lg:pl-0 border-l-2 lg:border-l-0 border-blue-500">
+                  <ul className="space-y-4 text-slate-600 font-medium">
+                     <li className="flex items-start gap-3">
+                        <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                        <span><span className="text-blue-600 font-bold">HCL</span> 파트너 계약 및 포스코DX 협력사 선정</span>
+                     </li>
+                     <li className="flex items-start gap-3">
+                        <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                        <span>자체 솔루션 <span className="text-blue-600 font-bold">X-Securitas</span> 개발 및 조달 등록</span>
+                     </li>
+                     <li className="flex items-start gap-3">
+                        <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                        <span>금융권(새마을금고) 및 공공(국립암센터) 대형 구축</span>
+                     </li>
+                     <li className="flex items-start gap-3">
+                        <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                        <span>울산항만공사 영상회의 시스템 및 ISMS 강화</span>
+                     </li>
+                  </ul>
+               </div>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* Philosophy Section */}
-      <section className="pt-40 text-center">
-        <div className="inline-flex items-center gap-4 px-10 py-6 rounded-[2rem] bg-slate-50 border border-white shadow-sm">
-           <div className="text-slate-400 font-bold text-sm">SINCE 2002</div>
-           <div className="w-px h-6 bg-slate-200"></div>
-           <div className="text-[#004a99] font-black text-lg tracking-tight italic uppercase">Total IT Security Expert</div>
-        </div>
-      </section>
+            <div className="lg:h-32 hidden lg:block"></div>
+
+            {/* Growth Period */}
+            <div className="lg:grid lg:grid-cols-2 gap-24 items-center relative">
+               <div className="relative order-2 lg:order-1 text-right lg:pr-8 pr-0 border-r-0 lg:border-r-2 lg:border-blue-500">
+                  <ul className="space-y-4 text-slate-600 font-medium">
+                     <li className="flex items-start justify-end gap-3">
+                        <span>벤처기업확인 및 연구소 중심 성장</span>
+                        <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                     </li>
+                     <li className="flex items-start justify-end gap-3">
+                        <span>IBM, Acronis, HP, PNP시큐어 파트너십</span>
+                        <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                     </li>
+                     <li className="flex items-start justify-end gap-3">
+                        <span><span className="text-blue-600 font-bold">Fortinet</span> 최우수 파트너 및 Expert 승격</span>
+                        <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                     </li>
+                  </ul>
+               </div>
+               <div className="order-1 lg:order-2">
+                  <h4 className="text-4xl font-black text-blue-600 mb-2 italic">2013 - 2018</h4>
+                  <p className="text-slate-400 font-bold mb-8 uppercase tracking-widest text-xs">Technical Expansion</p>
+               </div>
+            </div>
+
+            <div className="lg:h-32 hidden lg:block"></div>
+
+            {/* Foundation */}
+            <div className="lg:grid lg:grid-cols-2 gap-24 items-center relative">
+               <div className="lg:text-right">
+                  <h4 className="text-4xl font-black text-blue-600 mb-2 italic">2002 - 2012</h4>
+                  <p className="text-slate-400 font-bold mb-8 uppercase tracking-widest text-xs">The Beginning</p>
+               </div>
+               <div className="relative pl-8 lg:pl-0 border-l-2 lg:border-l-0 border-blue-500">
+                  <ul className="space-y-4 text-slate-600 font-medium">
+                     <li className="flex items-start gap-3">
+                        <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                        <span>2009년 **(주)솔모정보기술** 법인명 변경</span>
+                     </li>
+                     <li className="flex items-start gap-3">
+                        <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                        <span>2002년 ㈜에이투지정보기술 설립</span>
+                     </li>
+                     <li className="flex items-start gap-3">
+                        <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                        <span>정보통신공사업 등록 및 다수 특허 보유</span>
+                     </li>
+                     <li className="flex items-start gap-3">
+                        <div className="mt-2 w-1.5 h-1.5 rounded-full bg-blue-500 shrink-0"></div>
+                        <span>기업부설연구소 설립으로 독자 기술 확보</span>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
     </div>
   );
 }
