@@ -62,41 +62,36 @@ export default function Home() {
       category: "네트워크 보안",
       color: "blue",
       items: [
-        { name: "Fortinet FortiGate", tag: "UTM / VPN", note: "Expert Partner" },
+        { name: "Fortinet FortiGate", tag: "UTM / VPN", note: "통합 위협 관리" },
         { name: "PIOLINK WEBFRONT-K", tag: "WAF", note: "웹 방화벽" },
-        { name: "Infoblox Trinzic DDI", tag: "DNS", note: "도메인 관리" },
-        { name: "Cisco FirePOWER", tag: "IPS", note: "침입차단" },
-        { name: "GenianNAC", tag: "NAC", note: "네트워크 접근제어" },
+        { name: "Genian NAC", tag: "NAC", note: "네트워크 접근 제어" },
+        { name: "NETAND HIWARE", tag: "IAM / Access Control", note: "계정 및 접근 통제" },
+        { name: "Network DLP / URL Filter", tag: "DLP / Proxy", note: "Mail-i / WebKeeper" },
       ]
     },
     {
-      category: "데이터 보안",
+      category: "내부정보유출 보안",
       color: "indigo",
       items: [
-        { name: "X-Securitas", tag: "Watermark", note: "SOLMO 자체 개발" },
-        { name: "IBM QRadar", tag: "SIEM / SOAR", note: "통합 로그 분석" },
-        { name: "Acronis & Recovery", tag: "Backup", note: "데이터 보호·복구" },
-        { name: "Blancco Drive Eraser", tag: "Eraser", note: "완전 삭제" },
+        { name: "xSecuritas", tag: "Watermark", note: "스크린 워터마크 (자체개발)" },
+        { name: "DBSAFER", tag: "DB Security", note: "DB 접근 제어" },
+        { name: "IBM QRadar", tag: "SIEM / SOAR", note: "통합 로그 관리" },
+        { name: "Sindoh uPrint", tag: "Secure Print", note: "보안 복합기 시스템" },
       ]
     },
     {
-      category: "단말 / 서버 보안",
+      category: "어플리케이션 보안",
       color: "sky",
       items: [
-        { name: "DBSafer (PNP Secure)", tag: "DB 접근제어", note: "가상화 정책 제어" },
-        { name: "HIWARE 6 (넷앤드)", tag: "IAM", note: "계정 권한 관리" },
-        { name: "Vormetric (탈레스)", tag: "DB 암호화", note: "정형/비정형" },
-        { name: "Privacy-i (소만사)", tag: "E-DLP", note: "데이터 검출·관리" },
+        { name: "ITStation TA-PRS / FDM", tag: "PMS / FDM", note: "패치 및 배포 관리" },
+        { name: "Gaaiho PDF Suite", tag: "PDF / Office", note: "문서 관리 솔루션" },
       ]
     },
     {
-      category: "보안취약점 점검",
+      category: "백업 및 복구",
       color: "violet",
       items: [
-        { name: "모의해킹 점검", tag: "Pentest", note: "Solmo 직수행" },
-        { name: "IBM Randori", tag: "ASM", note: "공격표면 관리" },
-        { name: "Codemind", tag: "시큐어코딩", note: "소스코드 진단" },
-        { name: "HCL AppScan", tag: "DAST", note: "웹 취약점 분석" },
+        { name: "Acronis Cyber Protect", tag: "Backup / DR", note: "이미지 백업 및 재해 복구" },
       ]
     },
   ];
@@ -289,7 +284,7 @@ export default function Home() {
       </section>
 
       {/* ── Clients ── */}
-      <section className="py-24 bg-white border-b border-slate-100">
+      <section id="clients" className="py-24 bg-white border-b border-slate-100 scroll-mt-24">
         <div className="max-w-[1400px] mx-auto px-8">
           <div className="mb-14">
             <span className="text-blue-600 font-bold text-sm uppercase tracking-widest mb-3 block">References</span>

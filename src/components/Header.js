@@ -64,20 +64,20 @@ export default function Header() {
           </div>
 
           {/* 4. CLIENTS */}
-          <Link href="/clients" className="hover:text-[#001F5B] transition-colors">CLIENTS</Link>
+          <Link href={isHome ? "#clients" : "/#clients"} className="hover:text-[#001F5B] transition-colors">CLIENTS</Link>
 
           {/* 5. SUPPORT Dropdown */}
           <div className="relative group">
              <button className="group-hover:text-[#001F5B] transition-colors flex items-center gap-1">SUPPORT</button>
              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                 <div className="bg-white shadow-2xl rounded-2xl border border-slate-100 p-5 w-52 space-y-1 text-left uppercase">
-                  <Link href="/#contact" className="block px-4 py-3 hover:bg-slate-50 rounded-xl text-[11px] font-black text-slate-500 hover:text-[#001F5B] transition-all">영업문의</Link>
-                  <Link href="/#contact" className="block px-4 py-3 hover:bg-slate-50 rounded-xl text-[11px] font-black text-slate-500 hover:text-[#001F5B] transition-all opacity-50">오시는 길</Link>
+                  <Link href="/support/contact" className="block px-4 py-3 hover:bg-slate-50 rounded-xl text-[11px] font-black text-slate-500 hover:text-[#001F5B] transition-all">영업문의</Link>
+                  <Link href="/support/location" className="block px-4 py-3 hover:bg-slate-50 rounded-xl text-[11px] font-black text-slate-500 hover:text-[#001F5B] transition-all">오시는 길</Link>
                 </div>
              </div>
           </div>
           
-          <Link href="/#contact" className="ml-4 px-8 py-3 bg-[#001F5B] text-white rounded-full hover:bg-blue-900 transition-all shadow-xl shadow-blue-900/10">문의하기</Link>
+          <Link href="/support/contact" className="ml-4 px-8 py-3 bg-[#001F5B] text-white rounded-full hover:bg-blue-900 transition-all shadow-xl shadow-blue-900/10">문의하기</Link>
         </div>
       </div>
     </nav>
