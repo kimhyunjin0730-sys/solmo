@@ -77,14 +77,16 @@ export default function MaintenancePage() {
          </div>
       </section>
 
-      <section className="relative h-[650px] rounded-[4.5rem] overflow-hidden shadow-2xl">
-         <Image 
-           src="/images/services/통합유지보수.png" 
-           alt="통합 유지보수 서비스" 
-           fill 
-           className="object-cover"
-         />
-         <div className="absolute inset-x-12 bottom-12 p-16 bg-white shadow-2xl rounded-[3rem] animate-reveal">
+      <section className="relative h-[650px] rounded-[4.5rem] overflow-hidden shadow-2xl bg-white border border-slate-100 p-20">
+         <div className="relative w-full h-full">
+            <Image 
+              src="/images/services/통합유지보수.png" 
+              alt="통합 유지보수 서비스" 
+              fill 
+              className="object-contain"
+            />
+         </div>
+         <div className="absolute inset-x-12 bottom-12 p-16 bg-white shadow-2xl rounded-[3rem] animate-reveal border border-slate-100">
             <h3 className="text-4xl font-black italic mb-4 tracking-tighter text-slate-900">Endless Reliability</h3>
             <p className="text-slate-500 font-bold text-lg leading-relaxed max-w-2xl">
                포스코 그룹사, 새마을금고중앙회 등 대규모 인프라 운영 레퍼런스를 통해 검증된 통합 유지보수 서비스를 지금 만나보세요.

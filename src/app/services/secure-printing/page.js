@@ -52,17 +52,18 @@ export default function SecurePrintingPage() {
          <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-600/10 pointer-events-none"></div>
       </section>
 
-      <section className="relative h-[600px] rounded-[4rem] overflow-hidden shadow-2xl">
-         <Image 
-           src="/images/services/보안프린트.jpg" 
-           alt="보안프린트 구축" 
-           fill 
-           className="object-cover"
-         />
-         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/10 to-transparent"></div>
-         <div className="absolute bottom-20 left-20 right-20 text-white">
-            <h3 className="text-4xl font-black tracking-tight mb-4">Smart Security Print Solutions</h3>
-            <p className="text-lg font-bold opacity-70">보이지 않는 기술로 가장 확실한 자산 유출 방지를 실현합니다.</p>
+      <section className="relative h-[600px] rounded-[4rem] overflow-hidden shadow-2xl bg-white border border-slate-100 p-12">
+         <div className="relative w-full h-full">
+            <Image 
+              src="/images/services/보안프린트.jpg" 
+              alt="보안프린트 구축" 
+              fill 
+              className="object-contain"
+            />
+         </div>
+         <div className="absolute inset-x-0 bottom-0 p-16 bg-gradient-to-t from-slate-900 via-slate-900/40 to-transparent">
+            <h3 className="text-4xl font-black text-white mb-4 tracking-tighter">Smart Security Print Solutions</h3>
+            <p className="text-white/70 font-bold text-lg">보이지 않는 기술로 가장 확실한 자산 유출 방지를 실현합니다.</p>
          </div>
       </section>
     </div>

@@ -63,7 +63,10 @@ export default function Header() {
              </div>
           </div>
 
-          {/* 4. SUPPORT Dropdown */}
+          {/* 4. CLIENTS */}
+          <Link href="/clients" className="hover:text-[#001F5B] transition-colors">CLIENTS</Link>
+
+          {/* 5. SUPPORT Dropdown */}
           <div className="relative group">
              <button className="group-hover:text-[#001F5B] transition-colors flex items-center gap-1">SUPPORT</button>
              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
