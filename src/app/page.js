@@ -37,7 +37,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Solution Grid (Main Home Content) */}
+      {/* Solution Grid */}
       <section id="solutions" className="py-40 bg-slate-50 scroll-mt-24">
         <div className="max-w-[1400px] mx-auto px-8 grid lg:grid-cols-12 gap-16 items-start">
            <div className="lg:col-span-3">
@@ -58,7 +58,7 @@ export default function Home() {
         </div>
       </section>
       
-      {/* Service Area with Individual Anchors */}
+      {/* Service Area */}
       <section className="py-40 bg-white overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-8">
           <div className="flex flex-col md:flex-row justify-between items-end mb-20 gap-10">
@@ -101,6 +101,123 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Full Integrated History Section */}
+      <section id="history" className="py-40 bg-slate-50 border-y border-slate-100 scroll-mt-24">
+         <div className="max-w-[1400px] mx-auto px-8">
+            <div className="text-center mb-24">
+               <span className="text-blue-600 font-black text-xs uppercase tracking-[0.5em] mb-4 block">Our Legacy</span>
+               <h3 className="text-5xl font-black text-slate-900 tracking-tighter">솔모 22년의 탄탄한 기록</h3>
+            </div>
+
+            <div className="grid lg:grid-cols-2 gap-20">
+               {/* Column 1: Newer History (2013 - Present) */}
+               <div className="space-y-20">
+                  <div className="space-y-8">
+                     <h4 className="text-3xl font-black text-[#001F5B] flex items-center gap-4">
+                        2019 - Present
+                        <div className="h-0.5 flex-grow bg-blue-600/20"></div>
+                     </h4>
+                     <div className="space-y-8 pl-4 border-l-2 border-blue-600/10">
+                        <div>
+                           <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-3">파트너십 및 인증</p>
+                           <ul className="space-y-2 text-sm font-bold text-slate-600">
+                              <li>• HCL 파트너 계약 체결 (AppScan)</li>
+                              <li>• <strong className="text-slate-900">포스코DX</strong> 협력사 선정</li>
+                              <li>• Infoblox 파트너 등록</li>
+                              <li>• 기업 신용평가 등급 <strong className="text-blue-600 font-black">BB+</strong> 상향</li>
+                              <li>• Fortinet Expert 파트너 승격</li>
+                              <li>• 버카다(Verkada) 파트너 등록</li>
+                              <li>• 고숙련 일학습병행 학습기업 등록 및 서울지역 앰버서더 선정</li>
+                           </ul>
+                        </div>
+                        <div>
+                           <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-3">자체 개발 및 구축 실적</p>
+                           <ul className="space-y-3 text-sm font-bold text-slate-600">
+                              <li>• 스크린 워터마크 솔루션 <strong className="text-slate-900">X-Securitas</strong> 개발, 출시 및 조달 등록</li>
+                              <li>• <strong className="text-slate-900">포스코 그룹</strong>: 리눅스 서버용 백신 솔루션 구축, AI서버 렌탈 및 UTM 운영 인프라 구축</li>
+                              <li>• <strong className="text-slate-900">포스코인터내셔널</strong>: ISMS 강화 보안 솔루션 및 포티넷 방화벽 구축</li>
+                              <li>• <strong className="text-slate-900">포스코인터내셔널</strong>: Genian NAC 차단센서 구축</li>
+                              <li>• <strong className="text-slate-900">포스코에너지</strong>: DB 접근제어(DBSAFER) 및 MDM 시스템 구축</li>
+                              <li>• <strong className="text-slate-900">포스코인재창조원</strong>: 서버 백신 구축</li>
+                              <li>• <strong className="text-slate-900">포스코대우</strong>: 시스템 로그 관리 및 서버 보안 구축</li>
+                              <li>• <strong className="text-slate-900">포스코플랜텍-광양</strong>: 영상시스템 구축</li>
+                              <li>• <strong className="text-blue-700">금유/은행</strong>: <strong className="text-slate-900">MG새마을금고중앙회</strong> 업무자동화시스템 및 FDS 업그레이드 구축</li>
+                              <li>• <strong className="text-blue-700">금융</strong>: <strong className="text-slate-900">새마을금고중앙회</strong> DDoS(ONE-d 5000) 및 메시지 통합 관리시스템 구축</li>
+                              <li>• <strong className="text-slate-900">국립암센터</strong> 빅데이터 플랫폼 구축, <strong className="text-slate-900">한국보건의료연구원</strong> ACRONIS OS 백업 구축</li>
+                              <li>• <strong className="text-slate-900">건국대학교</strong> NAC 구축, <strong className="text-slate-900">울산항만공사</strong> 영상회의실 구축</li>
+                              <li>• <strong className="text-slate-900">현대중공업</strong> ISS 방화벽 구축, <strong className="text-slate-900">셀트리온 헬스케어</strong> 로그관리 구축</li>
+                              <li>• <strong className="text-slate-900">포스코건설</strong> 더샵 플랫폼 개발 취약점 진단 및 모의해킹</li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+
+                  <div className="space-y-8">
+                     <h4 className="text-3xl font-black text-slate-400 flex items-center gap-4">
+                        2017 - 2018
+                        <div className="h-0.5 flex-grow bg-slate-200"></div>
+                     </h4>
+                     <div className="space-y-8 pl-4 border-l-2 border-slate-100">
+                        <ul className="space-y-3 text-sm font-bold text-slate-500">
+                           <li>• Fortinet 최우수 파트너 수상 및 Citrix 파트너 등록</li>
+                           <li>• 파키스탄 글로벌 기업 "D"사와 방산 관련 LOA 체결</li>
+                           <li>• <strong className="text-slate-800">포스코대우</strong> NW APT 장비 및 E-DLP 솔루션 구축</li>
+                           <li>• RIST 웹키퍼 및 DDOS 보안장비 구축</li>
+                           <li>• 피엔알 ERP시스템 백업 SW(Acronis) 구축</li>
+                           <li>• <strong className="text-slate-800">포스코</strong> 해외법인 보안클라우드 방화벽 및 로그연동장치 구축</li>
+                           <li>• <strong className="text-slate-800">포스코에너지</strong> 정보유출 방지를 위한 네트워크 보안솔루션(NAC) 구축</li>
+                        </ul>
+                     </div>
+                  </div>
+               </div>
+
+               {/* Column 2: Older History (2002 - 2016) */}
+               <div className="space-y-20">
+                  <div className="space-y-8">
+                     <h4 className="text-3xl font-black text-slate-400 flex items-center gap-4">
+                        2013 - 2016
+                        <div className="h-0.5 flex-grow bg-slate-200"></div>
+                     </h4>
+                     <div className="space-y-8 pl-4 border-l-2 border-slate-100">
+                        <ul className="space-y-3 text-sm font-bold text-slate-500">
+                           <li>• <strong className="text-slate-800">HP, IBM e-Security, Acronis</strong> 파트너 등록</li>
+                           <li>• PNP시큐어 영업 파트너 및 효성인포메이션시스템 파트너 등록</li>
+                           <li>• <strong className="text-slate-800">벤처기업확인</strong> 등록 및 국방과학기술 수출 중개업 등록</li>
+                        </ul>
+                     </div>
+                  </div>
+
+                  <div className="space-y-8">
+                     <h4 className="text-3xl font-black text-slate-400 flex items-center gap-4">
+                        2002 - 2012
+                        <div className="h-0.5 flex-grow bg-slate-200"></div>
+                     </h4>
+                     <div className="space-y-8 pl-4 border-l-2 border-slate-100">
+                        <div>
+                           <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-3">회사 설립 및 기반</p>
+                           <ul className="space-y-2 text-sm font-bold text-slate-500">
+                              <li>• 2002년 10월 09일: <strong className="text-slate-900">㈜에이투지정보기술</strong> 설립</li>
+                              <li>• 2009년: <strong className="text-slate-900">(주)솔모정보기술</strong> 법인명 변경 출범</li>
+                              <li>• 기업부설연구소 설립 및 정보통신공사업 등록</li>
+                              <li>• <strong className="text-slate-900">한국전력공사</strong> 협력 업체 등록 (2004)</li>
+                              <li>• Fortinet Gold 파트너 승격 및 PNP시큐어 기술 파트너 등록</li>
+                           </ul>
+                        </div>
+                        <div>
+                           <p className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-3">기술 특허 확보</p>
+                           <ul className="space-y-2 text-sm font-bold text-slate-500">
+                              <li>• 2003년 무선랜 터보 다중 수신장치 특허 등록</li>
+                              <li>• 2009년 다기능 인터폰 장치 특허 등록</li>
+                              <li>• 수배전반 안전관리 및 도어락 특허 등록</li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
       </section>
 
       {/* Stat Section */}

@@ -2,104 +2,118 @@
 import Image from "next/image";
 
 export default function ApplicationSecurityPage() {
-  const products = [
-    {
-      title: "패치관리시스템 (PMS)",
-      brand: "공백 없는 보안 자동화",
-      logo: "/images/product/logo (4).png",
-      desc: "윈도우 PC 및 서버의 OS 보안 패치, 백신, PC보안 소프트웨어를 중앙에서 자동화된 체계로 관리하여 보안 공백을 최소화하는 솔루션입니다.",
-      features: [
-        "운영체제 및 어플리케이션 패치 자동/강제 설치",
-        "전사 단말 패치 적용 현황 로깅 및 통계 리포팅",
-        "사전 보완 취약점 제거를 통한 보안 수준 강화",
-        "악성코드 및 좀비 PC로 인한 불필요 트래픽 발생 방지"
-      ],
-      icon: "⚡"
-    },
-    {
-      title: "Gaaiho(가이호) PDF 솔루션",
-      brand: "문서 관리 통합 솔루션",
-      logo: "/images/product/Gaaiho.png",
-      desc: "단순한 뷰어를 넘어 강력한 편집, 변환, OCR 및 관리 기능을 제공하여 기업의 문서 업무 프로세스를 데이터 기반으로 혁신합니다.",
-      features: [
-        "텍스트와 이미지를 직접 수정하는 강력한 PDF 편집",
-        "대량 파일의 병합, 분할 및 워드/엑셀 상호 역변환",
-        "이미지 형태의 PDF를 텍스트 데이터로 바꾸는 OCR 기능",
-        "전자 서명 및 클라우드 연동을 통한 페이퍼리스 환경 구축"
-      ],
-      icon: "📄"
-    }
-  ];
-
   return (
-    <div className="space-y-32">
-      <header className="mb-20">
-        <span className="text-blue-600 font-black text-xs uppercase tracking-widest mb-4 block">Application Security</span>
-        <h2 className="text-5xl font-black text-slate-900 tracking-tighter mb-8 leading-tight">
-          업무 생산성과 <span className="text-blue-600">애플리케이션 보안</span>의 <br />
-          완벽한 조화를 지향합니다.
+    <div className="space-y-32 pb-40">
+      <header className="max-w-4xl">
+        <span className="text-blue-600 font-black text-xs uppercase tracking-[0.5em] mb-4 block">Software & App Security</span>
+        <h2 className="text-6xl font-black text-slate-900 tracking-tighter mb-8 leading-tight">
+          소프트웨어 무결성과 <br />
+          <span className="text-blue-600">업무 생산성의 조화.</span>
         </h2>
-        <p className="text-slate-500 font-medium text-lg leading-relaxed max-w-2xl">
-          솔모정보기술은 기업 내부 인프라의 핵심인 운영체제 관리부터 
-          모든 비즈니스 문서의 중심인 PDF까지 아우르는 통합 어플리케이션 보안 체계를 제시합니다.
+        <p className="text-slate-500 font-bold text-lg leading-relaxed">
+          윈도우 단말부터 비즈니스 문서 툴까지, 
+          업무 환경 전반의 보안 수준을 높이고 가용성을 확보합니다.
         </p>
       </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {products.map((prod, idx) => (
-          <div key={idx} className="group p-12 rounded-[3rem] bg-white border border-slate-100 hover:border-blue-500 hover:shadow-2xl transition-all duration-500 relative overflow-hidden flex flex-col">
-            <div className="flex justify-between items-start mb-10">
-               <div className="text-6xl transition-transform group-hover:scale-110 duration-500">{prod.icon}</div>
-               <div className="relative w-32 h-12 grayscale group-hover:grayscale-0 transition-all duration-500">
-                  <Image src={prod.logo} alt={prod.title} fill className="object-contain" />
+      {/* 1. PMS (Patch Management System) */}
+      <section className="scroll-mt-32" id="pms">
+         <div className="grid lg:grid-cols-2 gap-20 items-stretch">
+            <div className="flex flex-col justify-center">
+               <h3 className="text-3xl font-black text-slate-900 mb-8 tracking-tight">ITStantion 패치관리시스템 (PMS)</h3>
+               <p className="text-slate-500 font-bold leading-relaxed mb-12 text-lg">
+                  윈도우 단말 및 서버의 보안 공백을 실시간으로 메웁니다. 
+                  운영체제의 최신 패치부터 필수 보안 SW 배포 및 중앙 관리 체계를 확립합니다.
+               </p>
+               <div className="space-y-8">
+                  <PMSFeature title="자동 보안 패치" desc="OS 및 어플리케이션 패치 강제 업데이트 수행" />
+                  <PMSFeature title="네트워크 가용성" desc="좀비 PC 차단으로 트래픽 안정성 유지" />
+                  <PMSFeature title="전사 단말 관리" desc="패치 적용 현황 수집 및 통계 리포트 원격 제공" />
                </div>
             </div>
-            <div className="relative z-10 flex-grow">
-              <span className="text-blue-600 font-black text-[10px] uppercase tracking-widest mb-2 block">{prod.brand}</span>
-              <h3 className="text-2xl font-black text-slate-900 mb-6 tracking-tight">{prod.title}</h3>
-              <p className="text-slate-500 font-medium leading-relaxed mb-10 text-[15px]">{prod.desc}</p>
-              
-              <ul className="space-y-4">
-                {prod.features.map((feature, fidx) => (
-                  <li key={fidx} className="flex items-start gap-4 text-sm font-bold text-slate-600">
-                    <div className="mt-1 w-1.5 h-1.5 rounded-full bg-blue-500/30 group-hover:bg-blue-500 transition-colors"></div>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
+            <div className="bg-slate-50 p-12 rounded-[4rem] border border-slate-100 relative group overflow-hidden">
+               <h4 className="text-xs font-black text-blue-600 uppercase tracking-widest mb-10">Product Versions</h4>
+               <div className="space-y-6">
+                  <div className="p-8 bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all border border-slate-100">
+                     <div className="text-2xl font-black text-[#001F5B] mb-2 underline decoration-blue-500">TA-PRS</div>
+                     <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">Enhanced Patch Management</p>
+                  </div>
+                  <div className="p-8 bg-white rounded-3xl shadow-sm hover:shadow-xl transition-all border border-slate-100">
+                     <div className="text-2xl font-black text-[#001F5B] mb-2 underline decoration-blue-500">TA-FDM</div>
+                     <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">File Deployment Management</p>
+                  </div>
+               </div>
+               <div className="mt-12 p-8 bg-blue-600 rounded-[3rem] text-white">
+                  <h5 className="font-black text-lg mb-2 italic">Expectation</h5>
+                  <p className="text-sm font-bold opacity-60 leading-relaxed">보안 약점을 사전에 제거하여 외부 공격 노출 시간을 원천 차단합니다.</p>
+               </div>
             </div>
-          </div>
-        ))}
-      </div>
+         </div>
+      </section>
 
-      <div className="pt-20 border-t border-slate-100 bg-[#001F5B] text-white -mx-8 px-8 py-32 rounded-[4rem]">
-        <div className="max-w-4xl mx-auto space-y-12">
-            <h3 className="text-3xl font-black text-white text-center">기대 효과</h3>
-            <div className="grid md:grid-cols-3 gap-8">
-               <div className="bg-white/5 p-8 rounded-3xl border border-white/10 text-center">
-                  <h4 className="text-blue-400 font-black text-xl mb-4 italic">Efficiency</h4>
-                  <p className="text-sm font-bold text-white/70 leading-relaxed whitespace-pre-line">
-                     자동화된 패치 관리로 <br />
-                     관리 업무의 현격한 감소
-                  </p>
-               </div>
-               <div className="bg-white/5 p-8 rounded-3xl border border-white/10 text-center">
-                  <h4 className="text-blue-400 font-black text-xl mb-4 italic">Stability</h4>
-                  <p className="text-sm font-bold text-white/70 leading-relaxed whitespace-pre-line">
-                     문서 협업 환경의 <br />
-                     보안성과 무결성 보장
-                  </p>
-               </div>
-               <div className="bg-white/5 p-8 rounded-3xl border border-white/10 text-center">
-                  <h4 className="text-blue-400 font-black text-xl mb-4 italic">Digital Transformation</h4>
-                  <p className="text-sm font-bold text-white/70 leading-relaxed whitespace-pre-line">
-                     종이 없는 사무실과 <br />
-                     전자 서명 체계 완성
-                  </p>
+      {/* 2. Gaaiho PDF */}
+      <section className="bg-slate-900 p-20 lg:p-32 rounded-[5rem] text-white">
+         <div className="max-w-[1400px] mx-auto grid lg:grid-cols-12 gap-20">
+            <div className="lg:col-span-4">
+               <Image src="/images/product/Gaaiho.png" alt="Gaaiho" width={180} height={60} className="mb-12" />
+               <h3 className="text-4xl font-black italic tracking-tighter mb-8 italic text-blue-500 uppercase">Gaaiho PDF Suite</h3>
+               <p className="text-white/40 font-bold leading-relaxed mb-12">
+                  단순 뷰어를 넘어선 강력한 통합 PDF 솔루션. 
+                  기업의 문서 생산성을 혁신하고 페이퍼리스(Paperless) 환경을 구축합니다.
+               </p>
+               <div className="p-10 border border-white/10 rounded-[3rem] bg-white/5">
+                  <div className="text-3xl font-black mb-1">99%</div>
+                  <p className="text-[10px] font-black uppercase text-blue-400 tracking-[0.3em]">Compatibility Rate</p>
                </div>
             </div>
-        </div>
+            <div className="lg:col-span-8 grid md:grid-cols-3 gap-6">
+               <PDFItem title="Gaaiho DOC" desc="전문적인 편집 도구로 PDF를 워드처럼 직접 수정" />
+               <PDFItem title="Converter" desc="병합, 분할 및 엑셀/워드 정밀 역변환 지원" />
+               <PDFItem title="Manager" desc="내 PC 곳곳의 수많은 PDF를 지능적으로 탐색" />
+               <div className="md:col-span-3 grid grid-cols-2 lg:grid-cols-4 gap-6 pt-10 border-t border-white/10">
+                  <MiniFeature title="OCR 지원" />
+                  <MiniFeature title="전자서명" />
+                  <MiniFeature title="파일 최적화" />
+                  <MiniFeature title="클라우드 연동" />
+               </div>
+            </div>
+         </div>
+      </section>
+
+      <div className="bg-slate-50 p-20 rounded-[4rem] text-center max-w-4xl mx-auto">
+         <h4 className="text-2xl font-black text-slate-900 mb-6 tracking-tight">디지털 트랜스포메이션의 시작</h4>
+         <p className="text-slate-400 font-bold text-sm leading-relaxed uppercase tracking-widest">
+            (주)솔모정보기술은 기업의 보안 공백을 메우는 것은 물론, <br />
+            임직원의 업무 편의성을 극대화하는 검증된 어플리케이션을 선별하여 공급합니다.
+         </p>
       </div>
     </div>
   );
+}
+
+function PMSFeature({ title, desc }) {
+   return (
+      <div className="flex gap-6 items-start">
+         <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-black flex-shrink-0">✔</div>
+         <div>
+            <div className="text-lg font-black text-slate-900 mb-1">{title}</div>
+            <p className="text-xs font-bold text-slate-400 leading-relaxed">{desc}</p>
+         </div>
+      </div>
+   );
+}
+
+function PDFItem({ title, desc }) {
+   return (
+      <div className="p-10 bg-white/5 border border-white/10 rounded-[3.5rem] hover:bg-blue-600 hover:border-transparent transition-all group">
+         <h4 className="text-xl font-black mb-4 group-hover:italic">{title}</h4>
+         <p className="text-sm font-bold text-white/40 leading-relaxed group-hover:text-white">{desc}</p>
+      </div>
+   );
+}
+
+function MiniFeature({ title }) {
+   return (
+      <div className="text-center font-black text-[10px] text-white/30 uppercase tracking-[0.4em]">{title}</div>
+   );
 }
