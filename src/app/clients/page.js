@@ -2,56 +2,54 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 
-// Sprite sheet: public/images/clients/wall.png  (3183×1732, 5 cols × 8 rows)
-// pos: [row, col]  (0-indexed)
-const SPRITE_COLS = 5;
-const SPRITE_ROWS = 8;
-const SPRITE_SRC = "/images/clients/wall.png";
+// Local logo files at /public/images/client/그림{N}.png
+const LOGO = (n) => `/images/client/${encodeURIComponent(`그림${n}.png`)}`;
 
 const CLIENTS = [
   // ── 금융 ──
-  { name: "MG새마을금고",        nameEn: "MG Saemaul Kumgo",        category: "금융",    pos: [0, 0] },
-  { name: "하나손해보험",         nameEn: "Hana Insurance",           category: "금융",    pos: [0, 1] },
-  { name: "Sh수협은행",          nameEn: "Suhyup Bank",              category: "금융",    pos: [0, 2] },
-  { name: "SC제일은행",          nameEn: "Standard Chartered",       category: "금융",    pos: [0, 3] },
-  { name: "KB금융그룹",          nameEn: "KB Financial Group",       category: "금융",    pos: [0, 4] },
-  { name: "한화생명",            nameEn: "Hanwha Life",              category: "금융",    pos: [1, 0] },
-  { name: "미래에셋자산운용",     nameEn: "Mirae Asset",              category: "금융",    pos: [1, 1] },
-  { name: "DGB금융그룹",         nameEn: "DGB Financial Group",      category: "금융",    pos: [1, 2] },
-  { name: "NS홈쇼핑",           nameEn: "NS Home Shopping",         category: "금융",    pos: [1, 3] },
-  { name: "招商证券",            nameEn: "China Merchants Sec.",     category: "금융",    pos: [1, 4] },
+  { name: "MG새마을금고",        nameEn: "MG Saemaul Kumgo",        category: "금융",    image: LOGO(5) },
+  { name: "하나손해보험",         nameEn: "Hana Insurance",           category: "금융",    image: LOGO(6) },
+  { name: "Sh수협은행",          nameEn: "Suhyup Bank",              category: "금융",    image: LOGO(7) },
+  { name: "SC제일은행",          nameEn: "Standard Chartered",       category: "금융",    image: LOGO(8) },
+  { name: "KB금융그룹",          nameEn: "KB Financial Group",       category: "금융",    image: LOGO(9) },
+  { name: "한화생명",            nameEn: "Hanwha Life",              category: "금융",    image: LOGO(10) },
+  { name: "미래에셋자산운용",     nameEn: "Mirae Asset",              category: "금융",    image: LOGO(11) },
+  { name: "DGB금융그룹",         nameEn: "DGB Financial Group",      category: "금융",    image: LOGO(12) },
+  { name: "NS홈쇼핑",           nameEn: "NS Home Shopping",         category: "금융",    image: LOGO(13) },
+  { name: "招商证券",            nameEn: "China Merchants Sec.",     category: "금융",    image: LOGO(14) },
 
   // ── 기업/제조 ──
-  { name: "with POSCO",         nameEn: "POSCO Group",              category: "기업/제조", pos: [2, 0] },
-  { name: "GS칼텍스",            nameEn: "GS Caltex",                category: "기업/제조", pos: [2, 1] },
-  { name: "GS EPS",             nameEn: "GS EPS",                   category: "기업/제조", pos: [2, 2] },
-  { name: "DN오토모티브",         nameEn: "DN Automotive",            category: "기업/제조", pos: [2, 3] },
-  { name: "yesco",              nameEn: "yesco",                    category: "기업/제조", pos: [2, 4] },
-  { name: "KOREAN AIR",         nameEn: "Korean Air",               category: "기업/제조", pos: [3, 1] },
-  { name: "동진쎄미켐",           nameEn: "Dongjin Semichem",         category: "기업/제조", pos: [3, 2] },
-  { name: "롯데정보통신",         nameEn: "Lotte Data Comm.",         category: "기업/제조", pos: [3, 3] },
-  { name: "POONGSAN",           nameEn: "Poongsan Corp.",           category: "기업/제조", pos: [3, 4] },
+  { name: "with POSCO",         nameEn: "POSCO Group",              category: "기업/제조", image: LOGO(15) },
+  { name: "GS칼텍스",            nameEn: "GS Caltex",                category: "기업/제조", image: LOGO(16) },
+  { name: "GS EPS",             nameEn: "GS EPS",                   category: "기업/제조", image: LOGO(17) },
+  { name: "DN오토모티브",         nameEn: "DN Automotive",            category: "기업/제조", image: LOGO(18) },
+  { name: "yesco",              nameEn: "yesco",                    category: "기업/제조", image: LOGO(19) },
+  { name: "LG에너지솔루션",       nameEn: "LG Energy Solution",       category: "기업/제조", image: LOGO(20) },
+  { name: "KOREAN AIR",         nameEn: "Korean Air",               category: "기업/제조", image: LOGO(21) },
+  { name: "동진쎄미켐",           nameEn: "Dongjin Semichem",         category: "기업/제조", image: LOGO(22) },
+  { name: "롯데정보통신",         nameEn: "Lotte Data Comm.",         category: "기업/제조", image: LOGO(23) },
+  { name: "POONGSAN",           nameEn: "Poongsan Corp.",           category: "기업/제조", image: LOGO(24) },
 
   // ── 공공 ──
-  { name: "한국수력원자력",       nameEn: "KHNP",                     category: "공공",    pos: [4, 0] },
-  { name: "NICE평가정보",        nameEn: "NICE Information",         category: "공공",    pos: [4, 1] },
-  { name: "한국정보통신기술협회",  nameEn: "TTA",                      category: "공공",    pos: [4, 2] },
-  { name: "KoROAD 도로교통공단", nameEn: "Korea Road Traffic Auth.", category: "공공",    pos: [4, 3] },
-  { name: "KRIHS 국토연구원",    nameEn: "KRIHS",                    category: "공공",    pos: [4, 4] },
-  { name: "울산항만공사",         nameEn: "Ulsan Port Authority",     category: "공공",    pos: [5, 0] },
-  { name: "BPA 부산항만공사",     nameEn: "Busan Port Authority",     category: "공공",    pos: [5, 1] },
-  { name: "국민건강보험",         nameEn: "NHIS",                     category: "공공",    pos: [5, 2] },
-  { name: "항공안전기술원",       nameEn: "KIAST",                    category: "공공",    pos: [5, 3] },
-  { name: "한국기계전자시험연구원", nameEn: "KTC",                     category: "공공",    pos: [5, 4] },
+  { name: "한국수력원자력",       nameEn: "KHNP",                     category: "공공",    image: LOGO(25) },
+  { name: "NICE평가정보",        nameEn: "NICE Information",         category: "공공",    image: LOGO(26) },
+  { name: "한국정보통신기술협회",  nameEn: "TTA",                      category: "공공",    image: LOGO(27) },
+  { name: "KoROAD 도로교통공단", nameEn: "Korea Road Traffic Auth.", category: "공공",    image: LOGO(28) },
+  { name: "KRIHS 국토연구원",    nameEn: "KRIHS",                    category: "공공",    image: LOGO(29) },
+  { name: "울산항만공사",         nameEn: "Ulsan Port Authority",     category: "공공",    image: LOGO(30) },
+  { name: "BPA 부산항만공사",     nameEn: "Busan Port Authority",     category: "공공",    image: LOGO(31) },
+  { name: "국민건강보험",         nameEn: "NHIS",                     category: "공공",    image: LOGO(32) },
+  { name: "항공안전기술원",       nameEn: "KIAST",                    category: "공공",    image: LOGO(33) },
+  { name: "한국기계전자시험연구원", nameEn: "KTC",                     category: "공공",    image: LOGO(34) },
 
   // ── 교육/병원 ──
-  { name: "서울대학교",          nameEn: "Seoul National Univ.",     category: "교육/병원", pos: [6, 0] },
-  { name: "성균관대학교",         nameEn: "Sungkyunkwan Univ.",       category: "교육/병원", pos: [6, 1] },
-  { name: "연세대학교 의료원",    nameEn: "Yonsei Medical Center",    category: "교육/병원", pos: [6, 2] },
-  { name: "용인예술과학대학교",   nameEn: "Yongin Arts & Science",    category: "교육/병원", pos: [6, 3] },
-  { name: "삼광의료재단",         nameEn: "Samkwang Medical",         category: "교육/병원", pos: [6, 4] },
-  { name: "국립암센터",          nameEn: "National Cancer Center",   category: "교육/병원", pos: [7, 0] },
-  { name: "Seegene",            nameEn: "Seegene Inc.",             category: "교육/병원", pos: [7, 1] },
+  { name: "서울대학교",          nameEn: "Seoul National Univ.",     category: "교육/병원", image: LOGO(35) },
+  { name: "성균관대학교",         nameEn: "Sungkyunkwan Univ.",       category: "교육/병원", image: LOGO(36) },
+  { name: "연세대학교 의료원",    nameEn: "Yonsei Medical Center",    category: "교육/병원", image: LOGO(37) },
+  { name: "용인예술과학대학교",   nameEn: "Yongin Arts & Science",    category: "교육/병원", image: LOGO(38) },
+  { name: "삼광의료재단",         nameEn: "Samkwang Medical",         category: "교육/병원", image: LOGO(39) },
+  { name: "국립암센터",          nameEn: "National Cancer Center",   category: "교육/병원", image: LOGO(40) },
+  { name: "Seegene",            nameEn: "Seegene Inc.",             category: "교육/병원", image: LOGO(41) },
 ];
 
 const CATEGORIES = ["전체", "금융", "기업/제조", "공공", "교육/병원"];
@@ -310,34 +308,24 @@ function KPI({ big, label }) {
 
 function LogoCard({ client }) {
   const meta = CATEGORY_META[client.category];
-  const [row, col] = client.pos;
-
-  // Sprite positioning (% based — works for any container size)
-  const bgPosX = (col * 100) / (SPRITE_COLS - 1);
-  const bgPosY = (row * 100) / (SPRITE_ROWS - 1);
 
   return (
     <div className="group bg-white rounded-2xl border border-slate-100 hover:border-slate-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 p-4 sm:p-5 flex flex-col items-center relative overflow-hidden">
       {/* Category accent dot */}
       <div className={`absolute top-3 right-3 w-1.5 h-1.5 rounded-full ${meta.color} opacity-60`}></div>
 
-      {/* Logo (sprite slice) — actual cell ratio is ~3:1 */}
-      <div className="w-full px-2 sm:px-3 py-3 sm:py-4 flex items-center justify-center">
-        <div
-          role="img"
-          aria-label={client.name}
-          className="w-full aspect-[3/1] grayscale group-hover:grayscale-0 transition-all duration-300"
-          style={{
-            backgroundImage: `url(${SPRITE_SRC})`,
-            backgroundSize: `${SPRITE_COLS * 100}% ${SPRITE_ROWS * 100}%`,
-            backgroundPosition: `${bgPosX}% ${bgPosY}%`,
-            backgroundRepeat: "no-repeat",
-          }}
+      {/* Logo */}
+      <div className="w-full h-14 sm:h-16 flex items-center justify-center px-2 mb-3">
+        <img
+          src={client.image}
+          alt={client.name}
+          loading="lazy"
+          className="max-w-full max-h-full object-contain grayscale group-hover:grayscale-0 transition-all duration-300"
         />
       </div>
 
       {/* Name */}
-      <div className="text-center mt-1 min-h-[40px] flex flex-col justify-center w-full">
+      <div className="text-center min-h-[38px] flex flex-col justify-center w-full">
         <p className="text-[11px] sm:text-xs font-black text-slate-800 leading-snug tracking-tight truncate px-1">
           {client.name}
         </p>
