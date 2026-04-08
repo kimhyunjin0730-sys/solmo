@@ -76,6 +76,7 @@ export default function Home() {
                  role="Security Consulting"
                  desc="모의해킹 및 소스코드 진단을 통한 잠재적 위협 식별" 
                  bg="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800"
+                 href="/services/vulnerability-analysis"
                />
             </div>
             <div id="secu-print" className="scroll-mt-32">
@@ -85,6 +86,7 @@ export default function Home() {
                  role="X-Securitas Solution"
                  desc="스크린 및 출력물 워터마크 삽입을 통한 기밀 유출 방지" 
                  bg="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=800"
+                 href="/services/secure-printing"
                />
             </div>
             <div id="maintenance" className="scroll-mt-32">
@@ -94,6 +96,7 @@ export default function Home() {
                  role="ITO Management"
                  desc="시스템 전반의 안정적 운영을 위한 24/365 위탁 관리" 
                  bg="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800"
+                 href="/services/maintenance"
                />
             </div>
           </div>
@@ -152,7 +155,7 @@ export default function Home() {
   );
 }
 
-function ServiceCard({ id, title, role, desc, bg }) {
+function ServiceCard({ id, title, role, desc, bg, href }) {
   return (
     <div className="group relative h-[500px] rounded-[2rem] overflow-hidden shadow-2xl transition-all hover:-translate-y-4">
        <img src={bg} alt={title} className="w-full h-full object-cover group-hover:scale-110 transition-all duration-1000" />
@@ -162,7 +165,7 @@ function ServiceCard({ id, title, role, desc, bg }) {
           <h4 className="text-xl font-black text-white mb-2">{title}</h4>
           <div className="text-[10px] font-black text-blue-400 opacity-80 uppercase tracking-widest mb-4">{role}</div>
           <p className="text-white/50 text-[11px] font-bold leading-relaxed mb-8">{desc}</p>
-          <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white text-lg group-hover:bg-blue-600 transition-colors">→</div>
+          <Link href={href} className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white text-lg group-hover:bg-blue-600 transition-colors pointer-events-auto">→</Link>
        </div>
     </div>
   );

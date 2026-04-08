@@ -56,9 +56,9 @@ export default function Header() {
              <button className="group-hover:text-[#001F5B] flex items-center gap-1 transition-colors">SERVICES</button>
              <div className="absolute top-full left-1/2 -translate-x-1/2 pt-6 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                 <div className="bg-white shadow-2xl rounded-2xl border border-slate-100 p-5 w-60 space-y-1 text-left uppercase">
-                  <Link href="/#secu-analysis" className="block px-4 py-3 hover:bg-slate-50 rounded-xl text-[11px] font-black text-slate-500 hover:text-[#001F5B] transition-all">보안취약점 분석</Link>
-                  <Link href="/#secu-print" className="block px-4 py-3 hover:bg-slate-50 rounded-xl text-[11px] font-black text-slate-500 hover:text-[#001F5B] transition-all">보안프린트 구축</Link>
-                  <Link href="/#maintenance" className="block px-4 py-3 hover:bg-slate-50 rounded-xl text-[11px] font-black text-slate-500 hover:text-[#001F5B] transition-all">통합 유지보수</Link>
+                  <Link href="/services/vulnerability-analysis" className="block px-4 py-3 hover:bg-slate-50 rounded-xl text-[11px] font-black text-slate-500 hover:text-[#001F5B] transition-all">보안취약점 분석</Link>
+                  <Link href="/services/secure-printing" className="block px-4 py-3 hover:bg-slate-50 rounded-xl text-[11px] font-black text-slate-500 hover:text-[#001F5B] transition-all">보안프린트 구축</Link>
+                  <Link href="/services/maintenance" className="block px-4 py-3 hover:bg-slate-50 rounded-xl text-[11px] font-black text-slate-500 hover:text-[#001F5B] transition-all">통합 유지보수</Link>
                 </div>
              </div>
           </div>
