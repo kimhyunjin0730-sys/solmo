@@ -64,7 +64,7 @@ export default function Header() {
           </div>
 
           {/* 4. CLIENTS */}
-          <Link href={isHome ? "#clients" : "/#clients"} className="hover:text-[#001F5B] transition-colors">CLIENTS</Link>
+          <Link href="/clients" className="hover:text-[#001F5B] transition-colors">CLIENTS</Link>
 
           {/* 5. SUPPORT Dropdown */}
           <div className="relative group">
