@@ -93,8 +93,12 @@ export default function ChatBot() {
           }),
         });
 
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok) {
+          console.error("[chat] API error", res.status, data);
+          throw new Error(data?.error || `HTTP ${res.status}`);
+        }
 
         if (data.sessionId && data.sessionId !== sessionId) {
           setSessionId(data.sessionId);
@@ -103,6 +107,7 @@ export default function ChatBot() {
 
         setMessages((m) => [...m, { role: "assistant", content: data.reply || "..." }]);
       } catch (err) {
+        console.error("[chat] send failed:", err);
         setMessages((m) => [
           ...m,
           {

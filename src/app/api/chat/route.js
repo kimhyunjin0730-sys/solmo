@@ -8,7 +8,7 @@ export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const MODEL = process.env.OPENAI_MODEL || "gpt-4o-mini";
-const MAX_HISTORY = 20; // 최근 N개 메시지만 컨텍스트로
+const MAX_HISTORY = 20;
 
 let openai = null;
 function getOpenAI() {
@@ -31,82 +31,133 @@ function fallbackReply(userMessage) {
     return "Acronis Cyber Protect — 21개 이상의 플랫폼 지원, 랜섬웨어 사전 차단, 블록체인 기반 데이터 무결성 검증을 제공하는 통합 백업/재해복구 솔루션입니다.";
   if (text.includes("nac") || text.includes("genian"))
     return "Genian NAC — 강력한 인증과 단말 무결성 점검으로 내부 네트워크를 청정하게 유지하는 NAC 솔루션입니다. On-Premise/Cloud/VM 모두 지원합니다.";
-  return "죄송합니다, 지금은 자동 응답 모드로 동작 중입니다. 자세한 상담은 02-402-8054 또는 solmoit01@solmo.co.kr 로 문의해주세요.";
+  return "안녕하세요! 솔모정보기술 챗봇입니다. 자세한 상담은 02-402-8054 또는 solmoit01@solmo.co.kr 로 문의해주세요.";
+}
+
+/** DB 저장은 best-effort — 실패해도 답변은 전달 */
+async function safeDbSave(fn, label) {
+  try {
+    await fn();
+  } catch (err) {
+    console.error(`[chat][db:${label}] save failed:`, err?.message || err);
+  }
 }
 
 export async function POST(req) {
+  let body;
   try {
-    const body = await req.json();
-    const { messages = [], sessionId: incomingSessionId } = body;
-
-    if (!Array.isArray(messages) || messages.length === 0) {
-      return NextResponse.json({ error: "messages required" }, { status: 400 });
-    }
-
-    const lastUser = [...messages].reverse().find((m) => m.role === "user");
-    if (!lastUser || !lastUser.content?.trim()) {
-      return NextResponse.json({ error: "user message required" }, { status: 400 });
-    }
-    if (lastUser.content.length > 2000) {
-      return NextResponse.json({ error: "message too long" }, { status: 413 });
-    }
-
-    // Session 보장
-    const sessionId = incomingSessionId || crypto.randomUUID();
-    const userAgent = req.headers.get("user-agent")?.slice(0, 255) || null;
-    const prisma = getPrisma();
-
-    await prisma.chatSession.upsert({
-      where: { id: sessionId },
-      update: {},
-      create: { id: sessionId, userAgent },
-    });
-
-    // 사용자 메시지 저장
-    await prisma.chatMessage.create({
-      data: { sessionId, role: "user", content: lastUser.content },
-    });
-
-    // OpenAI 호출
-    const client = getOpenAI();
-    let assistantText;
-
-    if (!client) {
-      assistantText = fallbackReply(lastUser.content);
-    } else {
-      try {
-        const trimmedHistory = messages
-          .filter((m) => m.role === "user" || m.role === "assistant")
-          .slice(-MAX_HISTORY)
-          .map((m) => ({ role: m.role, content: String(m.content || "").slice(0, 2000) }));
-
-        const completion = await client.chat.completions.create({
-          model: MODEL,
-          temperature: 0.4,
-          max_tokens: 600,
-          messages: [
-            { role: "system", content: buildSystemPrompt() },
-            ...trimmedHistory,
-          ],
-        });
-
-        assistantText =
-          completion.choices?.[0]?.message?.content?.trim() ||
-          "죄송합니다, 응답을 생성하지 못했습니다. 다시 시도해주세요.";
-      } catch (err) {
-        console.error("[chat] OpenAI error:", err?.message || err);
-        assistantText = fallbackReply(lastUser.content);
-      }
-    }
-
-    // 어시스턴트 메시지 저장
-    await prisma.chatMessage.create({
-      data: { sessionId, role: "assistant", content: assistantText },
-    });
-
-    return NextResponse.json({ reply: assistantText, sessionId });
-  } catch (err) {
-    console.error("[chat] handler error:", err);
-    return NextResponse.json({ error: "internal_error" }, { status: 500 });
+    body = await req.json();
+  } catch {
+    return NextResponse.json({ error: "invalid_json" }, { status: 400 });
   }
+
+  const { messages = [], sessionId: incomingSessionId } = body || {};
+
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return NextResponse.json({ error: "messages_required" }, { status: 400 });
+  }
+
+  const lastUser = [...messages].reverse().find((m) => m.role === "user");
+  if (!lastUser || !lastUser.content?.trim()) {
+    return NextResponse.json({ error: "user_message_required" }, { status: 400 });
+  }
+  if (lastUser.content.length > 2000) {
+    return NextResponse.json({ error: "message_too_long" }, { status: 413 });
+  }
+
+  const sessionId = incomingSessionId || crypto.randomUUID();
+  const userAgent = req.headers.get("user-agent")?.slice(0, 255) || null;
+
+  // ── 1) DB session/message save (best-effort) ──
+  let prisma = null;
+  try {
+    prisma = getPrisma();
+  } catch (err) {
+    console.error("[chat] prisma init failed:", err?.message || err);
+  }
+
+  if (prisma) {
+    await safeDbSave(
+      () =>
+        prisma.chatSession.upsert({
+          where: { id: sessionId },
+          update: {},
+          create: { id: sessionId, userAgent },
+        }),
+      "session_upsert"
+    );
+    await safeDbSave(
+      () =>
+        prisma.chatMessage.create({
+          data: { sessionId, role: "user", content: lastUser.content },
+        }),
+      "user_message"
+    );
+  }
+
+  // ── 2) Generate reply (OpenAI with fallback) ──
+  let assistantText;
+  let aiError = null;
+  const client = getOpenAI();
+
+  if (!client) {
+    console.warn("[chat] OPENAI_API_KEY missing — using fallback");
+    assistantText = fallbackReply(lastUser.content);
+  } else {
+    try {
+      let systemPrompt;
+      try {
+        systemPrompt = buildSystemPrompt();
+      } catch (e) {
+        console.error("[chat] knowledge build failed:", e?.message);
+        systemPrompt =
+          "당신은 (주)솔모정보기술 공식 챗봇입니다. 친절하고 전문적으로 답변하세요. 모르는 내용은 02-402-8054 로 문의 안내합니다.";
+      }
+
+      const trimmedHistory = messages
+        .filter((m) => m.role === "user" || m.role === "assistant")
+        .slice(-MAX_HISTORY)
+        .map((m) => ({
+          role: m.role,
+          content: String(m.content || "").slice(0, 2000),
+        }));
+
+      const completion = await client.chat.completions.create({
+        model: MODEL,
+        temperature: 0.4,
+        max_tokens: 600,
+        messages: [
+          { role: "system", content: systemPrompt },
+          ...trimmedHistory,
+        ],
+      });
+
+      assistantText =
+        completion.choices?.[0]?.message?.content?.trim() ||
+        "죄송합니다, 응답을 생성하지 못했습니다. 다시 시도해주세요.";
+    } catch (err) {
+      aiError = err?.message || String(err);
+      console.error("[chat] OpenAI error:", aiError);
+      assistantText = fallbackReply(lastUser.content);
+    }
+  }
+
+  // ── 3) Save assistant message (best-effort) ──
+  if (prisma) {
+    await safeDbSave(
+      () =>
+        prisma.chatMessage.create({
+          data: { sessionId, role: "assistant", content: assistantText },
+        }),
+      "assistant_message"
+    );
+  }
+
+  return NextResponse.json({
+    reply: assistantText,
+    sessionId,
+    ...(aiError && process.env.NODE_ENV !== "production"
+      ? { _debug: { aiError } }
+      : {}),
+  });
 }
