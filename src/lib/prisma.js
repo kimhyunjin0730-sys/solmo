@@ -15,15 +15,34 @@ import { withAccelerate } from "@prisma/extension-accelerate";
 
 const globalForPrisma = globalThis;
 
+function normalizeAccelerateUrl(rawUrl) {
+  if (!rawUrl) return null;
+  // Already in the prisma protocol form — use as-is
+  if (rawUrl.startsWith("prisma://") || rawUrl.startsWith("prisma+postgres://")) {
+    return rawUrl;
+  }
+  // Convert standard postgres:// or postgresql:// to prisma+postgres://
+  // (Prisma Postgres / Accelerate accepts the same host+credentials with this scheme)
+  if (rawUrl.startsWith("postgres://")) {
+    return "prisma+" + rawUrl;
+  }
+  if (rawUrl.startsWith("postgresql://")) {
+    return "prisma+postgres://" + rawUrl.slice("postgresql://".length);
+  }
+  return rawUrl;
+}
+
 function createPrisma() {
-  const url =
+  const rawUrl =
     process.env.DATABASE_URL ||
     process.env.PRISMA_DATABASE_URL ||
     process.env.POSTGRES_URL;
 
-  if (!url) {
+  if (!rawUrl) {
     throw new Error("DATABASE_URL is not set");
   }
+
+  const url = normalizeAccelerateUrl(rawUrl);
 
   const client = new PrismaClient({
     accelerateUrl: url,

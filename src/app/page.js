@@ -46,9 +46,11 @@ const SOLUTIONS = [
   },
 ];
 
-const PARTNERS = [
+// Vendor brands of products we resell — labelled as "Solution Brands",
+// not customers/clients.
+const VENDOR_BRANDS = [
   "Fortinet", "PIOLINK", "Genian", "Acronis", "IBM", "NETAND",
-  "Sindoh", "Gaaiho", "DBSAFER", "소만사",
+  "신도리코", "Gaaiho", "PNP Secure", "소만사", "Thales", "Cisco", "Infoblox",
 ];
 
 const STRENGTHS = [
@@ -185,24 +187,27 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ───────────────────── PARTNER STRIP ───────────────────── */}
+      {/* ───────────────────── VENDOR BRAND STRIP ───────────────────── */}
       <section className="border-y border-slate-100 bg-white py-8 sm:py-10 overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8">
           <div className="flex items-center gap-6 lg:gap-10 flex-col lg:flex-row">
             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] shrink-0">
-              Trusted Partners
+              Solution Brands
             </div>
             <div className="h-px lg:h-10 lg:w-px bg-slate-200 hidden lg:block"></div>
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 sm:gap-x-10 gap-y-3">
-              {PARTNERS.map((p) => (
+            <Link
+              href="#solutions"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 sm:gap-x-10 gap-y-3 group"
+            >
+              {VENDOR_BRANDS.map((p) => (
                 <span
                   key={p}
-                  className="text-sm sm:text-base font-bold text-slate-400 hover:text-slate-700 transition-colors tracking-tight"
+                  className="text-sm sm:text-base font-bold text-slate-400 group-hover:text-slate-600 hover:!text-blue-600 transition-colors tracking-tight"
                 >
                   {p}
                 </span>
               ))}
-            </div>
+            </Link>
           </div>
         </div>
       </section>
