@@ -18,10 +18,23 @@ function createPrisma() {
     process.env.PRISMA_DATABASE_URL ||
     process.env.POSTGRES_URL;
 
-  return new PrismaClient({
-    accelerateUrl: url,
+  const isAccelerate = url?.startsWith("prisma://") || url?.startsWith("prisma+postgres://");
+
+  const options = {
     log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
-  }).$extends(withAccelerate());
+  };
+
+  if (isAccelerate) {
+    options.accelerateUrl = url;
+  } else {
+    options.datasources = {
+      db: { url: url },
+    };
+  }
+
+  const client = new PrismaClient(options);
+
+  return isAccelerate ? client.$extends(withAccelerate()) : client;
 }
 
 export function getPrisma() {

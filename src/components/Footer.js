@@ -16,7 +16,8 @@ export default function Footer() {
             </Link>
             <p className="text-white/40 text-sm font-bold leading-relaxed max-w-sm italic">
               "고객과 함께 성장하는 최고의 보안 파트너" <br />
-              (주)솔모정보기술은 20년 이상의 노하우와 독보적인 기술력으로 기업의 소중한 정보를 보호합니다.
+              (주)솔모정보기술은 20년 이상의 노하우와 독보적인 기술력으로 <br />
+              기업의 소중한 정보를 보호합니다.
             </p>
           </div>
 
