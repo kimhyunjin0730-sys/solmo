@@ -85,11 +85,11 @@ export default async function ProductDetailPage({ params }) {
 
           {/* Logo card */}
           <div className="lg:col-span-5">
-            <div className="bg-slate-50 border border-slate-100 rounded-3xl p-10 sm:p-14 flex items-center justify-center h-48 sm:h-64">
+            <div className="bg-white border border-slate-100 rounded-3xl p-10 sm:p-14 flex items-center justify-center h-48 sm:h-64">
               <img
                 src={product.logo}
                 alt={product.vendor}
-                style={{ width: "auto", height: "auto", maxWidth: "70%", maxHeight: "100%" }}
+                style={{ width: "auto", height: "auto", maxWidth: "70%", maxHeight: "100%", mixBlendMode: "multiply" }}
                 className="object-contain"
               />
             </div>
@@ -252,11 +252,11 @@ export default async function ProductDetailPage({ params }) {
                   href={`/solutions/products/${p.id}`}
                   className="block p-5 bg-white border border-slate-100 rounded-2xl hover:border-slate-300 hover:shadow-md hover:-translate-y-1 transition-all"
                 >
-                  <div className="bg-slate-50 rounded-xl p-3 mb-3 h-16 flex items-center justify-center">
+                  <div className="bg-white border border-slate-100 rounded-xl p-3 mb-3 h-16 flex items-center justify-center">
                     <img
                       src={p.logo}
                       alt={p.vendor}
-                      style={{ width: "auto", height: "auto", maxWidth: "70%", maxHeight: "100%" }}
+                      style={{ width: "auto", height: "auto", maxWidth: "70%", maxHeight: "100%", mixBlendMode: "multiply" }}
                       className="object-contain"
                     />
                   </div>

@@ -313,7 +313,7 @@ function LogoCard({ client }) {
       {/* Category accent dot */}
       <div className={`absolute top-3 right-3 w-1.5 h-1.5 rounded-full ${meta.color} opacity-60`}></div>
 
-      {/* Logo — fixed-height frame, image scales to fit without crop */}
+      {/* Logo — fixed-height frame, mix-blend-multiply hides white background */}
       <div className="w-full h-24 sm:h-28 flex items-center justify-center mb-4">
         <img
           src={client.image}
@@ -322,7 +322,7 @@ function LogoCard({ client }) {
           width={0}
           height={0}
           sizes="(max-width: 640px) 40vw, (max-width: 1024px) 25vw, 18vw"
-          style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
+          style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%", mixBlendMode: "multiply" }}
           className="object-contain"
         />
       </div>

@@ -139,9 +139,6 @@ export default function NetworkSecurityPage() {
           <SolutionCard key={sol.id} sol={sol} />
         ))}
       </div>
-
-      {/* Contact CTA */}
-      <ContactCTA />
     </div>
   );
 }
@@ -153,12 +150,12 @@ function SolutionCard({ sol }) {
       className="group bg-white rounded-3xl border border-slate-100 p-6 sm:p-7 shadow-sm hover:shadow-lg hover:border-blue-200 hover:-translate-y-1 transition-all flex flex-col"
     >
       {/* Logo */}
-      <div className="bg-slate-50 rounded-2xl px-4 py-5 flex items-center justify-center mb-5 h-24">
+      <div className="rounded-2xl px-4 py-5 flex items-center justify-center mb-5 h-24 border border-slate-100">
         <img
           src={sol.logo}
           alt={sol.vendor}
           loading="lazy"
-          style={{ width: "auto", height: "auto", maxWidth: "70%", maxHeight: "100%" }}
+          style={{ width: "auto", height: "auto", maxWidth: "70%", maxHeight: "100%", mixBlendMode: "multiply" }}
           className="object-contain"
         />
       </div>
@@ -202,29 +199,3 @@ function SolutionCard({ sol }) {
   );
 }
 
-function ContactCTA() {
-  return (
-    <section className="bg-slate-900 rounded-[2rem] sm:rounded-[2.5rem] p-8 sm:p-12 text-white relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none"></div>
-      <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-        <div>
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 mb-2 block">
-            Get in Touch
-          </span>
-          <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight mb-2">
-            네트워크 보안 도입 상담
-          </h3>
-          <p className="text-white/60 font-medium text-sm">
-            귀사 환경에 맞는 최적의 보안 라인업을 무료로 컨설팅해드립니다.
-          </p>
-        </div>
-        <a
-          href="/support/contact"
-          className="self-start lg:self-auto shrink-0 px-7 py-4 bg-white text-slate-900 rounded-full text-xs font-black tracking-wider hover:bg-blue-500 hover:text-white transition-all"
-        >
-          상담 신청 →
-        </a>
-      </div>
-    </section>
-  );
-}
