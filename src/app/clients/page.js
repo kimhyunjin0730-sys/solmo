@@ -86,19 +86,18 @@ export default function ClientsPage() {
   }, [active, query]);
 
   return (
-    <div className="min-h-screen bg-white pt-24 sm:pt-32 font-sans">
+    <div className="min-h-screen bg-white pt-20 sm:pt-24 font-sans">
       {/* ─────────────────────── HERO ─────────────────────── */}
-      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 pb-16 sm:pb-24">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-12 items-end">
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 pb-10 sm:pb-14 pt-2">
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-end">
           <div className="lg:col-span-8">
-            <span className="text-blue-600 font-black text-[10px] sm:text-xs uppercase tracking-[0.4em] sm:tracking-[0.5em] mb-5 sm:mb-6 block">
+            <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">
               Our References
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 tracking-tighter leading-[1.05] mb-6 sm:mb-8">
-              {CLIENTS.length}+ 기업·기관이<br />
-              <span className="text-blue-600">솔모를 신뢰합니다.</span>
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug mb-3">
+              {CLIENTS.length}+ 기업·기관이 <span className="text-blue-600">솔모를 신뢰합니다.</span>
             </h1>
-            <p className="text-slate-500 font-bold text-base sm:text-lg leading-relaxed max-w-2xl">
+            <p className="text-slate-500 font-medium text-sm leading-relaxed max-w-2xl">
               금융, 제조, 공공, 교육·의료에 이르는 다양한 산업군의 핵심 기관과 함께
               검증된 보안 솔루션을 구축해 왔습니다.
             </p>

@@ -46,14 +46,15 @@ export default function DataLeakagePreventionPage() {
   ];
 
   return (
-    <div className="space-y-24 pb-40">
-      <header className="max-w-4xl">
-        <span className="text-blue-600 font-black text-xs uppercase tracking-[0.5em] mb-4 block">Information Leakage Protection</span>
-        <h2 className="text-6xl font-black text-slate-900 tracking-tighter mb-8 leading-tight">
-          내부의 적, 유출 사고의 <br />
-          <span className="text-blue-600">완벽한 마침표.</span>
+    <div className="space-y-12 pb-20">
+      <header className="max-w-4xl pt-2">
+        <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">
+          Information Leakage Protection
+        </span>
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-3 leading-snug">
+          내부의 적, 유출 사고의 <span className="text-blue-600">완벽한 마침표.</span>
         </h2>
-        <p className="text-slate-500 font-bold text-lg leading-relaxed">
+        <p className="text-slate-500 font-medium text-sm leading-relaxed">
           중요 데이터의 생성부터 노출, 출력 단계까지 모든 접점을 완벽하게 관리하여 기업의 유무형 자산을 보호합니다.
         </p>
       </header>

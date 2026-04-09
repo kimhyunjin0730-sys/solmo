@@ -23,17 +23,16 @@ export default function LocationPage() {
   };
 
   return (
-    <div className="space-y-24 pb-20">
+    <div className="space-y-12 pb-20">
       {/* ───── Hero ───── */}
-      <header className="max-w-4xl">
-        <span className="text-blue-600 font-black text-xs uppercase tracking-[0.5em] mb-6 block">
+      <header className="max-w-4xl pt-2">
+        <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">
           Visit Us
         </span>
-        <h1 className="text-5xl lg:text-7xl font-black text-slate-900 tracking-tighter mb-8 leading-[1.05]">
-          솔모정보기술<br />
-          <span className="text-blue-600">오시는 길.</span>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-3 leading-snug">
+          솔모정보기술 <span className="text-blue-600">오시는 길.</span>
         </h1>
-        <p className="text-slate-500 font-bold text-lg leading-relaxed">
+        <p className="text-slate-500 font-medium text-sm leading-relaxed">
           서울특별시 광진구에 위치한 본사는 보안 컨설팅과 솔루션 데모를 위한 열린 공간입니다.
           언제든 방문하여 직접 체험해 보세요.
         </p>

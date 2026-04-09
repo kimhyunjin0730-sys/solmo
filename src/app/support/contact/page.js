@@ -26,17 +26,16 @@ export default function ContactPage() {
     setForm((f) => ({ ...f, [k]: e.target.type === "checkbox" ? e.target.checked : e.target.value }));
 
   return (
-    <div className="space-y-24 pb-20">
+    <div className="space-y-12 pb-20">
       {/* ───── Hero ───── */}
-      <header className="max-w-4xl">
-        <span className="text-blue-600 font-black text-xs uppercase tracking-[0.5em] mb-6 block">
+      <header className="max-w-4xl pt-2">
+        <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">
           Get in Touch
         </span>
-        <h1 className="text-5xl lg:text-7xl font-black text-slate-900 tracking-tighter mb-8 leading-[1.05]">
-          보안 파트너를<br />
-          <span className="text-blue-600">지금 만나보세요.</span>
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-3 leading-snug">
+          보안 파트너를 <span className="text-blue-600">지금 만나보세요.</span>
         </h1>
-        <p className="text-slate-500 font-bold text-lg leading-relaxed">
+        <p className="text-slate-500 font-medium text-sm leading-relaxed">
           보안 솔루션 도입, 유지보수, 컨설팅 등 궁금한 내용을 남겨주시면
           (주)솔모정보기술의 전문가가 영업일 기준 24시간 이내에 신속히 답변드립니다.
         </p>

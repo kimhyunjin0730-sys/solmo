@@ -3,14 +3,15 @@ import Image from "next/image";
 
 export default function BackupRecoveryPage() {
   return (
-    <div className="space-y-32 pb-40">
-      <header className="max-w-4xl">
-        <span className="text-blue-600 font-black text-xs uppercase tracking-[0.5em] mb-4 block">Backup & Recovery</span>
-        <h2 className="text-6xl font-black text-slate-900 tracking-tighter mb-8 leading-tight">
-          재해로부터 비즈니스를 <br />
-          <span className="text-blue-600">안전하게 구원하다.</span>
+    <div className="space-y-12 pb-20">
+      <header className="max-w-4xl pt-2">
+        <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">
+          Backup & Recovery
+        </span>
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-3 leading-snug">
+          재해로부터 비즈니스를 <span className="text-blue-600">안전하게 구원하다.</span>
         </h2>
-        <p className="text-slate-500 font-bold text-lg leading-relaxed">
+        <p className="text-slate-500 font-medium text-sm leading-relaxed">
           데이터 유실은 돌이킬 수 없지만, 아크로니스와 솔모가 제공하는 백업은 완벽한 복구를 약속합니다.
         </p>
       </header>

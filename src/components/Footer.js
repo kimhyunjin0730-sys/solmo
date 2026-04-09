@@ -21,32 +21,38 @@ export default function Footer() {
           </div>
 
           {/* Links Columns */}
-          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
-            <FooterLinkGroup 
-              title="Company" 
+          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            <FooterLinkGroup
+              title="Company"
               links={[
                 { label: "인사말", href: "/about/greetings" },
                 { label: "연혁", href: "/about/history" },
                 { label: "인증 및 특허", href: "/about/certifications" },
                 { label: "조직도", href: "/about/organization" }
-              ]} 
+              ]}
             />
-            <FooterLinkGroup 
-              title="Solutions" 
+            <FooterLinkGroup
+              title="Solutions"
               links={[
                 { label: "네트워크 보안", href: "/solutions/network-security" },
                 { label: "내부정보유출 보안", href: "/solutions/data-leakage-prevention" },
                 { label: "어플리케이션 보안", href: "/solutions/application-security" },
                 { label: "백업 및 복구", href: "/solutions/backup-recovery" }
-              ]} 
+              ]}
             />
-            <FooterLinkGroup 
-              title="Services" 
+            <FooterLinkGroup
+              title="Services"
               links={[
                 { label: "보안취약점 분석", href: "/services/vulnerability-analysis" },
                 { label: "보안프린트 구축", href: "/services/secure-printing" },
                 { label: "통합 유지보수", href: "/services/maintenance" }
-              ]} 
+              ]}
+            />
+            <FooterLinkGroup
+              title="Clients"
+              links={[
+                { label: "고객사 현황", href: "/clients" }
+              ]}
             />
             <FooterLinkGroup
               title="Support"

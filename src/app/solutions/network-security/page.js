@@ -5,15 +5,14 @@ export default function NetworkSecurityPage() {
   return (
     <div className="space-y-16 lg:space-y-24 pb-20 pt-10 px-8">
       {/* ────────────── HERO ────────────── */}
-      <header className="relative max-w-4xl">
-        <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">
+      <header className="relative max-w-4xl pt-2">
+        <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">
           Network Security
         </span>
-        <h2 className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter mb-6 leading-tight">
-          경계 없는 보안,<br />
-          <span className="text-blue-600">지능형 네트워크 방어.</span>
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-3 leading-snug">
+          경계 없는 보안, <span className="text-blue-600">지능형 네트워크 방어.</span>
         </h2>
-        <p className="text-slate-500 font-bold text-sm lg:text-base leading-relaxed max-w-2xl">
+        <p className="text-slate-500 font-medium text-sm leading-relaxed max-w-2xl">
           외부 위협 탐지부터 내부 자산 식별까지, (주)솔모정보기술의 검증된 네트워크 보안 라인업이 귀사의 인프라를 보호합니다.
         </p>
 

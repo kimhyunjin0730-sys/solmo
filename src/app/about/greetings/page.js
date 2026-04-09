@@ -31,10 +31,9 @@ export default function GreetingsPage() {
         {/* Content Body */}
         <div className="lg:col-span-7 space-y-16 py-0 flex flex-col justify-center">
            {/* Section 1: Welcome */}
-           <section className="space-y-10">
-              <h4 className="text-5xl font-black text-slate-900 tracking-tighter leading-[1.1]">
-                 솔모정보기술은 <span className="text-blue-600 italic">22년의 신뢰</span>를 <br />
-                 바탕으로 보안의 길을 걷습니다.
+           <section className="space-y-6">
+              <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
+                 솔모정보기술은 <span className="text-blue-600">22년의 신뢰</span>를 바탕으로 보안의 길을 걷습니다.
               </h4>
               <div className="space-y-6 text-slate-500 font-bold text-[17px] leading-relaxed">
                  <p>

@@ -26,14 +26,15 @@ export default function ApplicationSecurityPage() {
   ];
 
   return (
-    <div className="space-y-24 pb-40">
-      <header className="max-w-4xl">
-        <span className="text-blue-600 font-black text-xs uppercase tracking-[0.5em] mb-4 block">Application Security</span>
-        <h2 className="text-6xl font-black text-slate-900 tracking-tighter mb-8 leading-tight">
-          단말 무결성 유지, <br />
-          <span className="text-blue-600">안전한 업무 환경의 기초.</span>
+    <div className="space-y-12 pb-20">
+      <header className="max-w-4xl pt-2">
+        <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">
+          Application Security
+        </span>
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-3 leading-snug">
+          단말 무결성 유지, <span className="text-blue-600">안전한 업무 환경의 기초.</span>
         </h2>
-        <p className="text-slate-500 font-bold text-lg leading-relaxed">
+        <p className="text-slate-500 font-medium text-sm leading-relaxed">
           어플리케이션 취약점 관리부터 문서 보안까지, 효율적이고 안전한 비즈니스 프로세스를 지원합니다.
         </p>
       </header>

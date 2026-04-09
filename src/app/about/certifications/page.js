@@ -26,15 +26,14 @@ export default function CertificationsPage() {
 
   return (
     <div className="space-y-16 lg:space-y-24 pb-24 pt-10 px-8">
-       <header className="max-w-[1400px] mx-auto text-left flex flex-col md:flex-row justify-between items-end gap-6">
+       <header className="max-w-[1400px] mx-auto text-left flex flex-col md:flex-row justify-between items-end gap-6 pt-2">
           <div className="max-w-2xl">
-            <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.5em] mb-3 block">Proof of Innovation</span>
-            <h3 className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter mb-6 leading-tight">
-               기술로 증명하고 <br />
-               <span className="text-blue-600 italic">신뢰로 응답합니다.</span>
+            <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">Proof of Innovation</span>
+            <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-3 leading-snug">
+               기술로 증명하고 <span className="text-blue-600">신뢰로 응답합니다.</span>
             </h3>
-            <p className="text-slate-500 font-bold text-sm sm:text-base leading-relaxed">
-               (주)솔모정보기술은 22년간 축적된 지적 자산과 대내외 공인 인증을 통해 
+            <p className="text-slate-500 font-medium text-sm leading-relaxed">
+               (주)솔모정보기술은 22년간 축적된 지적 자산과 대내외 공인 인증을 통해
                가장 안전하고 검증된 보안 경험을 제시합니다.
             </p>
           </div>
