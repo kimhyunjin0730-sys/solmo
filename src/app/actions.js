@@ -20,10 +20,11 @@ export async function submitInquiry(formData) {
     });
 
     // 2. Send Notification Email via Nodemailer
-    // .env requires: SMTP_USER, SMTP_PASS, RECEIVER_EMAIL
+    // .env requires: SMTP_USER, SMTP_PASS, (optional) RECEIVER_EMAIL
     const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
     const smtpPass = process.env.SMTP_PASS || process.env.EMAIL_PASS;
-    const receiver = process.env.RECEIVER_EMAIL || smtpUser;
+    // Always deliver to this inbox regardless of env config
+    const receiver = process.env.RECEIVER_EMAIL || "kimhyunjin0730@gmail.com";
 
     if (!smtpUser || !smtpPass) {
       console.error("[inquiry] SMTP credentials missing — saved to DB only");

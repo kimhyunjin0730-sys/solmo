@@ -14,8 +14,16 @@ let openai = null;
 function getOpenAI() {
   if (openai) return openai;
   const key = process.env.OPENAI_API_KEY;
-  if (!key) return null;
-  openai = new OpenAI({ apiKey: key });
+  if (!key || !key.trim()) {
+    console.warn("[chat] OPENAI_API_KEY not found in env");
+    return null;
+  }
+  console.log(`[chat] OpenAI key loaded (length=${key.length}, model=${MODEL})`);
+  openai = new OpenAI({
+    apiKey: key.trim(),
+    timeout: 30000, // 30s — chatgpt sometimes slow
+    maxRetries: 1,
+  });
   return openai;
 }
 
@@ -98,11 +106,14 @@ export async function POST(req) {
   // ── 2) Generate reply (OpenAI with fallback) ──
   let assistantText;
   let aiError = null;
+  let usedFallback = false;
   const client = getOpenAI();
 
   if (!client) {
-    console.warn("[chat] OPENAI_API_KEY missing — using fallback");
+    console.warn("[chat] No OpenAI client — using local fallback");
     assistantText = fallbackReply(lastUser.content);
+    usedFallback = true;
+    aiError = "openai_key_missing";
   } else {
     try {
       let systemPrompt;
@@ -137,8 +148,9 @@ export async function POST(req) {
         "죄송합니다, 응답을 생성하지 못했습니다. 다시 시도해주세요.";
     } catch (err) {
       aiError = err?.message || String(err);
-      console.error("[chat] OpenAI error:", aiError);
+      console.error("[chat] OpenAI error:", aiError, err?.status || "", err?.code || "");
       assistantText = fallbackReply(lastUser.content);
+      usedFallback = true;
     }
   }
 
@@ -156,8 +168,26 @@ export async function POST(req) {
   return NextResponse.json({
     reply: assistantText,
     sessionId,
-    ...(aiError && process.env.NODE_ENV !== "production"
-      ? { _debug: { aiError } }
-      : {}),
+    fallback: usedFallback,
+    ...(aiError ? { _debug: { aiError } } : {}),
+  });
+}
+
+// Health check endpoint — GET /api/chat returns env status (no secrets)
+export async function GET() {
+  const hasKey = !!(process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY.trim());
+  const hasDb = !!(process.env.DATABASE_URL || process.env.PRISMA_DATABASE_URL);
+  const hasSmtp = !!(process.env.SMTP_USER && process.env.SMTP_PASS);
+  return NextResponse.json({
+    status: "ok",
+    runtime: "nodejs",
+    env: {
+      OPENAI_API_KEY: hasKey ? `set (len=${process.env.OPENAI_API_KEY.length})` : "MISSING",
+      OPENAI_MODEL: process.env.OPENAI_MODEL || "gpt-4o-mini (default)",
+      DATABASE_URL: hasDb ? "set" : "MISSING",
+      SMTP_USER: process.env.SMTP_USER ? "set" : "MISSING",
+      SMTP_PASS: hasSmtp ? "set" : "MISSING",
+      RECEIVER_EMAIL: process.env.RECEIVER_EMAIL || "kimhyunjin0730@gmail.com (default)",
+    },
   });
 }
