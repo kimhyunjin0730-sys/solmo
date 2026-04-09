@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import OpenAI from "openai";
 import crypto from "node:crypto";
-import { prisma } from "@/lib/prisma";
+import { getPrisma } from "@/lib/prisma";
 import { buildSystemPrompt } from "@/lib/knowledge";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 const MODEL = process.env.OPENAI_MODEL || "gpt-4o-mini";
 const MAX_HISTORY = 20; // 최근 N개 메시지만 컨텍스트로
@@ -53,6 +54,7 @@ export async function POST(req) {
     // Session 보장
     const sessionId = incomingSessionId || crypto.randomUUID();
     const userAgent = req.headers.get("user-agent")?.slice(0, 255) || null;
+    const prisma = getPrisma();
 
     await prisma.chatSession.upsert({
       where: { id: sessionId },

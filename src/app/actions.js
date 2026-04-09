@@ -1,9 +1,7 @@
 'use server';
 
-import { PrismaClient } from "@prisma/client";
 import nodemailer from "nodemailer";
-
-const prisma = new PrismaClient();
+import { getPrisma } from "@/lib/prisma";
 
 export async function submitInquiry(formData) {
   const name = formData.get('name');
@@ -11,6 +9,7 @@ export async function submitInquiry(formData) {
   const message = formData.get('message');
 
   try {
+    const prisma = getPrisma();
     // 1. Save to Database
     const inquiry = await prisma.inquiry.create({
       data: {
