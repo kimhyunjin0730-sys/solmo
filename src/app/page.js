@@ -74,6 +74,33 @@ const STRENGTHS = [
   },
 ];
 
+const BIG_STATS = [
+  { value: "98", suffix: "%", label: "고객 재계약률", desc: "장기 파트너십" },
+  { value: "47", suffix: "", label: "전문 엔지니어", desc: "특급·고급 50% 이상" },
+  { value: "5,000", suffix: "+", label: "보안 패턴 차단", desc: "실시간 위협 대응" },
+];
+
+const NEWS = [
+  {
+    date: "2024.07",
+    category: "Partnership",
+    title: "Infoblox · Verkada 신규 파트너 계약 체결",
+    desc: "DDI(DNS/DHCP/IPAM)와 클라우드 보안 카메라 솔루션을 라인업에 추가하여 토탈 보안 포트폴리오를 강화했습니다.",
+  },
+  {
+    date: "2023.11",
+    category: "Certification",
+    title: "기업신용등급 BB+ 상향 (한국평가데이타)",
+    desc: "재무 안정성과 사업 성장성을 인정받아 신용등급이 상향 조정되었습니다.",
+  },
+  {
+    date: "2023.05",
+    category: "Award",
+    title: "Fortinet Expert Partner 승격",
+    desc: "Fortinet 최우수 파트너로 승격하며 차세대 방화벽 분야의 기술 역량을 공식 인증받았습니다.",
+  },
+];
+
 export default function Home() {
   const [activeSolution, setActiveSolution] = useState(0);
 
@@ -287,31 +314,78 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ───────────────────── WHY SOLMO ───────────────────── */}
-      <section className="py-20 sm:py-28 bg-slate-950 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/15 rounded-full blur-[120px] pointer-events-none"></div>
-        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none"></div>
+      {/* ───────────────────── INFORMATION (BIG STATS) ───────────────────── */}
+      <section className="py-20 sm:py-28 lg:py-32 bg-slate-950 text-white relative overflow-hidden">
+        {/* Aurora background */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none"></div>
+        {/* Grid overlay */}
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+        />
+        {/* Earth-like glow */}
+        <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-t from-blue-600/20 to-transparent blur-[100px] pointer-events-none"></div>
 
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 relative z-10">
-          <div className="max-w-3xl mb-14 sm:mb-20">
-            <span className="text-blue-400 font-bold text-[11px] sm:text-xs uppercase tracking-[0.3em] mb-3 block">
-              Why SOLMO
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-5">
-              왜 솔모정보기술인가
-            </h2>
-            <p className="text-white/50 text-sm sm:text-base font-medium leading-relaxed">
-              20년 업력, 자체 개발력, 그리고 검증된 레퍼런스 — 보안 파트너에게 가장 중요한 세 가지를 모두 갖췄습니다.
-            </p>
+          {/* Header */}
+          <div className="grid lg:grid-cols-12 gap-8 mb-16 sm:mb-20">
+            <div className="lg:col-span-5">
+              <span className="text-blue-400 font-bold text-[11px] sm:text-xs uppercase tracking-[0.3em] mb-4 block">
+                Information
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1]">
+                숫자로 증명하는<br />
+                <span className="bg-gradient-to-r from-blue-300 to-indigo-400 bg-clip-text text-transparent">
+                  솔모의 신뢰
+                </span>
+              </h2>
+            </div>
+            <div className="lg:col-span-7 lg:pt-8">
+              <p className="text-white/50 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
+                20년 업력, 자체 개발력, 그리고 검증된 레퍼런스 — 보안 파트너에게 가장 중요한 세 가지를
+                모두 갖춘 (주)솔모정보기술의 성과를 숫자로 확인해보세요.
+              </p>
+            </div>
           </div>
 
+          {/* Big numbers — like Information section in reference */}
+          <div className="grid sm:grid-cols-3 gap-px bg-white/10 mb-16 sm:mb-20 rounded-3xl overflow-hidden border border-white/10">
+            {BIG_STATS.map((s, i) => (
+              <div
+                key={i}
+                className="bg-slate-950 p-8 sm:p-10 lg:p-12 hover:bg-slate-900 transition-colors"
+              >
+                <div className="flex items-baseline gap-1 mb-4">
+                  <span className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tighter bg-gradient-to-br from-white to-white/60 bg-clip-text text-transparent">
+                    {s.value}
+                  </span>
+                  <span className="text-2xl sm:text-3xl font-extrabold text-blue-400">
+                    {s.suffix}
+                  </span>
+                </div>
+                <div className="text-base sm:text-lg font-bold text-white tracking-tight mb-1">
+                  {s.label}
+                </div>
+                <div className="text-[11px] sm:text-xs font-medium text-white/40 uppercase tracking-widest">
+                  {s.desc}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Why SOLMO 4 cards */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {STRENGTHS.map((s) => (
               <div
                 key={s.num}
-                className="p-7 sm:p-8 bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl hover:bg-white/10 hover:-translate-y-1 transition-all"
+                className="p-7 sm:p-8 bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl hover:bg-white/[0.06] hover:border-blue-400/30 hover:-translate-y-1 transition-all group"
               >
-                <div className="text-3xl sm:text-4xl font-extrabold text-blue-400 mb-5 tracking-tight">
+                <div className="text-3xl sm:text-4xl font-extrabold text-blue-400 mb-5 tracking-tight group-hover:scale-110 transition-transform origin-left">
                   {s.num}
                 </div>
                 <h3 className="text-base sm:text-lg font-bold mb-3 tracking-tight">{s.title}</h3>
@@ -370,6 +444,34 @@ export default function Home() {
               count="7"
               clients={["서울대학교", "성균관대학교", "연세대 의료원", "국립암센터"]}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────────── NEWS / RECENT ACTIVITY ───────────────────── */}
+      <section className="py-20 sm:py-28 bg-slate-50">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 sm:mb-16">
+            <div>
+              <span className="text-blue-600 font-bold text-[11px] sm:text-xs uppercase tracking-[0.3em] mb-3 block">
+                News
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                최근 소식 & 활동
+              </h2>
+            </div>
+            <Link
+              href="/about/history"
+              className="self-start lg:self-auto text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors"
+            >
+              전체 연혁 보기 →
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5 sm:gap-6">
+            {NEWS.map((n, i) => (
+              <NewsCard key={i} news={n} dark={i === 1} />
+            ))}
           </div>
         </div>
       </section>
@@ -444,6 +546,55 @@ export default function Home() {
 }
 
 /* ──────────────── Sub-components ──────────────── */
+
+function NewsCard({ news, dark }) {
+  return (
+    <article
+      className={`group p-7 sm:p-8 rounded-3xl border transition-all hover:-translate-y-1 ${
+        dark
+          ? "bg-slate-900 border-slate-800 text-white hover:border-blue-500/40 hover:shadow-2xl hover:shadow-blue-900/20"
+          : "bg-white border-slate-100 hover:border-slate-300 hover:shadow-lg"
+      }`}
+    >
+      <div className="flex items-center justify-between mb-6">
+        <span
+          className={`text-[10px] font-black uppercase tracking-widest ${
+            dark ? "text-blue-400" : "text-blue-600"
+          }`}
+        >
+          {news.category}
+        </span>
+        <span
+          className={`text-xs font-bold ${dark ? "text-white/40" : "text-slate-400"}`}
+        >
+          {news.date}
+        </span>
+      </div>
+      <h3
+        className={`text-lg sm:text-xl font-extrabold tracking-tight leading-snug mb-4 ${
+          dark ? "text-white" : "text-slate-900"
+        }`}
+      >
+        {news.title}
+      </h3>
+      <p
+        className={`text-sm font-medium leading-relaxed mb-6 ${
+          dark ? "text-white/50" : "text-slate-500"
+        }`}
+      >
+        {news.desc}
+      </p>
+      <div
+        className={`flex items-center gap-2 text-xs font-black uppercase tracking-widest ${
+          dark ? "text-blue-400" : "text-blue-600"
+        }`}
+      >
+        <span>Read more</span>
+        <span className="group-hover:translate-x-1 transition-transform">→</span>
+      </div>
+    </article>
+  );
+}
 
 function HeroKPI({ value, label }) {
   return (
