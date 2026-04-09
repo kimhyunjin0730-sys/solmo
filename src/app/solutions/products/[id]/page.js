@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getProduct, PRODUCT_LIST, CATEGORY_INFO } from "@/lib/products";
+import ProductDiagram from "@/components/ProductDiagrams";
 
 /* ──────────── Feature card with proper SVG iconography ──────────── */
 function FeatureCard({ feature, index }) {
@@ -294,6 +295,9 @@ export default async function ProductDetailPage({ params }) {
             </div>
           </section>
         )}
+
+        {/* System Architecture Diagram (only for products with one) */}
+        <ProductDiagram id={product.id} />
 
         {/* Specs */}
         {product.specs?.length > 0 && (

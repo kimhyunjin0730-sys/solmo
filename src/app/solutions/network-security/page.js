@@ -46,6 +46,20 @@ const SOLUTIONS = [
     logo: "/images/product/6.png",
   },
   {
+    id: "mail-i",
+    cat: "Network DLP",
+    name: "Mail-i (Hyboost)",
+    vendor: "소만사",
+    desc: "이메일·메신저·웹하드·SNS를 통한 내부 정보 유출을 상시 감사하는 Network DLP 솔루션.",
+    features: [
+      "이메일 제목·본문·첨부 파일 상세 로깅",
+      "상용 웹메일·메신저·SNS 통합 모니터링",
+      "개인정보 / 특정 키워드 검색 기능",
+      "외부 전송 검출 시 실시간 통보",
+    ],
+    logo: "/images/product/6.png",
+  },
+  {
     id: "wips",
     cat: "WIPS",
     name: "Fire Power (WIPS)",

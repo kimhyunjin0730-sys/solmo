@@ -99,6 +99,38 @@ export const PRODUCTS = {
     ],
   },
 
+  "mail-i": {
+    id: "mail-i",
+    category: "network-security",
+    categoryLabel: "네트워크 보안",
+    cat: "Network DLP",
+    name: "Mail-i (Hyboost)",
+    vendor: "소만사",
+    shortDesc:
+      "이메일·메신저·웹하드·SNS 등 외부로 발송되는 채널을 모니터링하여 내부 정보 유출을 상시 감사하는 Network DLP.",
+    logo: "/images/product/6.png",
+    overview:
+      "회사 외부로 발송되는 이메일, 메신저, 웹하드, SNS 서비스 등을 모니터링하여 비즈니스 정보의 외부 유출을 방지하며, 내부 정보의 외부 유출을 상시 감사하는 보안 서비스입니다. 백본 스위치에 일체형 장비(Hyboost)로 구성되어 분산 환경에서도 중앙 통합 관리가 가능합니다.",
+    keyFeatures: [
+      { icon: "📨", title: "이메일 모니터링", desc: "제목·본문은 물론 첨부파일 내용까지 상세 로깅 수행" },
+      { icon: "🌐", title: "다양한 채널", desc: "상용 웹메일 · 메신저 · 웹하드 · SNS 모니터링 지원" },
+      { icon: "🔍", title: "검색·검출", desc: "개인정보 및 특정 키워드 검색 기능 제공" },
+      { icon: "🚨", title: "통보 기능", desc: "외부 전송되는 개인정보 자료 검출 시 즉시 통보" },
+    ],
+    specs: [
+      { label: "구성", value: "Server 모듈 + Engine 모듈" },
+      { label: "장비 형태", value: "하드웨어 일체형 Appliance (Hyboost)" },
+      { label: "배치", value: "네트워크 백본 스위치" },
+      { label: "관리", value: "분산 환경 중앙 통합 관리" },
+      { label: "컴플라이언스", value: "개인정보보호법 시행령 제6조 3항 준수" },
+    ],
+    useCases: [
+      { title: "내부 정보 유출 방지", desc: "임직원·협력체 모니터링을 통한 정보 유출 방지 및 보안성 강화" },
+      { title: "보안 의식 제고", desc: "직원의 보안 의식 강화를 통해 유출 사고 및 잠재적 피해 최소화" },
+      { title: "법적 준수", desc: "개인정보보호법 및 시행령·고시 완벽 준수" },
+    ],
+  },
+
   "wips": {
     id: "wips",
     category: "network-security",
