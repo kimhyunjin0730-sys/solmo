@@ -2,12 +2,15 @@ import { PrismaClient } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
 
 /**
- * Lazy-initialized Prisma client.
+ * Lazy-initialized Prisma client for Prisma Postgres (Accelerate).
  *
- * Why lazy? At build time Next.js may import this module while collecting
- * page data, but we don't want to instantiate PrismaClient at module load —
- * that would force env vars to be present during build, and fail for
- * preview/static analysis steps. Instead, we construct on first call.
+ * Prisma 7 removed the `datasources` constructor option entirely.
+ * For Prisma Postgres / Accelerate, you must pass `accelerateUrl` to
+ * the PrismaClient constructor and apply the withAccelerate() extension.
+ *
+ * Lazy init is critical: at build time Next.js may import this module
+ * while collecting page data, but env vars may not be present yet.
+ * We construct on first call only.
  */
 
 const globalForPrisma = globalThis;
@@ -18,23 +21,16 @@ function createPrisma() {
     process.env.PRISMA_DATABASE_URL ||
     process.env.POSTGRES_URL;
 
-  const isAccelerate = url?.startsWith("prisma://") || url?.startsWith("prisma+postgres://");
-
-  const options = {
-    log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
-  };
-
-  if (isAccelerate) {
-    options.accelerateUrl = url;
-  } else {
-    options.datasources = {
-      db: { url: url },
-    };
+  if (!url) {
+    throw new Error("DATABASE_URL is not set");
   }
 
-  const client = new PrismaClient(options);
+  const client = new PrismaClient({
+    accelerateUrl: url,
+    log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
+  });
 
-  return isAccelerate ? client.$extends(withAccelerate()) : client;
+  return client.$extends(withAccelerate());
 }
 
 export function getPrisma() {
