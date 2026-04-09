@@ -1,11 +1,14 @@
 'use client';
 import { useState } from "react";
+import { submitInquiry } from "@/app/actions";
 
 const TEL = "02-402-8054";
 const EMAIL = "solmoit01@solmo.co.kr";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
   const [form, setForm] = useState({
     name: "",
     company: "",
@@ -16,10 +19,39 @@ export default function ContactPage() {
     agree: false,
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    // TODO: nodemailer / API 연동
+    if (submitting) return;
+    setSubmitting(true);
+    setErrorMsg("");
+
+    // 모든 폼 정보를 한 메시지로 합쳐서 server action에 전달
+    const fullMessage = [
+      `[문의 유형] ${form.type}`,
+      `[회사명/기관명] ${form.company}`,
+      `[연락처] ${form.phone}`,
+      ``,
+      form.message,
+    ].join("\n");
+
+    const fd = new FormData();
+    fd.append("name", form.name);
+    fd.append("email", form.email);
+    fd.append("message", fullMessage);
+
+    try {
+      const result = await submitInquiry(fd);
+      if (result?.success) {
+        setSubmitted(true);
+      } else {
+        setErrorMsg(result?.error || "문의 전송에 실패했습니다. 잠시 후 다시 시도해주세요.");
+      }
+    } catch (err) {
+      console.error("[contact] submit error:", err);
+      setErrorMsg("문의 전송 중 오류가 발생했습니다. 02-402-8054 로 직접 문의해주세요.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const update = (k) => (e) =>
@@ -236,11 +268,18 @@ export default function ContactPage() {
                 </span>
               </label>
 
+              {errorMsg && (
+                <div className="px-5 py-4 rounded-2xl bg-red-50 border border-red-200 text-sm font-bold text-red-700">
+                  ⚠ {errorMsg}
+                </div>
+              )}
+
               <button
                 type="submit"
-                className="w-full py-5 bg-[#001F5B] text-white font-black rounded-full hover:bg-blue-700 transition-all text-sm uppercase tracking-[0.2em]"
+                disabled={submitting}
+                className="w-full py-5 bg-[#001F5B] text-white font-black rounded-full hover:bg-blue-700 transition-all text-sm uppercase tracking-[0.2em] disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Submit Inquiry →
+                {submitting ? "전송 중..." : "Submit Inquiry →"}
               </button>
             </form>
           )}
