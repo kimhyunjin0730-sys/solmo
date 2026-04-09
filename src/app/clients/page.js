@@ -310,26 +310,30 @@ function LogoCard({ client }) {
   const meta = CATEGORY_META[client.category];
 
   return (
-    <div className="group bg-white rounded-2xl border border-slate-100 hover:border-slate-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 p-5 sm:p-7 flex flex-col items-center relative overflow-hidden">
+    <div className="group bg-white rounded-2xl border border-slate-100 hover:border-slate-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-200 p-4 sm:p-6 flex flex-col items-center relative">
       {/* Category accent dot */}
       <div className={`absolute top-3 right-3 w-1.5 h-1.5 rounded-full ${meta.color} opacity-60`}></div>
 
-      {/* Logo */}
-      <div className="w-full h-20 sm:h-24 flex items-center justify-center px-3 mb-4">
+      {/* Logo — fixed-height frame, image scales to fit without crop */}
+      <div className="w-full h-24 sm:h-28 flex items-center justify-center mb-4">
         <img
           src={client.image}
           alt={client.name}
           loading="lazy"
-          className="max-w-full max-h-full object-contain"
+          width={0}
+          height={0}
+          sizes="(max-width: 640px) 40vw, (max-width: 1024px) 25vw, 18vw"
+          style={{ width: "auto", height: "auto", maxWidth: "100%", maxHeight: "100%" }}
+          className="object-contain"
         />
       </div>
 
-      {/* Name */}
+      {/* Name — wrap, never truncate */}
       <div className="text-center min-h-[48px] flex flex-col justify-center w-full">
-        <p className="text-sm sm:text-base font-black text-slate-900 leading-snug tracking-tight truncate px-1">
+        <p className="text-sm sm:text-base font-black text-slate-900 leading-snug tracking-tight px-1 break-keep">
           {client.name}
         </p>
-        <p className="text-[10px] sm:text-xs text-slate-400 mt-1 leading-tight font-bold truncate px-1">
+        <p className="text-[10px] sm:text-xs text-slate-400 mt-1 leading-tight font-bold px-1 break-keep">
           {client.nameEn}
         </p>
       </div>

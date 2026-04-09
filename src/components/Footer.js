@@ -48,13 +48,12 @@ export default function Footer() {
                 { label: "통합 유지보수", href: "/services/maintenance" }
               ]} 
             />
-            <FooterLinkGroup 
-              title="Support" 
+            <FooterLinkGroup
+              title="Support"
               links={[
-                { label: "고객사 현황", href: "/clients" },
                 { label: "영업 문의", href: "/support/contact" },
                 { label: "오시는 길", href: "/support/location" }
-              ]} 
+              ]}
             />
           </div>
         </div>

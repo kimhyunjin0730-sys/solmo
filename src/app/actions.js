@@ -20,12 +20,21 @@ export async function submitInquiry(formData) {
     });
 
     // 2. Send Notification Email via Nodemailer
-    // IMPORTANT: Users MUST set EMAIL_USER and EMAIL_PASS in .env
+    // .env requires: SMTP_USER, SMTP_PASS, RECEIVER_EMAIL
+    const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
+    const smtpPass = process.env.SMTP_PASS || process.env.EMAIL_PASS;
+    const receiver = process.env.RECEIVER_EMAIL || smtpUser;
+
+    if (!smtpUser || !smtpPass) {
+      console.error("[inquiry] SMTP credentials missing — saved to DB only");
+      return { success: true, inquiryId: inquiry.id, mailSent: false };
+    }
+
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: process.env.EMAIL_USER || 'your-email@gmail.com', 
-        pass: process.env.EMAIL_PASS || 'your-app-password',
+        user: smtpUser,
+        pass: smtpPass,
       },
     });
 
@@ -63,13 +72,14 @@ export async function submitInquiry(formData) {
     `;
 
     await transporter.sendMail({
-      from: `"SOLMO Web" <${process.env.EMAIL_USER}>`,
-      to: 'kimhyunjin0730@gmail.com', // User's requested test email
+      from: `"SOLMO Web" <${smtpUser}>`,
+      to: receiver,
+      replyTo: email,
       subject: `[홈페이지 문의] ${name}님의 새로운 문의입니다.`,
       html: htmlContent,
     });
 
-    return { success: true, inquiryId: inquiry.id };
+    return { success: true, inquiryId: inquiry.id, mailSent: true };
   } catch (error) {
     console.error("Inquiry Submission Error:", error);
     // Even if email fails, we return success if it was saved to DB, 
