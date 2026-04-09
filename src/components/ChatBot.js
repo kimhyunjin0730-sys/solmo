@@ -163,14 +163,7 @@ export default function ChatBot() {
           <div
             role="dialog"
             aria-label="솔모정보기술 챗봇"
-            className="
-              fixed z-[60] bg-white shadow-2xl flex flex-col overflow-hidden
-              inset-x-0 bottom-0 top-16 rounded-t-[2rem]
-              sm:inset-auto sm:bottom-7 sm:right-7 sm:top-auto
-              sm:w-[400px] sm:h-[640px] sm:max-h-[calc(100vh-4rem)] sm:rounded-[2rem]
-              border border-slate-200
-              animate-chat-in
-            "
+            className="fixed z-[60] bg-white shadow-2xl flex flex-col overflow-hidden inset-x-0 bottom-0 top-16 rounded-t-[2rem] sm:inset-auto sm:bottom-7 sm:right-7 sm:top-auto sm:w-[400px] sm:h-[640px] sm:max-h-[calc(100vh-4rem)] sm:rounded-[2rem] border border-slate-200 animate-chat-in"
           >
             {/* Header */}
             <div className="bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white px-5 py-4 flex items-center gap-3 shrink-0">
