@@ -85,8 +85,8 @@ export default function Header() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled || !isHome
-            ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100"
-            : "bg-white border-b border-slate-100"
+            ? "bg-white/80 backdrop-blur-xl shadow-[0_2px_24px_-12px_rgba(0,31,91,0.15)] border-b border-slate-200/60"
+            : "bg-white/90 backdrop-blur-sm border-b border-slate-100"
         }`}
         style={{ paddingTop: "max(0.875rem, env(safe-area-inset-top))" }}
       >

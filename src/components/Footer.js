@@ -4,8 +4,23 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-white py-20 border-t border-white/5">
-      <div className="max-w-[1400px] mx-auto px-8">
+    <footer className="relative bg-slate-950 text-white py-20 border-t border-white/5 overflow-hidden">
+      {/* Aurora background glows */}
+      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none -translate-x-1/3 -translate-y-1/3"></div>
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none translate-x-1/3 translate-y-1/3"></div>
+      {/* Subtle grid overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      ></div>
+      {/* Top accent gradient line */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent"></div>
+
+      <div className="max-w-[1400px] mx-auto px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-16">
           {/* Brand Column */}
           <div className="lg:col-span-4 space-y-8">

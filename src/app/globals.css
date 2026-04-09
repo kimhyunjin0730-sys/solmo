@@ -6,6 +6,21 @@
 :root {
   --background: #ffffff;
   --foreground: #0f172a;
+  /* Brand palette tokens */
+  --brand-navy: #001F5B;
+  --brand-navy-deep: #001440;
+  --brand-blue: #2563eb;
+  --brand-blue-light: #60a5fa;
+  --brand-indigo: #4338ca;
+  --ink-strong: #0f172a;
+  --ink-body: #334155;
+  --ink-muted: #64748b;
+  --ink-faint: #94a3b8;
+  --surface-page: #fafbfc;
+  --surface-card: #ffffff;
+  --surface-soft: #f1f5f9;
+  --border-soft: #e2e8f0;
+  --border-faint: #f1f5f9;
   --font-sans:
     "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "맑은 고딕",
@@ -27,13 +42,58 @@ html {
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--surface-page);
+  color: var(--ink-strong);
   font-family: var(--font-sans);
   font-feature-settings: "ss06" on, "ss07" on; /* Pretendard 한글 OpenType 최적화 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+/* ───────── Background pattern utilities ───────── */
+/* Subtle dot grid for sub-page surfaces */
+.bg-dot-grid {
+  background-color: #fafbfc;
+  background-image: radial-gradient(circle at 1px 1px, rgba(15, 23, 42, 0.06) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Diagonal soft gradient — for hero section accents */
+.bg-soft-diag {
+  background: linear-gradient(135deg, #fafbfc 0%, #f1f5f9 50%, #fafbfc 100%);
+}
+
+/* Mesh-like aurora gradient for dark sections */
+.bg-aurora-dark {
+  background-color: #0a0f1c;
+  background-image:
+    radial-gradient(at 20% 20%, rgba(37, 99, 235, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+    radial-gradient(at 0% 80%, rgba(59, 130, 246, 0.1) 0px, transparent 50%);
+}
+
+/* Top-fade gradient — sub-nav transition */
+.bg-fade-top {
+  background: linear-gradient(180deg, #f8fafc 0%, transparent 100%);
+}
+
+/* Refined card shadow — softer than tailwind defaults */
+.shadow-card {
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 4px 12px rgba(15, 23, 42, 0.04);
+}
+.shadow-card-hover {
+  box-shadow:
+    0 1px 2px rgba(15, 23, 42, 0.05),
+    0 24px 60px -20px rgba(0, 31, 91, 0.18);
+}
+
+/* Selection color */
+::selection {
+  background: rgba(37, 99, 235, 0.18);
+  color: #001F5B;
 }
 
 /* 헤딩의 한글은 italic이 어색함 → 영문에만 적용되도록 기본은 normal */

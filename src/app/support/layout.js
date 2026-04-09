@@ -11,9 +11,11 @@ export default function SupportLayout({ children }) {
   ];
 
   return (
-    <div className="min-h-screen bg-white font-sans selection:bg-blue-500/10">
+    <div className="min-h-screen bg-dot-grid font-sans selection:bg-blue-500/10 relative">
+      <div className="absolute inset-x-0 top-0 h-[420px] bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none"></div>
+
       {/* Sub-navigation Tabs */}
-      <div className="pt-16 sm:pt-20 bg-slate-50 border-b border-slate-200">
+      <div className="pt-16 sm:pt-20 bg-white/70 backdrop-blur-md border-b border-slate-200/70 relative">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 flex gap-6 sm:gap-8 overflow-x-auto">
           {navItems.map((item) => (
             <Link
@@ -34,13 +36,9 @@ export default function SupportLayout({ children }) {
         </div>
       </div>
 
-      <main className="max-w-[1400px] mx-auto px-5 sm:px-8 pt-6 sm:pt-8 pb-20 animate-reveal">
+      <main className="max-w-[1400px] mx-auto px-5 sm:px-8 pt-6 sm:pt-8 pb-20 animate-reveal relative">
         {children}
       </main>
-
-      <footer className="bg-slate-900 text-white/20 py-12 px-8 text-center text-[10px] font-black uppercase tracking-[0.3em]">
-        © 2026 SOLMO Information Technology. All rights reserved.
-      </footer>
 
       <style jsx global>{`
         @keyframes reveal {
