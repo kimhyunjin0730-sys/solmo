@@ -202,38 +202,6 @@ export default async function ProductDetailPage({ params }) {
           </section>
         )}
 
-        {/* CTA */}
-        <section className="bg-slate-900 rounded-[2rem] sm:rounded-[2.5rem] p-8 sm:p-12 lg:p-14 text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none"></div>
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-            <div>
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 mb-2 block">
-                Get a Quote
-              </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">
-                {product.name} 도입 상담
-              </h3>
-              <p className="text-white/60 font-medium text-sm">
-                전문 컨설턴트가 귀사 환경에 맞는 최적의 구성을 무료로 안내해드립니다.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link
-                href="/support/contact"
-                className="px-7 py-4 bg-white text-slate-900 rounded-full text-xs font-black tracking-wider hover:bg-blue-500 hover:text-white transition-all text-center"
-              >
-                상담 신청 →
-              </Link>
-              <a
-                href="tel:024028054"
-                className="px-7 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-full text-xs font-black tracking-wider hover:bg-white/20 transition-all text-center"
-              >
-                📞 02-402-8054
-              </a>
-            </div>
-          </div>
-        </section>
-
         {/* Related products */}
         {related.length > 0 && (
           <section className="space-y-8">
