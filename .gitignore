@@ -8,3 +8,8 @@ build/
 .env
 
 /src/generated/prisma
+
+# Local SQLite database (do not deploy)
+*.db
+*.db-journal
+prisma/dev.db

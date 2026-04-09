@@ -6,31 +6,36 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "mysql"
 }
 
 model Inquiry {
   id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  message   String
+  name      String   @db.VarChar(120)
+  email     String   @db.VarChar(255)
+  message   String   @db.Text
   createdAt DateTime @default(now())
+
+  @@index([createdAt])
 }
 
 model ChatSession {
-  id        String        @id
+  id        String        @id @db.VarChar(64)
   createdAt DateTime      @default(now())
-  userAgent String?
+  userAgent String?       @db.VarChar(255)
   messages  ChatMessage[]
+
+  @@index([createdAt])
 }
 
 model ChatMessage {
   id        Int         @id @default(autoincrement())
-  sessionId String
-  role      String      // "user" | "assistant" | "system"
-  content   String
+  sessionId String      @db.VarChar(64)
+  role      String      @db.VarChar(16) // "user" | "assistant" | "system"
+  content   String      @db.Text
   createdAt DateTime    @default(now())
   session   ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 
   @@index([sessionId])
+  @@index([createdAt])
 }
