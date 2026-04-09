@@ -81,7 +81,7 @@ export default function Home() {
     <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-500/10 overflow-x-hidden">
 
       {/* ───────────────────── HERO ───────────────────── */}
-      <section className="relative min-h-[640px] lg:min-h-[760px] flex items-center bg-slate-950 overflow-hidden pt-24 pb-16">
+      <section className="relative min-h-[500px] lg:min-h-[600px] flex items-center bg-slate-950 overflow-hidden pt-20 pb-12">
         <div className="absolute inset-0 z-0">
           <Image
             src="/office-bg.png"
@@ -108,20 +108,20 @@ export default function Home() {
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 relative z-10 w-full animate-reveal">
           <div className="max-w-3xl">
             {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-7">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span className="text-[11px] font-semibold tracking-[0.2em] text-white/80 uppercase">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-5">
+              <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span className="text-[10px] font-semibold tracking-[0.2em] text-white/80 uppercase">
                 Total IT Security Partner · Since 2002
               </span>
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-white leading-[1.1] tracking-tight mb-6 sm:mb-8">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] tracking-tight mb-5 sm:mb-6">
               미래를 보호하는<br />
               <span className="bg-gradient-to-r from-blue-300 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
                 지능형 보안의 기준.
               </span>
             </h1>
-            <p className="text-white/60 text-base sm:text-lg font-medium max-w-xl leading-relaxed mb-10">
+            <p className="text-white/60 text-sm sm:text-base font-medium max-w-xl leading-relaxed mb-8">
               (주)솔모정보기술은 20년 이상의 업력과 화이트해커급 기술력을 바탕으로
               귀사의 정보 자산을 가장 안전하게 지켜드립니다.
             </p>
@@ -129,13 +129,13 @@ export default function Home() {
             <div className="flex flex-wrap gap-3 sm:gap-4">
               <Link
                 href="#solutions"
-                className="px-7 sm:px-8 py-4 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-500 transition-all shadow-xl shadow-blue-600/30 text-sm tracking-tight"
+                className="px-6 py-3 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-500 transition-all shadow-xl shadow-blue-600/30 text-xs tracking-tight"
               >
                 솔루션 살펴보기 →
               </Link>
               <Link
                 href="/support/contact"
-                className="px-7 sm:px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold rounded-full hover:bg-white/20 transition-all text-sm tracking-tight"
+                className="px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold rounded-full hover:bg-white/20 transition-all text-xs tracking-tight"
               >
                 전문가 상담 신청
               </Link>
@@ -143,7 +143,7 @@ export default function Home() {
           </div>
 
           {/* Hero KPI strip */}
-          <div className="mt-14 sm:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl">
+          <div className="mt-10 sm:mt-14 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl">
             <HeroKPI value="20+" label="Years of Trust" />
             <HeroKPI value="47" label="Engineers" />
             <HeroKPI value="37+" label="Clients" />

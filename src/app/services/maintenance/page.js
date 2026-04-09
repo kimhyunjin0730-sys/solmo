@@ -3,20 +3,20 @@ import Image from "next/image";
 
 export default function MaintenancePage() {
   return (
-    <div className="space-y-32">
+    <div className="space-y-12 lg:space-y-16 px-8 pt-10 pb-20">
       <header className="max-w-4xl">
-        <span className="text-blue-600 font-black text-xs uppercase tracking-widest mb-4 block">Total IT Maintenance</span>
-        <h2 className="text-5xl font-black text-slate-900 tracking-tighter mb-8 leading-tight">
+        <span className="text-blue-600 font-black text-[10px] uppercase tracking-widest mb-3 block">Total IT Maintenance</span>
+        <h2 className="text-3xl lg:text-4xl font-black text-slate-900 tracking-tighter mb-6 leading-tight">
           24/365, 귀사의 IT 인프라를 <br />
           <span className="text-blue-600">가장 안정적</span>으로 운영합니다.
         </h2>
-        <p className="text-slate-500 font-medium text-lg leading-relaxed">
+        <p className="text-slate-500 font-bold text-sm lg:text-base leading-relaxed">
           (주)솔모정보기술은 22년의 신뢰와 전문 인력을 바탕으로 고객사의 통합 인프라를 
           선제적으로 관리하고 신속한 장애 대응을 통해 최상의 가용성을 제공합니다.
         </p>
       </header>
 
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center border-y border-slate-100 py-20">
+      <section className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center border-y border-slate-100 py-12">
          <div>
             <div className="text-4xl font-black text-blue-600 mb-4">22+</div>
             <p className="text-[10px] font-black uppercase tracking-widest opacity-40">Years of Experience</p>

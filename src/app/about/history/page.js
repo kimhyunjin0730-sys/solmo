@@ -47,17 +47,14 @@ export default function HistoryPage() {
   return (
     <div className="pb-24 sm:pb-32">
       {/* Visual Header */}
-      <section className="relative h-[260px] sm:h-[320px] mb-12 sm:mb-20 flex items-center justify-center overflow-hidden">
+      <section className="relative h-[180px] sm:h-[220px] mb-8 sm:mb-14 flex items-center justify-center overflow-hidden">
          <Image src="/office-bg.png" alt="Office Background" fill className="object-cover opacity-15" />
          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white"></div>
-         <div className="relative z-10 text-center px-6">
-            <span className="text-blue-600 font-bold text-[11px] sm:text-xs uppercase tracking-[0.35em] mb-3 sm:mb-4 block">Our Journey</span>
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+         <div className="relative z-10 text-center px-6 pt-16">
+            <span className="text-blue-600 font-bold text-[10px] sm:text-[11px] uppercase tracking-[0.35em] mb-2 sm:mb-3 block">Our Journey</span>
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#001F5B] tracking-tight leading-tight">
               연혁 및 실적
             </h1>
-            <p className="mt-3 sm:mt-4 text-sm sm:text-base text-slate-500 font-medium max-w-xl mx-auto">
-              20년 이상 축적된 솔모정보기술의 발자취
-            </p>
          </div>
       </section>
 

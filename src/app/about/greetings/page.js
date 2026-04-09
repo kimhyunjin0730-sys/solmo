@@ -3,33 +3,33 @@ import Image from "next/image";
 
 export default function GreetingsPage() {
   return (
-    <div className="max-w-[1400px] mx-auto">
-      <div className="grid lg:grid-cols-12 gap-20 items-start">
+    <div className="max-w-[1400px] mx-auto px-8 py-10 lg:py-16">
+      <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 items-start">
         {/* Visual Sidebar */}
-        <div className="lg:col-span-5 sticky top-32">
-           <div className="relative aspect-[4/5] rounded-[4rem] overflow-hidden shadow-2xl group">
+        <div className="lg:col-span-5 lg:sticky lg:top-32">
+           <div className="relative aspect-[4/4] rounded-[3rem] overflow-hidden shadow-2xl group">
               <Image src="/office-bg.png" alt="CEO Message" fill className="object-cover transition-transform duration-1000 group-hover:scale-110" />
               <div className="absolute inset-0 bg-[#001F5B]/40 backdrop-blur-[2px]"></div>
-              <div className="absolute inset-0 p-16 flex flex-col justify-between">
+              <div className="absolute inset-0 p-10 lg:p-12 flex flex-col justify-between">
                  <div>
-                    <span className="text-blue-400 font-black text-xs uppercase tracking-[0.5em] mb-4 block">CEO Message</span>
-                    <h3 className="text-white text-3xl font-black leading-tight tracking-tighter">
+                    <span className="text-blue-400 font-black text-[10px] uppercase tracking-[0.5em] mb-3 block">CEO Message</span>
+                    <h3 className="text-white text-2xl lg:text-3xl font-black leading-tight tracking-tighter">
                        "고객과 함께 성장하는 <br /> 
                        최고의 보안 파트너가 <br />
                        되겠습니다."
                     </h3>
                  </div>
                  <div className="text-white">
-                    <div className="w-16 h-1.5 bg-blue-500 mb-8 rounded-full"></div>
-                    <p className="text-sm font-black tracking-widest uppercase mb-1">Representative Director</p>
-                    <p className="text-4xl font-black italic">Lee Byung-Doo</p>
+                    <div className="w-12 h-1 bg-blue-500 mb-6 rounded-full"></div>
+                    <p className="text-[10px] font-black tracking-widest uppercase mb-1">Representative Director</p>
+                    <p className="text-3xl font-black italic">Lee Byung-Doo</p>
                  </div>
               </div>
            </div>
         </div>
 
         {/* Content Body */}
-        <div className="lg:col-span-7 space-y-24 py-10">
+        <div className="lg:col-span-7 space-y-16 py-0 flex flex-col justify-center">
            {/* Section 1: Welcome */}
            <section className="space-y-10">
               <h4 className="text-5xl font-black text-slate-900 tracking-tighter leading-[1.1]">

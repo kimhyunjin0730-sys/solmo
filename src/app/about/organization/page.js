@@ -33,11 +33,11 @@ export default function OrganizationPage() {
   });
 
   return (
-    <div className="space-y-20 sm:space-y-28 lg:space-y-32 pb-20 sm:pb-32 lg:pb-40">
+    <div className="space-y-12 sm:space-y-16 lg:space-y-20 pb-16 pt-10">
       <div className="text-center max-w-3xl mx-auto px-2">
-        <span className="text-blue-600 font-black text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-widest mb-3 sm:mb-4 block">Organization</span>
-        <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter mb-5 sm:mb-8 leading-tight">효율적인 의사결정 체계</h3>
-        <p className="text-slate-500 font-bold text-sm sm:text-base lg:text-lg leading-relaxed">
+        <span className="text-blue-600 font-black text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-widest mb-2 block">Organization</span>
+        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tighter mb-4 leading-tight">효율적인 의사결정 체계</h3>
+        <p className="text-slate-500 font-bold text-xs sm:text-sm lg:text-base leading-relaxed">
           솔모정보기술은 전문성과 신뢰를 바탕으로 각 부서 간의 유기적인 협력 체계를 구축하고 있습니다.
         </p>
       </div>

@@ -3,17 +3,17 @@ import Image from "next/image";
 
 export default function NetworkSecurityPage() {
   return (
-    <div className="space-y-32 pb-40">
+    <div className="space-y-16 lg:space-y-24 pb-20 pt-10 px-8">
       {/* ────────────── HERO ────────────── */}
-      <header className="relative">
-        <span className="text-blue-600 font-black text-xs uppercase tracking-[0.5em] mb-6 block">
+      <header className="relative max-w-4xl">
+        <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.5em] mb-4 block">
           Network Security
         </span>
-        <h2 className="text-5xl lg:text-7xl font-black text-slate-900 tracking-tighter mb-10 leading-[1.05]">
+        <h2 className="text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter mb-6 leading-tight">
           경계 없는 보안,<br />
           <span className="text-blue-600">지능형 네트워크 방어.</span>
         </h2>
-        <p className="text-slate-500 font-bold text-lg leading-relaxed max-w-2xl">
+        <p className="text-slate-500 font-bold text-sm lg:text-base leading-relaxed max-w-2xl">
           외부 위협 탐지부터 내부 자산 식별까지, (주)솔모정보기술의 검증된 네트워크 보안 라인업이 귀사의 인프라를 보호합니다.
         </p>
 

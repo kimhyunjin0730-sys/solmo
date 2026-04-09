@@ -3,14 +3,14 @@ import Image from "next/image";
 
 export default function SecurePrintingPage() {
   return (
-    <div className="space-y-32">
+    <div className="space-y-12 lg:space-y-16 px-8 pt-10 pb-20">
       <header className="max-w-4xl">
-        <span className="text-blue-600 font-black text-xs uppercase tracking-widest mb-4 block">Security Print Service</span>
-        <h2 className="text-5xl font-black text-slate-900 tracking-tighter mb-8 leading-tight">
+        <span className="text-blue-600 font-black text-[10px] uppercase tracking-widest mb-3 block">Security Print Service</span>
+        <h2 className="text-3xl lg:text-4xl font-black text-slate-900 tracking-tighter mb-6 leading-tight">
           종이 문서를 통한 정보 유출, <br />
           <span className="text-blue-600">스마트 보안 출력</span>으로 원천 차단합니다.
         </h2>
-        <p className="text-slate-500 font-medium text-lg leading-relaxed">
+        <p className="text-slate-500 font-bold text-sm lg:text-base leading-relaxed">
           자체 솔루션인 **X-Securitas** 기반의 스크린 및 출력물 워터마크 기술을 적용하여 
           어떤 복합기 환경에서도 완벽한 문서 보안과 이력 관리를 실현합니다.
         </p>

@@ -14,7 +14,7 @@ export default function RootLayout({ children }) {
     <html lang="ko" className="h-full antialiased">
       <body className="min-h-full flex flex-col">
         <Header />
-        <main className="flex-grow">{children}</main>
+        <main className="flex-grow pt-20 lg:pt-24">{children}</main>
         <Footer />
         <ChatBot />
       </body>
