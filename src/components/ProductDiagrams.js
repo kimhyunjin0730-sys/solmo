@@ -15,6 +15,11 @@ const DIAGRAMS = {
   "hiware": HiwareDiagram,
   "ta-prs": TaPrsDiagram,
   "gaaiho-pdf": GaaihoPdfDiagram,
+  "xsecuritas": XSecuritasDiagram,
+  "qradar": QRadarDiagram,
+  "dbsafer": DbSaferDiagram,
+  "uprint": UPrintDiagram,
+  "acronis": AcronisDiagram,
 };
 
 export default function ProductDiagram({ id }) {
