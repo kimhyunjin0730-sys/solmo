@@ -1,4 +1,5 @@
 'use client';
+import Link from "next/link";
 
 const SOLUTIONS = [
   {
@@ -147,7 +148,10 @@ export default function NetworkSecurityPage() {
 
 function SolutionCard({ sol }) {
   return (
-    <section className="bg-white rounded-3xl border border-slate-100 p-6 sm:p-7 shadow-sm hover:shadow-lg hover:border-slate-200 transition-all flex flex-col">
+    <Link
+      href={`/solutions/products/${sol.id}`}
+      className="group bg-white rounded-3xl border border-slate-100 p-6 sm:p-7 shadow-sm hover:shadow-lg hover:border-blue-200 hover:-translate-y-1 transition-all flex flex-col"
+    >
       {/* Logo */}
       <div className="bg-slate-50 rounded-2xl px-4 py-5 flex items-center justify-center mb-5 h-24">
         <img
@@ -165,7 +169,7 @@ function SolutionCard({ sol }) {
           <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">
             {sol.cat}
           </span>
-          <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight mt-1">
+          <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight mt-1 group-hover:text-blue-600 transition-colors">
             {sol.name}
           </h3>
           <p className="text-xs font-bold text-slate-400 mt-1">{sol.vendor}</p>
@@ -181,7 +185,7 @@ function SolutionCard({ sol }) {
         {sol.desc}
       </p>
 
-      <ul className="space-y-2 mt-auto">
+      <ul className="space-y-2">
         {sol.features.map((f, i) => (
           <li key={i} className="flex gap-2 items-start text-xs font-medium text-slate-600 leading-relaxed">
             <span className="text-blue-600 mt-0.5 shrink-0">✓</span>
@@ -189,7 +193,12 @@ function SolutionCard({ sol }) {
           </li>
         ))}
       </ul>
-    </section>
+
+      <div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-black text-blue-600 uppercase tracking-widest">
+        <span>자세히 보기</span>
+        <span className="group-hover:translate-x-1 transition-transform">→</span>
+      </div>
+    </Link>
   );
 }
 
