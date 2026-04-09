@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function GreetingsPage() {
   return (
-    <div className="max-w-[1400px] mx-auto px-8 py-10 lg:py-16">
+    <div className="max-w-[1400px] mx-auto px-5 sm:px-8 pb-10">
       <div className="grid lg:grid-cols-12 gap-10 lg:gap-20 items-start">
         {/* Visual Sidebar */}
         <div className="lg:col-span-5 lg:sticky lg:top-32">

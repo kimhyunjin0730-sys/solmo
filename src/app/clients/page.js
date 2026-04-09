@@ -86,9 +86,9 @@ export default function ClientsPage() {
   }, [active, query]);
 
   return (
-    <div className="min-h-screen bg-white pt-20 sm:pt-24 font-sans">
+    <div className="min-h-screen bg-white pt-20 font-sans">
       {/* ─────────────────────── HERO ─────────────────────── */}
-      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 pb-10 sm:pb-14 pt-2">
+      <section className="max-w-[1400px] mx-auto px-5 sm:px-8 pb-8 sm:pb-10 pt-6 sm:pt-8">
         <div className="grid lg:grid-cols-12 gap-6 lg:gap-10 items-end">
           <div className="lg:col-span-8">
             <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">

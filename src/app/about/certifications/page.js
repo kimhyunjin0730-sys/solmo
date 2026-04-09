@@ -25,7 +25,7 @@ export default function CertificationsPage() {
   ];
 
   return (
-    <div className="space-y-16 lg:space-y-24 pb-24 pt-10 px-8">
+    <div className="space-y-12 pb-10">
        <header className="max-w-[1400px] mx-auto text-left flex flex-col md:flex-row justify-between items-end gap-6 pt-2">
           <div className="max-w-2xl">
             <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">Proof of Innovation</span>

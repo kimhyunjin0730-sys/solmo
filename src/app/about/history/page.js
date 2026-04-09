@@ -1,6 +1,5 @@
 'use client';
 import { useState } from "react";
-import Image from "next/image";
 
 export default function HistoryPage() {
   const [filter, setFilter] = useState("All");
@@ -45,18 +44,16 @@ export default function HistoryPage() {
   const filteredData = filter === "All" ? historyData : historyData.filter(item => item.category === filter);
 
   return (
-    <div className="pb-24 sm:pb-32">
-      {/* Visual Header */}
-      <section className="relative h-[180px] sm:h-[220px] mb-8 sm:mb-14 flex items-center justify-center overflow-hidden">
-         <Image src="/office-bg.png" alt="Office Background" fill className="object-cover opacity-15" />
-         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-white"></div>
-         <div className="relative z-10 text-center px-6 pt-16">
-            <span className="text-blue-600 font-bold text-[10px] sm:text-[11px] uppercase tracking-[0.35em] mb-2 sm:mb-3 block">Our Journey</span>
-            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#001F5B] tracking-tight leading-tight">
-              연혁 및 실적
-            </h1>
-         </div>
-      </section>
+    <div className="pb-10">
+      {/* Compact header */}
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 mb-8">
+         <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">
+            Our Journey
+         </span>
+         <h1 className="text-2xl sm:text-3xl font-extrabold text-[#001F5B] tracking-tight leading-snug">
+            연혁 및 실적
+         </h1>
+      </div>
 
       <div className="max-w-6xl mx-auto px-5 sm:px-8">
          <div className="flex gap-2 sm:gap-3 flex-wrap mb-10 sm:mb-14">

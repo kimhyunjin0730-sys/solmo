@@ -33,7 +33,7 @@ export default function OrganizationPage() {
   });
 
   return (
-    <div className="space-y-12 sm:space-y-16 lg:space-y-20 pb-16 pt-10">
+    <div className="space-y-12 pb-10">
       <div className="text-center max-w-3xl mx-auto px-2">
         <span className="text-blue-600 font-black text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-widest mb-2 block">Organization</span>
         <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tighter mb-4 leading-tight">효율적인 의사결정 체계</h3>

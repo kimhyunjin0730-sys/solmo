@@ -28,8 +28,8 @@ export default async function ProductDetailPage({ params }) {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Breadcrumb */}
-      <div className="border-b border-slate-100 bg-slate-50">
+      {/* Breadcrumb (sits below the fixed header) */}
+      <div className="border-b border-slate-100 bg-slate-50 pt-20">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 py-4 flex items-center gap-2 text-xs font-bold text-slate-500 overflow-x-auto whitespace-nowrap">
           <Link href="/" className="hover:text-blue-600 transition-colors">
             HOME
@@ -43,7 +43,7 @@ export default async function ProductDetailPage({ params }) {
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 py-10 sm:py-14 space-y-12 sm:space-y-16">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 pt-6 sm:pt-8 pb-12 space-y-10 sm:space-y-12">
         {/* Hero */}
         <header className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           <div className="lg:col-span-7">

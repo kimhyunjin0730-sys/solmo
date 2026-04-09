@@ -13,13 +13,13 @@ export default function SupportLayout({ children }) {
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-blue-500/10">
       {/* Sub-navigation Tabs */}
-      <div className="pt-32 pb-4 bg-slate-50 border-b border-slate-200">
-        <div className="max-w-[1400px] mx-auto px-8 flex gap-8">
+      <div className="pt-20 sm:pt-24 bg-slate-50 border-b border-slate-200">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 flex gap-6 sm:gap-8 overflow-x-auto">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={`pb-4 text-sm font-bold tracking-tight transition-all relative ${
+              className={`shrink-0 pb-3 pt-3 text-xs sm:text-sm font-bold tracking-tight transition-all relative ${
                 pathname === item.href
                   ? "text-[#001F5B]"
                   : "text-slate-400 hover:text-slate-600"
@@ -34,7 +34,7 @@ export default function SupportLayout({ children }) {
         </div>
       </div>
 
-      <main className="max-w-[1400px] mx-auto px-8 py-20 pb-40 animate-reveal">
+      <main className="max-w-[1400px] mx-auto px-5 sm:px-8 pt-6 sm:pt-8 pb-20 animate-reveal">
         {children}
       </main>
 

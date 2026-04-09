@@ -23,7 +23,7 @@ export default function LocationPage() {
   };
 
   return (
-    <div className="space-y-12 pb-20">
+    <div className="space-y-12 pb-10">
       {/* ───── Hero ───── */}
       <header className="max-w-4xl pt-2">
         <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">
