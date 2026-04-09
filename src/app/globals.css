@@ -47,3 +47,37 @@ p, li {
   word-break: keep-all;
   overflow-wrap: break-word;
 }
+
+/* ───────── Mobile / Tablet (≤1024px) — app-like polish ───────── */
+@media (max-width: 1024px) {
+  html {
+    /* iOS Safari 100vh 버그 회피용 */
+    height: -webkit-fill-available;
+  }
+  body {
+    /* 모바일에서 최소 터치 타깃 + 반응 부드럽게 */
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior-y: none;
+  }
+  /* 입력 필드 줌인 방지 — iOS Safari는 16px 미만 input에서 자동 zoom */
+  input,
+  textarea,
+  select {
+    font-size: 16px !important;
+  }
+  /* 버튼/링크 터치 친화 — 최소 44x44 터치 영역 */
+  button,
+  a {
+    touch-action: manipulation;
+  }
+}
+
+/* iOS notch / Android gesture bar safe area */
+@supports (padding: max(0px)) {
+  .safe-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  .safe-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+}

@@ -1,7 +1,6 @@
 'use client';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
 
 export default function AboutLayout({ children }) {
   const pathname = usePathname();
@@ -16,7 +15,7 @@ export default function AboutLayout({ children }) {
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-blue-500/10">
       {/* Sub-navigation Tabs (sticky just below the fixed header) */}
-      <div className="pt-20 sm:pt-24 bg-slate-50 border-b border-slate-200">
+      <div className="pt-16 sm:pt-20 bg-slate-50 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-5 sm:px-8 flex gap-6 sm:gap-8 overflow-x-auto">
           {navItems.map((item) => (
             <Link
