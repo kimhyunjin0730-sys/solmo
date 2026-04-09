@@ -13,6 +13,8 @@ const DIAGRAMS = {
   "webkeeper": WebkeeperDiagram,
   "genian-nac": GenianNacDiagram,
   "hiware": HiwareDiagram,
+  "ta-prs": TaPrsDiagram,
+  "gaaiho-pdf": GaaihoPdfDiagram,
 };
 
 export default function ProductDiagram({ id }) {
@@ -542,6 +544,196 @@ function GenianNacDiagram() {
         <text x="60" y="518" fontSize="12" fontWeight="800" fill="#5b21b6">③ Agent (에이전트)</text>
         <text x="80" y="536" fontSize="10" fontWeight="600" fill="#64748b">PC 자산 관리 및 장치 사용 통제, 에이전트 설치에 따른 비용 부담 없음 (선택적 사용)</text>
       </g>
+    </svg>
+  );
+}
+
+/* ──────────── 7. TA-PRS / TA-FDM (PMS) ──────────── */
+function TaPrsDiagram() {
+  return (
+    <svg viewBox="0 0 1000 600" className="w-full h-auto min-w-[700px]" xmlns="http://www.w3.org/2000/svg">
+      <ArrowMarkers />
+
+      {/* Title strip */}
+      <text x="500" y="40" textAnchor="middle" fontSize="14" fontWeight="800" fill="#0f172a">
+        자동화된 패치관리시스템(PMS) 구축으로
+      </text>
+      <text x="500" y="68" textAnchor="middle" fontSize="20" fontWeight="800" fill="#dc2626">
+        전사적인 보안 수준 강화
+      </text>
+
+      {/* Center upward arrow split into top "보안사고 최소화" and bottom "운영의 편의성 제고" */}
+      <g>
+        {/* Outer arrow shape pointing up */}
+        <path
+          d="M 430 250 L 430 360 L 380 360 L 500 240 L 620 360 L 570 360 L 570 250 Z"
+          fill="#bfdbfe"
+          stroke="#60a5fa"
+          strokeWidth="2"
+        />
+        <text x="500" y="295" textAnchor="middle" fontSize="13" fontWeight="800" fill="#1e3a8a">보안사고</text>
+        <text x="500" y="315" textAnchor="middle" fontSize="13" fontWeight="800" fill="#1e3a8a">최소화</text>
+
+        {/* Bottom darker block — 운영 편의성 */}
+        <rect x="430" y="370" width="140" height="100" rx="6" fill="#1e3a8a" />
+        <text x="500" y="408" textAnchor="middle" fontSize="13" fontWeight="800" fill="#fff">운영의</text>
+        <text x="500" y="428" textAnchor="middle" fontSize="13" fontWeight="800" fill="#fff">편의성 제고</text>
+      </g>
+
+      {/* Dotted divider lines (decorative dots) */}
+      {[...Array(8)].map((_, i) => (
+        <circle key={`l${i}`} cx={345} cy={250 + i * 28} r="2.5" fill="#cbd5e1" />
+      ))}
+      {[...Array(8)].map((_, i) => (
+        <circle key={`r${i}`} cx={655} cy={250 + i * 28} r="2.5" fill="#cbd5e1" />
+      ))}
+
+      {/* ── Left card: 패치 자동/강제 설치 + 현황 수집 ── */}
+      <g>
+        <rect x="40" y="220" width="290" height="320" rx="14" fill="#fff" stroke="#1e3a8a" strokeWidth="2" />
+        {/* Header bullets */}
+        <text x="60" y="250" fontSize="12" fontWeight="800" fill="#1e3a8a">▪ 패치 자동/강제 설치 및 업데이트</text>
+        <text x="60" y="272" fontSize="12" fontWeight="800" fill="#1e3a8a">▪ 현황 수집 및 통계</text>
+
+        {/* Item 01 */}
+        <text x="60" y="320" fontSize="32" fontWeight="800" fill="#bfdbfe">01</text>
+        <text x="115" y="312" fontSize="11" fontWeight="700" fill="#0f172a">운영체제 및 어플리케이션에 대한</text>
+        <text x="115" y="328" fontSize="11" fontWeight="700" fill="#0f172a">자동화된 패치관리로 각종 취약점을</text>
+        <text x="115" y="344" fontSize="11" fontWeight="700" fill="#0f172a">제거하고 보안수준을 강화</text>
+
+        {/* Item 02 */}
+        <text x="60" y="430" fontSize="32" fontWeight="800" fill="#bfdbfe">02</text>
+        <text x="115" y="418" fontSize="11" fontWeight="700" fill="#0f172a">해킹, 자료유출 방지 등 PC보호로</text>
+        <text x="115" y="434" fontSize="11" fontWeight="700" fill="#0f172a">보안사고 최소화 및 각종 악성코드 및</text>
+        <text x="115" y="450" fontSize="11" fontWeight="700" fill="#0f172a">좀비PC로 인한 트래픽 발생방지와</text>
+        <text x="115" y="466" fontSize="11" fontWeight="700" fill="#0f172a">네트워크 가용성 확보</text>
+      </g>
+
+      {/* ── Right card: 최소인원 최대효율 + 친화력 ── */}
+      <g>
+        <rect x="670" y="220" width="290" height="320" rx="14" fill="#fff" stroke="#1e3a8a" strokeWidth="2" />
+        <text x="690" y="250" fontSize="12" fontWeight="800" fill="#1e3a8a">▪ 최소인원을 통한 최대 효율 달성</text>
+        <text x="690" y="272" fontSize="12" fontWeight="800" fill="#1e3a8a">▪ 기존 환경과의 친화력 극대화</text>
+
+        {/* Item 01 */}
+        <text x="690" y="320" fontSize="32" fontWeight="800" fill="#bfdbfe">01</text>
+        <text x="745" y="312" fontSize="11" fontWeight="700" fill="#0f172a">조직 전반에 걸친 일관성 있는</text>
+        <text x="745" y="328" fontSize="11" fontWeight="700" fill="#0f172a">패치관리정책 수립 및 운용</text>
+
+        {/* Item 02 */}
+        <text x="690" y="395" fontSize="32" fontWeight="800" fill="#bfdbfe">02</text>
+        <text x="745" y="387" fontSize="11" fontWeight="700" fill="#0f172a">최소한의 인력을 통한 운영 효율성</text>
+        <text x="745" y="403" fontSize="11" fontWeight="700" fill="#0f172a">극대화</text>
+
+        {/* Item 03 */}
+        <text x="690" y="470" fontSize="32" fontWeight="800" fill="#bfdbfe">03</text>
+        <text x="745" y="462" fontSize="11" fontWeight="700" fill="#0f172a">중앙 집중적인 관제를 통한</text>
+        <text x="745" y="478" fontSize="11" fontWeight="700" fill="#0f172a">총괄적인 관리</text>
+      </g>
+
+      {/* Bottom legend */}
+      <rect x="20" y="560" width="960" height="32" rx="8" fill="#eff6ff" stroke="#bfdbfe" />
+      <text x="500" y="581" textAnchor="middle" fontSize="11" fontWeight="800" fill="#1e3a8a">
+        Windows PC · 서버 OS · 어플리케이션 · 백신 통합 패치 자동 배포
+      </text>
+    </svg>
+  );
+}
+
+/* ──────────── 8. Gaaiho PDF Suite ──────────── */
+function GaaihoPdfDiagram() {
+  const blocks = [
+    {
+      x: 80,
+      topColor: "#ea580c",
+      topLabel1: "PDF",
+      topLabel2: "READER",
+      bottomLabel1: "PDF",
+      bottomLabel2: "강력한 편집",
+    },
+    {
+      x: 380,
+      topColor: "#16a34a",
+      topLabel1: "PDF Converter",
+      topLabel2: "(다양한 PDF 생성)",
+      bottomLabel1: "PDF Manager",
+      bottomLabel2: "(편리한 PDF 관리)",
+    },
+    {
+      x: 680,
+      topColor: "#2563eb",
+      topLabel1: "PDF OCR",
+      topLabel2: "(광학문자인식)",
+      bottomLabel1: "Cloud 연결 · 음성읽기",
+      bottomLabel2: "주석 · Office · 디지털서명",
+    },
+  ];
+
+  return (
+    <svg viewBox="0 0 1000 600" className="w-full h-auto min-w-[700px]" xmlns="http://www.w3.org/2000/svg">
+      <ArrowMarkers />
+
+      {/* 3 stacked color blocks */}
+      {blocks.map((b, i) => (
+        <g key={i}>
+          {/* Top colored half — drawn as a parallelogram-like shape with diagonal cut */}
+          <path
+            d={`M ${b.x} 30 L ${b.x + 240} 30 L ${b.x + 240} 220 L ${b.x} 270 Z`}
+            fill={b.topColor}
+          />
+          <text x={b.x + 120} y="125" textAnchor="middle" fontSize="22" fontWeight="800" fill="#fff">
+            {b.topLabel1}
+          </text>
+          <text x={b.x + 120} y="155" textAnchor="middle" fontSize="14" fontWeight="700" fill="#fff">
+            {b.topLabel2}
+          </text>
+
+          {/* Bottom grey half — opposite diagonal */}
+          <path
+            d={`M ${b.x} 270 L ${b.x + 240} 220 L ${b.x + 240} 380 L ${b.x} 380 Z`}
+            fill="#9ca3af"
+          />
+          <text x={b.x + 120} y="320" textAnchor="middle" fontSize="18" fontWeight="800" fill="#fff">
+            {b.bottomLabel1}
+          </text>
+          <text x={b.x + 120} y="345" textAnchor="middle" fontSize="12" fontWeight="700" fill="#fff">
+            {b.bottomLabel2}
+          </text>
+        </g>
+      ))}
+
+      {/* Legend section */}
+      <g>
+        <text x="80" y="430" fontSize="14" fontWeight="800" fill="#ea580c">
+          1. Gaaiho PDF DOC
+        </text>
+        <text x="245" y="430" fontSize="12" fontWeight="600" fill="#0f172a">
+          : PDF 문서 편집 등 대부분의 기능을 구현하는 어플리케이션 프로그램
+        </text>
+
+        <text x="80" y="465" fontSize="14" fontWeight="800" fill="#16a34a">
+          2. Gaaiho PDF Converter
+        </text>
+        <text x="100" y="487" fontSize="12" fontWeight="600" fill="#0f172a">
+          PDF 다양한 생성기능 (병합, 분할, 대량변환)
+        </text>
+        <text x="100" y="507" fontSize="12" fontWeight="600" fill="#0f172a">
+          PDF 역변환 기능 제공 (워드형식, 엑셀형식 등의 문서변환)
+        </text>
+
+        <text x="80" y="540" fontSize="14" fontWeight="800" fill="#2563eb">
+          3. Gaaiho PDF Manager
+        </text>
+        <text x="280" y="540" fontSize="12" fontWeight="600" fill="#0f172a">
+          : PC에 있는 PDF 문서의 탐색, 관리 등
+        </text>
+      </g>
+
+      {/* Bottom note */}
+      <rect x="20" y="565" width="960" height="28" rx="8" fill="#f1f5f9" stroke="#cbd5e1" />
+      <text x="500" y="584" textAnchor="middle" fontSize="11" fontWeight="800" fill="#0f172a">
+        Reader · Editor · Converter · Manager · OCR — 통합 PDF 솔루션
+      </text>
     </svg>
   );
 }
