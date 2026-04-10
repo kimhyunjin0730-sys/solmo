@@ -188,15 +188,28 @@ export async function POST(req) {
 // Health check endpoint — GET /api/chat returns env status (no secrets)
 export async function GET() {
   const hasKey = !!(process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY.trim());
-  const hasDb = !!(process.env.DATABASE_URL || process.env.PRISMA_DATABASE_URL);
+  const dbUrl = process.env.DATABASE_URL || process.env.PRISMA_DATABASE_URL || "";
+  const hasDb = !!dbUrl;
+  const dbProtocol = dbUrl ? dbUrl.split(":")[0] : "missing";
   const hasSmtp = !!(process.env.SMTP_USER && process.env.SMTP_PASS);
+
+  // Try a quick prisma init to detect DB problems
+  let prismaStatus = "not_attempted";
+  try {
+    getPrisma();
+    prismaStatus = "initialized";
+  } catch (err) {
+    prismaStatus = `init_failed: ${err?.message?.slice(0, 120) || "unknown"}`;
+  }
+
   return NextResponse.json({
     status: "ok",
     runtime: "nodejs",
     env: {
       OPENAI_API_KEY: hasKey ? `set (len=${process.env.OPENAI_API_KEY.length})` : "MISSING",
       OPENAI_MODEL: process.env.OPENAI_MODEL || "gpt-4o-mini (default)",
-      DATABASE_URL: hasDb ? "set" : "MISSING",
+      DATABASE_URL: hasDb ? `set (protocol=${dbProtocol}://)` : "MISSING",
+      PRISMA_STATUS: prismaStatus,
       SMTP_USER: process.env.SMTP_USER ? "set" : "MISSING",
       SMTP_PASS: hasSmtp ? "set" : "MISSING",
       RECEIVER_EMAIL: process.env.RECEIVER_EMAIL || "kimhyunjin0730@gmail.com (default)",
