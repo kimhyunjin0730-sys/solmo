@@ -5,16 +5,16 @@ const STORAGE_KEY = "solmo_chat_session";
 const STORAGE_MSGS = "solmo_chat_messages";
 
 const SUGGESTIONS = [
-  "솔모정보기술은 어떤 회사인가요?",
-  "Genian NAC가 뭔가요?",
-  "백업 솔루션 추천해주세요",
-  "오시는 길이 어떻게 되나요?",
+  "여기 뭐하는 곳이야?",
+  "보안 솔루션 추천해줘",
+  "견적 문의하고 싶어요",
+  "회사 위치가 어디예요?",
 ];
 
 const WELCOME = {
   role: "assistant",
   content:
-    "안녕하세요! 솔모정보기술 챗봇 솔모봇입니다 🤖\n보안 솔루션, 회사 정보, 견적 문의 등 무엇이든 물어보세요.",
+    "안녕하세요! 솔모정보기술 AI 상담원이에요.\n보안 솔루션, 회사 정보, 견적 문의 등 편하게 물어보세요.",
 };
 
 export default function ChatBot() {

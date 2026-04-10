@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import OpenAI from "openai";
 import crypto from "node:crypto";
 import { getPrisma } from "@/lib/prisma";
@@ -7,61 +8,131 @@ import { buildSystemPrompt } from "@/lib/knowledge";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const MODEL = process.env.OPENAI_MODEL || "gpt-4o-mini";
 const MAX_HISTORY = 20;
 
-let openai = null;
+/* ──────────── AI Provider Management ──────────── */
+
+// Provider priority: Gemini → OpenAI → local fallback
+let geminiModel = null;
+let openaiClient = null;
+
+function getGemini() {
+  if (geminiModel) return geminiModel;
+  const key = process.env.GEMINI_API_KEY;
+  if (!key?.trim()) return null;
+  const model = process.env.GEMINI_MODEL || "gemini-2.0-flash";
+  const genAI = new GoogleGenerativeAI(key.trim());
+  geminiModel = genAI.getGenerativeModel({ model });
+  console.log(`[chat] Gemini loaded (model=${model})`);
+  return geminiModel;
+}
+
 function getOpenAI() {
-  if (openai) return openai;
+  if (openaiClient) return openaiClient;
   const key = process.env.OPENAI_API_KEY;
-  if (!key || !key.trim()) {
-    console.warn("[chat] OPENAI_API_KEY not found in env");
-    return null;
-  }
-  console.log(`[chat] OpenAI key loaded (length=${key.length}, model=${MODEL})`);
-  openai = new OpenAI({
-    apiKey: key.trim(),
-    timeout: 30000, // 30s — chatgpt sometimes slow
-    maxRetries: 1,
-  });
-  return openai;
+  if (!key?.trim()) return null;
+  const model = process.env.OPENAI_MODEL || "gpt-4o-mini";
+  openaiClient = new OpenAI({ apiKey: key.trim(), timeout: 30000, maxRetries: 1 });
+  console.log(`[chat] OpenAI loaded (model=${model})`);
+  return openaiClient;
 }
 
-function fallbackReply(userMessage) {
-  const text = (userMessage || "").toLowerCase();
-  
-  // 회사/솔모 키워드 대응 (Intelligence Upgrade)
-  if (text.includes("회사") || text.includes("어떤") || text.includes("솔모") || text.includes("누구")) {
-    return "(주)솔모정보기술은 20년 이상의 업력을 가진 통합 IT 보안 파트너입니다. 네트워크 보안, 내부정보유출 방지, 백업 및 복구 등 기업의 귀중한 정보 자산을 보호하는 전문 솔루션을 제공하며, 47명의 전문 엔지니어가 신뢰받는 서비스를 제공하고 있습니다.";
-  }
-  
-  // 제품/솔루션/소개 키워드 대응
-  if (text.includes("제품") || text.includes("솔루션") || text.includes("서비스") || text.includes("기능")) {
-    return "솔모정보기술의 핵심 솔루션은 다음과 같습니다:\n1. 네트워크 보안: Fortinet UTM, Genian NAC\n2. 내부정보유출: X-Securitas(스크린워터마크), DBSAFER\n3. 어플리케이션: ITStation, Gaaiho PDF\n4. 백업: Acronis Cyber Protect\n상세한 내용은 홈페이지의 SOLUTIONS 메뉴를 참고하시거나 02-402-8054로 문의해주세요.";
+/* ──────────── Generate reply with cascading fallback ──────────── */
+
+async function generateReply(messages, systemPrompt) {
+  const userHistory = messages
+    .filter((m) => m.role === "user" || m.role === "assistant")
+    .slice(-MAX_HISTORY)
+    .map((m) => ({ role: m.role, content: String(m.content || "").slice(0, 2000) }));
+
+  const lastUserMsg = [...userHistory].reverse().find((m) => m.role === "user")?.content || "";
+
+  // ── Try 1: Gemini ──
+  const gemini = getGemini();
+  if (gemini) {
+    try {
+      // Build Gemini chat history
+      const geminiHistory = [];
+      for (const msg of userHistory.slice(0, -1)) {
+        geminiHistory.push({
+          role: msg.role === "user" ? "user" : "model",
+          parts: [{ text: msg.content }],
+        });
+      }
+
+      const chat = gemini.startChat({
+        history: geminiHistory,
+        systemInstruction: { parts: [{ text: systemPrompt }] },
+        generationConfig: {
+          temperature: 0.6,
+          maxOutputTokens: 600,
+        },
+      });
+
+      const result = await chat.sendMessage(lastUserMsg);
+      const text = result.response?.text()?.trim();
+      if (text) {
+        return { text, provider: "gemini" };
+      }
+    } catch (err) {
+      console.error("[chat] Gemini error:", err?.message || err);
+    }
   }
 
-  if (text.includes("전화") || text.includes("연락") || text.includes("phone"))
-    return "대표 전화는 02-402-8054 입니다. 평일 09:00–18:00 운영됩니다.";
-  if (text.includes("주소") || text.includes("위치") || text.includes("오시는"))
-    return "본사는 서울특별시 광진구 아차산로 309 남장빌딩 2층에 위치해 있습니다. 자세한 안내는 /support/location 페이지를 참고해주세요.";
-  if (text.includes("이메일") || text.includes("email"))
-    return "이메일 문의는 solmoit01@solmo.co.kr 로 보내주시면 됩니다.";
-  if (text.includes("백업") || text.includes("acronis"))
-    return "Acronis Cyber Protect — 21개 이상의 플랫폼 지원, 랜섬웨어 사전 차단, 블록체인 기반 데이터 무결성 검증을 제공하는 통합 백업/재해복구 솔루션입니다.";
-  if (text.includes("nac") || text.includes("genian"))
-    return "Genian NAC — 강력한 인증과 단말 무결성 점검으로 내부 네트워크를 청정하게 유지하는 NAC 솔루션입니다. On-Premise/Cloud/VM 모두 지원합니다.";
-  
-  return "안녕하세요! 솔모정보기술 챗봇입니다. 회사 소개, 제품 정보, 위치 등에 대해 물어보시면 답변해 드릴 수 있습니다. 자세한 상담은 02-402-8054로 연락주세요.";
+  // ── Try 2: OpenAI ──
+  const openai = getOpenAI();
+  if (openai) {
+    try {
+      const completion = await openai.chat.completions.create({
+        model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+        temperature: 0.5,
+        max_tokens: 600,
+        messages: [
+          { role: "system", content: systemPrompt },
+          ...userHistory,
+        ],
+      });
+      const text = completion.choices?.[0]?.message?.content?.trim();
+      if (text) {
+        return { text, provider: "openai" };
+      }
+    } catch (err) {
+      console.error("[chat] OpenAI error:", err?.message || err);
+    }
+  }
+
+  // ── Try 3: Local fallback ──
+  return { text: localFallback(lastUserMsg), provider: "fallback" };
 }
 
-/** DB 저장은 best-effort — 실패해도 답변은 전달 */
+function localFallback(msg) {
+  const t = (msg || "").toLowerCase();
+  if (t.includes("뭔데") || t.includes("뭐하는") || t.includes("여긴") || t.includes("회사") || t.includes("누구"))
+    return "IT 보안 전문기업 솔모정보기술입니다! 방화벽부터 내부정보유출 방지, 백업까지 다양한 보안 솔루션을 구축해드려요. 궁금한 거 있으면 편하게 물어보세요.";
+  if (t.includes("제품") || t.includes("솔루션") || t.includes("뭐 팔"))
+    return "네트워크 보안(Fortinet·Genian NAC), 내부정보 보안(X-Securitas·QRadar), 백업(Acronis) 등을 취급하고 있어요. 자세한 건 /solutions/network-security 페이지를 참고해주세요!";
+  if (t.includes("전화") || t.includes("연락"))
+    return "대표 전화 02-402-8054 입니다. 평일 09:00–18:00 운영해요.";
+  if (t.includes("주소") || t.includes("위치") || t.includes("어디"))
+    return "서울 광진구 아차산로 309 남장빌딩 2층이에요. /support/location 에서 지도도 볼 수 있어요.";
+  if (t.includes("견적") || t.includes("가격") || t.includes("얼마"))
+    return "정확한 견적은 도입 규모에 따라 달라서, 02-402-8054 또는 /support/contact 에서 문의해주시면 전문 상담사가 안내해드릴게요!";
+  if (t.match(/^(ㅎㅇ|하이|안녕|헬로|hi)/))
+    return "안녕하세요! 솔모정보기술 챗봇이에요. 뭐든 편하게 물어보세요.";
+  return "안녕하세요! 솔모정보기술 챗봇입니다. 보안 솔루션, 회사 정보, 견적 문의 등 편하게 질문해주세요. 자세한 상담은 02-402-8054 또는 /support/contact 로 문의하실 수 있어요.";
+}
+
+/* ──────────── DB save (best-effort) ──────────── */
+
 async function safeDbSave(fn, label) {
   try {
     await fn();
   } catch (err) {
-    console.error(`[chat][db:${label}] save failed:`, err?.message || err);
+    console.error(`[chat][db:${label}]`, err?.message || err);
   }
 }
+
+/* ──────────── POST handler ──────────── */
 
 export async function POST(req) {
   let body;
@@ -72,13 +143,12 @@ export async function POST(req) {
   }
 
   const { messages = [], sessionId: incomingSessionId } = body || {};
-
   if (!Array.isArray(messages) || messages.length === 0) {
     return NextResponse.json({ error: "messages_required" }, { status: 400 });
   }
 
   const lastUser = [...messages].reverse().find((m) => m.role === "user");
-  if (!lastUser || !lastUser.content?.trim()) {
+  if (!lastUser?.content?.trim()) {
     return NextResponse.json({ error: "user_message_required" }, { status: 400 });
   }
   if (lastUser.content.length > 2000) {
@@ -88,127 +158,68 @@ export async function POST(req) {
   const sessionId = incomingSessionId || crypto.randomUUID();
   const userAgent = req.headers.get("user-agent")?.slice(0, 255) || null;
 
-  // ── 1) DB session/message save (best-effort) ──
+  // DB session + user message (best-effort)
   let prisma = null;
+  try { prisma = getPrisma(); } catch (e) { console.error("[chat] prisma init:", e?.message); }
+
+  if (prisma) {
+    await safeDbSave(
+      () => prisma.chatSession.upsert({ where: { id: sessionId }, update: {}, create: { id: sessionId, userAgent } }),
+      "session"
+    );
+    await safeDbSave(
+      () => prisma.chatMessage.create({ data: { sessionId, role: "user", content: lastUser.content } }),
+      "user_msg"
+    );
+  }
+
+  // Generate reply (Gemini → OpenAI → fallback)
+  let systemPrompt;
   try {
-    prisma = getPrisma();
-  } catch (err) {
-    console.error("[chat] prisma init failed:", err?.message || err);
+    systemPrompt = buildSystemPrompt();
+  } catch (e) {
+    console.error("[chat] knowledge build failed:", e?.message);
+    systemPrompt = "당신은 (주)솔모정보기술 공식 AI 상담원입니다. 친절하고 자연스럽게 대화하세요. 모르는 건 02-402-8054 로 안내하세요.";
   }
 
+  const { text: assistantText, provider } = await generateReply(messages, systemPrompt);
+
+  // Save assistant message (best-effort)
   if (prisma) {
     await safeDbSave(
-      () =>
-        prisma.chatSession.upsert({
-          where: { id: sessionId },
-          update: {},
-          create: { id: sessionId, userAgent },
-        }),
-      "session_upsert"
-    );
-    await safeDbSave(
-      () =>
-        prisma.chatMessage.create({
-          data: { sessionId, role: "user", content: lastUser.content },
-        }),
-      "user_message"
-    );
-  }
-
-  // ── 2) Generate reply (OpenAI with fallback) ──
-  let assistantText;
-  let aiError = null;
-  let usedFallback = false;
-  const client = getOpenAI();
-
-  if (!client) {
-    console.warn("[chat] No OpenAI client — using local fallback");
-    assistantText = fallbackReply(lastUser.content);
-    usedFallback = true;
-    aiError = "openai_key_missing";
-  } else {
-    try {
-      let systemPrompt;
-      try {
-        systemPrompt = buildSystemPrompt();
-      } catch (e) {
-        console.error("[chat] knowledge build failed:", e?.message);
-        systemPrompt =
-          "당신은 (주)솔모정보기술 공식 챗봇입니다. 친절하고 전문적으로 답변하세요. 모르는 내용은 02-402-8054 로 문의 안내합니다.";
-      }
-
-      const trimmedHistory = messages
-        .filter((m) => m.role === "user" || m.role === "assistant")
-        .slice(-MAX_HISTORY)
-        .map((m) => ({
-          role: m.role,
-          content: String(m.content || "").slice(0, 2000),
-        }));
-
-      const completion = await client.chat.completions.create({
-        model: MODEL,
-        temperature: 0.4,
-        max_tokens: 600,
-        messages: [
-          { role: "system", content: systemPrompt },
-          ...trimmedHistory,
-        ],
-      });
-
-      assistantText =
-        completion.choices?.[0]?.message?.content?.trim() ||
-        "죄송합니다, 응답을 생성하지 못했습니다. 다시 시도해주세요.";
-    } catch (err) {
-      aiError = err?.message || String(err);
-      console.error("[chat] OpenAI error:", aiError, err?.status || "", err?.code || "");
-      assistantText = fallbackReply(lastUser.content);
-      usedFallback = true;
-    }
-  }
-
-  // ── 3) Save assistant message (best-effort) ──
-  if (prisma) {
-    await safeDbSave(
-      () =>
-        prisma.chatMessage.create({
-          data: { sessionId, role: "assistant", content: assistantText },
-        }),
-      "assistant_message"
+      () => prisma.chatMessage.create({ data: { sessionId, role: "assistant", content: assistantText } }),
+      "assistant_msg"
     );
   }
 
   return NextResponse.json({
     reply: assistantText,
     sessionId,
-    fallback: usedFallback,
-    ...(aiError ? { _debug: { aiError } } : {}),
+    provider,
   });
 }
 
-// Health check endpoint — GET /api/chat returns env status (no secrets)
+/* ──────────── GET health check ──────────── */
+
 export async function GET() {
-  const hasKey = !!(process.env.OPENAI_API_KEY && process.env.OPENAI_API_KEY.trim());
+  const hasGemini = !!(process.env.GEMINI_API_KEY?.trim());
+  const hasOpenAI = !!(process.env.OPENAI_API_KEY?.trim());
   const dbUrl = process.env.DATABASE_URL || process.env.PRISMA_DATABASE_URL || "";
   const hasDb = !!dbUrl;
-  const dbProtocol = dbUrl ? dbUrl.split(":")[0] : "missing";
   const hasSmtp = !!(process.env.SMTP_USER && process.env.SMTP_PASS);
 
-  // Try a quick prisma init to detect DB problems
   let prismaStatus = "not_attempted";
-  try {
-    getPrisma();
-    prismaStatus = "initialized";
-  } catch (err) {
-    prismaStatus = `init_failed: ${err?.message?.slice(0, 120) || "unknown"}`;
-  }
+  try { getPrisma(); prismaStatus = "initialized"; } catch (e) { prismaStatus = `failed: ${e?.message?.slice(0, 120)}`; }
 
   return NextResponse.json({
     status: "ok",
-    runtime: "nodejs",
+    aiProvider: hasGemini ? "gemini (primary)" : hasOpenAI ? "openai" : "fallback only",
     env: {
-      OPENAI_API_KEY: hasKey ? `set (len=${process.env.OPENAI_API_KEY.length})` : "MISSING",
+      GEMINI_API_KEY: hasGemini ? `set (len=${process.env.GEMINI_API_KEY.length})` : "MISSING",
+      GEMINI_MODEL: process.env.GEMINI_MODEL || "gemini-2.0-flash (default)",
+      OPENAI_API_KEY: hasOpenAI ? `set (len=${process.env.OPENAI_API_KEY.length})` : "MISSING",
       OPENAI_MODEL: process.env.OPENAI_MODEL || "gpt-4o-mini (default)",
-      DATABASE_URL: hasDb ? `set (protocol=${dbProtocol}://)` : "MISSING",
+      DATABASE_URL: hasDb ? `set (${dbUrl.split(":")[0]}://)` : "MISSING",
       PRISMA_STATUS: prismaStatus,
       SMTP_USER: process.env.SMTP_USER ? "set" : "MISSING",
       SMTP_PASS: hasSmtp ? "set" : "MISSING",
