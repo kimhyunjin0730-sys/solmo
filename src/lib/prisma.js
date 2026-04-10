@@ -2,46 +2,56 @@ import { PrismaClient } from "@prisma/client";
 import { withAccelerate } from "@prisma/extension-accelerate";
 
 /**
- * Lazy-initialized Prisma client for Prisma Postgres (Accelerate).
+ * Lazy-initialized Prisma client.
  *
- * Prisma 7 removed the `datasources` constructor option entirely.
- * For Prisma Postgres / Accelerate, you must pass `accelerateUrl` to
- * the PrismaClient constructor and apply the withAccelerate() extension.
+ * Strategy: Prisma 7 removed the `datasources` constructor option.
+ * For Prisma Postgres / Accelerate (db.prisma.io or any prisma+postgres://
+ * URL) we MUST pass `accelerateUrl` to the constructor and apply
+ * the withAccelerate() extension.
  *
- * Lazy init is critical: at build time Next.js may import this module
- * while collecting page data, but env vars may not be present yet.
- * We construct on first call only.
+ * For a real direct Postgres URL (e.g. Neon, Supabase, vanilla
+ * postgres://) we'd need a driver adapter — but as long as we're on
+ * Prisma Postgres we route everything through Accelerate. Plain
+ * postgres:// URLs that point at db.prisma.io are also Accelerate
+ * URLs and just need the protocol prefix swapped.
  */
 
 const globalForPrisma = globalThis;
 
+function normalizeAccelerateUrl(rawUrl) {
+  if (!rawUrl) return null;
+  // Already in the right protocol form
+  if (rawUrl.startsWith("prisma://") || rawUrl.startsWith("prisma+postgres://")) {
+    return rawUrl;
+  }
+  // Swap protocol — Prisma Postgres / Accelerate accepts both forms
+  if (rawUrl.startsWith("postgres://")) {
+    return "prisma+" + rawUrl;
+  }
+  if (rawUrl.startsWith("postgresql://")) {
+    return "prisma+postgres://" + rawUrl.slice("postgresql://".length);
+  }
+  return rawUrl;
+}
+
 function createPrisma() {
-  const url =
+  const rawUrl =
     process.env.DATABASE_URL ||
     process.env.PRISMA_DATABASE_URL ||
     process.env.POSTGRES_URL;
 
-  if (!url) {
+  if (!rawUrl) {
     throw new Error("DATABASE_URL is not set");
   }
 
-  const isAccelerate = url.startsWith("prisma://");
+  const url = normalizeAccelerateUrl(rawUrl);
 
-  const options = {
+  const client = new PrismaClient({
+    accelerateUrl: url,
     log: process.env.NODE_ENV === "development" ? ["error", "warn"] : ["error"],
-  };
+  });
 
-  if (isAccelerate) {
-    options.accelerateUrl = url;
-  } else {
-    options.datasources = {
-      db: { url: url },
-    };
-  }
-
-  const client = new PrismaClient(options);
-
-  return isAccelerate ? client.$extends(withAccelerate()) : client;
+  return client.$extends(withAccelerate());
 }
 
 export function getPrisma() {
