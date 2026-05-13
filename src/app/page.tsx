@@ -1,0 +1,828 @@
+'use client';
+
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+
+type Solution = {
+  href: string;
+  num: string;
+  tag: string;
+  title: string;
+  desc: string;
+  products: readonly string[];
+  accent: string;
+  dot: string;
+};
+
+const SOLUTIONS: readonly Solution[] = [
+  {
+    href: '/solutions/network-security',
+    num: '01',
+    tag: 'Network Security',
+    title: '네트워크 보안',
+    desc: '차세대 방화벽부터 NAC, NDR, SIEM까지 — 외부 위협을 원천 봉쇄하는 다층 방어 체계.',
+    products: ['FortiNet UTM', 'Genian ZTNA/NAC', 'IBM QRadar', 'Network BlackBox'],
+    accent: 'from-blue-500 to-blue-700',
+    dot: 'bg-blue-600',
+  },
+  {
+    href: '/solutions/endpoint-server-security',
+    num: '02',
+    tag: 'Endpoint & Server Security',
+    title: '단말 / 서버 보안',
+    desc: 'DB·OS 접근 통제부터 차세대 백신·XDR까지 — 단말과 서버를 동시에 방어합니다.',
+    products: ['DBSAFER', 'NETAND HIWARE', 'AppCheck Pro', 'Trend Vision One'],
+    accent: 'from-sky-500 to-sky-700',
+    dot: 'bg-sky-600',
+  },
+  {
+    href: '/solutions/application-security',
+    num: '03',
+    tag: 'Application Security',
+    title: '애플리케이션 보안',
+    desc: '화면 워터마크·보안 출력·이메일 보안·VDI·백업까지, 업무 애플리케이션 전 구간 보호.',
+    products: ['xSecuritas (자체개발)', '신도 보안출력', 'Proofpoint', 'Acronis'],
+    accent: 'from-indigo-500 to-indigo-700',
+    dot: 'bg-indigo-600',
+  },
+  {
+    href: '/solutions/ot-security',
+    num: '04',
+    tag: 'OT Security',
+    title: 'OT 보안 & 시스템',
+    desc: '산업 현장(OT)과 미션 크리티컬 스토리지까지, IT 보안의 경계를 확장합니다.',
+    products: ['TXOne OT Zero Trust', 'Hitachi Storage'],
+    accent: 'from-violet-500 to-violet-700',
+    dot: 'bg-violet-600',
+  },
+];
+
+const VENDOR_BRANDS = [
+  'Fortinet',
+  'PIOLINK',
+  'Genians',
+  'Acronis',
+  'IBM',
+  'NETAND',
+  '신도리코',
+  'Proofpoint',
+  'PNP Secure',
+  'Cisco',
+  'TXOne',
+  'Trend Micro',
+  'Tilon',
+] as const;
+
+const STRENGTHS = [
+  {
+    num: '01',
+    title: '22년의 신뢰',
+    desc: '2002년 설립 이래 금융·공공·대기업 핵심 인프라를 지켜온 검증된 파트너.',
+  },
+  {
+    num: '02',
+    title: '47명 전문 엔지니어',
+    desc: '특급·고급 기술자가 50% 이상. 대규모 프로젝트의 안정적 수행 역량.',
+  },
+  {
+    num: '03',
+    title: '자체 개발 솔루션',
+    desc: '기업부설연구소에서 개발한 xSecuritas — GS인증 1등급 스크린워터마크.',
+  },
+  {
+    num: '04',
+    title: '37+ 고객사 신뢰',
+    desc: 'MG새마을금고, POSCO, 한국수력원자력, 서울대 등 핵심 기관과 동행.',
+  },
+] as const;
+
+const BIG_STATS = [
+  { value: '98', suffix: '%', label: '고객 재계약률', desc: '장기 파트너십' },
+  { value: '47', suffix: '', label: '전문 엔지니어', desc: '특급·고급 50% 이상' },
+  { value: '21', suffix: '+', label: '취급 솔루션', desc: '4 카테고리 통합' },
+] as const;
+
+type News = { date: string; category: string; title: string; desc: string };
+
+const NEWS: readonly News[] = [
+  {
+    date: '2025.07',
+    category: 'Certification',
+    title: 'ISO 9001 / 14001 / 27001 / 45001 4종 인증 획득',
+    desc: '품질·환경·정보보호·안전보건 4개 영역의 ISO 인증을 동시에 확보하며 글로벌 수준의 경영 시스템을 입증했습니다.',
+  },
+  {
+    date: '2024.06',
+    category: 'Partnership',
+    title: 'Fortinet Expert Partner 승격',
+    desc: 'Fortinet 최우수 파트너로 승격하며 차세대 방화벽 분야의 기술 역량을 공식 인증받았습니다.',
+  },
+  {
+    date: '2024',
+    category: 'Partnership',
+    title: 'TXOne Networks 공식 Reseller 계약',
+    desc: 'OT(운영기술) 보안 라인업을 강화하여 산업 현장의 사이버 위협 대응 체계를 완성했습니다.',
+  },
+];
+
+export default function Home() {
+  const [activeSolution, setActiveSolution] = useState(0);
+
+  return (
+    <div className="min-h-screen bg-white text-slate-900 selection:bg-blue-500/10 overflow-x-hidden">
+      <section className="relative min-h-[500px] lg:min-h-[600px] flex items-center bg-slate-950 overflow-hidden pt-20 pb-12">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/office-bg.png"
+            alt=""
+            fill
+            priority
+            className="object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900/80 to-slate-900/40" />
+          <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px]" />
+          <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-indigo-600/15 rounded-full blur-[140px]" />
+          <div
+            className="absolute inset-0 opacity-[0.04]"
+            style={{
+              backgroundImage:
+                'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
+              backgroundSize: '60px 60px',
+            }}
+          />
+        </div>
+
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 relative z-10 w-full animate-reveal">
+          <div className="max-w-3xl">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm mb-5">
+              <span className="w-1 h-1 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[10px] font-semibold tracking-[0.2em] text-white/80 uppercase">
+                Total IT Security Partner · Since 2002
+              </span>
+            </div>
+
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] tracking-tight mb-5 sm:mb-6">
+              미래를 보호하는
+              <br />
+              <span className="bg-gradient-to-r from-blue-300 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+                지능형 보안의 기준.
+              </span>
+            </h1>
+            <p className="text-white/60 text-sm sm:text-base font-medium max-w-xl leading-relaxed mb-8">
+              솔모정보기술은 22년의 업력과 화이트해커급 기술력을 바탕으로 귀사의
+              정보 자산을 가장 안전하게 지켜드립니다.
+            </p>
+
+            <div className="flex flex-wrap gap-3 sm:gap-4">
+              <Link
+                href="#solutions"
+                className="px-6 py-3 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-500 transition-all shadow-xl shadow-blue-600/30 text-xs tracking-tight"
+              >
+                솔루션 살펴보기 →
+              </Link>
+              <Link
+                href="/support/contact"
+                className="px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold rounded-full hover:bg-white/20 transition-all text-xs tracking-tight"
+              >
+                전문가 상담 신청
+              </Link>
+            </div>
+          </div>
+
+          <div className="mt-10 sm:mt-14 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl">
+            <HeroKPI value="22+" label="Years of Trust" />
+            <HeroKPI value="47" label="Engineers" />
+            <HeroKPI value="37+" label="Clients" />
+            <HeroKPI value="24/7" label="Support" />
+          </div>
+        </div>
+
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2 text-white/40">
+          <span className="text-[10px] font-bold uppercase tracking-[0.3em]">
+            Scroll
+          </span>
+          <div className="w-px h-10 bg-gradient-to-b from-white/40 to-transparent" />
+        </div>
+      </section>
+
+      <section className="border-y border-slate-100 bg-white py-8 sm:py-10 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8">
+          <div className="flex items-center gap-6 lg:gap-10 flex-col lg:flex-row">
+            <div className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] shrink-0">
+              Solution Brands
+            </div>
+            <div className="h-px lg:h-10 lg:w-px bg-slate-200 hidden lg:block" />
+            <Link
+              href="#solutions"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-x-6 sm:gap-x-10 gap-y-3 group"
+            >
+              {VENDOR_BRANDS.map((p) => (
+                <span
+                  key={p}
+                  className="text-sm sm:text-base font-bold text-slate-400 group-hover:text-slate-600 hover:!text-blue-600 transition-colors tracking-tight"
+                >
+                  {p}
+                </span>
+              ))}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section id="solutions" className="py-20 sm:py-28 bg-slate-50 scroll-mt-24">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 sm:mb-16">
+            <div>
+              <span className="text-blue-600 font-bold text-[11px] sm:text-xs uppercase tracking-[0.3em] mb-3 block">
+                Our Solutions
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 leading-tight">
+                보안 솔루션 포트폴리오
+              </h2>
+              <p className="text-slate-500 text-sm sm:text-base font-medium max-w-xl leading-relaxed">
+                글로벌 파트너의 검증된 제품과 솔모의 자체 기술이 결합된 종합
+                보안 라인업 — 4 카테고리, 21+ 제품.
+              </p>
+            </div>
+            <Link
+              href="#solutions"
+              className="hidden lg:inline-flex items-center gap-2 text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors"
+            >
+              전체 솔루션 →
+            </Link>
+          </div>
+
+          <div className="flex gap-2 mb-6 overflow-x-auto pb-2 -mx-1 px-1">
+            {SOLUTIONS.map((s, i) => (
+              <button
+                key={s.title}
+                onClick={() => setActiveSolution(i)}
+                className={`shrink-0 px-5 sm:px-6 py-3 rounded-full text-xs sm:text-sm font-semibold tracking-tight transition-all ${
+                  activeSolution === i
+                    ? 'bg-slate-900 text-white shadow-md'
+                    : 'bg-white text-slate-500 border border-slate-200 hover:border-slate-400'
+                }`}
+              >
+                <span className="opacity-50 mr-2">{s.num}</span>
+                {s.title}
+              </button>
+            ))}
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-6">
+            <SolutionDetail solution={SOLUTIONS[activeSolution]} />
+            <div className="grid grid-cols-1 gap-3">
+              {SOLUTIONS.map((s, i) => (
+                <SolutionMini
+                  key={s.title}
+                  solution={s}
+                  active={activeSolution === i}
+                  onClick={() => setActiveSolution(i)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 sm:py-28 bg-white">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 sm:mb-16">
+            <div>
+              <span className="text-blue-600 font-bold text-[11px] sm:text-xs uppercase tracking-[0.3em] mb-3 block">
+                Services
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                전문 컨설팅 서비스
+              </h2>
+            </div>
+            <Link
+              href="/services/vulnerability-analysis"
+              className="text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors"
+            >
+              전체 서비스 →
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5 sm:gap-6">
+            <ServiceCard
+              id="01"
+              title="보안취약점 분석"
+              role="Security Consulting"
+              desc="모의해킹 및 소스코드 진단을 통한 잠재적 위협 식별"
+              bg="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800"
+              href="/services/vulnerability-analysis"
+            />
+            <ServiceCard
+              id="02"
+              title="보안프린트 구축"
+              role="xSecuritas Solution"
+              desc="스크린 및 출력물 워터마크 삽입을 통한 기밀 유출 방지"
+              bg="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=800"
+              href="/services/secure-printing"
+            />
+            <ServiceCard
+              id="03"
+              title="통합 유지보수"
+              role="ITO Management"
+              desc="시스템 전반의 안정적 운영을 위한 24/365 위탁 관리"
+              bg="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=800"
+              href="/services/maintenance"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 sm:py-28 lg:py-32 bg-slate-950 text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none" />
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
+            backgroundSize: '80px 80px',
+          }}
+        />
+        <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-t from-blue-600/20 to-transparent blur-[100px] pointer-events-none" />
+
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 relative z-10">
+          <div className="grid lg:grid-cols-12 gap-8 mb-16 sm:mb-20">
+            <div className="lg:col-span-5">
+              <span className="text-blue-400 font-bold text-[11px] sm:text-xs uppercase tracking-[0.3em] mb-4 block">
+                Information
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1]">
+                숫자로 증명하는
+                <br />
+                <span className="bg-gradient-to-r from-blue-300 to-indigo-400 bg-clip-text text-transparent">
+                  솔모의 신뢰
+                </span>
+              </h2>
+            </div>
+            <div className="lg:col-span-7 lg:pt-8">
+              <p className="text-white/50 text-sm sm:text-base font-medium leading-relaxed max-w-2xl">
+                22년 업력, 자체 개발력, 그리고 검증된 레퍼런스 — 보안 파트너에게
+                가장 중요한 세 가지를 모두 갖춘 솔모정보기술의 성과를 숫자로
+                확인해보세요.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid sm:grid-cols-3 gap-px bg-white/10 mb-16 sm:mb-20 rounded-3xl overflow-hidden border border-white/10">
+            {BIG_STATS.map((s) => (
+              <div
+                key={s.label}
+                className="bg-slate-950 p-8 sm:p-10 lg:p-12 hover:bg-slate-900 transition-colors"
+              >
+                <div className="flex items-baseline gap-1 mb-4">
+                  <span className="text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tighter bg-gradient-to-br from-white to-white/60 bg-clip-text text-transparent">
+                    {s.value}
+                  </span>
+                  <span className="text-2xl sm:text-3xl font-extrabold text-blue-400">
+                    {s.suffix}
+                  </span>
+                </div>
+                <div className="text-base sm:text-lg font-bold text-white tracking-tight mb-1">
+                  {s.label}
+                </div>
+                <div className="text-[11px] sm:text-xs font-medium text-white/40 uppercase tracking-widest">
+                  {s.desc}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+            {STRENGTHS.map((s) => (
+              <div
+                key={s.num}
+                className="p-7 sm:p-8 bg-white/[0.03] backdrop-blur-sm border border-white/10 rounded-2xl hover:bg-white/[0.06] hover:border-blue-400/30 hover:-translate-y-1 transition-all group"
+              >
+                <div className="text-3xl sm:text-4xl font-extrabold text-blue-400 mb-5 tracking-tight group-hover:scale-110 transition-transform origin-left">
+                  {s.num}
+                </div>
+                <h3 className="text-base sm:text-lg font-bold mb-3 tracking-tight">
+                  {s.title}
+                </h3>
+                <p className="text-xs sm:text-sm font-medium text-white/50 leading-relaxed">
+                  {s.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="clients" className="py-20 sm:py-28 bg-white scroll-mt-24">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 sm:mb-16">
+            <div>
+              <span className="text-blue-600 font-bold text-[11px] sm:text-xs uppercase tracking-[0.3em] mb-3 block">
+                References
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+                37개 이상의 기업·기관이
+                <br />
+                솔모를 신뢰합니다
+              </h2>
+              <p className="text-slate-500 text-sm sm:text-base font-medium max-w-xl leading-relaxed">
+                금융, 제조, 공공, 교육·의료 — 산업군별 핵심 레퍼런스와
+                함께합니다.
+              </p>
+            </div>
+            <Link
+              href="/clients"
+              className="self-start lg:self-auto inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-900 text-white text-sm font-bold hover:bg-blue-600 transition-all"
+            >
+              전체 고객사 보기 →
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-5">
+            <ClientGroup
+              label="금융"
+              tag="Finance"
+              count="10"
+              clients={['MG새마을금고', 'KB금융그룹', 'Sh수협은행', '한화생명']}
+            />
+            <ClientGroup
+              label="기업 / 제조"
+              tag="Enterprise"
+              count="10"
+              clients={['with POSCO', 'GS칼텍스', 'LG에너지솔루션', 'KOREAN AIR']}
+            />
+            <ClientGroup
+              label="공공"
+              tag="Public"
+              count="10"
+              clients={['한국수력원자력', '국민건강보험', 'KoROAD', 'BPA 부산항만공사']}
+            />
+            <ClientGroup
+              label="교육 / 의료"
+              tag="Edu / Medical"
+              count="7"
+              clients={['서울대학교', '성균관대학교', '연세대 의료원', '국립암센터']}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 sm:py-28 bg-slate-50">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8">
+          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12 sm:mb-16">
+            <div>
+              <span className="text-blue-600 font-bold text-[11px] sm:text-xs uppercase tracking-[0.3em] mb-3 block">
+                News
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+                최근 소식 &amp; 활동
+              </h2>
+            </div>
+            <Link
+              href="/about/history"
+              className="self-start lg:self-auto text-sm font-bold text-blue-600 hover:text-blue-700 transition-colors"
+            >
+              전체 연혁 보기 →
+            </Link>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5 sm:gap-6">
+            {NEWS.map((n, i) => (
+              <NewsCard key={n.title} news={n} dark={i === 1} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-5 sm:px-8 pb-20 sm:pb-28">
+        <div className="max-w-[1400px] mx-auto bg-gradient-to-br from-[#001F5B] via-[#001F5B] to-indigo-900 rounded-[2rem] sm:rounded-[3rem] p-10 sm:p-16 lg:p-20 text-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-500/15 rounded-full blur-[120px] pointer-events-none" />
+
+          <div className="relative z-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div className="lg:col-span-7">
+              <span className="text-blue-300 font-bold text-[11px] sm:text-xs uppercase tracking-[0.3em] mb-4 block">
+                Get Started
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight mb-5">
+                보안 파트너를
+                <br />
+                지금 만나보세요.
+              </h2>
+              <p className="text-white/60 text-sm sm:text-base font-medium leading-relaxed max-w-xl">
+                솔루션 도입부터 운영, 컨설팅까지 — 솔모의 전문가가 1:1로 안내해드립니다.
+                영업일 기준 24시간 이내 답변드립니다.
+              </p>
+            </div>
+            <div className="lg:col-span-5 flex flex-col gap-3">
+              <Link
+                href="/support/contact"
+                className="group flex items-center justify-between px-7 py-5 bg-white text-slate-900 rounded-2xl font-bold hover:bg-blue-500 hover:text-white transition-all"
+              >
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-blue-600 group-hover:text-white/80 mb-1">
+                    Inquiry
+                  </div>
+                  <div className="text-base tracking-tight">온라인 문의 작성</div>
+                </div>
+                <span className="text-2xl">→</span>
+              </Link>
+              <a
+                href="tel:024028054"
+                className="group flex items-center justify-between px-7 py-5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl font-bold hover:bg-white/20 transition-all"
+              >
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-blue-300 mb-1">
+                    Call
+                  </div>
+                  <div className="text-base tracking-tight">02-402-8054</div>
+                </div>
+                <span className="text-2xl">📞</span>
+              </a>
+              <Link
+                href="/support/location"
+                className="group flex items-center justify-between px-7 py-5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl font-bold hover:bg-white/20 transition-all"
+              >
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-widest text-blue-300 mb-1">
+                    Visit
+                  </div>
+                  <div className="text-sm tracking-tight">
+                    서울 광진구 아차산로 309
+                  </div>
+                </div>
+                <span className="text-2xl">📍</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <style jsx global>{`
+        html { scroll-behavior: smooth; }
+        @keyframes reveal {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        .animate-reveal { animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+      `}</style>
+    </div>
+  );
+}
+
+function NewsCard({ news, dark }: { news: News; dark?: boolean }) {
+  return (
+    <article
+      className={`group p-7 sm:p-8 rounded-3xl border transition-all hover:-translate-y-1 ${
+        dark
+          ? 'bg-slate-900 border-slate-800 text-white hover:border-blue-500/40 hover:shadow-2xl hover:shadow-blue-900/20'
+          : 'bg-white border-slate-100 hover:border-slate-300 hover:shadow-lg'
+      }`}
+    >
+      <div className="flex items-center justify-between mb-6">
+        <span
+          className={`text-[10px] font-black uppercase tracking-widest ${
+            dark ? 'text-blue-400' : 'text-blue-600'
+          }`}
+        >
+          {news.category}
+        </span>
+        <span
+          className={`text-xs font-bold ${dark ? 'text-white/40' : 'text-slate-400'}`}
+        >
+          {news.date}
+        </span>
+      </div>
+      <h3
+        className={`text-lg sm:text-xl font-extrabold tracking-tight leading-snug mb-4 ${
+          dark ? 'text-white' : 'text-slate-900'
+        }`}
+      >
+        {news.title}
+      </h3>
+      <p
+        className={`text-sm font-medium leading-relaxed mb-6 ${
+          dark ? 'text-white/50' : 'text-slate-500'
+        }`}
+      >
+        {news.desc}
+      </p>
+      <div
+        className={`flex items-center gap-2 text-xs font-black uppercase tracking-widest ${
+          dark ? 'text-blue-400' : 'text-blue-600'
+        }`}
+      >
+        <span>Read more</span>
+        <span className="group-hover:translate-x-1 transition-transform">→</span>
+      </div>
+    </article>
+  );
+}
+
+function HeroKPI({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 sm:p-5">
+      <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-1">
+        {value}
+      </div>
+      <div className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
+        {label}
+      </div>
+    </div>
+  );
+}
+
+function SolutionDetail({ solution }: { solution: Solution }) {
+  return (
+    <Link
+      href={solution.href}
+      className="block bg-white border border-slate-100 rounded-3xl p-8 sm:p-10 lg:p-12 hover:border-slate-300 hover:shadow-xl transition-all relative overflow-hidden group"
+    >
+      <div
+        className={`absolute top-0 right-0 w-64 h-64 bg-gradient-to-br ${solution.accent} opacity-10 rounded-full blur-3xl group-hover:opacity-20 transition-opacity`}
+      />
+
+      <div className="relative">
+        <div className="flex items-start justify-between mb-6">
+          <div className={`w-3 h-3 rounded-full ${solution.dot}`} />
+          <span className="text-5xl sm:text-6xl font-extrabold text-slate-100 tracking-tighter">
+            {solution.num}
+          </span>
+        </div>
+
+        <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-3 block">
+          {solution.tag}
+        </span>
+        <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-4 leading-tight">
+          {solution.title}
+        </h3>
+        <p className="text-slate-500 text-sm sm:text-base font-medium leading-relaxed mb-8">
+          {solution.desc}
+        </p>
+
+        <div className="space-y-2 mb-8">
+          {solution.products.map((p) => (
+            <div
+              key={p}
+              className="flex items-center gap-3 text-sm font-semibold text-slate-700"
+            >
+              <span className={`w-1 h-1 rounded-full ${solution.dot}`} />
+              {p}
+            </div>
+          ))}
+        </div>
+
+        <div className="inline-flex items-center gap-2 text-sm font-bold text-blue-600 group-hover:gap-3 transition-all">
+          자세히 보기 <span>→</span>
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function SolutionMini({
+  solution,
+  active,
+  onClick,
+}: {
+  solution: Solution;
+  active: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      onClick={onClick}
+      className={`text-left p-5 sm:p-6 rounded-2xl border transition-all flex items-center gap-4 ${
+        active
+          ? 'bg-slate-900 border-slate-900 text-white'
+          : 'bg-white border-slate-100 hover:border-slate-300'
+      }`}
+    >
+      <div
+        className={`text-xl sm:text-2xl font-extrabold tracking-tight shrink-0 ${
+          active ? 'text-blue-400' : 'text-slate-300'
+        }`}
+      >
+        {solution.num}
+      </div>
+      <div className="flex-1 min-w-0">
+        <div
+          className={`text-[10px] font-bold uppercase tracking-widest mb-0.5 ${
+            active ? 'text-white/50' : 'text-slate-400'
+          }`}
+        >
+          {solution.tag}
+        </div>
+        <div
+          className={`text-sm sm:text-base font-bold tracking-tight ${
+            active ? 'text-white' : 'text-slate-900'
+          }`}
+        >
+          {solution.title}
+        </div>
+      </div>
+      <span
+        className={`text-lg shrink-0 ${active ? 'text-blue-400' : 'text-slate-300'}`}
+      >
+        →
+      </span>
+    </button>
+  );
+}
+
+function ServiceCard({
+  id,
+  title,
+  role,
+  desc,
+  bg,
+  href,
+}: {
+  id: string;
+  title: string;
+  role: string;
+  desc: string;
+  bg: string;
+  href: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className="group relative h-[380px] sm:h-[420px] rounded-3xl overflow-hidden shadow-lg hover:-translate-y-1 transition-transform duration-300 block"
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={bg}
+        alt={title}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+      <div className="absolute bottom-7 sm:bottom-8 left-7 sm:left-8 right-7 sm:right-8">
+        <span className="text-blue-400 font-extrabold text-2xl mb-2 block tracking-tighter">
+          {id}
+        </span>
+        <div className="text-[10px] font-bold text-blue-300 uppercase tracking-[0.25em] mb-2">
+          {role}
+        </div>
+        <h4 className="text-xl sm:text-2xl font-extrabold text-white mb-3 tracking-tight">
+          {title}
+        </h4>
+        <p className="text-white/60 text-xs sm:text-sm font-medium leading-relaxed mb-6">
+          {desc}
+        </p>
+        <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/15 text-white text-base group-hover:bg-blue-600 transition-colors">
+          →
+        </div>
+      </div>
+    </Link>
+  );
+}
+
+function ClientGroup({
+  label,
+  tag,
+  count,
+  clients,
+}: {
+  label: string;
+  tag: string;
+  count: string;
+  clients: readonly string[];
+}) {
+  return (
+    <Link
+      href="/clients"
+      className="block bg-slate-50 border border-slate-100 rounded-2xl p-6 sm:p-7 hover:border-blue-600 hover:bg-white hover:shadow-md transition-all group"
+    >
+      <div className="flex items-start justify-between mb-5">
+        <div>
+          <div className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-1">
+            {tag}
+          </div>
+          <h4 className="text-base sm:text-lg font-extrabold text-slate-900 tracking-tight">
+            {label}
+          </h4>
+        </div>
+        <span className="text-2xl font-extrabold text-slate-200 group-hover:text-blue-200 transition-colors">
+          {count}
+        </span>
+      </div>
+      <ul className="space-y-2 mb-4">
+        {clients.map((c) => (
+          <li
+            key={c}
+            className="text-xs sm:text-sm text-slate-600 font-semibold flex items-center gap-2"
+          >
+            <span className="w-1 h-1 rounded-full bg-blue-400 shrink-0" />
+            {c}
+          </li>
+        ))}
+      </ul>
+      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 group-hover:text-blue-600 transition-colors">
+        + 더 보기 →
+      </div>
+    </Link>
+  );
+}
