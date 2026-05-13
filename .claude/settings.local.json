@@ -50,7 +50,11 @@
       "Bash(git commit -m 'content\\(nx-portrait\\): vendor + overview text per PPT verbatim *)",
       "Bash(git commit -m 'content\\(wips\\): vendor 코닉오토메이션 + PPT 본문 그대로 *)",
       "Bash(C:/Users/admin/AppData/Local/Programs/Python/Python312/python.exe /tmp/split-qradar.py)",
-      "Bash(git commit -m 'feat\\(wips\\): big thin-line blue outline icons \\(PPT style\\) *)"
+      "Bash(git commit -m 'feat\\(wips\\): big thin-line blue outline icons \\(PPT style\\) *)",
+      "Bash(mkdir -p /tmp/pptx-extract/solutions && unzip -q -o \"C:/Users/admin/Downloads/홈페이지_솔루션_260511.pptx\" -d /tmp/pptx-extract/solutions/ 2>&1 | tail -2; ls /tmp/pptx-extract/solutions/ppt/slides/ | head -5)",
+      "Bash(cygpath -w /tmp/pptx-extract/solutions/ppt/slides)",
+      "Bash(C:/Users/admin/AppData/Local/Programs/Python/Python312/python.exe -c ' *)",
+      "Bash(C:/Users/admin/AppData/Local/Programs/Python/Python312/python.exe /tmp/update-ppt-text.py)"
     ]
   }
 }
