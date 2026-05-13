@@ -353,7 +353,7 @@ const networkSecurityProducts: Product[] = [
       logo: '/images/products/kornic-glory-wips/logo.png',
     },
     name: 'WIPS 무선인증',
-    vendor: '코닉오토메이션',
+    vendor: '코닉글로리',
     shortDescription:
       '무선 네트워크 환경에서 발생할 수 있는 다양한 위협을 실시간 탐지·차단하는 고성능 무선 침입 방지 시스템.',
     longDescription:
@@ -437,7 +437,7 @@ const endpointServerProducts: Product[] = [
     shortDescription:
       'DB 접근 통제 및 감사. SQL 단위 권한과 작업 로그를 통합 관리.',
     longDescription:
-      'DBSAFER DB는 데이터베이스의 모든 접속 및 작업 내역, SQL 수행 권한 제어와 데이터 유출을 차단합니다. 동종 접근제어 솔루션 중 유일하게 Server Agent를 활용해 우회 접속까지 완벽하게 차단하며, 다양한 운영 환경(클라우드·가상화 등)에 최적화돼 있습니다.',
+      'DBSAFER DB는 개인정보 데이터베이스에 대한 접근 및 권한 제어, SQL 감사 등을 통해 개인정보 유출을 차단합니다. 국내 접근제어 솔루션 중 유일하게 Server Agent를 활용해 우회접속까지 완벽하게 차단합니다. 제품 연동 및 클라우드 환경 지원 등을 통해 기업 상황에 최적화 된 운영 환경을 보장합니다.',
     officialUrl: 'https://www.pnpsecure.com/02_1_dbsafer-db/',
     features: [
       {
@@ -469,7 +469,7 @@ const endpointServerProducts: Product[] = [
     shortDescription:
       '서버·네트워크·DB·AD까지 아우르는 통합 시스템 접근 통제(IAM/PAM).',
     longDescription:
-      'HIWARE는 주요 IT 인프라 시스템에 대한 권한을 한 곳에서 일원화해 관리하는 국내 대표 시스템 접근 제어 및 계정관리(IAM) 솔루션입니다. 권한 부여, 작업 통제·감사, 네트워크 장비·DB·AD·CCTV 등 주요 인프라의 보안관리 기반을 제공합니다.',
+      'HIWARE는 주요 IT 인프라 시스템의 보안 관리에 꼭 필요한 제품라인업으로 구성된 국내 대표 통합 접근제어 및 계정관리(IAM) 솔루션입니다. HIWARE는 접근제어와 계정관리 기술을 바탕으로, 국내 최초이자 유일하게 서버, 네트워크 장비, 데이터베이스, Active Directory, CCTV 등 주요 IT 인프라 시스템의 보안관리 기능을 제공합니다.',
     officialUrl: 'https://www.netand.co.kr',
     features: [
       {
@@ -521,7 +521,7 @@ const endpointServerProducts: Product[] = [
     shortDescription:
       '랜섬웨어 방어 특화 안티멀웨어. 예방·탐지·복구·자동 격리를 한 번에.',
     longDescription:
-      '앱체크는 랜섬웨어의 예방·탐지·복구·자동 격리까지 한 번에 해결합니다. 가정용은 물론 기업용·클라우드 서버까지 다양한 환경에 적용해 데이터 자산을 안전하게 보호할 수 있는 멀티플랫폼 보안 솔루션입니다.',
+      '앱체크는 랜섬웨어 사전 방어, 탐지, 차단, 자동 복구까지 한번에 해결합니다. 뿐만 아니라 취약점 가드와 클리너 기능으로 다양한 환경에 대응하여 정보 자산을 안전하게 보호할 수 있는 안티랜섬웨어 전문 솔루션입니다.',
     badges: ['Anti-Ransomware'],
     officialUrl: 'https://www.checkmal.com/',
     features: [
@@ -562,7 +562,7 @@ const endpointServerProducts: Product[] = [
     shortDescription:
       'AI 기반 통합 사이버 보안 플랫폼. XDR + ASRM(공격 표면 위험 관리).',
     longDescription:
-      'Trend Micro Vision One은 AI 기반 통합 사이버 보안 플랫폼으로, 엔드포인트·이메일·네트워크·클라우드 등 다양한 환경을 아우르는 XDR(확장 탐지 및 대응)과 공격 표면 위험 관리(ASRM)를 결합합니다. 디지털 자산을 선제적으로 보호하고, 위협 탐지·대응 속도를 끌어올리는 것이 핵심입니다.',
+      'Trend Micro의 Vision One은 AI 기반 통합 사이버 보안 플랫폼으로, 엔드포인트·이메일·네트워크·클라우드 등 다양한 계층을 아우르는 XDR(Extended Detection & Response)과 공격 표면 위험 관리(ASRM)를 제공하는 차세대 보안 솔루션입니다. 기업의 디지털 자산을 전방위적으로 보호하고, 위협 탐지·대응·위험 관리까지 단일 콘솔에서 수행할 수 있는 것이 핵심입니다.',
     officialUrl: 'https://www.trendmicro.com/ko_kr',
     features: [
       {
@@ -602,7 +602,7 @@ const applicationProducts: Product[] = [
     shortDescription:
       '화면 워터마크·캡처 차단·웹캠 워터마크로 화면 기반 유출을 차단.',
     longDescription:
-      'xSecuritas 스크린 워터마크 솔루션은 화면 워터마크·캡처 차단·녹화 및 웹캠 워터마크 기능을 통해 화면 기반 정보 유출을 방지하는 종합 보안 솔루션입니다. Windows·macOS·Linux·VDI 환경을 지원하며, ISO 27001·SOC 2 Type II 인증을 충족합니다.',
+      'xSecuritas는 스크린 워터마크 솔루션은 화면 워터마크, 캡처 방지, 출력 및 웹캠 워터마크 기술을 통해 화면 기반 정보 유출을 방지하는 기업용 보안 솔루션으로, Windows·macOS·Linux·VDI 환경을 지원하며 ISO 27001 및 SOC 2 Type II 기준을 충족합니다.',
     badges: ['ISO 27001', 'SOC 2 Type II'],
     officialUrl: 'https://www.xsecuritas.com',
     features: [
@@ -636,7 +636,7 @@ const applicationProducts: Product[] = [
     shortDescription:
       '출력 시점의 정보 유출을 방어하는 특화 솔루션. 사용자 인증·체크·모니터링 일체.',
     longDescription:
-      '신도 보안출력기는 출력 과정에서 발생할 수 있는 정보 유출을 효과적으로 방지하는 출력 특화 솔루션입니다. 사용자 인증 기반 출력 제어와 출력물 보호 및 모니터링이 가능하고, 워터마크·복사 방지 기능도 포함되어 있어 정보 유출 방지에 특화되어 있습니다.',
+      '신도리코 보안복합기는 기업의 문서 출력 및 관리 과정에서 발생할 수 있는 보안 위협을 효과적으로 차단하는 보안 특화 복합기 솔루션입니다. 사용자 인증 기술 기반으로 비인가 사용자의 출력 및 기기 접근을 차단하며, 출력 기록의 체계적 관리 및 모니터링 기능을 제공합니다. 또한, 보안 문서 워터마크 삽입과 같은 출력물 자체에 대한 보안 기능도 포함하여 문서 유출 방지와 위변조 방지에 특화되어 있습니다.',
     officialUrl: 'https://www.sindoh.com',
     features: [
       {
@@ -667,7 +667,7 @@ const applicationProducts: Product[] = [
     shortDescription:
       '대규모 이메일 환경의 표적·피싱 공격을 실시간 식별하고 차단합니다.',
     longDescription:
-      'Proofpoint 보안 메일 솔루션은 기업과 기관의 이메일 환경을 보호하며 고도화된 위협을 효과적으로 탐지하고 차단하기 위해 설계된 위협 방지 플랫폼입니다. 피싱·악성 파일·피싱코드 등 정교한 공격 시도를 실시간으로 식별합니다.',
+      'Proofpoint 메일 보안 솔루션은 기업과 조직의 이메일 환경을 대상으로 고도화된 위협을 효과적으로 탐지하고 차단하기 위해 설계된 종합 보안 플랫폼입니다. 스팸 메일과 피싱 공격, 악성코드 및 랜섬웨어 전달 시도를 실시간으로 식별하여 사용자와 인프라를 보호합니다.',
     officialUrl: 'https://www.proofpoint.com/kr',
     features: [
       {
@@ -701,7 +701,7 @@ const applicationProducts: Product[] = [
     shortDescription:
       '인바운드·아웃바운드 메일 트래픽을 통합 보호하는 엔터프라이즈 메일 보안.',
     longDescription:
-      'Cisco Email Security Appliance(ESA)는 대규모 및 기업용 이메일 환경에서 발생할 수 있는 다양한 메일 기반 위협(스팸·피싱·악성코드·랜섬웨어 등)을 실시간 탐지·차단해 안전한 이메일 통신을 보장합니다.',
+      'Cisco Email Security Appliance(Cisco ESA)는 기업 및 기관의 이메일 환경을 대상으로 설계된 고성능 이메일 보안 솔루션입니다. 이 시스템은 스팸 메일, 피싱 공격, 악성코드, 랜섬웨어 등 다양한 이메일 기반 위협을 실시간으로 탐지하고 차단하여 안전한 이메일 통신을 보장합니다.',
     officialUrl:
       'https://www.cisco.com/site/us/en/products/security/secure-email/index.html',
     features: [
@@ -733,7 +733,7 @@ const applicationProducts: Product[] = [
     shortDescription:
       '중앙 집중형 가상 데스크톱 환경. 장소·디바이스 제약 없는 안전한 업무 환경.',
     longDescription:
-      '틸론 VDI는 중앙 집중형 가상 데스크톱 환경을 구축해 사용자가 장소와 디바이스에 구애받지 않고 안전하게 업무를 수행할 수 있도록 지원하는 솔루션입니다. 국내 VDI 점유율 선두권으로, 원격 근무/하이브리드 환경에서 강력한 보안과 운영 효율을 동시에 제공합니다.',
+      '틸론 VDI(가상 데스크톱 인프라) 시스템은 중앙 서버에서 가상 데스크톱 환경을 구축하여 사용자가 장소와 디바이스에 구애받지 않고 안전하게 업무를 수행할 수 있도록 지원하는 솔루션입니다. 국내 VDI(가상 데스크톱 인프라) 시장 선두주자로, 공공기관·금융·기업 환경에서 데이터 보안과 업무 효율성을 동시에 제공하는 것이 핵심입니다.',
     badges: ['국내 VDI 선두'],
     officialUrl: 'https://www.tilon.com/',
     features: [
@@ -774,7 +774,7 @@ const applicationProducts: Product[] = [
     shortDescription:
       '백업·재해복구·랜섬웨어 보호를 결합한 사이버 프로텍션 솔루션.',
     longDescription:
-      'Acronis는 데이터 보호와 시스템 복구 통합 솔루션이며, 비즈니스 연속성과 재해 복구(DR)를 동시에 지원합니다. 물리·가상·클라우드·엔드포인트 등 다양한 IT 인프라 환경에서 신속하고 안정적으로 백업하며, 디스크 이미지 기반 복원으로 시스템 전체 또는 특정 파일을 빠르게 복구합니다.',
+      'Acronis는 기업의 데이터 보호와 복구를 위한 종합 솔루션으로, 백업과 재해복구(Disaster Recovery)를 통합 제공합니다. 이 시스템은 서버, 가상화 환경, 클라우드, 엔드포인트 등 다양한 IT 인프라 환경에서 데이터 및 시스템을 신속하고 안정적으로 백업하며, 필요 시 빠른 복구가 가능합니다. Acronis는 디스크 이미지 기반 백업 방식을 사용하여 시스템 전체 또는 개별 파일 단위까지 유연한 복원 옵션을 제공합니다.',
     officialUrl: 'https://www.acronis.com/',
     features: [
       {
@@ -816,7 +816,7 @@ const otProducts: Product[] = [
     shortDescription:
       '산업제어시스템(ICS)과 생산 환경에 특화된 OT 제로 트러스트 보안.',
     longDescription:
-      'TXOne은 OT(운영기술) 환경을 위한 보안 솔루션으로, 산업제어시스템(ICS) 및 생산 현장의 디지털 네트워크를 사이버 위협으로부터 보호합니다. 실시간 위협 탐지·차단 기능을 제공하며, OT 환경에 특화된 안정성과 운용성을 보장해 운영 중단을 최소화합니다.',
+      'TXOne은 OT(운영기술) 환경을 위한 전문 보안 솔루션으로, 산업제어시스템(ICS) 및 제조 현장의 설비와 네트워크를 사이버 위협으로부터 보호하는 데 특화되어 있습니다. 실시간 위협 탐지 및 차단 기능을 제공하며, OT 환경에 적합한 안정성과 가용성을 보장하여 생산 설비의 안정운영을 지원합니다.',
     badges: ['OT 특화'],
     officialUrl: 'https://www.txone.com',
     features: [
@@ -848,11 +848,11 @@ const otProducts: Product[] = [
       featureImages: ['/images/products/hitachi-storage/feature-1.png', '/images/products/hitachi-storage/feature-2.png', '/images/products/hitachi-storage/feature-3.png', '/images/products/hitachi-storage/feature-4.png'],
     },
     name: 'Hitachi Storage',
-    vendor: 'Hitachi Vantara',
+    vendor: '효성인포메이션시스템',
     shortDescription:
       '엔터프라이즈 스토리지 인프라. 미션 크리티컬 데이터를 위한 고가용성 저장소.',
     longDescription:
-      'Hitachi 스토리지 솔루션은 미션 크리티컬 워크로드를 위한 엔터프라이즈 스토리지 인프라를 제공합니다. 고가용성·고성능을 동시에 보장하며, 운영 자동화와 함께 데이터센터의 안정성을 확보합니다.',
+      '효성인포메이션시스템의 스토리지 솔루션은 다양한 산업 분야의 데이터 저장 및 관리 요구를 충족시키기 위해 설계된 엔터프라이즈급 스토리지 시스템입니다. 이 솔루션은 고성능과 안정성을 바탕으로 대용량 데이터 처리에 최적화되어 있으며, 블록 스토리지, 파일 스토리지, 오브젝트 스토리지 등 다양한 스토리지 방식을 지원합니다.',
     features: [
       {
         icon: 'zap',
