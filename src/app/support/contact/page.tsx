@@ -1,85 +1,117 @@
 'use client';
-import { useState } from "react";
-import { submitInquiry } from "@/app/actions";
 
-const TEL = "02-402-8054";
-const EMAIL = "solmoit01@solmo.co.kr";
+import { useState, type ReactNode, type ChangeEvent, type FormEvent } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { submitInquiry, type InquirySubmitResult } from '@/app/actions';
+
+const TEL = '02-402-8054';
+const EMAIL = 'solmoit01@solmo.co.kr';
+
+type InquiryType =
+  | '솔루션 도입 문의'
+  | '유지보수 / 기술 지원'
+  | '보안 컨설팅 의뢰'
+  | '기타 제휴 문의';
+
+const INQUIRY_TYPES: readonly InquiryType[] = [
+  '솔루션 도입 문의',
+  '유지보수 / 기술 지원',
+  '보안 컨설팅 의뢰',
+  '기타 제휴 문의',
+];
+
+type ContactForm = {
+  name: string;
+  company: string;
+  phone: string;
+  email: string;
+  type: InquiryType;
+  message: string;
+  agree: boolean;
+};
+
+const EMPTY_FORM: ContactForm = {
+  name: '',
+  company: '',
+  phone: '',
+  email: '',
+  type: '솔루션 도입 문의',
+  message: '',
+  agree: false,
+};
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
-  const [form, setForm] = useState({
-    name: "",
-    company: "",
-    phone: "",
-    email: "",
-    type: "솔루션 도입 문의",
-    message: "",
-    agree: false,
+  const [form, setForm] = useState<ContactForm>(EMPTY_FORM);
+
+  const mutation = useMutation<InquirySubmitResult, Error, ContactForm>({
+    mutationFn: async (data) => {
+      const fullMessage = [
+        `[문의 유형] ${data.type}`,
+        `[회사명/기관명] ${data.company}`,
+        `[연락처] ${data.phone}`,
+        '',
+        data.message,
+      ].join('\n');
+
+      const fd = new FormData();
+      fd.append('name', data.name);
+      fd.append('email', data.email);
+      fd.append('message', fullMessage);
+
+      return submitInquiry(fd);
+    },
+    onSuccess: (result) => {
+      if (result.success) setSubmitted(true);
+    },
   });
 
-  const handleSubmit = async (e) => {
+  const errorMsg =
+    mutation.data && !mutation.data.success
+      ? mutation.data.error
+      : mutation.error?.message ?? '';
+
+  const submitting = mutation.isPending;
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (submitting) return;
-    setSubmitting(true);
-    setErrorMsg("");
-
-    // 모든 폼 정보를 한 메시지로 합쳐서 server action에 전달
-    const fullMessage = [
-      `[문의 유형] ${form.type}`,
-      `[회사명/기관명] ${form.company}`,
-      `[연락처] ${form.phone}`,
-      ``,
-      form.message,
-    ].join("\n");
-
-    const fd = new FormData();
-    fd.append("name", form.name);
-    fd.append("email", form.email);
-    fd.append("message", fullMessage);
-
-    try {
-      const result = await submitInquiry(fd);
-      if (result?.success) {
-        setSubmitted(true);
-      } else {
-        setErrorMsg(result?.error || "문의 전송에 실패했습니다. 잠시 후 다시 시도해주세요.");
-      }
-    } catch (err) {
-      console.error("[contact] submit error:", err);
-      setErrorMsg("문의 전송 중 오류가 발생했습니다. 02-402-8054 로 직접 문의해주세요.");
-    } finally {
-      setSubmitting(false);
-    }
+    mutation.mutate(form);
   };
 
-  const update = (k) => (e) =>
-    setForm((f) => ({ ...f, [k]: e.target.type === "checkbox" ? e.target.checked : e.target.value }));
+  const update =
+    <K extends keyof ContactForm>(key: K) =>
+    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const target = e.target;
+      const value =
+        target instanceof HTMLInputElement && target.type === 'checkbox'
+          ? target.checked
+          : target.value;
+      setForm((f) => ({ ...f, [key]: value }) as ContactForm);
+    };
 
   return (
     <div className="space-y-12 pb-10">
-      {/* ───── Hero ───── */}
       <header className="max-w-4xl pt-2">
         <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">
           Get in Touch
         </span>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-3 leading-snug">
-          보안 파트너를 <span className="text-blue-600">지금 만나보세요.</span>
+          보안 파트너를{' '}
+          <span className="text-blue-600">지금 만나보세요.</span>
         </h1>
         <p className="text-slate-500 font-medium text-sm leading-relaxed">
           보안 솔루션 도입, 유지보수, 컨설팅 등 궁금한 내용을 남겨주시면
-          (주)솔모정보기술의 전문가가 영업일 기준 24시간 이내에 신속히 답변드립니다.
+          솔모정보기술의 전문가가 영업일 기준 24시간 이내에 신속히 답변드립니다.
         </p>
       </header>
 
-      {/* ───── Quick contact strip ───── */}
       <section className="grid md:grid-cols-3 gap-4">
         <QuickCard
           tag="Call"
           big={TEL}
           sub="평일 09:00 – 18:00"
-          href={`tel:${TEL.replace(/-/g, "")}`}
+          href={`tel:${TEL.replace(/-/g, '')}`}
         />
         <QuickCard
           tag="Email"
@@ -96,9 +128,7 @@ export default function ContactPage() {
         />
       </section>
 
-      {/* ───── Form + Sidebar ───── */}
       <section className="grid lg:grid-cols-12 gap-10 items-start">
-        {/* Sidebar */}
         <aside className="lg:col-span-4 space-y-6">
           <div className="p-8 bg-slate-50 rounded-[2rem] border border-slate-100">
             <span className="text-[10px] font-black text-blue-600 uppercase tracking-[0.3em] mb-3 block">
@@ -116,7 +146,7 @@ export default function ContactPage() {
           </div>
 
           <div className="p-8 bg-slate-900 text-white rounded-[2rem] relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-40 h-40 bg-blue-600/20 rounded-full blur-[80px]"></div>
+            <div className="absolute top-0 right-0 w-40 h-40 bg-blue-600/20 rounded-full blur-[80px]" />
             <span className="text-[10px] font-black uppercase tracking-[0.3em] text-blue-400 mb-3 block">
               Direct Line
             </span>
@@ -125,7 +155,7 @@ export default function ContactPage() {
               유지보수 계약 고객사는 24/7 핫라인으로 즉시 연결됩니다.
             </p>
             <a
-              href={`tel:${TEL.replace(/-/g, "")}`}
+              href={`tel:${TEL.replace(/-/g, '')}`}
               className="inline-flex items-center gap-2 text-blue-300 font-black text-sm"
             >
               📞 {TEL} →
@@ -133,7 +163,6 @@ export default function ContactPage() {
           </div>
         </aside>
 
-        {/* Form */}
         <div className="lg:col-span-8 bg-white border border-slate-100 rounded-[2.5rem] p-10 lg:p-14 shadow-sm">
           {submitted ? (
             <div className="text-center py-16">
@@ -149,10 +178,8 @@ export default function ContactPage() {
               <button
                 onClick={() => {
                   setSubmitted(false);
-                  setForm({
-                    name: "", company: "", phone: "", email: "",
-                    type: "솔루션 도입 문의", message: "", agree: false,
-                  });
+                  setForm(EMPTY_FORM);
+                  mutation.reset();
                 }}
                 className="px-8 py-4 rounded-full border border-slate-200 text-xs font-black uppercase tracking-wider text-slate-600 hover:border-blue-600 hover:text-blue-600 transition-all"
               >
@@ -176,7 +203,7 @@ export default function ContactPage() {
                     type="text"
                     placeholder="홍길동 부장"
                     value={form.name}
-                    onChange={update("name")}
+                    onChange={update('name')}
                     required
                     className={inputCls}
                   />
@@ -184,9 +211,9 @@ export default function ContactPage() {
                 <Field label="회사명 / 기관명" required>
                   <input
                     type="text"
-                    placeholder="(주)솔모정보기술"
+                    placeholder="㈜솔모정보기술"
                     value={form.company}
-                    onChange={update("company")}
+                    onChange={update('company')}
                     required
                     className={inputCls}
                   />
@@ -199,7 +226,7 @@ export default function ContactPage() {
                     type="tel"
                     placeholder="010-1234-5678"
                     value={form.phone}
-                    onChange={update("phone")}
+                    onChange={update('phone')}
                     required
                     className={inputCls}
                   />
@@ -209,7 +236,7 @@ export default function ContactPage() {
                     type="email"
                     placeholder="example@solmo.co.kr"
                     value={form.email}
-                    onChange={update("email")}
+                    onChange={update('email')}
                     required
                     className={inputCls}
                   />
@@ -218,20 +245,15 @@ export default function ContactPage() {
 
               <Field label="문의 유형" required>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-                  {[
-                    "솔루션 도입 문의",
-                    "유지보수 / 기술 지원",
-                    "보안 컨설팅 의뢰",
-                    "기타 제휴 문의",
-                  ].map((opt) => (
+                  {INQUIRY_TYPES.map((opt) => (
                     <button
                       type="button"
                       key={opt}
                       onClick={() => setForm((f) => ({ ...f, type: opt }))}
                       className={`px-4 py-3 rounded-2xl text-xs font-black tracking-tight transition-all border ${
                         form.type === opt
-                          ? "bg-[#001F5B] text-white border-[#001F5B]"
-                          : "bg-white text-slate-500 border-slate-200 hover:border-slate-400"
+                          ? 'bg-[#001F5B] text-white border-[#001F5B]'
+                          : 'bg-white text-slate-500 border-slate-200 hover:border-slate-400'
                       }`}
                     >
                       {opt}
@@ -245,7 +267,7 @@ export default function ContactPage() {
                   rows={6}
                   placeholder="도입 수량, 현재 인프라 환경, 도입 예정 시기 등 상세 내용을 입력해 주시면 더 정확한 상담이 가능합니다."
                   value={form.message}
-                  onChange={update("message")}
+                  onChange={update('message')}
                   required
                   className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-5 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all font-medium text-slate-900 leading-relaxed resize-none"
                 />
@@ -255,15 +277,17 @@ export default function ContactPage() {
                 <input
                   type="checkbox"
                   checked={form.agree}
-                  onChange={update("agree")}
+                  onChange={update('agree')}
                   required
                   className="w-5 h-5 accent-blue-600 mt-0.5 cursor-pointer shrink-0"
                 />
                 <span className="text-xs font-bold text-slate-500 leading-relaxed">
-                  개인정보 수집 및 이용에 동의합니다. <span className="text-red-500">(필수)</span>
+                  개인정보 수집 및 이용에 동의합니다.{' '}
+                  <span className="text-red-500">(필수)</span>
                   <br />
                   <span className="text-slate-400">
-                    수집 항목: 성함, 회사명, 연락처, 이메일 / 이용 목적: 문의 응대 및 상담 / 보유 기간: 상담 종료 후 1년
+                    수집 항목: 성함, 회사명, 연락처, 이메일 / 이용 목적: 문의 응대
+                    및 상담 / 보유 기간: 상담 종료 후 1년
                   </span>
                 </span>
               </label>
@@ -279,7 +303,7 @@ export default function ContactPage() {
                 disabled={submitting}
                 className="w-full py-5 bg-[#001F5B] text-white font-black rounded-full hover:bg-blue-700 transition-all text-sm uppercase tracking-[0.2em] disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {submitting ? "전송 중..." : "Submit Inquiry →"}
+                {submitting ? '전송 중...' : 'Submit Inquiry →'}
               </button>
             </form>
           )}
@@ -290,9 +314,17 @@ export default function ContactPage() {
 }
 
 const inputCls =
-  "w-full bg-slate-50 border border-slate-100 rounded-full px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-sm text-slate-900 placeholder:text-slate-300";
+  'w-full bg-slate-50 border border-slate-100 rounded-full px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-sm text-slate-900 placeholder:text-slate-300';
 
-function Field({ label, required, children }) {
+function Field({
+  label,
+  required,
+  children,
+}: {
+  label: string;
+  required?: boolean;
+  children: ReactNode;
+}) {
   return (
     <div>
       <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 ml-2">
@@ -303,7 +335,19 @@ function Field({ label, required, children }) {
   );
 }
 
-function QuickCard({ tag, big, sub, href, small }) {
+function QuickCard({
+  tag,
+  big,
+  sub,
+  href,
+  small,
+}: {
+  tag: string;
+  big: string;
+  sub: string;
+  href: string;
+  small?: boolean;
+}) {
   return (
     <a
       href={href}
@@ -314,7 +358,7 @@ function QuickCard({ tag, big, sub, href, small }) {
       </span>
       <div
         className={`font-black text-slate-900 tracking-tight mb-2 group-hover:text-blue-600 transition-colors ${
-          small ? "text-lg break-all" : "text-2xl"
+          small ? 'text-lg break-all' : 'text-2xl'
         }`}
       >
         {big}
@@ -324,7 +368,15 @@ function QuickCard({ tag, big, sub, href, small }) {
   );
 }
 
-function ProcessStep({ num, title, desc }) {
+function ProcessStep({
+  num,
+  title,
+  desc,
+}: {
+  num: string;
+  title: string;
+  desc: string;
+}) {
   return (
     <li className="flex gap-4 items-start">
       <span className="text-lg font-black text-blue-600 shrink-0">{num}</span>
