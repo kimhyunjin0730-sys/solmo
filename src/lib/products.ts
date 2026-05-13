@@ -113,12 +113,11 @@ const networkSecurityProducts: Product[] = [
     categoryId: 'network-security',
     assets: {
       logo: '/images/products/radware/logo.png',
-      hero: '/images/products/radware/hero.png',
     },
     name: 'Radware DDoS',
     vendor: 'Radware',
     shortDescription:
-      '실시간 트래픽 분석과 시그니처 기반 탐지로 모든 형태의 DDoS 공격을 방어합니다.',
+      '모든 유형의 AI 기반 DDoS 공격으로부터 네트워크와 애플리케이션을 보호합니다.',
     longDescription:
       'Radware DDoS 솔루션은 분산 서비스 거부(DDoS) 공격으로부터 네트워크와 애플리케이션을 보호하는 고급 보안 시스템입니다. 실시간 트래픽 분석과 시그니처 기반 탐지를 통해 다양한 형태의 DDoS 공격을 신속하게 식별하고 자동으로 차단합니다.',
     badges: ['AI 기반', '최대 800Gbps'],
@@ -126,19 +125,39 @@ const networkSecurityProducts: Product[] = [
     features: [
       {
         icon: 'shield-check',
-        title: '비즈니스 무중단',
-        description: '제로 다운타임 보장으로 서비스 연속성을 유지합니다.',
+        title: '비즈니스 연속성 유지',
+        description:
+          '최신 AI 기반 공격으로부터 서버 및 핵심 애플리케이션의 다운타임을 방지합니다.',
       },
       {
-        icon: 'gauge',
-        title: '최대 800Gbps 확장',
-        description: '가상·클라우드·하이브리드 환경 모두를 대응합니다.',
+        icon: 'shield',
+        title: '정교한 공격을 차단',
+        description:
+          '자동화된 실시간 시그니처로 가장 까다로운 제로데이 공격, DNS DDoS, 웹 DDoS 공격(복호화 필요 없음)까지 실시간 차단합니다.',
       },
       {
         icon: 'brain',
-        title: 'AI 자동 차단',
+        title: '오탐 최소화',
         description:
-          'AI 기반 위협 탐지로 룰 작성 없이 즉시 대응합니다.',
+          'AI 기반 행동 탐지 기능으로 악성 공격을 차단하면서 정상 트래픽은 그대로 통과시킵니다.',
+      },
+      {
+        icon: 'monitor',
+        title: '가시성과 관리 간소화',
+        description:
+          '고급 보안 대시보드로 모든 배포 환경에서 네트워크·공격 주기·완화 조치에 대한 통합 가시성을 확보합니다.',
+      },
+      {
+        icon: 'gauge',
+        title: '유연성과 확장성을 갖춘 배포',
+        description:
+          '6Gbps부터 800Gbps까지 확장 가능한 솔루션으로 통합 가상·온프레미스·하이브리드 환경 모두를 보호합니다.',
+      },
+      {
+        icon: 'package',
+        title: '총 소유 비용 절감',
+        description:
+          'AI와 자동화로 수동 작업을 줄이면서 동시에 완벽한 DDoS 공격 방어를 보장합니다.',
       },
     ],
   },
@@ -185,7 +204,6 @@ const networkSecurityProducts: Product[] = [
     categoryId: 'network-security',
     assets: {
       logo: '/images/products/piolink/logo.png',
-      hero: '/images/products/piolink/hero.png',
     },
     name: 'PIOLINK PAS-K Switch',
     vendor: 'PIOLINK',
@@ -197,18 +215,21 @@ const networkSecurityProducts: Product[] = [
     features: [
       {
         icon: 'network',
-        title: 'L4/L7 스위칭',
-        description: '서버 부하 분산과 애플리케이션 계층 라우팅을 통합 제공합니다.',
+        title: '부하분산 / 트래픽 제어',
+        description:
+          '다양한 부하분산(Load Balancing), 다양한 리다이렉션, 다양한 이중화(Failover), TCP 멀티플렉싱, REST API 지원.',
+      },
+      {
+        icon: 'server',
+        title: '서버 오프로드 / 주소 변환',
+        description:
+          '서버 오프로드, 네트워크 주소 변환(NAT), 네트워크 레벨 보안, DDoS 방어 및 서버 정보 은폐, Script 기반 제어 및 설정.',
       },
       {
         icon: 'shield',
-        title: '통합 IPS',
-        description: '침입 방지 기능을 단일 박스에 결합해 운영을 단순화합니다.',
-      },
-      {
-        icon: 'activity',
-        title: '실시간 트래픽 가시성',
-        description: '플로우 단위 모니터링과 상세 로그로 즉시 원인을 파악합니다.',
+        title: '애플리케이션 보안 / 최적화',
+        description:
+          'HTTP 압축 및 메모리 캐싱, 네트워크 방화벽, 트랜잭션 보장 및 HTML 최적화, 트래픽 폭주 제어 및 연결 보장, 클라우드 오케스트레이션 연동 플러그인.',
       },
     ],
   },
@@ -253,7 +274,6 @@ const networkSecurityProducts: Product[] = [
     categoryId: 'network-security',
     assets: {
       logo: '/images/products/nx-portrait/logo.png',
-      hero: '/images/products/nx-portrait/hero.png',
     },
     name: 'NX Portrait',
     vendor: '엔에스큐어',
@@ -265,20 +285,27 @@ const networkSecurityProducts: Product[] = [
     features: [
       {
         icon: 'list-checks',
-        title: '정책 자동화',
+        title: '정책 신청 및 결재 승인 기능',
         description:
-          '복잡한 방화벽 정책의 라이프사이클을 자동화해 휴먼 에러를 줄입니다.',
+          '신규 정책, 연장, 삭제 신청과 정책 Scale-In · Scale-Out 신청을 결재 워크플로 위에서 통합 관리합니다.',
+      },
+      {
+        icon: 'wand',
+        title: '정책 설계 및 적용 자동화 기능',
+        description:
+          '대상 방화벽 자동 추천과 NAT 객체 자동 설계로 정책 생성·적용을 자동화합니다.',
+      },
+      {
+        icon: 'gauge',
+        title: '3Tib/Day 이상 대량 Traffic 처리',
+        description:
+          '대량 Traffic 수신 및 검색 기능, Traffic 최적화 및 적용 자동화 지원.',
       },
       {
         icon: 'bar-chart',
-        title: '효율성 분석',
+        title: '장비 정책 분석 및 보안 감사 기능',
         description:
-          '중복·미사용 룰을 식별해 정책 베이스를 깨끗하게 유지합니다.',
-      },
-      {
-        icon: 'shuffle',
-        title: '멀티 벤더 지원',
-        description: '여러 방화벽 벤더를 한 화면에서 관리합니다.',
+          '정책 별 상관·비교·Meta 분석과 Compliance Scoring을 제공합니다.',
       },
     ],
   },
@@ -287,30 +314,40 @@ const networkSecurityProducts: Product[] = [
     categoryId: 'network-security',
     assets: {
       logo: '/images/products/entrolink/logo.png',
-      hero: '/images/products/entrolink/hero.png',
     },
-    name: '엔트로링크 스위칭/방화벽',
+    name: '엔트로링크 통합 인증',
     vendor: '엔트로링크',
     shortDescription:
-      '대형·고밀도 네트워크 환경을 위한 고성능 스위칭/방화벽 솔루션.',
+      'PPX 시리즈 — H/W 기반 통합 인증, OTP, 자원 관리, 명령어 검증을 아우르는 보안 인프라.',
     longDescription:
-      '엔트로링크 스위칭 솔루션은 대규모 및 고밀도의 현대 네트워크 환경을 대상으로 안정적이고 빠르며 안전한 통신을 지원하는 차세대 스위칭 솔루션입니다.',
+      '엔트로링크 솔루션은 대규모 및 고밀도의 현대 네트워크 환경을 대상으로 안정적이고 빠르며 안전한 통신과 인증을 지원하는 차세대 보안 인프라입니다. 유무선 통합 인증부터 OTP, 자원 관리, 명령어 검증까지 모듈별 라인업으로 구성됩니다.',
     officialUrl: 'http://www.entrolink.com/',
     features: [
       {
-        icon: 'network',
-        title: '고밀도 스위칭',
-        description: '대용량 트래픽을 안정적으로 처리하는 라인업.',
+        icon: 'shield-check',
+        title: 'PPX-AnyLink',
+        description: 'H/W 기반의 유·무선 통합 인증 보안 제품.',
       },
       {
-        icon: 'shield',
-        title: '통합 방화벽',
-        description: '스위칭·보안을 단일 인프라에서 제공합니다.',
+        icon: 'clock',
+        title: 'PPX-OTP',
+        description:
+          '정해진 시간 동안만 유효한 일회성 비밀번호 생성 및 검증 시스템.',
       },
       {
-        icon: 'gauge',
-        title: '저지연 전송',
-        description: '미션 크리티컬 워크로드에 맞는 저지연 패브릭을 제공합니다.',
+        icon: 'monitor',
+        title: 'PPX-IPADM',
+        description: 'H/W 및 S/W 기반의 통합 자원 관리 제품.',
+      },
+      {
+        icon: 'key',
+        title: 'PPX-TACACS',
+        description: '관리자 및 명령어 검증 시스템.',
+      },
+      {
+        icon: 'globe',
+        title: 'WEB Portal',
+        description: '관리자의 CALL을 최소화할 수 있는 시스템.',
       },
     ],
   },
@@ -319,7 +356,6 @@ const networkSecurityProducts: Product[] = [
     categoryId: 'network-security',
     assets: {
       logo: '/images/products/kornic-glory-wips/logo.png',
-      hero: '/images/products/kornic-glory-wips/hero.png',
     },
     name: 'WIPS (Wireless IPS)',
     vendor: '코니카미놀타 / Kornic Glory',
@@ -330,19 +366,22 @@ const networkSecurityProducts: Product[] = [
     officialUrl: 'https://www.kornicglory.co.kr/',
     features: [
       {
-        icon: 'radio',
-        title: '무선 자산 가시화',
-        description: '주변 AP·단말을 자동 식별해 인가/비인가를 구분합니다.',
+        icon: 'shield-check',
+        title: '외부 무선 위협 차단',
+        description:
+          '내부정보 유출 방지, 내부 사용자 + 외부 접속 방지, 방문자 관리.',
       },
       {
-        icon: 'shield-x',
-        title: 'Rogue AP 차단',
-        description: '비인가 AP에 대한 deauth·차단 정책을 자동 실행합니다.',
+        icon: 'users',
+        title: '자가 단말 제어 및 외부시스템 연동',
+        description:
+          '인가되지 않은 비인가 AP, 사용자 무선 기기 관리, 스마트폰을 이용한 테더링 차단, 인증 솔루션 + 자산 정보 관리 제어.',
       },
       {
-        icon: 'activity',
-        title: '24/7 모니터링',
-        description: '무선 채널 전구간을 24시간 감시합니다.',
+        icon: 'radar',
+        title: '지능형 무선 자산 가시성 확보',
+        description:
+          '외부 해킹 공격 방어 및 무선 해킹 모니터링, 외부 침입 신호 위치추적 및 삼각측량법을 활용한 표시, WEP Cracking.',
       },
     ],
   },
@@ -425,7 +464,6 @@ const endpointServerProducts: Product[] = [
     categoryId: 'endpoint-server-security',
     assets: {
       logo: '/images/products/netand-hiware/logo.png',
-      hero: '/images/products/netand-hiware/hero.png',
     },
     name: 'HIWARE',
     vendor: 'NETAND',
@@ -436,21 +474,40 @@ const endpointServerProducts: Product[] = [
     officialUrl: 'https://www.netand.co.kr',
     features: [
       {
-        icon: 'key',
-        title: '통합 계정 관리',
-        description: '여러 시스템의 계정 라이프사이클을 단일 콘솔에서 관리합니다.',
+        icon: 'server',
+        title: '시스템 접근제어 (HIWARE PSM)',
+        description:
+          'SSH·RDP·VNC 등 관리자 접근 세션을 기록·감사해 내부자 위협을 통제합니다.',
+      },
+      {
+        icon: 'database',
+        title: 'DB 접근제어 (HIWARE DBM)',
+        description:
+          '데이터베이스 세션·SQL 단위 권한 통제와 감사 기능을 제공합니다.',
       },
       {
         icon: 'shield-check',
-        title: '특권 계정 보호(PAM)',
+        title: '시스템 계정관리 (HIWARE AM)',
         description:
-          '관리자 세션을 기록·감사해 내부자 위협을 통제합니다.',
+          '서버·시스템 계정의 라이프사이클을 단일 콘솔에서 관리합니다.',
       },
       {
-        icon: 'layers',
-        title: '멀티 벤더 자산 지원',
+        icon: 'key',
+        title: 'DB / AD 계정관리',
         description:
-          '서버·NW·DB·AD·CCTV까지 광범위한 자산을 단일 정책으로 통제합니다.',
+          'DB 계정관리(HIWARE DBAM)와 Active Directory 계정관리(HIWARE ADAM)를 통합 운영.',
+      },
+      {
+        icon: 'lock',
+        title: 'SSH 키 관리 (HIWARE SecureKey)',
+        description:
+          '서버 간 자동화에 사용되는 SSH 키를 중앙에서 안전하게 관리.',
+      },
+      {
+        icon: 'monitor',
+        title: 'CCTV 패스워드 관리 / 모바일 OTP',
+        description:
+          'CCTV 등 OT 장비 패스워드와 모바일 OTP(HIWARE MobileOTP)까지 통합 관리.',
       },
     ],
   },
@@ -500,7 +557,6 @@ const endpointServerProducts: Product[] = [
     categoryId: 'endpoint-server-security',
     assets: {
       logo: '/images/products/trendmicro-vision-one/logo.png',
-      hero: '/images/products/trendmicro-vision-one/hero.png',
     },
     name: 'Trend Vision One',
     vendor: 'Trend Micro',
@@ -606,7 +662,6 @@ const applicationProducts: Product[] = [
     categoryId: 'application-security',
     assets: {
       logo: '/images/products/proofpoint/logo.png',
-      hero: '/images/products/proofpoint/hero.png',
     },
     name: 'Proofpoint Email Protection',
     vendor: 'Proofpoint',
@@ -617,22 +672,22 @@ const applicationProducts: Product[] = [
     officialUrl: 'https://www.proofpoint.com/kr',
     features: [
       {
-        icon: 'mail',
-        title: '표적 메일 탐지',
+        icon: 'globe',
+        title: '검증된 솔루션 제품군',
         description:
-          'BEC·피싱·계정 탈취 시도를 머신러닝으로 식별합니다.',
+          '글로벌 표준 수준의 위협 인텔리전스와 메일 보안 라인업으로 다양한 산업·규제 환경에서 검증된 안정성을 제공합니다.',
       },
       {
-        icon: 'shield-check',
-        title: '악성 파일 / URL 분석',
+        icon: 'cloud',
+        title: '클라우드 사용 속도 및 혁신',
         description:
-          '샌드박스 분석으로 첨부와 URL의 위험도를 판단합니다.',
+          '클라우드 기반 분석 엔진으로 신·변종 위협에 빠르게 대응하며 새로운 보안 기능을 지속적으로 제공합니다.',
       },
       {
-        icon: 'users',
-        title: 'People-centric 보안',
+        icon: 'radar',
+        title: '광범위한 인텔리전스 및 가시성',
         description:
-          '공격받기 쉬운 사용자(VAP)를 식별해 보호를 집중합니다.',
+          '전 세계 메일 트래픽을 분석한 광범위한 위협 인텔리전스로 표적·피싱·계정 탈취 시도를 식별합니다.',
       },
     ],
   },
@@ -673,7 +728,6 @@ const applicationProducts: Product[] = [
     categoryId: 'application-security',
     assets: {
       logo: '/images/products/tilon-vdi/logo.png',
-      hero: '/images/products/tilon-vdi/hero.png',
     },
     name: '틸론 VDI (Dstation)',
     vendor: 'Tilon',
@@ -685,19 +739,28 @@ const applicationProducts: Product[] = [
     officialUrl: 'https://www.tilon.com/',
     features: [
       {
+        icon: 'users',
+        title: 'DDS (Dstation Directory Service)',
+        description:
+          '사용자와 가상데스크톱을 위한 디렉터리 정보 통합 관리. DDS의 기본 AD 통합으로 운영편리 가능. 인증·계정·권한 로그 기록 (변조 불가). Active Directory를 대체한 보안성과 자체 VDI 인증 지원.',
+      },
+      {
+        icon: 'shield-check',
+        title: 'DAC (Dstation Access Control)',
+        description:
+          '가상망에 접근 통제. 사용자·단말(IP·MAC) 정보 기반 가상 데스크톱 접근 통제. 가상 데스크톱 자원 접근 통제. 네트워크·USB·파일 입출력 설정 통제. 사용자 데이터 보호. 화면 캡처 차단. 파일/폴더/네트워크 등 인가/거부 사용자/모듈 접근 완벽 제어.',
+      },
+      {
+        icon: 'lock',
+        title: 'DDP (Dstation Data Protection)',
+        description:
+          '전송 데이터 보호. 표준 프로토콜(HTTPS, TLS 1.2) 암호화 사용. RSA-2048(키교환), SHA-256(해시) 등 알고리즘 자체 보호 및 저장 데이터 보호. 모든 통신 구간 암호화와 중요 정보 저장 시 정보 가치/생성·운영 관리·이력 기밀성 및 무결성 강화.',
+      },
+      {
         icon: 'monitor',
-        title: '중앙 집중 데스크톱',
-        description: '데이터를 데이터센터 안에 두어 단말 유출을 원천 차단합니다.',
-      },
-      {
-        icon: 'wifi',
-        title: '디바이스 독립',
-        description: 'PC·태블릿·스마트폰 모두에서 동일 환경을 제공합니다.',
-      },
-      {
-        icon: 'gauge',
-        title: '운영 효율',
-        description: '단말 표준화·이미지 일괄 관리로 IT 운영 비용을 절감합니다.',
+        title: 'DMS (Dstation Monitoring Service)',
+        description:
+          '서비스·프로세스 실시간 감시로 무결성 보호. 성능 실적·로그 기록 관리자 화면에 보장. 정보 자산 모니터링과 로그 기록 관리자에게 정보 보호 및 가용성·안전성 보장. 제품 위변조 주기적 검증으로 무결성과 안전성을 보장.',
       },
     ],
   },
@@ -706,7 +769,6 @@ const applicationProducts: Product[] = [
     categoryId: 'application-security',
     assets: {
       logo: '/images/products/acronis/logo.png',
-      hero: '/images/products/acronis/hero.png',
     },
     name: 'Acronis Cyber Protect',
     vendor: 'Acronis',
@@ -717,20 +779,22 @@ const applicationProducts: Product[] = [
     officialUrl: 'https://www.acronis.com/',
     features: [
       {
-        icon: 'hard-drive',
-        title: '이미지 기반 백업',
-        description: '디스크 단위 백업으로 전체 시스템을 빠르게 복원합니다.',
+        icon: 'package',
+        title: '30개 이상의 워크로드 보호',
+        description:
+          '물리적·가상·클라우드 및 모바일 환경 전반에 걸쳐 데이터를 안전하게 보호합니다.',
       },
       {
-        icon: 'cloud',
-        title: '하이브리드 저장',
-        description: '온프레미스 + 클라우드를 동시에 활용해 가용성을 확보합니다.',
+        icon: 'refresh-ccw',
+        title: '빠르고 안정적인 복구',
+        description:
+          '어떤 기기에서든, 어떤 사고 발생 시에도 앱·시스템 및 데이터를 빠르고 안정적으로 복구합니다.',
       },
       {
         icon: 'shield',
-        title: '랜섬웨어 방어 통합',
+        title: '안전한 랜섬웨어 보호',
         description:
-          '백업 데이터까지 위협으로부터 보호하는 액티브 프로텍션 탑재.',
+          '머신러닝 기반 랜섬웨어 방어 및 블록체인 공증 기능으로 데이터를 보호합니다.',
       },
     ],
   },
