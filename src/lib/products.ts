@@ -59,7 +59,6 @@ const networkSecurityProducts: Product[] = [
     categoryId: 'network-security',
     assets: {
       logo: '/images/products/fortinet/logo.png',
-      hero: '/images/products/fortinet/hero.png',
       featureImages: ['/images/products/fortinet/feature-1.png', '/images/products/fortinet/feature-2.png', '/images/products/fortinet/feature-3.png', '/images/products/fortinet/feature-4.png', '/images/products/fortinet/feature-5.png', '/images/products/fortinet/feature-6.png'],
     },
     name: 'FortiGate',
