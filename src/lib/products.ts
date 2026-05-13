@@ -61,8 +61,8 @@ const networkSecurityProducts: Product[] = [
       logo: '/images/products/fortinet/logo.png',
       featureImages: ['/images/products/fortinet/feature-1.png', '/images/products/fortinet/feature-2.png', '/images/products/fortinet/feature-3.png', '/images/products/fortinet/feature-4.png', '/images/products/fortinet/feature-5.png', '/images/products/fortinet/feature-6.png'],
     },
-    name: 'FortiGate',
-    vendor: 'Fortinet',
+    name: 'FortiGate UTM / VPN',
+    vendor: 'FortiNet',
     shortDescription:
       '글로벌 네트워크 방화벽 점유율 50% 이상의 차세대 방화벽(NGFW).',
     longDescription:
@@ -207,7 +207,7 @@ const networkSecurityProducts: Product[] = [
     assets: {
       logo: '/images/products/piolink/logo.png',
     },
-    name: 'PIOLINK PAS-K Switch',
+    name: 'PAS-K Switch',
     vendor: 'PIOLINK',
     shortDescription:
       'L4/L7 스위치와 침입방지(IPS) 기능을 결합한 통합 네트워크 어플라이언스.',
@@ -329,7 +329,7 @@ const networkSecurityProducts: Product[] = [
     assets: {
       logo: '/images/products/entrolink/logo.png',
     },
-    name: '엔트로링크 무선인증',
+    name: '무선인증',
     vendor: '엔트로링크',
     shortDescription:
       '기업 및 공공기관의 무선 네트워크 환경을 대상으로 안전한 사용자 인증과 접속 관리를 제공하는 종합 보안 솔루션입니다.',
