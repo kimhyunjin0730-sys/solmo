@@ -93,56 +93,27 @@ export default async function ProductDetailPage({
             </div>
           )}
 
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-            <div className="lg:col-span-8">
-              <div className="flex flex-wrap items-center gap-3 mb-4">
-                <span className="inline-flex items-center bg-blue-50 text-blue-700 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
-                  {category.englishName}
+          <div>
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="inline-flex items-center bg-blue-50 text-blue-700 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
+                {category.englishName}
+              </span>
+              <span className="text-xs font-black text-slate-400 uppercase tracking-widest">
+                {product.vendor}
+              </span>
+              {product.badges?.map((b) => (
+                <span
+                  key={b}
+                  className="text-[10px] font-black text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full px-2.5 py-0.5 uppercase tracking-wider"
+                >
+                  {b}
                 </span>
-                <span className="text-xs font-black text-slate-400 uppercase tracking-widest">
-                  {product.vendor}
-                </span>
-                {product.badges?.map((b) => (
-                  <span
-                    key={b}
-                    className="text-[10px] font-black text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full px-2.5 py-0.5 uppercase tracking-wider"
-                  >
-                    {b}
-                  </span>
-                ))}
-              </div>
-
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
-                {product.name}
-              </h1>
+              ))}
             </div>
 
-            <aside className="lg:col-span-4">
-              <div className="bg-gradient-to-br from-[#001F5B] to-indigo-700 rounded-3xl p-8 text-white shadow-2xl shadow-blue-900/20">
-                <div className="text-[10px] font-black uppercase tracking-[0.4em] text-blue-300 mb-2">
-                  Quick Quote
-                </div>
-                <h3 className="text-2xl font-black tracking-tight mb-4 leading-tight">
-                  {product.vendor} <br />
-                  도입 견적 받기
-                </h3>
-                <p className="text-white/60 text-sm font-medium leading-relaxed mb-6">
-                  도입 규모·환경에 따른 맞춤형 견적을 받아보세요.
-                </p>
-                <Link
-                  href="/support/contact"
-                  className="block w-full text-center bg-white text-[#001F5B] py-3 rounded-full text-sm font-black tracking-tight hover:scale-[1.02] transition-transform mb-2"
-                >
-                  문의하기 →
-                </Link>
-                <a
-                  href="tel:024028054"
-                  className="block w-full text-center bg-white/10 text-white py-3 rounded-full text-sm font-black tracking-tight border border-white/20 hover:bg-white/20 transition-colors"
-                >
-                  02-402-8054
-                </a>
-              </div>
-            </aside>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+              {product.name}
+            </h1>
           </div>
         </div>
       </div>
