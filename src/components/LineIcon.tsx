@@ -32,7 +32,20 @@ export type LineIconName =
   | 'hand'
   | 'brain'
   | 'expand'
-  | 'savings';
+  | 'savings'
+  | 'refresh-ccw'
+  | 'crosshair'
+  | 'camera-off'
+  | 'user-check'
+  | 'file-text'
+  | 'mail'
+  | 'send'
+  | 'package'
+  | 'factory'
+  | 'usb'
+  | 'workflow'
+  | 'search'
+  | 'zap';
 
 const COMMON = {
   width: 32,
@@ -276,6 +289,128 @@ export function LineIcon({
           <circle cx="12" cy="12" r="8" />
           <path d="M12 8v8" />
           <path d="M9 13l3 3 3-3" />
+        </svg>
+      );
+    /** 자동 복구 — 순환 화살표 */
+    case 'refresh-ccw':
+      return (
+        <svg {...props}>
+          <polyline points="1 4 1 10 7 10" />
+          <polyline points="23 20 23 14 17 14" />
+          <path d="M3.5 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.65 4.36A9 9 0 0 0 20.5 15" />
+        </svg>
+      );
+    /** 표적 / 공격표면 — 크로스헤어 */
+    case 'crosshair':
+      return (
+        <svg {...props}>
+          <circle cx="12" cy="12" r="9" />
+          <line x1="22" y1="12" x2="18" y2="12" />
+          <line x1="6" y1="12" x2="2" y2="12" />
+          <line x1="12" y1="6" x2="12" y2="2" />
+          <line x1="12" y1="22" x2="12" y2="18" />
+        </svg>
+      );
+    /** 캡처 차단 — 카메라 + 슬래시 */
+    case 'camera-off':
+      return (
+        <svg {...props}>
+          <path d="M21 7v10a2 2 0 0 1-2 2h-2.5" />
+          <path d="M14.5 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2l1.5-2h7" />
+          <line x1="3" y1="3" x2="21" y2="21" />
+          <circle cx="12" cy="13" r="3.5" />
+        </svg>
+      );
+    /** 사용자 인증 — 체크 사용자 */
+    case 'user-check':
+      return (
+        <svg {...props}>
+          <circle cx="9" cy="8" r="3.5" />
+          <path d="M2 21a7 7 0 0 1 14 0" />
+          <polyline points="17 11 19 13 23 9" />
+        </svg>
+      );
+    /** 문서 / 출력 */
+    case 'file-text':
+      return (
+        <svg {...props}>
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+          <polyline points="14 2 14 8 20 8" />
+          <line x1="8" y1="13" x2="16" y2="13" />
+          <line x1="8" y1="17" x2="16" y2="17" />
+        </svg>
+      );
+    /** 이메일 */
+    case 'mail':
+      return (
+        <svg {...props}>
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <polyline points="3 7 12 13 21 7" />
+        </svg>
+      );
+    /** 발송 — 종이비행기 */
+    case 'send':
+      return (
+        <svg {...props}>
+          <line x1="22" y1="2" x2="11" y2="13" />
+          <polygon points="22 2 15 22 11 13 2 9 22 2" />
+        </svg>
+      );
+    /** 패키지 / 박스 */
+    case 'package':
+      return (
+        <svg {...props}>
+          <path d="M3 7l9-4 9 4v10l-9 4-9-4V7z" />
+          <line x1="3" y1="7" x2="12" y2="11" />
+          <line x1="12" y1="11" x2="21" y2="7" />
+          <line x1="12" y1="11" x2="12" y2="21" />
+        </svg>
+      );
+    /** 공장 / OT */
+    case 'factory':
+      return (
+        <svg {...props}>
+          <path d="M3 21V11l5 3V11l5 3V11l5 3v7z" />
+          <line x1="3" y1="21" x2="21" y2="21" />
+          <line x1="9" y1="17" x2="9.01" y2="17" />
+          <line x1="14" y1="17" x2="14.01" y2="17" />
+        </svg>
+      );
+    /** USB 디바이스 */
+    case 'usb':
+      return (
+        <svg {...props}>
+          <rect x="9" y="14" width="6" height="7" rx="1" />
+          <line x1="12" y1="14" x2="12" y2="6" />
+          <polyline points="9 9 12 6 15 9" />
+          <circle cx="9" cy="3" r="1" />
+          <circle cx="15" cy="3" r="1" />
+          <line x1="9" y1="3" x2="15" y2="3" />
+        </svg>
+      );
+    /** 워크플로 — 노드 연결 */
+    case 'workflow':
+      return (
+        <svg {...props}>
+          <rect x="3" y="3" width="6" height="6" rx="1" />
+          <rect x="15" y="15" width="6" height="6" rx="1" />
+          <rect x="15" y="3" width="6" height="6" rx="1" />
+          <path d="M9 6h6M18 9v6M6 9v6a2 2 0 0 0 2 2h7" />
+        </svg>
+      );
+    /** 검색 — 돋보기 */
+    case 'search':
+      return (
+        <svg {...props}>
+          <circle cx="11" cy="11" r="7" />
+          <line x1="21" y1="21" x2="16" y2="16" />
+        </svg>
+      );
+    /** 신속 / 전력 — 번개 */
+    case 'zap':
+      return (
+        <svg {...props}>
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
         </svg>
       );
     default:
