@@ -4,13 +4,17 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: '인증 및 특허',
   description:
-    '솔모정보기술의 보유 인증 / 자격 / 특허 — ISO 4종, GS 1등급, 신용평가 BB+, 그리고 5건 이상의 보안 특허.',
+    '솔모정보기술의 보유 인증 / 자격 / 특허 — ISO 4종, 메인비즈·이노비즈, GS 1등급, 신용평가 BB+, 그리고 보안 특허.',
 };
 
 type Cert = {
   title: string;
   img: string;
   desc: string;
+  /** 다운로드 가능한 원본 PDF 경로. 있으면 카드 클릭 시 새 탭으로 열림 */
+  pdf?: string;
+  /** 인증 유효기간 (있을 경우) */
+  period?: string;
 };
 
 const CORPORATE_CERTS: readonly Cert[] = [
@@ -30,19 +34,32 @@ const CORPORATE_CERTS: readonly Cert[] = [
     desc: '독자적 보안 기술 연구 및 신기술 창출을 위한 전담 연구소',
   },
   {
-    title: '포스코DX 협력사',
-    img: '/images/인증 및 특허/포스코UX 협력사.emf',
-    desc: '글로벌 철강 기업 포스코DX의 핵심 IT 보안 파트너',
-  },
-  {
     title: '소프트웨어사업자 신고',
-    img: '/images/인증 및 특허/소프트웨어사업자.jpg',
-    desc: '컴퓨터 관련 서비스 및 패키지 SW 개발 공급 공식 사업자',
+    img: '/certs/software-business-cert-preview.jpg',
+    pdf: '/certs/software-business-cert.pdf',
+    desc: '컴퓨터 관련 서비스 및 패키지 SW 개발 공급 공식 사업자 (2025년 결산 기준, 발급일 2026.04.15)',
+    period: '2026 갱신',
   },
   {
     title: '중소기업확인서',
-    img: '/images/인증 및 특허/중소기업확인서.jpg',
+    img: '/certs/sme-cert-preview.jpg',
+    pdf: '/certs/sme-cert.pdf',
     desc: '대한민국 중소벤처기업부 인증 유망 중소기업',
+    period: '2026.04.01 ~ 2027.03.31',
+  },
+  {
+    title: '메인비즈 (MAIN-BIZ) 확인서',
+    img: '/certs/mainbiz-cert-preview.jpg',
+    pdf: '/certs/mainbiz-cert.pdf',
+    desc: '경영혁신형 중소기업 인증 — 마케팅·조직·인사·생산 등 비기술 분야 혁신 역량 검증',
+    period: '2025.01.14 ~ 2028.01.13',
+  },
+  {
+    title: '이노비즈 (INNO-BIZ) 확인서',
+    img: '/certs/innobiz-cert-preview.jpg',
+    pdf: '/certs/innobiz-cert.pdf',
+    desc: '기술혁신형 중소기업 인증 — 기술 우위·R&D 역량을 정부가 공인',
+    period: '2024.12.23 ~ 2027.12.22',
   },
   {
     title: '직접생산확인증명서',
@@ -58,19 +75,19 @@ const QUALITY_CERTS: readonly Cert[] = [
     desc: '소프트웨어 품질 인증 최고 등급 (자체 개발 xSecuritas 솔루션)',
   },
   {
-    title: '기업신용등급 BB+',
-    img: '/images/인증 및 특허/기업신용등급.png',
-    desc: '안정적인 현금 흐름과 우수한 재무 건전성 및 거래 신뢰도',
+    title: 'ISO 통합 인증 (4종)',
+    img: '/certs/iso-certs-preview.jpg',
+    pdf: '/certs/iso-certs.pdf',
+    desc: 'ISO 9001 (품질) · ISO 14001 (환경) · ISO 37301 (컴플라이언스) · ISO 45001 (안전보건) 통합 운영 인증',
+    period: '2025 신규',
   },
-];
-
-/** PPT 슬라이드 5에서 추가 확보·추진된 인증 (이미지가 별도 등록되지 않은 항목). */
-const RECENT_BADGES: readonly { label: string; year?: string }[] = [
-  { label: 'ISO 9001 품질경영', year: '2025.07' },
-  { label: 'ISO 14001 환경경영', year: '2025.07' },
-  { label: 'ISO 27001 정보보호', year: '2025.07' },
-  { label: 'ISO 45001 안전보건', year: '2025.07' },
-  { label: 'Innobiz (이노비즈) 인증' },
+  {
+    title: '기업신용등급 BB+',
+    img: '/certs/credit-rating-bb-plus-preview.jpg',
+    pdf: '/certs/credit-rating-bb-plus.pdf',
+    desc: '한국평가데이터 2025년 신용평가 — 안정적 현금흐름과 우수한 재무 건전성·거래 신뢰도',
+    period: '2026.04.24 ~ 2027.04.23',
+  },
 ];
 
 const PATENTS: readonly Cert[] = [
@@ -122,43 +139,11 @@ export default function CertificationsPage() {
         </div>
       </header>
 
-      {/* 최근 인증 배지 (2025) */}
-      <section className="max-w-[1400px] mx-auto">
-        <div className="bg-gradient-to-br from-blue-50 to-white border border-blue-100 rounded-3xl p-8 sm:p-10">
-          <div className="flex items-center gap-3 mb-5">
-            <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em]">
-              Recent
-            </span>
-            <span className="text-slate-400 text-xs font-bold">
-              2025년 신규 확보 / 진행 중
-            </span>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            {RECENT_BADGES.map((b) => (
-              <div
-                key={b.label}
-                className="inline-flex items-center gap-2 bg-white border border-blue-100 rounded-full pl-4 pr-5 py-2 shadow-sm"
-              >
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                <span className="text-sm font-bold text-slate-800 tracking-tight">
-                  {b.label}
-                </span>
-                {b.year && (
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                    {b.year}
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <InteractiveSection title="Corporate Foundation" data={CORPORATE_CERTS} />
       <InteractiveSection
         title="Quality Excellence"
         data={QUALITY_CERTS}
-        columns={2}
+        columns={3}
       />
       <InteractiveSection title="Intellectual Property" data={PATENTS} />
 
@@ -207,33 +192,64 @@ function InteractiveSection({
       </div>
       <div className={`grid grid-cols-1 md:grid-cols-2 ${gridCols} gap-12`}>
         {data.map((item) => (
-          <div key={item.title} className="group relative">
-            <div className="relative aspect-[3/4.2] rounded-[3.5rem] overflow-hidden bg-white border border-slate-100 shadow-sm group-hover:shadow-2xl group-hover:scale-[1.02] group-hover:-translate-y-2 transition-all duration-700">
-              <Image
-                src={item.img}
-                alt={item.title}
-                fill
-                className="object-cover transition-transform duration-1000 group-hover:scale-110"
-              />
-              <div className="absolute inset-0 bg-blue-900/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-12 flex flex-col justify-end">
-                <span className="text-blue-400 font-black text-[10px] uppercase tracking-widest mb-4 block">
-                  Details
-                </span>
-                <p className="text-white text-lg font-bold leading-tight tracking-tight">
-                  {item.desc}
-                </p>
-              </div>
-            </div>
-            <div className="mt-8 px-4">
-              <h5 className="text-[17px] font-black text-slate-900 tracking-tight">
-                {item.title}
-              </h5>
-              <div className="w-8 h-1 bg-slate-200 mt-3 group-hover:w-full group-hover:bg-blue-600 transition-all duration-500 rounded-full" />
-            </div>
-          </div>
+          <CertCard key={item.title} item={item} />
         ))}
       </div>
     </div>
+  );
+}
+
+function CertCard({ item }: { item: Cert }) {
+  const inner = (
+    <>
+      <div className="relative aspect-[3/4.2] rounded-[3.5rem] overflow-hidden bg-white border border-slate-100 shadow-sm group-hover:shadow-2xl group-hover:scale-[1.02] group-hover:-translate-y-2 transition-all duration-700">
+        <Image
+          src={item.img}
+          alt={item.title}
+          fill
+          className="object-cover transition-transform duration-1000 group-hover:scale-110"
+        />
+        <div className="absolute inset-0 bg-blue-900/90 opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-12 flex flex-col justify-end">
+          <span className="text-blue-400 font-black text-[10px] uppercase tracking-widest mb-4 block">
+            {item.pdf ? 'Click to View PDF →' : 'Details'}
+          </span>
+          <p className="text-white text-base sm:text-lg font-bold leading-tight tracking-tight">
+            {item.desc}
+          </p>
+        </div>
+        {item.period && (
+          <div className="absolute top-4 right-4 bg-white/95 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black text-blue-700 tracking-wider shadow-sm">
+            {item.period}
+          </div>
+        )}
+      </div>
+      <div className="mt-8 px-4">
+        <div className="flex items-center justify-between gap-2">
+          <h5 className="text-[17px] font-black text-slate-900 tracking-tight">
+            {item.title}
+          </h5>
+          {item.pdf && (
+            <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest shrink-0">
+              PDF ↗
+            </span>
+          )}
+        </div>
+        <div className="w-8 h-1 bg-slate-200 mt-3 group-hover:w-full group-hover:bg-blue-600 transition-all duration-500 rounded-full" />
+      </div>
+    </>
+  );
+
+  return item.pdf ? (
+    <a
+      href={item.pdf}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group relative block"
+    >
+      {inner}
+    </a>
+  ) : (
+    <div className="group relative">{inner}</div>
   );
 }
 

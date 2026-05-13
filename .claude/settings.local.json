@@ -60,7 +60,13 @@
       "Bash(find /c/Users/admin -mmin -60 \\\\\\( -name \"*.png\" -o -name \"*.jpg\" -o -name \"*.jpeg\" -o -name \"*.webp\" \\\\\\) -size +200k 2>/dev/null | grep -v node_modules | grep -v \".git\" | head -20)",
       "Bash([ -s /c/Users/admin/AppData/Local/Temp/claude/*/fb85a90b-56f0-4e9e-b510-8c499c41cd73/tasks/bkeog6wgw.output ])",
       "Bash(grep -iE \"\\\\.\\(png|jpg|jpeg|webp\\)$\")",
-      "PowerShell(Add-Type -AssemblyName System.Windows.Forms; $img = [System.Windows.Forms.Clipboard]::GetImage\\(\\); if \\($img -ne $null\\) { $path = \"C:\\\\Users\\\\admin\\\\my-web\\\\my-js-web\\\\.claude\\\\worktrees\\\\jolly-shamir-fd924a\\\\public\\\\images\\\\ceo.png\"; $img.Save\\($path\\); Write-Output \"Saved $\\($img.Width\\)x$\\($img.Height\\) to $path\"; $info = Get-Item $path; Write-Output \"Size: $\\($info.Length\\) bytes\" } else { Write-Output \"No image in clipboard\" })"
+      "PowerShell(Add-Type -AssemblyName System.Windows.Forms; $img = [System.Windows.Forms.Clipboard]::GetImage\\(\\); if \\($img -ne $null\\) { $path = \"C:\\\\Users\\\\admin\\\\my-web\\\\my-js-web\\\\.claude\\\\worktrees\\\\jolly-shamir-fd924a\\\\public\\\\images\\\\ceo.png\"; $img.Save\\($path\\); Write-Output \"Saved $\\($img.Width\\)x$\\($img.Height\\) to $path\"; $info = Get-Item $path; Write-Output \"Size: $\\($info.Length\\) bytes\" } else { Write-Output \"No image in clipboard\" })",
+      "Bash(grep -E \"\\\\.pdf$\")",
+      "Bash(cp \"/c/Users/admin/Downloads/1. 솔모정보기술-소프트웨어사업자 일반현황관리확인서\\(2025년결산기준\\) \\(발급일2026.04.15\\).pdf\" \"public/certs/software-business-cert.pdf\")",
+      "Bash(cp \"/c/Users/admin/Downloads/2. 솔모정보기술-중소기업확인서\\(26.04.01-27.03.31\\).pdf\" \"public/certs/sme-cert.pdf\")",
+      "Bash(cp \"/c/Users/admin/Downloads/3. 솔모정보기술-메인비즈확인서\\(2025.01.14-2028.01.13\\).pdf\" \"public/certs/mainbiz-cert.pdf\")",
+      "Bash(cp \"/c/Users/admin/Downloads/4. 솔모정보기술-이노비즈_확인서\\(2024.12.23-2027.12.22\\).pdf\" \"public/certs/innobiz-cert.pdf\")",
+      "Bash(cp \"/c/Users/admin/Downloads/5. ISO 통합본 [9001-2015, 14001-2015, 37301-2021, 37301-2021, 45001-2018.pdf\" \"public/certs/iso-certs.pdf\")"
     ]
   }
 }
