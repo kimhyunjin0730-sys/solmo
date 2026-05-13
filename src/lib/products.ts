@@ -207,7 +207,7 @@ const networkSecurityProducts: Product[] = [
     assets: {
       logo: '/images/products/piolink/logo.png',
     },
-    name: 'PAS-K Switch',
+    name: 'PIOLINK SWITCH',
     vendor: 'PIOLINK',
     shortDescription:
       'L4/L7 스위치와 침입방지(IPS) 기능을 결합한 통합 네트워크 어플라이언스.',
