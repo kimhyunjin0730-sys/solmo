@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import {
@@ -39,13 +40,13 @@ export default async function ProductDetailPage({
   const category = CATEGORY_BY_ID[product.categoryId];
   const siblings = PRODUCTS.filter(
     (p) => p.categoryId === product.categoryId && p.id !== product.id
-  ).slice(0, 4);
+  );
+  const featureImages = product.assets?.featureImages ?? [];
 
   return (
     <div className="min-h-screen bg-slate-50 pb-24">
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 pt-20 sm:pt-24 pb-10">
-          {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-6">
             <Link href="/" className="hover:text-[#001F5B] transition-colors">
               HOME
@@ -67,6 +68,22 @@ export default async function ProductDetailPage({
             <span>/</span>
             <span className="text-slate-900">{product.name}</span>
           </nav>
+
+          {/* 벤더 로고 (PPT 좌상단 위치 모방) */}
+          {product.assets?.logo && (
+            <div className="mb-6">
+              <div className="relative h-14 w-48">
+                <Image
+                  src={product.assets.logo}
+                  alt={`${product.vendor} 로고`}
+                  fill
+                  className="object-contain object-left"
+                  sizes="192px"
+                  priority
+                />
+              </div>
+            </div>
+          )}
 
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-start">
             <div className="lg:col-span-8">
@@ -90,7 +107,7 @@ export default async function ProductDetailPage({
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-5">
                 {product.name}
               </h1>
-              <p className="text-lg sm:text-xl font-bold text-slate-500 leading-relaxed mb-2">
+              <p className="text-lg sm:text-xl font-bold text-slate-500 leading-relaxed">
                 {product.shortDescription}
               </p>
             </div>
@@ -150,35 +167,72 @@ export default async function ProductDetailPage({
             )}
           </section>
 
+          {/* 히어로 이미지 (PPT 본문 중앙의 대표 다이어그램/제품 사진) */}
+          {product.assets?.hero && (
+            <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200">
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em]">
+                  Product View
+                </span>
+                <div className="flex-1 h-px bg-slate-100" />
+              </div>
+              <div className="relative w-full">
+                <Image
+                  src={product.assets.hero}
+                  alt={`${product.name} 제품 이미지`}
+                  width={1200}
+                  height={800}
+                  className="w-full h-auto object-contain rounded-2xl"
+                />
+              </div>
+            </section>
+          )}
+
           <section>
             <div className="flex items-center gap-3 mb-6">
               <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em]">
                 Key Features
               </span>
+              <span className="text-xs font-bold text-slate-400">핵심기능</span>
               <div className="flex-1 h-px bg-slate-200" />
             </div>
             <div className="grid sm:grid-cols-2 gap-5">
-              {product.features.map((f, idx) => (
-                <div
-                  key={f.title}
-                  className="relative bg-white border border-slate-200 rounded-2xl p-6 hover:border-[#001F5B] hover:shadow-md transition-all overflow-hidden"
-                >
-                  <span className="absolute -top-2 -right-2 text-[80px] font-black text-slate-50 leading-none select-none pointer-events-none">
-                    {String(idx + 1).padStart(2, '0')}
-                  </span>
-                  <div className="relative">
-                    <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#001F5B] to-indigo-700 text-white flex items-center justify-center text-xs font-black uppercase tracking-widest mb-4">
-                      {f.icon.slice(0, 2)}
+              {product.features.map((f, idx) => {
+                const img = featureImages[idx];
+                return (
+                  <div
+                    key={f.title}
+                    className="relative bg-white border border-slate-200 rounded-2xl p-6 hover:border-[#001F5B] hover:shadow-md transition-all overflow-hidden"
+                  >
+                    <span className="absolute -top-2 -right-2 text-[80px] font-black text-slate-50 leading-none select-none pointer-events-none">
+                      {String(idx + 1).padStart(2, '0')}
+                    </span>
+                    <div className="relative">
+                      {img ? (
+                        <div className="relative w-20 h-20 mb-4">
+                          <Image
+                            src={img}
+                            alt={f.title}
+                            fill
+                            className="object-contain"
+                            sizes="80px"
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#001F5B] to-indigo-700 text-white flex items-center justify-center text-xs font-black uppercase tracking-widest mb-4">
+                          {f.icon.slice(0, 2)}
+                        </div>
+                      )}
+                      <h4 className="text-base font-black text-slate-900 tracking-tight mb-2 leading-tight">
+                        {f.title}
+                      </h4>
+                      <p className="text-sm font-medium text-slate-500 leading-relaxed">
+                        {f.description}
+                      </p>
                     </div>
-                    <h4 className="text-base font-black text-slate-900 tracking-tight mb-2 leading-tight">
-                      {f.title}
-                    </h4>
-                    <p className="text-sm font-medium text-slate-500 leading-relaxed">
-                      {f.description}
-                    </p>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </section>
         </main>
@@ -191,17 +245,32 @@ export default async function ProductDetailPage({
             <h4 className="text-lg font-black text-slate-900 tracking-tight mb-5">
               {category.name}
             </h4>
-            <ul className="space-y-2">
-              {siblings.map((s) => (
+            <ul className="space-y-1.5">
+              {siblings.slice(0, 8).map((s) => (
                 <li key={s.id}>
                   <Link
                     href={`/solutions/products/${s.id}`}
-                    className="block px-3 py-2.5 rounded-xl text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-[#001F5B] transition-colors"
+                    className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-bold text-slate-600 hover:bg-blue-50 hover:text-[#001F5B] transition-colors"
                   >
-                    {s.name}
-                    <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
-                      {s.vendor}
-                    </span>
+                    {s.assets?.logo ? (
+                      <div className="relative w-8 h-6 shrink-0">
+                        <Image
+                          src={s.assets.logo}
+                          alt=""
+                          fill
+                          className="object-contain object-left"
+                          sizes="32px"
+                        />
+                      </div>
+                    ) : (
+                      <div className="w-8 h-6 shrink-0 rounded bg-slate-100" />
+                    )}
+                    <div className="min-w-0">
+                      <div className="truncate">{s.name}</div>
+                      <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest truncate">
+                        {s.vendor}
+                      </div>
+                    </div>
                   </Link>
                 </li>
               ))}
