@@ -119,7 +119,7 @@ const networkSecurityProducts: Product[] = [
     shortDescription:
       '모든 유형의 AI 기반 DDoS 공격으로부터 네트워크와 애플리케이션을 보호합니다.',
     longDescription:
-      'Radware DDoS 솔루션은 분산 서비스 거부(DDoS) 공격으로부터 네트워크와 애플리케이션을 보호하는 고급 보안 시스템입니다. 실시간 트래픽 분석과 시그니처 기반 탐지를 통해 다양한 형태의 DDoS 공격을 신속하게 식별하고 자동으로 차단합니다.',
+      'Radware DDoS 솔루션은 분산 서비스 거부(DDoS) 공격으로부터 네트워크와 애플리케이션을 보호하기 위해 설계된 고성능 보안 시스템입니다. 이 솔루션은 실시간 트래픽 분석과 인텔리전스 기반 위협 탐지를 통해 다양한 유형의 DDoS 공격을 신속하게 식별하고 자동으로 차단합니다.',
     badges: ['AI 기반', '최대 800Gbps'],
     officialUrl: 'https://www.radware.com',
     features: [
@@ -172,7 +172,8 @@ const networkSecurityProducts: Product[] = [
     shortDescription:
       '풀패킷 캡처 기반의 NDR(Network Detection and Response) 솔루션.',
     longDescription:
-      'Network BlackBox는 풀패킷 캡처 기반의 트래픽 전수검사로 보안운영 자동화를 지원하는 차세대 NDR 솔루션입니다. 캡처·수집 → 탐지 → 헌팅 → 포렌식 → 대응 5단계 핵심 기능을 모두 갖춰 사고 발생 시 신속한 원인 분석과 대응이 가능합니다.',
+      '네트워크 블랙박스는 풀패킷 캡처 기반의 트래픽 전수검사를 통해 보안운영의 자동화를 지원하는 차별화된 차세대 NDR(Network Detection and Response) 솔루션입니다.
+. 풀패킷 캡쳐 및 수집(Capture & Collection)1 — 탐지(detection)2 — 헌팅(hunting)3  — 포렌식(forensic)4 — 대응(response)5의 5단계 핵심 기능을 모두 갖춰 사고 발생 시 신속한 원인 분석과 대응이 가능합니다.',
     officialUrl: 'https://quadminers.com/',
     features: [
       {
@@ -213,7 +214,8 @@ const networkSecurityProducts: Product[] = [
     shortDescription:
       'L4/L7 스위치와 침입방지(IPS) 기능을 결합한 통합 네트워크 어플라이언스.',
     longDescription:
-      '파이오링크 PAS-K는 중단 없는 운영 및 통합된 네트워크 보안을 제공하는 차세대 방화벽 및 침입방지 시스템입니다. 네트워크 트래픽을 실시간 분석해 애플리케이션 계층의 공격과 다양한 형태의 위협으로부터 네트워크를 보호합니다.',
+      '파이오링크 PAS-K는 중대형 기업 및 기관의 네트워크 보안을 목적한 차세대 방화벽 및 침입방지 시스템(IPS)입니다. 이 장비는 네트워크 트래픽을 실시간으로 분석하여 애플리케이션 기반의 세밀한 제어와 다양한 보안 위협으로부터 네트워크를 보호합니다.
+',
     officialUrl: 'https://www.piolink.com/kr',
     features: [
       {
