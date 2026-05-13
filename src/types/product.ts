@@ -63,6 +63,17 @@ export type Product = {
    * 이 값이 있으면 features 카드 그리드 대신 이 리스트가 렌더됨.
    */
   featureBullets?: readonly string[];
+  /**
+   * "그룹 타이틀 + 체크 불릿" 형태의 카드 그리드.
+   * (예: NX Portrait PPT는 4개의 큰 기능 카드, 각 카드 안에 ✓ 세부 항목.)
+   * features / featureBullets 보다 우선순위가 높다.
+   */
+  featureGroups?: readonly {
+    title: string;
+    /** 이모지 또는 단축키 (예: 'wand', 'gauge', '🛡') */
+    icon?: string;
+    bullets: readonly string[];
+  }[];
   /** PPT에서 추출한 시각 자산 (로고·히어로·기능 아이콘) */
   assets?: ProductAssets;
   /** 공식 사이트 */

@@ -228,7 +228,42 @@ export default async function ProductDetailPage({
               <div className="flex-1 h-px bg-slate-200" />
             </div>
 
-            {product.featureBullets && product.featureBullets.length > 0 ? (
+            {product.featureGroups && product.featureGroups.length > 0 ? (
+              <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 sm:p-10">
+                <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+                  {product.featureGroups.map((g) => (
+                    <div
+                      key={g.title}
+                      className="bg-white border border-slate-100 rounded-2xl p-6 hover:border-[#001F5B] hover:shadow-md transition-all"
+                    >
+                      <div className="flex items-center gap-3 mb-4">
+                        {g.icon && (
+                          <span className="text-2xl leading-none select-none">
+                            {g.icon}
+                          </span>
+                        )}
+                        <h4 className="text-base sm:text-lg font-black text-[#001F5B] tracking-tight leading-snug">
+                          {g.title}
+                        </h4>
+                      </div>
+                      <ul className="space-y-2 ml-1">
+                        {g.bullets.map((b) => (
+                          <li
+                            key={b}
+                            className="flex items-start gap-2 text-sm font-bold text-slate-700"
+                          >
+                            <span className="mt-0.5 text-blue-600 shrink-0">
+                              ✓
+                            </span>
+                            <span className="leading-relaxed">{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : product.featureBullets && product.featureBullets.length > 0 ? (
               <div className="bg-white border border-slate-200 rounded-3xl p-7 sm:p-10">
                 <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
                   {product.featureBullets.map((b) => (
