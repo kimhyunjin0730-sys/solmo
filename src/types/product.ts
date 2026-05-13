@@ -32,8 +32,14 @@ export type ProductAssets = {
   logo?: string;
   /** 제품 대표 이미지 (큰 다이어그램/스크린샷) */
   hero?: string;
-  /** 핵심 기능별 아이콘/이미지. 순서는 PPT 슬라이드 등장 순. */
+  /** 핵심 기능별 작은 아이콘 (64x64 정도). 카드 좌상단에 chip으로 렌더. */
   featureImages?: readonly string[];
+  /**
+   * 핵심 기능별 와이드 스크린샷/패널 (300x250 정도).
+   * 카드 상단 풀폭으로 렌더 (object-contain). QRadar SIEM/SOAR/EDR 같은
+   * 제품 화면 캡처에 적합.
+   */
+  featureScreenshots?: readonly string[];
   /**
    * 본문에 끼워 넣을 추가 다이어그램들(구성도, 컴포넌트 그리드 등).
    * 각 항목은 캡션과 함께 별도 섹션으로 렌더된다.

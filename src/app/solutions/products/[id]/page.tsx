@@ -51,6 +51,7 @@ export default async function ProductDetailPage({
     (p) => p.categoryId === product.categoryId && p.id !== product.id
   );
   const featureImages = product.assets?.featureImages ?? [];
+  const featureScreenshots = product.assets?.featureScreenshots ?? [];
 
   return (
     <div className="min-h-screen bg-slate-50 pb-24">
@@ -280,9 +281,14 @@ export default async function ProductDetailPage({
             ) : FLOW_PRODUCTS.has(product.id) ? (
               <FeatureFlowDiagram features={product.features} />
             ) : (
-              <div className="grid sm:grid-cols-2 gap-5">
+              <div
+                className={`grid sm:grid-cols-2 gap-5 ${
+                  featureScreenshots.length > 0 ? 'lg:grid-cols-3' : ''
+                }`}
+              >
                 {product.features.map((f, idx) => {
                   const img = featureImages[idx];
+                  const shot = featureScreenshots[idx];
                   return (
                     <div
                       key={f.title}
@@ -292,7 +298,17 @@ export default async function ProductDetailPage({
                         {String(idx + 1).padStart(2, '0')}
                       </span>
                       <div className="relative">
-                        {img ? (
+                        {shot ? (
+                          <div className="relative w-full aspect-[4/3] mb-4 bg-slate-50 rounded-xl overflow-hidden">
+                            <Image
+                              src={shot}
+                              alt={f.title}
+                              fill
+                              className="object-contain"
+                              sizes="(max-width: 768px) 100vw, 33vw"
+                            />
+                          </div>
+                        ) : img ? (
                           <div className="relative w-20 h-20 mb-4">
                             <Image
                               src={img}

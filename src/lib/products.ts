@@ -385,31 +385,35 @@ const networkSecurityProducts: Product[] = [
     categoryId: 'network-security',
     assets: {
       logo: '/images/products/qradar/logo.png',
-      hero: '/images/products/qradar/hero.png',
+      featureScreenshots: [
+        '/images/products/qradar/feature-1.png',
+        '/images/products/qradar/feature-2.png',
+        '/images/products/qradar/feature-3.png',
+      ],
     },
-    name: 'IBM QRadar',
+    name: 'QRadar',
     vendor: 'IBM',
     shortDescription:
       'SIEM·SOAR·EDR을 아우르는 통합 위협 탐지 및 대응 플랫폼.',
     longDescription:
-      'IBM QRadar는 기업이 보안 위협을 효과적으로 탐지하고 대응할 수 있도록 지원하는 위협 탐지 및 대응 솔루션입니다. 대규모 운영 환경을 지원하며, 광범위한 데이터 소스를 분석해 우선순위가 높은 인시던트를 자동 식별합니다.',
+      'IBM® QRadar®는 기업내 위협을 보다 효율적으로 탐지하고 대응할 수 있도록 설계된 위협 탐지 및 대응 솔루션입니다. 대규모 기업 환경을 지원하며, 보안팀이 주요 핵심 기술 전반에 걸쳐 보안 태세를 강화할 수 있도록 돕습니다.',
     officialUrl: 'https://www.ibm.com/products/qradar',
     features: [
       {
         icon: 'search',
-        title: 'QRadar SIEM',
+        title: 'IBM QRadar® SIEM',
         description:
           '대량 로그를 상관 분석해 의미 있는 위협 인시던트만 추립니다.',
       },
       {
         icon: 'workflow',
-        title: 'QRadar SOAR',
+        title: 'IBM QRadar SOAR',
         description:
           '플레이북 기반 자동 대응으로 평균 대응 시간(MTTR)을 단축합니다.',
       },
       {
         icon: 'monitor',
-        title: 'QRadar EDR',
+        title: 'IBM QRadar EDR',
         description: '엔드포인트 행위 가시화로 위협 전파를 차단합니다.',
       },
     ],
