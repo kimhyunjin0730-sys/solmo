@@ -176,26 +176,29 @@ const networkSecurityProducts: Product[] = [
     officialUrl: 'https://quadminers.com/',
     features: [
       {
-        icon: 'database',
-        title: '풀패킷 캡처 & 수집',
-        description: '손실 없는 패킷 저장과 분산 수집으로 증거를 보존합니다.',
+        icon: 'capture',
+        title: '풀패킷 캡쳐 및 수집 (Capture & Collect)',
+        description: '손실 없는 패킷 수집 및 분산 저장.',
       },
       {
-        icon: 'radar',
-        title: '시그니처 / 행위 / 분석 다중 탐지',
-        description:
-          '시그니처·행위·머신러닝 분석을 결합해 미탐을 최소화합니다.',
+        icon: 'detect',
+        title: '탐지 (Detection)',
+        description: '시그니처 / 행위 / 분석 기반 위협 탐지.',
       },
       {
-        icon: 'search',
-        title: '헌팅 & 포렌식',
-        description:
-          '의심 위협을 능동적으로 추적하고 인시던트 시점의 트래픽을 정밀 분석합니다.',
+        icon: 'hunt',
+        title: '헌팅 (Hunting)',
+        description: '잠재 위협 헌팅으로 보안사고 예방.',
       },
       {
-        icon: 'zap',
-        title: '신속 대응',
-        description: '탐지된 위협에 대한 자동·반자동 대응 워크플로를 제공합니다.',
+        icon: 'forensic',
+        title: '포렌식 (Forensic)',
+        description: '추적, 탐지 및 헌팅된 위협 확정.',
+      },
+      {
+        icon: 'response',
+        title: '대응 (Response)',
+        description: '보안팀의 신속한 대응 연계.',
       },
     ],
   },
