@@ -123,13 +123,13 @@ const networkSecurityProducts: Product[] = [
     officialUrl: 'https://www.radware.com',
     features: [
       {
-        icon: 'shield-check',
+        icon: 'activity',
         title: '비즈니스 연속성 유지',
         description:
           '최신 AI 기반 공격으로부터 서버 및 핵심 애플리케이션의 다운타임을 방지합니다.',
       },
       {
-        icon: 'shield',
+        icon: 'hand',
         title: '정교한 공격을 차단',
         description:
           '자동화된 실시간 시그니처로 가장 까다로운 제로데이 공격, DNS DDoS, 웹 DDoS 공격(복호화 필요 없음)까지 실시간 차단합니다.',
@@ -147,13 +147,13 @@ const networkSecurityProducts: Product[] = [
           '고급 보안 대시보드로 모든 배포 환경에서 네트워크·공격 주기·완화 조치에 대한 통합 가시성을 확보합니다.',
       },
       {
-        icon: 'gauge',
+        icon: 'expand',
         title: '유연성과 확장성을 갖춘 배포',
         description:
           '6Gbps부터 800Gbps까지 확장 가능한 솔루션으로 통합 가상·온프레미스·하이브리드 환경 모두를 보호합니다.',
       },
       {
-        icon: 'package',
+        icon: 'savings',
         title: '총 소유 비용 절감',
         description:
           'AI와 자동화로 수동 작업을 줄이면서 동시에 완벽한 DDoS 공격 방어를 보장합니다.',

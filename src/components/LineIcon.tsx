@@ -27,7 +27,12 @@ export type LineIconName =
   | 'branch'
   | 'agent'
   | 'gateway'
-  | 'policy';
+  | 'policy'
+  | 'activity'
+  | 'hand'
+  | 'brain'
+  | 'expand'
+  | 'savings';
 
 const COMMON = {
   width: 32,
@@ -227,6 +232,50 @@ export function LineIcon({
           <rect x="3" y="13" width="18" height="6" rx="1" />
           <line x1="7" y1="8" x2="7.01" y2="8" />
           <line x1="7" y1="16" x2="7.01" y2="16" />
+        </svg>
+      );
+    /** 연속성·생동 — 심전도 파형 */
+    case 'activity':
+      return (
+        <svg {...props}>
+          <polyline points="3 12 8 12 10 6 14 18 16 12 21 12" />
+        </svg>
+      );
+    /** 공격 차단 — 손바닥 STOP */
+    case 'hand':
+      return (
+        <svg {...props}>
+          <path d="M9 11V5a1.5 1.5 0 0 1 3 0v6" />
+          <path d="M12 11V4a1.5 1.5 0 0 1 3 0v8" />
+          <path d="M15 12V6a1.5 1.5 0 0 1 3 0v9a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6v-3a1.5 1.5 0 0 1 3 0v2" />
+        </svg>
+      );
+    /** AI 두뇌 */
+    case 'brain':
+      return (
+        <svg {...props}>
+          <path d="M9 5a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 1 5 3 3 0 0 0 4 2 3 3 0 0 0 3-2V5z" />
+          <path d="M15 5a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-1 5 3 3 0 0 1-4 2 3 3 0 0 1-3-2V5z" />
+          <line x1="12" y1="9" x2="12" y2="9.01" />
+        </svg>
+      );
+    /** 확장성 — 양방향 화살표 (out arrows) */
+    case 'expand':
+      return (
+        <svg {...props}>
+          <polyline points="15 3 21 3 21 9" />
+          <polyline points="9 21 3 21 3 15" />
+          <line x1="21" y1="3" x2="14" y2="10" />
+          <line x1="3" y1="21" x2="10" y2="14" />
+        </svg>
+      );
+    /** 비용 절감 — 동전에 화살표 down */
+    case 'savings':
+      return (
+        <svg {...props}>
+          <circle cx="12" cy="12" r="8" />
+          <path d="M12 8v8" />
+          <path d="M9 13l3 3 3-3" />
         </svg>
       );
     default:
