@@ -32,7 +32,8 @@
       "Bash(bash /tmp/extract-product-images.sh)",
       "Bash(C:/Users/admin/AppData/Local/Programs/Python/Python312/python.exe /tmp/build-assets.py)",
       "Bash(cat)",
-      "Bash(C:/Users/admin/AppData/Local/Programs/Python/Python312/python.exe /tmp/patch-products.py)"
+      "Bash(C:/Users/admin/AppData/Local/Programs/Python/Python312/python.exe /tmp/patch-products.py)",
+      "Bash(git commit -m 'content\\(fortinet\\): use PPT overview text verbatim *)"
     ]
   }
 }
