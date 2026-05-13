@@ -355,7 +355,7 @@ const networkSecurityProducts: Product[] = [
         description: 'H/W 및 S/W 기반의 통합 자원 관리 제품.',
       },
       {
-        icon: 'key',
+        icon: 'branch',
         title: 'PPX-TACACS',
         description: '관리자 및 명령어 검증 시스템.',
       },

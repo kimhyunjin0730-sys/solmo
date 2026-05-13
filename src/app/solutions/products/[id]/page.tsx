@@ -8,9 +8,13 @@ import {
   PRODUCTS,
 } from '@/lib/products';
 import { FeatureFlowDiagram } from '@/components/FeatureFlowDiagram';
+import { LineIcon } from '@/components/LineIcon';
 
 /** 단계가 시퀀스로 의미 있는 제품은 features를 화살표 플로우로 렌더한다. */
 const FLOW_PRODUCTS = new Set(['network-blackbox']);
+
+/** 제품 라인업 가로 행으로 보여주는 모드 (PPT: 한 박스 안 5개 카드). */
+const ROW_PRODUCTS = new Set(['entrolink']);
 
 type Params = { id: string };
 
@@ -276,6 +280,30 @@ export default async function ProductDetailPage({
                     </li>
                   ))}
                 </ul>
+              </div>
+            ) : ROW_PRODUCTS.has(product.id) ? (
+              <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 sm:p-10">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+                  {product.features.map((f) => (
+                    <div
+                      key={f.title}
+                      className="text-center px-2 sm:px-3 py-4"
+                    >
+                      <div className="flex justify-center mb-4 text-[#001F5B]">
+                        <LineIcon
+                          name={f.icon}
+                          className="w-10 h-10 sm:w-12 sm:h-12"
+                        />
+                      </div>
+                      <h4 className="text-base sm:text-lg font-black text-[#001F5B] tracking-tight mb-2 leading-tight">
+                        {f.title}
+                      </h4>
+                      <p className="text-xs sm:text-[13px] font-bold text-slate-500 leading-relaxed">
+                        {f.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             ) : FLOW_PRODUCTS.has(product.id) ? (
               <FeatureFlowDiagram features={product.features} />
