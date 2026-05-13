@@ -172,8 +172,7 @@ const networkSecurityProducts: Product[] = [
     shortDescription:
       '풀패킷 캡처 기반의 NDR(Network Detection and Response) 솔루션.',
     longDescription:
-      '네트워크 블랙박스는 풀패킷 캡처 기반의 트래픽 전수검사를 통해 보안운영의 자동화를 지원하는 차별화된 차세대 NDR(Network Detection and Response) 솔루션입니다.
-. 풀패킷 캡쳐 및 수집(Capture & Collection)1 — 탐지(detection)2 — 헌팅(hunting)3  — 포렌식(forensic)4 — 대응(response)5의 5단계 핵심 기능을 모두 갖춰 사고 발생 시 신속한 원인 분석과 대응이 가능합니다.',
+      '네트워크 블랙박스는 풀패킷 캡처 기반의 트래픽 전수검사를 통해 보안운영의 자동화를 지원하는 차별화된 차세대 NDR(Network Detection and Response) 솔루션입니다.\n\n풀패킷 캡쳐 및 수집(Capture & Collection)1 — 탐지(detection)2 — 헌팅(hunting)3  — 포렌식(forensic)4 — 대응(response)5의 5단계 핵심 기능을 모두 갖춰 사고 발생 시 신속한 원인 분석과 대응이 가능합니다.',
     officialUrl: 'https://quadminers.com/',
     features: [
       {
@@ -214,8 +213,7 @@ const networkSecurityProducts: Product[] = [
     shortDescription:
       'L4/L7 스위치와 침입방지(IPS) 기능을 결합한 통합 네트워크 어플라이언스.',
     longDescription:
-      '파이오링크 PAS-K는 중대형 기업 및 기관의 네트워크 보안을 목적한 차세대 방화벽 및 침입방지 시스템(IPS)입니다. 이 장비는 네트워크 트래픽을 실시간으로 분석하여 애플리케이션 기반의 세밀한 제어와 다양한 보안 위협으로부터 네트워크를 보호합니다.
-',
+      '파이오링크 PAS-K는 중대형 기업 및 기관의 네트워크 보안을 목적한 차세대 방화벽 및 침입방지 시스템(IPS)입니다. 이 장비는 네트워크 트래픽을 실시간으로 분석하여 애플리케이션 기반의 세밀한 제어와 다양한 보안 위협으로부터 네트워크를 보호합니다.',
     officialUrl: 'https://www.piolink.com/kr',
     features: [],
     featureBullets: [
@@ -241,34 +239,45 @@ const networkSecurityProducts: Product[] = [
     categoryId: 'network-security',
     assets: {
       logo: '/images/products/genian-ztna/logo.png',
-      hero: '/images/products/genian-ztna/hero.png',
+      diagrams: [
+        {
+          src: '/images/products/genian-ztna/components.png',
+          caption:
+            '구성 요소 — ZTNA Agent · ZTNA G/W · ZTNA Policy',
+        },
+        {
+          src: '/images/products/genian-ztna/architecture.png',
+          caption:
+            'Genian ZTNA 구성 — On-Prem / Cloud / Hybrid 배포 모델',
+        },
+      ],
     },
     name: 'Genian ZTNA / NAC',
     vendor: 'Genians',
     shortDescription:
-      '제로 트러스트 기반 네트워크 접근 제어. 사용자·디바이스 신뢰도를 평가합니다.',
+      'Genian ZTNA(제로 트러스트 네트워크 액세스) — 사용자·기기 신뢰도를 지속 검증하는 첨단 보안 솔루션.',
     longDescription:
-      'Genian ZTNA(제로 트러스트 네트워크 액세스)는 전통적인 경계 보안 모델을 탈피하여 사용자와 디바이스의 신뢰도를 지속적으로 평가하고 최소 권한 원칙을 적용해 네트워크 접근을 통제하는 첨단 보안 솔루션입니다.',
+      'Genian ZTNA(제로 트러스트 네트워크 액세스) 시스템은 전통적인 경계 기반 보안 모델을 탈피하여, 사용자와 기기의 신뢰도를 지속적으로 검증하며 최소 권한 원칙에 따라 네트워크 접근을 제어하는 첨단 보안 솔루션입니다.',
     badges: ['Zero Trust'],
     officialUrl: 'https://www.genians.co.kr/',
     features: [
       {
-        icon: 'lock',
-        title: '제로 트러스트 액세스',
+        icon: 'agent',
+        title: 'ZTNA Agent',
         description:
-          '신뢰 전제 없이 모든 접근 요청을 검증해 횡적 이동을 차단합니다.',
+          '사용자 단말에서 신원·기기 상태를 평가하고 ZTNA Policy에 따라 안전한 접속을 중개하는 엔드포인트 에이전트.',
       },
       {
-        icon: 'user-check',
-        title: '디바이스 컴플라이언스',
+        icon: 'gateway',
+        title: 'ZTNA G/W',
         description:
-          'AV·패치·암호화 등 단말 상태를 평가해 접속 허용 여부를 결정합니다.',
+          '클라우드 또는 데이터센터에 배치되어 모든 접근 요청을 정책 기반으로 통제하는 게이트웨이. (NEW)',
       },
       {
-        icon: 'eye',
-        title: '실시간 가시성',
+        icon: 'policy',
+        title: 'ZTNA Policy',
         description:
-          '네트워크 위 모든 자산을 자동 식별하고 위험 단말을 차단합니다.',
+          '사용자·기기·서비스 단위로 신뢰 정책을 수립·관리하는 중앙 정책 서버.',
       },
     ],
   },

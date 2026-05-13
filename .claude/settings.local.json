@@ -33,7 +33,16 @@
       "Bash(C:/Users/admin/AppData/Local/Programs/Python/Python312/python.exe /tmp/build-assets.py)",
       "Bash(cat)",
       "Bash(C:/Users/admin/AppData/Local/Programs/Python/Python312/python.exe /tmp/patch-products.py)",
-      "Bash(git commit -m 'content\\(fortinet\\): use PPT overview text verbatim *)"
+      "Bash(git commit -m 'content\\(fortinet\\): use PPT overview text verbatim *)",
+      "Bash(git fetch *)",
+      "Bash(C:/Users/admin/AppData/Local/Programs/Python/Python312/python.exe /tmp/fix-strings.py)",
+      "Bash(mkdir -p /tmp/pptx-extract/solutions)",
+      "Bash(unzip -q -o \"C:/Users/admin/Downloads/홈페이지_솔루션_260511.pptx\" -d /tmp/pptx-extract/solutions/)",
+      "Bash(cp /tmp/pptx-extract/solutions/ppt/media/image15.png /tmp/genian-slide7-hero.png)",
+      "Bash(cp /tmp/pptx-extract/solutions/ppt/media/image16.png /tmp/genian-slide8-hero.png)",
+      "Read(//c/tmp/**)",
+      "Bash(cp /tmp/pptx-extract/solutions/ppt/media/image15.png public/images/products/genian-ztna/components.png)",
+      "Bash(cp /tmp/pptx-extract/solutions/ppt/media/image16.png public/images/products/genian-ztna/architecture.png)"
     ]
   }
 }
