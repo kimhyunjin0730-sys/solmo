@@ -17,6 +17,12 @@ const FLOW_PRODUCTS = new Set(['network-blackbox']);
 /** 제품 라인업 가로 행으로 보여주는 모드 (PPT: 한 박스 안 5개 카드). */
 const ROW_PRODUCTS = new Set(['entrolink']);
 
+/**
+ * PPT가 큰 thin-line blue outline 아이콘 (navy 박스 없이 floating) 스타일인 제품.
+ * 일반 feature card 안에서 아이콘 chip을 그대로 두면 톤이 안 맞아 별도 모드.
+ */
+const OUTLINE_ICON_PRODUCTS = new Set(['kornic-glory-wips']);
+
 type Params = { id: string };
 
 export async function generateStaticParams(): Promise<Params[]> {
@@ -323,6 +329,13 @@ export default async function ProductDetailPage({
                             <RadwareIcon
                               iconKey={f.icon}
                               className="w-14 h-14"
+                            />
+                          </div>
+                        ) : OUTLINE_ICON_PRODUCTS.has(product.id) ? (
+                          <div className="mb-6 flex justify-center pt-4">
+                            <LineIcon
+                              name={f.icon}
+                              className="w-16 h-16 text-blue-500"
                             />
                           </div>
                         ) : (
