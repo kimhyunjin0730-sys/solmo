@@ -192,6 +192,9 @@ export default async function ProductDetailPage({
             </section>
           )}
 
+          {(product.features.length > 0 ||
+            (product.featureBullets && product.featureBullets.length > 0) ||
+            (product.featureGroups && product.featureGroups.length > 0)) && (
           <section>
             <div className="flex items-center gap-3 mb-6">
               <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em]">
@@ -324,6 +327,7 @@ export default async function ProductDetailPage({
               </div>
             )}
           </section>
+          )}
         </main>
 
         <aside className="lg:col-span-4 space-y-6">

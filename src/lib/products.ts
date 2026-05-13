@@ -259,26 +259,7 @@ const networkSecurityProducts: Product[] = [
       'Genian ZTNA(제로 트러스트 네트워크 액세스) 시스템은 전통적인 경계 기반 보안 모델을 탈피하여, 사용자와 기기의 신뢰도를 지속적으로 검증하며 최소 권한 원칙에 따라 네트워크 접근을 제어하는 첨단 보안 솔루션입니다.',
     badges: ['Zero Trust'],
     officialUrl: 'https://www.genians.co.kr/',
-    features: [
-      {
-        icon: 'agent',
-        title: 'ZTNA Agent',
-        description:
-          '사용자 단말에서 신원·기기 상태를 평가하고 ZTNA Policy에 따라 안전한 접속을 중개하는 엔드포인트 에이전트.',
-      },
-      {
-        icon: 'gateway',
-        title: 'ZTNA G/W',
-        description:
-          '클라우드 또는 데이터센터에 배치되어 모든 접근 요청을 정책 기반으로 통제하는 게이트웨이. (NEW)',
-      },
-      {
-        icon: 'policy',
-        title: 'ZTNA Policy',
-        description:
-          '사용자·기기·서비스 단위로 신뢰 정책을 수립·관리하는 중앙 정책 서버.',
-      },
-    ],
+    features: [],
   },
   {
     id: 'nx-portrait',
