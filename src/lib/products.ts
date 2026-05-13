@@ -72,22 +72,40 @@ const networkSecurityProducts: Product[] = [
     officialUrl: 'https://www.fortinet.com/kr',
     features: [
       {
-        icon: 'shield',
-        title: '차세대 방화벽',
+        icon: 'ai',
+        title: '지능형 AI 위협 방어',
         description:
-          'NGFW 기능을 단일 어플라이언스에 통합해 운영 비용을 절감합니다.',
+          'FortiGuard AI 기반 보안 서비스가 알려지지 않은 신·변종 공격까지 실시간으로 차단합니다.',
       },
       {
-        icon: 'cpu',
-        title: '보안 프로세서 가속',
+        icon: 'asic',
+        title: '전용 하드웨어 가속',
         description:
-          '전용 ASIC으로 암호화·검사 처리량을 끌어올려 성능 저하 없이 보호합니다.',
+          '전용 ASIC 보안 프로세서가 암호화·검사 처리량을 끌어올려 성능 저하 없이 보호합니다.',
       },
       {
-        icon: 'brain',
-        title: 'FortiGuard AI 위협 인텔리전스',
+        icon: 'vpn',
+        title: '통합 하이브리드 VPN',
         description:
-          '실시간 위협 인텔리전스로 알려지지 않은 신·변종 공격까지 차단합니다.',
+          'IPSec·SSL VPN을 단일 어플라이언스에서 운영하며 본사·지사·재택을 안전하게 연결합니다.',
+      },
+      {
+        icon: 'vdom',
+        title: '고효율 가상화 보안 (VDOM)',
+        description:
+          '하나의 장비를 다수의 가상 도메인으로 분리해 멀티 테넌트 환경을 효율적으로 운영합니다.',
+      },
+      {
+        icon: 'sdwan',
+        title: '지능형 하이브리드 SD-WAN',
+        description:
+          '애플리케이션 인지 기반 경로 선택으로 회선 품질을 최적화하고 비용을 절감합니다.',
+      },
+      {
+        icon: 'ztna',
+        title: '제로 트러스트 보안 접속 (ZTNA)',
+        description:
+          '신뢰 전제 없이 사용자·디바이스를 지속적으로 검증해 최소 권한 원칙으로 접근을 통제합니다.',
       },
     ],
   },
