@@ -460,8 +460,6 @@ const endpointServerProducts: Product[] = [
     categoryId: 'endpoint-server-security',
     assets: {
       logo: '/images/products/appcheck/logo.png',
-      hero: '/images/products/appcheck/hero.png',
-      featureImages: ['/images/products/appcheck/feature-1.png', '/images/products/appcheck/feature-2.png', '/images/products/appcheck/feature-3.png'],
     },
     name: 'AppCheck Pro',
     vendor: '체크멀(Checkmal)',
@@ -474,18 +472,27 @@ const endpointServerProducts: Product[] = [
     features: [
       {
         icon: 'shield',
-        title: '랜섬웨어 행위 탐지',
-        description: '시그니처 없이 행위 분석으로 신·변종 랜섬웨어를 차단합니다.',
+        title: '기존 백신과 호환되는 편리함',
+        description:
+          '기존 바이러스 백신이 실행 전에 감지·차단한다면 AppCheck Pro는 파일 손상 행위 자체를 감지해 중단시킵니다. 기존 백신과 충돌 없이 동시에 설치·운용할 수 있습니다.',
+      },
+      {
+        icon: 'shield',
+        title: '악의적인 랜섬웨어 위협으로부터의 보호',
+        description:
+          '체크멀의 상황 인식 기반 랜섬웨어 행위 엔진이 실시간으로 클라우드 없이 파일 훼손을 분석해 차단합니다.',
       },
       {
         icon: 'refresh-ccw',
-        title: '자동 복구',
-        description: '암호화된 파일을 자동으로 원상 복구합니다.',
+        title: '랜섬가드',
+        description:
+          '랜섬웨어에 의해 손상되는 파일은 드라이버 수준에서 보호되는 디렉터리에 원본이 실시간 백업되어, 최소한의 디스크 공간만 효율적으로 사용합니다.',
       },
       {
-        icon: 'package',
-        title: '멀티플랫폼',
-        description: 'Windows·서버·클라우드까지 모두 지원합니다.',
+        icon: 'database',
+        title: '탐지 실패시에도 데이터를 복구 가능',
+        description:
+          '통합된 스케줄 백업이 파일을 보호하는 추가 계층을 제공합니다. 파일 변경을 실시간 추적하여 변경된 파일만 누적 백업합니다.',
       },
     ],
   },
@@ -535,7 +542,6 @@ const applicationProducts: Product[] = [
     assets: {
       logo: '/images/products/xsecuritas/logo.png',
       hero: '/images/products/xsecuritas/hero.png',
-      featureImages: ['/images/products/xsecuritas/feature-1.png', '/images/products/xsecuritas/feature-2.png'],
     },
     name: 'xSecuritas Screen Watermark',
     vendor: 'xSecuritas',
@@ -787,21 +793,28 @@ const otProducts: Product[] = [
       'Hitachi 스토리지 솔루션은 미션 크리티컬 워크로드를 위한 엔터프라이즈 스토리지 인프라를 제공합니다. 고가용성·고성능을 동시에 보장하며, 운영 자동화와 함께 데이터센터의 안정성을 확보합니다.',
     features: [
       {
-        icon: 'hard-drive',
-        title: '엔터프라이즈 가용성',
+        icon: 'zap',
+        title: '고성능 처리',
         description:
-          '미션 크리티컬 워크로드에 맞춘 고가용성 아키텍처를 제공합니다.',
+          '저지연·고처리량 IO 아키텍처로 대용량 워크로드를 안정적으로 처리합니다.',
       },
       {
-        icon: 'gauge',
-        title: '고성능 IO',
-        description: '대용량/저지연 IO 요구를 만족하는 라인업.',
+        icon: 'lock',
+        title: '데이터 보호 / 암호화',
+        description:
+          '저장 단위 암호화와 복제·스냅샷을 통해 데이터 손실 위험을 최소화합니다.',
       },
       {
-        icon: 'database',
-        title: '데이터 보호',
+        icon: 'monitor',
+        title: '통합 모니터링',
         description:
-          '내장 복제·스냅샷으로 데이터 손실 위험을 최소화합니다.',
+          '단일 콘솔에서 다수의 스토리지 노드를 실시간 가시화하고 알람·이벤트를 통합 관리합니다.',
+      },
+      {
+        icon: 'bar-chart',
+        title: '분석 / 리포팅',
+        description:
+          'AI 기반 용량·성능 분석으로 자원 사용 추세를 예측하고 운영 의사 결정을 지원합니다.',
       },
     ],
   },
