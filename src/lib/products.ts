@@ -268,11 +268,11 @@ const networkSecurityProducts: Product[] = [
       logo: '/images/products/nx-portrait/logo.png',
     },
     name: 'NX Portrait',
-    vendor: '엔에스큐어',
+    vendor: '엘로이큐브',
     shortDescription:
-      '방화벽 정책 관리 자동화 — 정책 생성·수정·삭제 및 효율성 모니터링.',
+      '방화벽 정책의 효율적이고 체계적인 관리를 지원하는 정책관리 솔루션.',
     longDescription:
-      '엔에스큐어의 NX Portrait는 방화벽 정책을 효율적이고 체계적으로 관리할 수 있는 정책관리 솔루션입니다. 다양한 네트워크 환경에서 방화벽 정책의 생성·수정·삭제 과정을 자동화하며, 실시간으로 정책의 효율성과 적용 여부를 모니터링할 수 있도록 설계되었습니다.',
+      '엘로이큐브사의 NX Portrait는 방화벽 정책의 효율적이고 체계적인 관리를 지원하는 정책관리 솔루션입니다. 이 솔루션은 다양한 네트워크 환경에서 방화벽 정책의 생성, 수정, 배포 과정을 자동화하며, 실시간으로 정책의 효과성과 위반 여부를 모니터링할 수 있게 설계되었습니다.',
     officialUrl: 'https://www.nxportrait.com/',
     features: [],
     featureGroups: [
