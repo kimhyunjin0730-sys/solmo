@@ -125,28 +125,62 @@ export default function LocationPage() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid lg:grid-cols-2 gap-6 mb-6">
           <TransitCard
             num="01"
             tag="Subway"
-            title="구의역 (2호선)"
-            desc="1번 출구로 나와 광진구청 방면으로 직진, 도보 약 5분"
+            title="지하철"
             badge="🚇"
+            routes={[
+              {
+                heading: '구의역 (2호선) 1번 출구',
+                detail:
+                  '건대입구역(2호선) 방향 도보 약 8~10분',
+              },
+              {
+                heading: '건대입구역 (2호선 2번 / 7호선 4번 출구)',
+                detail: '구의역(2호선) 방향 도보 약 8~10분',
+              },
+            ]}
           />
           <TransitCard
             num="02"
             tag="Bus"
-            title="광진구청 정류장"
-            desc="간선 · 지선 · 마을버스 다수 정차. 하차 후 자양사거리 방면 도보 3분"
+            title="버스"
             badge="🚌"
+            routes={[
+              {
+                heading:
+                  '구의역(2호선) 2번 출구 앞 — 광진구청·구의역 2번출구 정류장',
+                bullets: [
+                  '2224 · 2227번 버스 승차 → 자양초등학교앞 정류장 하차 후 도보 약 1분',
+                ],
+              },
+              {
+                heading:
+                  '건대입구역 (2호선·7호선) 5번 출구 앞 — 광진문화예술회관 정류장',
+                bullets: [
+                  '마을버스 광진05 승차 → 송림식당앞 하차 후 도보 약 3분',
+                  '간선버스 2224 승차 → 건국대학교앞 하차 후 도보 약 5분',
+                ],
+              },
+            ]}
           />
-          <TransitCard
-            num="03"
-            tag="Car"
-            title="자가용 방문"
-            desc="건물 내 방문자 주차 가능. 사전 연락 시 주차 공간 확보 안내"
-            badge="🚗"
-          />
+        </div>
+
+        <div className="bg-white border border-slate-100 rounded-2xl p-6 sm:p-8 flex items-start gap-5">
+          <span className="text-3xl shrink-0">🚗</span>
+          <div>
+            <div className="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-1">
+              Car
+            </div>
+            <h3 className="text-lg font-black text-slate-900 tracking-tight mb-1">
+              자가용 방문
+            </h3>
+            <p className="text-sm font-bold text-slate-500 leading-relaxed">
+              건물 내 방문자 주차 가능. 사전 연락 시 주차 공간 확보 안내드립니다.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -206,32 +240,67 @@ function ContactRow({
   return href ? <a href={href}>{Inner}</a> : Inner;
 }
 
+type TransitRoute = {
+  heading: string;
+  detail?: string;
+  bullets?: readonly string[];
+};
+
 function TransitCard({
   num,
   tag,
   title,
-  desc,
   badge,
+  routes,
 }: {
   num: string;
   tag: string;
   title: string;
-  desc: string;
   badge: string;
+  routes: readonly TransitRoute[];
 }) {
   return (
     <div className="p-8 bg-white border border-slate-100 rounded-[2rem] hover:border-blue-600 hover:-translate-y-1 transition-all">
-      <div className="flex items-start justify-between mb-8">
+      <div className="flex items-start justify-between mb-6">
         <span className="text-3xl">{badge}</span>
         <span className="text-2xl font-black text-slate-200">{num}</span>
       </div>
       <div className="text-[10px] font-black uppercase tracking-widest text-blue-600 mb-2">
         {tag}
       </div>
-      <h3 className="text-xl font-black text-slate-900 mb-3 tracking-tight">
+      <h3 className="text-xl font-black text-slate-900 mb-5 tracking-tight">
         {title}
       </h3>
-      <p className="text-sm font-bold text-slate-500 leading-relaxed">{desc}</p>
+
+      <div className="space-y-4">
+        {routes.map((r) => (
+          <div key={r.heading} className="border-l-2 border-blue-100 pl-4">
+            <div className="text-sm font-bold text-slate-800 leading-relaxed mb-1">
+              {r.heading}
+            </div>
+            {r.detail && (
+              <p className="text-xs font-bold text-slate-500 leading-relaxed">
+                {r.detail}
+              </p>
+            )}
+            {r.bullets && (
+              <ul className="space-y-1 mt-2">
+                {r.bullets.map((b, idx) => (
+                  <li
+                    key={idx}
+                    className="text-xs font-bold text-slate-500 leading-relaxed flex items-start gap-2"
+                  >
+                    <span className="text-blue-500 shrink-0">
+                      {idx + 1}.
+                    </span>
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
