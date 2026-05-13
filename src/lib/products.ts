@@ -330,12 +330,12 @@ const networkSecurityProducts: Product[] = [
     assets: {
       logo: '/images/products/entrolink/logo.png',
     },
-    name: '엔트로링크 통합 인증',
+    name: '엔트로링크 무선인증',
     vendor: '엔트로링크',
     shortDescription:
-      'PPX 시리즈 — H/W 기반 통합 인증, OTP, 자원 관리, 명령어 검증을 아우르는 보안 인프라.',
+      '기업 및 공공기관의 무선 네트워크 환경을 대상으로 안전한 사용자 인증과 접속 관리를 제공하는 종합 보안 솔루션입니다.',
     longDescription:
-      '엔트로링크 솔루션은 대규모 및 고밀도의 현대 네트워크 환경을 대상으로 안정적이고 빠르며 안전한 통신과 인증을 지원하는 차세대 보안 인프라입니다. 유무선 통합 인증부터 OTP, 자원 관리, 명령어 검증까지 모듈별 라인업으로 구성됩니다.',
+      '엔트로링크 무선인증 솔루션은 기업 및 공공기관의 무선 네트워크 환경을 대상으로 안전한 사용자 인증과 접속 관리를 제공하는 종합 보안 솔루션입니다. 유무선 통합 인증부터 OTP, 자원 관리, 명령어 검증까지 모듈별 라인업으로 구성됩니다.',
     officialUrl: 'http://www.entrolink.com/',
     features: [
       {

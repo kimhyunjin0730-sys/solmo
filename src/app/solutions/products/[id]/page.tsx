@@ -331,8 +331,8 @@ export default async function ProductDetailPage({
                             />
                           </div>
                         ) : (
-                          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#001F5B] to-indigo-700 text-white flex items-center justify-center text-xs font-black uppercase tracking-widest mb-4">
-                            {f.icon.slice(0, 2)}
+                          <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#001F5B] to-indigo-700 text-white flex items-center justify-center mb-4">
+                            <LineIcon name={f.icon} className="w-6 h-6" />
                           </div>
                         )}
                         <h4 className="text-base font-black text-slate-900 tracking-tight mb-2 leading-tight">
