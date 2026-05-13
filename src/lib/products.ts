@@ -120,7 +120,6 @@ const networkSecurityProducts: Product[] = [
       '모든 유형의 AI 기반 DDoS 공격으로부터 네트워크와 애플리케이션을 보호합니다.',
     longDescription:
       'Radware DDoS 솔루션은 분산 서비스 거부(DDoS) 공격으로부터 네트워크와 애플리케이션을 보호하기 위해 설계된 고성능 보안 시스템입니다. 이 솔루션은 실시간 트래픽 분석과 인텔리전스 기반 위협 탐지를 통해 다양한 유형의 DDoS 공격을 신속하게 식별하고 자동으로 차단합니다.',
-    badges: ['AI 기반', '최대 800Gbps'],
     officialUrl: 'https://www.radware.com',
     features: [
       {
