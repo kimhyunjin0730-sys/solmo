@@ -33,57 +33,36 @@ export default function GreetingsPage() {
            {/* Section 1: Welcome */}
            <section className="space-y-6">
               <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
-                 솔모정보기술은 <span className="text-blue-600">22년의 신뢰</span>를 바탕으로 보안의 길을 걷습니다.
+                 <span className="text-blue-600">초연결 및 AI 시대</span>, 정보보안은 기업의 생존과 경쟁력을 좌우합니다.
               </h4>
               <div className="space-y-6 text-slate-500 font-bold text-[17px] leading-relaxed">
                  <p>
-                    ㈜솔모정보기술 홈페이지를 방문해 주신 모든 분들에게 진심으로 감사의 말씀 드립니다.
+                    안녕하십니까. <br />
+                    솔모정보기술 대표이사 이병두입니다.
                  </p>
                  <p>
-                    ㈜솔모정보기술은 2002년 설립 이후 지금까지 IT보안 분야의 정보 보호 컨설팅, 보안취약점 진단, 모의해킹, 통합로그분석, 네트워크 보안 등 보안 컨설팅과 솔루션을 구축하고 통합보안 운영을 전문으로 하는 기업입니다.
+                    초연결 및 AI 시대로 접어든 오늘날, 정보보안은 단순히 데이터를 보호하는 기술을 넘어 기업의 생존과 경쟁력을 좌우하는 핵심 가치로 자리 잡고 있습니다.
                  </p>
                  <p>
-                    또한 우리회사는 사람과 기술에 대한 가치와 중요성을 인식하고 있으며, 이에 따른 직원들의 기술력 함양을 위한 교육 및 훈련에 대해서 내부/외부적으로 적극 지원하고 있습니다.
+                    저희 회사는 설립 이래 정보통신 보안 분야의 핵심 기술력을 바탕으로 고객의 소중한 정보자산을 보호하는 데 최선을 다해왔습니다.
                  </p>
                  <p>
-                    이에 따른 결과로 고객에게 신뢰받는 기업이 되었으며, IT보안 분야에서의 입지를 성공적으로 다지고 있습니다. 꿈과 열정을 토대로 고객과 동반 성장하는 기업이 되도록 최선을 다하겠습니다.
+                    또한, 끊임없는 연구와 혁신을 통해 진화 발전하는 사이버 위협에 선제적으로 대응하여, 고객에게 검증된 최적의 보안 솔루션을 제공하고 있습니다.
+                 </p>
+                 <p>
+                    솔모정보기술은 단순한 보안기술 공급 회사를 넘어 고객의 안전한 비즈니스 성장을 함께하는 <span className="text-slate-900">전략적 파트너</span>가 되고자 합니다.
+                 </p>
+                 <p>
+                    앞으로도 차별화된 기술 혁신과 책임감 있는 서비스를 바탕으로 대한민국 정보보안 산업을 선도하는 기업으로 도약하겠습니다.
+                 </p>
+                 <p>
+                    끝으로 변함없는 관심과 성원을 보내주시는 고객 및 파트너 여러분께 깊이 감사드립니다.
+                 </p>
+                 <p className="text-slate-900 text-lg font-black pt-2">
+                    감사합니다.
                  </p>
               </div>
            </section>
-
-           {/* Section 2: Special Message to Family */}
-           <section className="p-16 rounded-[4rem] bg-slate-900 text-white relative overflow-hidden">
-              <div className="relative z-10 space-y-8">
-                 <h4 className="text-2xl font-black italic text-blue-500">To. 솔모정보기술 가족 여러분께</h4>
-                 <div className="space-y-6 text-white/60 font-medium text-[15px] leading-relaxed">
-                    <p>
-                       우리는 지난 한 해 한번도 경험하지 못한 힘든 경험을 했습니다. 
-                       금방 지나갈 줄 알았던 코로나가 지난 한해는 물론이며 언제 종식 될 지 모르는 상황 속에서 벌써 우리 일상 깊숙이 자리 잡고 있습니다.
-                    </p>
-                    <p>
-                       이러한 상황에 발 맞춰 지금까지의 근무방식과 생각을 바꾸는 제도개선을 지속적으로 추진하겠습니다. 
-                       또한, 원격근무 시대에 원활한 소통 방법과 탁월한 팀워크를 기반으로 경쟁력 있는 기업이 되기 위해 노력하고 성장합시다.
-                    </p>
-                    <p className="text-white text-lg font-black pt-4">
-                       "여러분 가정에 항상 건강과 행복이 가득한 한 해 되시기를 진심으로 기원하며, <br />
-                       열정 가득한 동반 성장의 길을 함께 갑시다."
-                    </p>
-                 </div>
-              </div>
-              <div className="absolute -bottom-20 -right-20 w-96 h-96 bg-blue-600/10 rounded-full blur-[100px]"></div>
-           </section>
-
-           {/* Footer: Summary Info */}
-           <div className="grid grid-cols-2 gap-10 pt-10 border-t border-slate-100">
-              <div>
-                 <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-2 block">Established</span>
-                 <p className="text-2xl font-black text-slate-900 italic">2002. 10. 09</p>
-              </div>
-              <div>
-                 <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-2 block">Enterprise Type</span>
-                 <p className="text-2xl font-black text-slate-900 italic">Security Specialist</p>
-              </div>
-           </div>
         </div>
       </div>
     </div>
