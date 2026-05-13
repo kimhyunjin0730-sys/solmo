@@ -201,7 +201,21 @@ export default async function ProductDetailPage({
               <div className="flex-1 h-px bg-slate-200" />
             </div>
 
-            {FLOW_PRODUCTS.has(product.id) ? (
+            {product.featureBullets && product.featureBullets.length > 0 ? (
+              <div className="bg-white border border-slate-200 rounded-3xl p-7 sm:p-10">
+                <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
+                  {product.featureBullets.map((b) => (
+                    <li
+                      key={b}
+                      className="flex items-start gap-3 text-sm sm:text-base font-bold text-slate-700"
+                    >
+                      <span className="mt-2 w-1.5 h-1.5 rounded-sm bg-blue-600 shrink-0" />
+                      <span className="leading-relaxed">{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : FLOW_PRODUCTS.has(product.id) ? (
               <FeatureFlowDiagram features={product.features} />
             ) : (
               <div className="grid sm:grid-cols-2 gap-5">
