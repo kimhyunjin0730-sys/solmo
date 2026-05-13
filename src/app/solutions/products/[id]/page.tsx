@@ -9,6 +9,7 @@ import {
 } from '@/lib/products';
 import { FeatureFlowDiagram } from '@/components/FeatureFlowDiagram';
 import { LineIcon } from '@/components/LineIcon';
+import { RadwareIcon } from '@/components/RadwareIcons';
 
 /** 단계가 시퀀스로 의미 있는 제품은 features를 화살표 플로우로 렌더한다. */
 const FLOW_PRODUCTS = new Set(['network-blackbox']);
@@ -296,6 +297,13 @@ export default async function ProductDetailPage({
                               fill
                               className="object-contain"
                               sizes="80px"
+                            />
+                          </div>
+                        ) : product.id === 'radware' ? (
+                          <div className="mb-4">
+                            <RadwareIcon
+                              iconKey={f.icon}
+                              className="w-14 h-14"
                             />
                           </div>
                         ) : (
