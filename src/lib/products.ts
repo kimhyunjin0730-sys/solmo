@@ -476,37 +476,49 @@ const endpointServerProducts: Product[] = [
         icon: 'server',
         title: '시스템 접근제어 (HIWARE PSM)',
         description:
-          'SSH·RDP·VNC 등 관리자 접근 세션을 기록·감사해 내부자 위협을 통제합니다.',
+          '서버, 네트워크 등 시스템에 대한 접근제어와 권한 관리.',
       },
       {
         icon: 'database',
-        title: 'DB 접근제어 (HIWARE DBM)',
+        title: 'DB 접근제어 (HIWARE DBAM)',
         description:
-          '데이터베이스 세션·SQL 단위 권한 통제와 감사 기능을 제공합니다.',
+          '데이터베이스에 대한 접근제어와 권한 관리.',
       },
       {
         icon: 'shield-check',
-        title: '시스템 계정관리 (HIWARE AM)',
+        title: '시스템 계정관리 (HIWARE iM)',
         description:
-          '서버·시스템 계정의 라이프사이클을 단일 콘솔에서 관리합니다.',
+          '서버, 네트워크 등 시스템에 대한 계정 및 패스워드 통합 관리.',
+      },
+      {
+        icon: 'database',
+        title: 'DB 계정관리 (HIWARE DBM)',
+        description:
+          '데이터베이스에 대한 계정 및 패스워드 통합 관리.',
+      },
+      {
+        icon: 'user-check',
+        title: 'AD 계정관리 (HIWARE ADiM)',
+        description:
+          'Active Directory에 대한 계정 및 패스워드 통합 관리.',
       },
       {
         icon: 'key',
-        title: 'DB / AD 계정관리',
+        title: 'SSH CA 키 관리 (HIWARE SecureKey)',
         description:
-          'DB 계정관리(HIWARE DBAM)와 Active Directory 계정관리(HIWARE ADAM)를 통합 운영.',
-      },
-      {
-        icon: 'lock',
-        title: 'SSH 키 관리 (HIWARE SecureKey)',
-        description:
-          '서버 간 자동화에 사용되는 SSH 키를 중앙에서 안전하게 관리.',
+          '제로트러스트를 위한 서명키 인증 보안.',
       },
       {
         icon: 'monitor',
-        title: 'CCTV 패스워드 관리 / 모바일 OTP',
+        title: 'CCTV 패스워드 관리 (HIWARE CCTV PM)',
         description:
-          'CCTV 등 OT 장비 패스워드와 모바일 OTP(HIWARE MobileOTP)까지 통합 관리.',
+          'CCTV의 계정 현황 및 패스워드 관리.',
+      },
+      {
+        icon: 'lock',
+        title: '모바일 OTP (HIWARE MobileOTP)',
+        description:
+          '사용자 인증 강화를 위한 추가 보안 인증.',
       },
     ],
   },
@@ -527,27 +539,27 @@ const endpointServerProducts: Product[] = [
     features: [
       {
         icon: 'shield',
-        title: '기존 백신과 호환되는 편리함',
-        description:
-          '기존 바이러스 백신이 실행 전에 감지·차단한다면 AppCheck Pro는 파일 손상 행위 자체를 감지해 중단시킵니다. 기존 백신과 충돌 없이 동시에 설치·운용할 수 있습니다.',
-      },
-      {
-        icon: 'shield',
         title: '악의적인 랜섬웨어 위협으로부터의 보호',
         description:
-          '체크멀의 상황 인식 기반 랜섬웨어 행위 엔진이 실시간으로 클라우드 없이 파일 훼손을 분석해 차단합니다.',
+          '강력한 랜섬웨어 방어 기능은 체크멀의 상황인식기반 랜섬웨어 행위 엔진에 의해 제공되며 실시간으로 클라우드없이 파일 훼손을 분석하여 차단합니다.',
       },
       {
-        icon: 'refresh-ccw',
+        icon: 'lock',
         title: '랜섬가드',
         description:
-          '랜섬웨어에 의해 손상되는 파일은 드라이버 수준에서 보호되는 디렉터리에 원본이 실시간 백업되어, 최소한의 디스크 공간만 효율적으로 사용합니다.',
+          '랜섬웨어에 의해 손상되는 파일은 드라이버 수준에서 보호되는 디렉터리에 원본파일이 실시간으로 백업하여 최소한의 디스크 공간만 효율적으로 사용합니다.',
       },
       {
         icon: 'database',
         title: '탐지 실패시에도 데이터를 복구 가능',
         description:
-          '통합된 스케줄 백업이 파일을 보호하는 추가 계층을 제공합니다. 파일 변경을 실시간 추적하여 변경된 파일만 누적 백업합니다.',
+          '통합된 스케줄 백업은 파일을 보호하는 추가 계층을 제공합니다. 파일 변경을 실시간으로 추적하고 변경된 파일만 누적 백업합니다.',
+      },
+      {
+        icon: 'shield-check',
+        title: '기존 백신과 호환되는 편리함',
+        description:
+          '기존에 설치되어있는 바이러스 백신 소프트웨어는 랜섬웨어의 실행전에 감지하고 차단하며, AppCheck Pro는 파일의 손상 행위를 감지하고 이를 중단합니다. 이렇게 기존의 백신 소프트웨어가 설치되어 있더라도 충돌없이 동시에 설치, 운용할 수 있습니다.',
       },
     ],
   },
@@ -566,20 +578,22 @@ const endpointServerProducts: Product[] = [
     officialUrl: 'https://www.trendmicro.com/ko_kr',
     features: [
       {
-        icon: 'radar',
-        title: 'XDR 통합 탐지',
+        icon: 'gauge',
+        title: '운영 효율성',
         description:
-          '엔드포인트·메일·네트워크·클라우드 신호를 상관분석합니다.',
+          '단일 콘솔에서 위협 탐지·대응·위험 관리까지 수행하여 보안팀의 업무 효율을 끌어올립니다.',
       },
       {
-        icon: 'crosshair',
-        title: 'ASRM 공격 표면 관리',
-        description: '노출된 자산과 위험을 자동 식별해 우선순위를 매깁니다.',
+        icon: 'savings',
+        title: '절감된 비용',
+        description:
+          '분산된 솔루션을 통합 플랫폼으로 일원화하여 라이선스·운영 비용을 절감합니다.',
       },
       {
-        icon: 'brain',
-        title: 'AI 자동 대응',
-        description: '플레이북 기반 자동 격리·치료로 운영 부담을 줄입니다.',
+        icon: 'globe',
+        title: '포괄적 범위',
+        description:
+          '엔드포인트·이메일·네트워크·클라우드를 아우르는 XDR + ASRM으로 전방위 디지털 자산을 보호합니다.',
       },
     ],
   },

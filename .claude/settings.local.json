@@ -57,7 +57,10 @@
       "Bash(C:/Users/admin/AppData/Local/Programs/Python/Python312/python.exe /tmp/update-ppt-text.py)",
       "Bash(sleep 3 && cat \"/c/Users/admin/AppData/Local/Temp/claude/C--Users-admin-my-web-my-js-web--claude-worktrees-jolly-shamir-fd924a/fb85a90b-56f0-4e9e-b510-8c499c41cd73/tasks/bql2wodfy.output\" 2>&1 | head -20)",
       "Bash(find \"/c/Users/admin/AppData/Local/Temp/claude\" -mtime -1 \\\\\\( -name \"*.png\" -o -name \"*.jpg\" \\\\\\) -size +50k 2>/dev/null | head -10; echo \"---\"; find \"/c/Users/admin/AppData/Roaming\" -mtime -1 -name \"*.png\" -size +500k 2>/dev/null | head -10)",
-      "Bash(find /c/Users/admin -mmin -60 \\\\\\( -name \"*.png\" -o -name \"*.jpg\" -o -name \"*.jpeg\" -o -name \"*.webp\" \\\\\\) -size +200k 2>/dev/null | grep -v node_modules | grep -v \".git\" | head -20)"
+      "Bash(find /c/Users/admin -mmin -60 \\\\\\( -name \"*.png\" -o -name \"*.jpg\" -o -name \"*.jpeg\" -o -name \"*.webp\" \\\\\\) -size +200k 2>/dev/null | grep -v node_modules | grep -v \".git\" | head -20)",
+      "Bash([ -s /c/Users/admin/AppData/Local/Temp/claude/*/fb85a90b-56f0-4e9e-b510-8c499c41cd73/tasks/bkeog6wgw.output ])",
+      "Bash(grep -iE \"\\\\.\\(png|jpg|jpeg|webp\\)$\")",
+      "PowerShell(Add-Type -AssemblyName System.Windows.Forms; $img = [System.Windows.Forms.Clipboard]::GetImage\\(\\); if \\($img -ne $null\\) { $path = \"C:\\\\Users\\\\admin\\\\my-web\\\\my-js-web\\\\.claude\\\\worktrees\\\\jolly-shamir-fd924a\\\\public\\\\images\\\\ceo.png\"; $img.Save\\($path\\); Write-Output \"Saved $\\($img.Width\\)x$\\($img.Height\\) to $path\"; $info = Get-Item $path; Write-Output \"Size: $\\($info.Length\\) bytes\" } else { Write-Output \"No image in clipboard\" })"
     ]
   }
 }
