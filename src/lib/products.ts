@@ -294,30 +294,33 @@ const networkSecurityProducts: Product[] = [
     longDescription:
       '엔에스큐어의 NX Portrait는 방화벽 정책을 효율적이고 체계적으로 관리할 수 있는 정책관리 솔루션입니다. 다양한 네트워크 환경에서 방화벽 정책의 생성·수정·삭제 과정을 자동화하며, 실시간으로 정책의 효율성과 적용 여부를 모니터링할 수 있도록 설계되었습니다.',
     officialUrl: 'https://www.nxportrait.com/',
-    features: [
+    features: [],
+    featureGroups: [
       {
-        icon: 'list-checks',
+        icon: '📝',
         title: '정책 신청 및 결재 승인 기능',
-        description:
-          '신규 정책, 연장, 삭제 신청과 정책 Scale-In · Scale-Out 신청을 결재 워크플로 위에서 통합 관리합니다.',
+        bullets: [
+          '신규 정책, 연장, 삭제 신청',
+          '정책 Scale-In, Scale-Out 신청',
+        ],
       },
       {
-        icon: 'wand',
+        icon: '⚙️',
         title: '정책 설계 및 적용 자동화 기능',
-        description:
-          '대상 방화벽 자동 추천과 NAT 객체 자동 설계로 정책 생성·적용을 자동화합니다.',
+        bullets: ['대상 방화벽 자동 추천', 'NAT 객체 자동 설계'],
       },
       {
-        icon: 'gauge',
+        icon: '📈',
         title: '3Tib/Day 이상 대량 Traffic 처리',
-        description:
-          '대량 Traffic 수신 및 검색 기능, Traffic 최적화 및 적용 자동화 지원.',
+        bullets: [
+          '대량 Traffic 수신 및 검색 기능',
+          'Traffic 최적화 및 적용 자동화',
+        ],
       },
       {
-        icon: 'bar-chart',
+        icon: '🖥️',
         title: '장비 정책 분석 및 보안 감사 기능',
-        description:
-          '정책 별 상관·비교·Meta 분석과 Compliance Scoring을 제공합니다.',
+        bullets: ['정책 별 상관, 비교, Meta 분석', 'Compliance Scoring'],
       },
     ],
   },
