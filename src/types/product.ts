@@ -34,6 +34,12 @@ export type ProductAssets = {
   hero?: string;
   /** 핵심 기능별 아이콘/이미지. 순서는 PPT 슬라이드 등장 순. */
   featureImages?: readonly string[];
+  /**
+   * 본문에 끼워 넣을 추가 다이어그램들(구성도, 컴포넌트 그리드 등).
+   * 각 항목은 캡션과 함께 별도 섹션으로 렌더된다.
+   * 예: Genian ZTNA의 구성 요소(Agent/G/W/Policy) + 도입 구성(On-Prem/Cloud/Hybrid).
+   */
+  diagrams?: readonly { src: string; caption: string }[];
 };
 
 export type Product = {

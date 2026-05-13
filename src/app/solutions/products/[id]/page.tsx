@@ -171,6 +171,33 @@ export default async function ProductDetailPage({
             )}
           </section>
 
+          {/* 추가 다이어그램 (구성도·컴포넌트 등 PPT 표제 이미지) */}
+          {product.assets?.diagrams?.map((d) => (
+            <section
+              key={d.src}
+              className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200"
+            >
+              <div className="flex items-center gap-3 mb-6">
+                <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em]">
+                  Diagram
+                </span>
+                <span className="text-xs font-bold text-slate-500">
+                  {d.caption}
+                </span>
+                <div className="flex-1 h-px bg-slate-100" />
+              </div>
+              <div className="relative w-full">
+                <Image
+                  src={d.src}
+                  alt={d.caption}
+                  width={1600}
+                  height={900}
+                  className="w-full h-auto object-contain rounded-2xl"
+                />
+              </div>
+            </section>
+          ))}
+
           {/* 히어로 이미지 (PPT 본문 중앙의 대표 다이어그램/제품 사진) */}
           {product.assets?.hero && (
             <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200">
