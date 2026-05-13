@@ -1,126 +1,163 @@
 'use client';
-import { useState, useRef, useEffect, useCallback } from "react";
 
-const STORAGE_KEY = "solmo_chat_session";
-const STORAGE_MSGS = "solmo_chat_messages";
+import {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  type KeyboardEvent,
+  type FormEvent,
+} from 'react';
+import { useMutation } from '@tanstack/react-query';
 
-const SUGGESTIONS = [
-  "여기 뭐하는 곳이야?",
-  "보안 솔루션 추천해줘",
-  "견적 문의하고 싶어요",
-  "회사 위치가 어디예요?",
+const STORAGE_KEY = 'solmo_chat_session';
+const STORAGE_MSGS = 'solmo_chat_messages';
+
+const SUGGESTIONS: readonly string[] = [
+  '여기 뭐하는 곳이야?',
+  '보안 솔루션 추천해줘',
+  '견적 문의하고 싶어요',
+  '회사 위치가 어디예요?',
 ];
 
-const WELCOME = {
-  role: "assistant",
-  content:
-    "안녕하세요! 솔모정보기술 AI 상담원이에요.\n보안 솔루션, 회사 정보, 견적 문의 등 편하게 물어보세요.",
+type Role = 'user' | 'assistant' | 'system';
+
+type Message = {
+  role: Role;
+  content: string;
 };
+
+type ChatResponse = {
+  reply: string;
+  sessionId: string;
+  provider: 'gemini' | 'openai' | 'fallback';
+};
+
+const WELCOME: Message = {
+  role: 'assistant',
+  content:
+    '안녕하세요! 솔모정보기술 AI 상담원이에요.\n보안 솔루션, 회사 정보, 견적 문의 등 편하게 물어보세요.',
+};
+
+async function sendChatRequest(payload: {
+  messages: Message[];
+  sessionId: string | null;
+}): Promise<ChatResponse> {
+  const res = await fetch('/api/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  const data = (await res.json().catch(() => ({}))) as
+    | ChatResponse
+    | { error?: string };
+  if (!res.ok) {
+    const err = (data as { error?: string })?.error || `HTTP ${res.status}`;
+    throw new Error(err);
+  }
+  return data as ChatResponse;
+}
 
 export default function ChatBot() {
   const [open, setOpen] = useState(false);
-  const [messages, setMessages] = useState([WELCOME]);
-  const [input, setInput] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [sessionId, setSessionId] = useState(null);
-  const scrollRef = useRef(null);
-  const inputRef = useRef(null);
+  const [messages, setMessages] = useState<Message[]>([WELCOME]);
+  const [input, setInput] = useState('');
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+  const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
-  // Restore session from localStorage
+  const mutation = useMutation({
+    mutationFn: sendChatRequest,
+    onSuccess: (data) => {
+      if (data.sessionId && data.sessionId !== sessionId) {
+        setSessionId(data.sessionId);
+        try {
+          localStorage.setItem(STORAGE_KEY, data.sessionId);
+        } catch {
+          /* noop */
+        }
+      }
+      setMessages((m) => [
+        ...m,
+        { role: 'assistant', content: data.reply || '...' },
+      ]);
+    },
+    onError: (err: Error) => {
+      console.error('[chat] send failed:', err);
+      setMessages((m) => [
+        ...m,
+        {
+          role: 'assistant',
+          content:
+            '죄송합니다, 일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요. 급한 문의는 02-402-8054 로 연락해주세요.',
+        },
+      ]);
+    },
+  });
+
+  const loading = mutation.isPending;
+
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
     try {
       const savedId = localStorage.getItem(STORAGE_KEY);
       const savedMsgs = localStorage.getItem(STORAGE_MSGS);
       if (savedId) setSessionId(savedId);
       if (savedMsgs) {
-        const parsed = JSON.parse(savedMsgs);
+        const parsed = JSON.parse(savedMsgs) as Message[];
         if (Array.isArray(parsed) && parsed.length) setMessages(parsed);
       }
-    } catch {}
+    } catch {
+      /* noop */
+    }
   }, []);
 
-  // Persist messages
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
     try {
       localStorage.setItem(STORAGE_MSGS, JSON.stringify(messages.slice(-50)));
-    } catch {}
+    } catch {
+      /* noop */
+    }
   }, [messages]);
 
-  // Auto-scroll on new message
   useEffect(() => {
     if (!open) return;
     const el = scrollRef.current;
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages, open, loading]);
 
-  // Lock body scroll on mobile when open
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (open && window.matchMedia("(max-width: 640px)").matches) {
+    if (typeof window === 'undefined') return;
+    if (open && window.matchMedia('(max-width: 640px)').matches) {
       const original = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
       return () => {
         document.body.style.overflow = original;
       };
     }
   }, [open]);
 
-  // Focus input when opened
   useEffect(() => {
     if (open) setTimeout(() => inputRef.current?.focus(), 250);
   }, [open]);
 
   const send = useCallback(
-    async (text) => {
+    (text?: string) => {
       const content = (text ?? input).trim();
       if (!content || loading) return;
 
-      const userMsg = { role: "user", content };
+      const userMsg: Message = { role: 'user', content };
       const next = [...messages, userMsg];
       setMessages(next);
-      setInput("");
-      setLoading(true);
+      setInput('');
 
-      try {
-        const res = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            messages: next.filter((m) => m.role !== "system"),
-            sessionId,
-          }),
-        });
-
-        const data = await res.json().catch(() => ({}));
-
-        if (!res.ok) {
-          console.error("[chat] API error", res.status, data);
-          throw new Error(data?.error || `HTTP ${res.status}`);
-        }
-
-        if (data.sessionId && data.sessionId !== sessionId) {
-          setSessionId(data.sessionId);
-          try { localStorage.setItem(STORAGE_KEY, data.sessionId); } catch {}
-        }
-
-        setMessages((m) => [...m, { role: "assistant", content: data.reply || "..." }]);
-      } catch (err) {
-        console.error("[chat] send failed:", err);
-        setMessages((m) => [
-          ...m,
-          {
-            role: "assistant",
-            content:
-              "죄송합니다, 일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요. 급한 문의는 02-402-8054 로 연락해주세요.",
-          },
-        ]);
-      } finally {
-        setLoading(false);
-      }
+      mutation.mutate({
+        messages: next.filter((m) => m.role !== 'system'),
+        sessionId,
+      });
     },
-    [input, loading, messages, sessionId]
+    [input, loading, messages, mutation, sessionId]
   );
 
   const reset = () => {
@@ -129,12 +166,25 @@ export default function ChatBot() {
     try {
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem(STORAGE_MSGS);
-    } catch {}
+    } catch {
+      /* noop */
+    }
+  };
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    send();
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      send();
+    }
   };
 
   return (
     <>
-      {/* ───────── Floating launcher button ───────── */}
       {!open && (
         <button
           onClick={() => setOpen(true)}
@@ -154,23 +204,19 @@ export default function ChatBot() {
         </button>
       )}
 
-      {/* ───────── Chat panel ───────── */}
       {open && (
         <>
-          {/* Backdrop (mobile only) */}
           <div
             onClick={() => setOpen(false)}
             className="fixed inset-0 z-[59] bg-black/40 backdrop-blur-sm sm:hidden"
             aria-hidden="true"
           />
 
-          {/* Panel */}
           <div
             role="dialog"
             aria-label="솔모정보기술 챗봇"
             className="fixed z-[60] bg-white shadow-2xl flex flex-col overflow-hidden inset-x-0 bottom-0 top-16 rounded-t-[2rem] sm:inset-auto sm:bottom-7 sm:right-7 sm:top-auto sm:w-[400px] sm:h-[640px] sm:max-h-[calc(100vh-4rem)] sm:rounded-[2rem] border border-slate-200 animate-chat-in"
           >
-            {/* Header */}
             <div className="bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white px-5 py-4 flex items-center gap-3 shrink-0">
               <div className="w-11 h-11 rounded-full bg-white/15 flex items-center justify-center text-xl shrink-0">
                 🤖
@@ -201,7 +247,6 @@ export default function ChatBot() {
               </button>
             </div>
 
-            {/* Messages */}
             <div
               ref={scrollRef}
               className="flex-1 overflow-y-auto px-4 py-5 space-y-4 bg-slate-50"
@@ -211,7 +256,6 @@ export default function ChatBot() {
               ))}
               {loading && <TypingDots />}
 
-              {/* Suggestions (only when conversation is fresh) */}
               {messages.length <= 1 && !loading && (
                 <div className="pt-2">
                   <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 px-1">
@@ -232,14 +276,12 @@ export default function ChatBot() {
               )}
             </div>
 
-            {/* Input */}
             <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                send();
-              }}
+              onSubmit={handleSubmit}
               className="border-t border-slate-100 p-3 sm:p-4 bg-white shrink-0"
-              style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
+              style={{
+                paddingBottom: 'max(0.75rem, env(safe-area-inset-bottom))',
+              }}
             >
               <div className="flex gap-2 items-end">
                 <div className="flex-1 bg-slate-50 border border-slate-200 rounded-2xl focus-within:border-blue-600 transition-colors">
@@ -247,12 +289,7 @@ export default function ChatBot() {
                     ref={inputRef}
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" && !e.shiftKey) {
-                        e.preventDefault();
-                        send();
-                      }
-                    }}
+                    onKeyDown={handleKeyDown}
                     placeholder="무엇이든 물어보세요..."
                     rows={1}
                     maxLength={2000}
@@ -287,10 +324,10 @@ export default function ChatBot() {
   );
 }
 
-function Bubble({ role, content }) {
-  const isUser = role === "user";
+function Bubble({ role, content }: { role: Role; content: string }) {
+  const isUser = role === 'user';
   return (
-    <div className={`flex ${isUser ? "justify-end" : "justify-start"}`}>
+    <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
       {!isUser && (
         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white flex items-center justify-center text-xs shrink-0 mr-2 mt-0.5">
           🤖
@@ -299,8 +336,8 @@ function Bubble({ role, content }) {
       <div
         className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap break-words ${
           isUser
-            ? "bg-[#001F5B] text-white rounded-br-md font-medium"
-            : "bg-white border border-slate-200 text-slate-800 rounded-bl-md font-medium"
+            ? 'bg-[#001F5B] text-white rounded-br-md font-medium'
+            : 'bg-white border border-slate-200 text-slate-800 rounded-bl-md font-medium'
         }`}
       >
         {content}
@@ -316,9 +353,18 @@ function TypingDots() {
         🤖
       </div>
       <div className="bg-white border border-slate-200 rounded-2xl rounded-bl-md px-5 py-4 flex gap-1.5 items-center">
-        <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: "0ms" }}></span>
-        <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: "150ms" }}></span>
-        <span className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style={{ animationDelay: "300ms" }}></span>
+        <span
+          className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce"
+          style={{ animationDelay: '0ms' }}
+        ></span>
+        <span
+          className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce"
+          style={{ animationDelay: '150ms' }}
+        ></span>
+        <span
+          className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce"
+          style={{ animationDelay: '300ms' }}
+        ></span>
       </div>
     </div>
   );

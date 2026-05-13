@@ -19,7 +19,10 @@
       "Bash(git merge *)",
       "Bash(npm install *)",
       "Bash(npx tsc *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(git rm *)",
+      "Bash(git push *)",
+      "Bash(npm i *)"
     ]
   }
 }

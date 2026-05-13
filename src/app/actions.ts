@@ -1,26 +1,42 @@
 'use server';
 
-import nodemailer from "nodemailer";
-import { getPrisma } from "@/lib/prisma";
+import nodemailer from 'nodemailer';
+import { getPrisma } from '@/lib/prisma';
+
+export type InquirySubmitResult =
+  | {
+      success: true;
+      inquiryId: number | null;
+      dbSaved: boolean;
+      mailSent: boolean;
+      dbWarning?: string;
+      mailWarning?: string;
+    }
+  | {
+      success: false;
+      error: string;
+    };
 
 /**
  * Inquiry submission with FULL DECOUPLING:
- * - DB save and email send are independent steps
- * - DB failure does NOT prevent email delivery
- * - Email failure does NOT prevent the user from getting a success response
- *   (we still return success because the message reached us via at least one channel)
- * - Each step logs its own error to Vercel Functions logs
+ *  - DB save and email send are independent steps
+ *  - DB failure does NOT prevent email delivery
+ *  - Email failure does NOT prevent the user from getting a success response
+ *    (we still return success because the message reached us via at least one channel)
+ *  - Each step logs its own error to Vercel Functions logs
  */
-export async function submitInquiry(formData) {
-  const name = formData.get('name');
-  const email = formData.get('email');
-  const message = formData.get('message');
+export async function submitInquiry(
+  formData: FormData
+): Promise<InquirySubmitResult> {
+  const name = String(formData.get('name') ?? '');
+  const email = String(formData.get('email') ?? '');
+  const message = String(formData.get('message') ?? '');
 
   let dbSaved = false;
   let mailSent = false;
-  let dbError = null;
-  let mailError = null;
-  let inquiryId = null;
+  let dbError: string | null = null;
+  let mailError: string | null = null;
+  let inquiryId: number | null = null;
 
   // ── Step 1: DB save (best-effort) ──
   try {
@@ -30,49 +46,49 @@ export async function submitInquiry(formData) {
     });
     inquiryId = inquiry.id;
     dbSaved = true;
-    console.log("[inquiry] saved to DB:", inquiryId);
+    console.log('[inquiry] saved to DB:', inquiryId);
   } catch (err) {
-    dbError = err?.message || String(err);
-    console.error("[inquiry] DB save FAILED:", dbError);
-    // Don't return — keep going to email
+    dbError = err instanceof Error ? err.message : String(err);
+    console.error('[inquiry] DB save FAILED:', dbError);
   }
 
   // ── Step 2: Email send (independent) ──
   const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
   const smtpPass = process.env.SMTP_PASS || process.env.EMAIL_PASS;
-  const receiver = process.env.RECEIVER_EMAIL || "kimhyunjin0730@gmail.com";
+  const receiver = process.env.RECEIVER_EMAIL || 'kimhyunjin0730@gmail.com';
 
   if (!smtpUser || !smtpPass) {
-    mailError = "SMTP credentials not set in environment";
-    console.error("[inquiry] " + mailError);
+    mailError = 'SMTP credentials not set in environment';
+    console.error('[inquiry] ' + mailError);
   } else {
     try {
       const transporter = nodemailer.createTransport({
-        service: "gmail",
+        service: 'gmail',
         auth: { user: smtpUser, pass: smtpPass },
       });
 
-      // Verify the SMTP connection first — fails fast with a clear error
       try {
         await transporter.verify();
-        console.log("[inquiry] SMTP connection verified");
+        console.log('[inquiry] SMTP connection verified');
       } catch (verifyErr) {
-        console.error("[inquiry] SMTP verify failed:", verifyErr?.message || verifyErr);
+        const msg =
+          verifyErr instanceof Error ? verifyErr.message : String(verifyErr);
+        console.error('[inquiry] SMTP verify failed:', msg);
       }
 
-      const safeName = String(name || "").slice(0, 200);
-      const safeEmail = String(email || "").slice(0, 200);
-      const safeMessage = String(message || "").slice(0, 5000);
+      const safeName = name.slice(0, 200);
+      const safeEmail = email.slice(0, 200);
+      const safeMessage = message.slice(0, 5000);
       const safeDbStatus = dbSaved
         ? `✅ DB 저장됨 (ID: ${inquiryId})`
-        : `⚠ DB 저장 실패 (${dbError || "unknown"})`;
+        : `⚠ DB 저장 실패 (${dbError || 'unknown'})`;
 
       const htmlContent = `
         <div style="font-family: 'Apple SD Gothic Neo', sans-serif; max-width: 640px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden;">
           <div style="background: linear-gradient(135deg, #001F5B, #4338ca); color: white; padding: 28px 32px;">
             <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.2em; opacity: 0.7; margin-bottom: 8px;">SOLMO WEB INQUIRY</div>
             <h1 style="margin: 0; font-size: 22px; font-weight: 800;">새로운 홈페이지 문의 접수</h1>
-            <p style="margin: 8px 0 0; font-size: 13px; opacity: 0.8;">${new Date().toLocaleString("ko-KR")}</p>
+            <p style="margin: 8px 0 0; font-size: 13px; opacity: 0.8;">${new Date().toLocaleString('ko-KR')}</p>
           </div>
           <div style="padding: 28px 32px; background: #fff;">
             <table style="width: 100%; border-collapse: collapse;">
@@ -103,25 +119,24 @@ export async function submitInquiry(formData) {
         from: `"SOLMO Web" <${smtpUser}>`,
         to: receiver,
         replyTo: email,
-        subject: `[솔모 문의] ${name}님 — ${String(message).slice(0, 30)}...`,
+        subject: `[솔모 문의] ${name}님 — ${message.slice(0, 30)}...`,
         html: htmlContent,
       });
       mailSent = true;
-      console.log("[inquiry] email sent:", info.messageId, "to:", receiver);
+      console.log('[inquiry] email sent:', info.messageId, 'to:', receiver);
     } catch (err) {
-      mailError = err?.message || String(err);
-      console.error("[inquiry] email send FAILED:", mailError);
+      mailError = err instanceof Error ? err.message : String(err);
+      console.error('[inquiry] email send FAILED:', mailError);
     }
   }
 
   // ── Step 3: Return result ──
-  // We consider it a success if EITHER channel succeeded
   const success = dbSaved || mailSent;
 
   if (!success) {
     return {
       success: false,
-      error: `문의 전송 실패. DB: ${dbError || "?"} / Mail: ${mailError || "?"}`,
+      error: `문의 전송 실패. DB: ${dbError || '?'} / Mail: ${mailError || '?'}`,
     };
   }
 
@@ -135,11 +150,11 @@ export async function submitInquiry(formData) {
   };
 }
 
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
 }

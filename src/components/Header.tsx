@@ -1,50 +1,71 @@
 'use client';
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
-const NAV = [
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+
+/** 네비게이션 항목 — 드롭다운 섹션 또는 직링크. */
+type NavLink = { label: string; href: string };
+
+type NavSectionGroup = {
+  id: string;
+  label: string;
+  items: readonly NavLink[];
+};
+
+type NavSectionLink = {
+  id: string;
+  label: string;
+  href: string;
+};
+
+type NavSection = NavSectionGroup | NavSectionLink;
+
+function isLinkSection(section: NavSection): section is NavSectionLink {
+  return 'href' in section;
+}
+
+const NAV: readonly NavSection[] = [
   {
-    id: "company",
-    label: "COMPANY",
+    id: 'company',
+    label: 'COMPANY',
     items: [
-      { label: "인사말", href: "/about/greetings" },
-      { label: "연혁", href: "/about/history" },
-      { label: "인증 및 특허", href: "/about/certifications" },
-      { label: "조직도", href: "/about/organization" },
+      { label: '인사말', href: '/about/greetings' },
+      { label: '연혁', href: '/about/history' },
+      { label: '인증 및 특허', href: '/about/certifications' },
+      { label: '조직도', href: '/about/organization' },
     ],
   },
   {
-    id: "solutions",
-    label: "SOLUTIONS",
+    id: 'solutions',
+    label: 'SOLUTIONS',
     items: [
-      { label: "네트워크 보안", href: "/solutions/network-security" },
-      { label: "어플리케이션 보안", href: "/solutions/application-security" },
-      { label: "내부정보유출 보안", href: "/solutions/data-leakage-prevention" },
-      { label: "백업 및 복구", href: "/solutions/backup-recovery" },
+      { label: '네트워크 보안', href: '/solutions/network-security' },
+      {
+        label: '단말 / 서버 보안',
+        href: '/solutions/endpoint-server-security',
+      },
+      { label: '애플리케이션 보안', href: '/solutions/application-security' },
+      { label: 'OT 보안 & 시스템', href: '/solutions/ot-security' },
     ],
   },
   {
-    id: "services",
-    label: "SERVICES",
+    id: 'services',
+    label: 'SERVICES',
     items: [
-      { label: "보안취약점 분석", href: "/services/vulnerability-analysis" },
-      { label: "보안프린트 구축", href: "/services/secure-printing" },
-      { label: "통합 유지보수", href: "/services/maintenance" },
+      { label: '보안취약점 분석', href: '/services/vulnerability-analysis' },
+      { label: '보안프린트 구축', href: '/services/secure-printing' },
+      { label: '통합 유지보수', href: '/services/maintenance' },
     ],
   },
+  { id: 'clients', label: 'CLIENTS', href: '/clients' },
   {
-    id: "clients",
-    label: "CLIENTS",
-    href: "/clients",
-  },
-  {
-    id: "support",
-    label: "SUPPORT",
+    id: 'support',
+    label: 'SUPPORT',
     items: [
-      { label: "영업문의", href: "/support/contact" },
-      { label: "오시는 길", href: "/support/location" },
+      { label: '영업문의', href: '/support/contact' },
+      { label: '오시는 길', href: '/support/location' },
     ],
   },
 ];
@@ -52,28 +73,26 @@ const NAV = [
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [openSection, setOpenSection] = useState(null); // mobile accordion
+  const [openSection, setOpenSection] = useState<string | null>(null);
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const isHome = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileOpen(false);
     setOpenSection(null);
   }, [pathname]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (typeof window === 'undefined') return;
     if (mobileOpen) {
       const original = document.body.style.overflow;
-      document.body.style.overflow = "hidden";
+      document.body.style.overflow = 'hidden';
       return () => {
         document.body.style.overflow = original;
       };
@@ -85,23 +104,31 @@ export default function Header() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled || !isHome
-            ? "bg-white/80 backdrop-blur-xl shadow-[0_2px_24px_-12px_rgba(0,31,91,0.15)] border-b border-slate-200/60"
-            : "bg-white/90 backdrop-blur-sm border-b border-slate-100"
+            ? 'bg-white/80 backdrop-blur-xl shadow-[0_2px_24px_-12px_rgba(0,31,91,0.15)] border-b border-slate-200/60'
+            : 'bg-white/90 backdrop-blur-sm border-b border-slate-100'
         }`}
-        style={{ paddingTop: "max(0.875rem, env(safe-area-inset-top))" }}
+        style={{ paddingTop: 'max(0.875rem, env(safe-area-inset-top))' }}
       >
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-14 sm:h-16 lg:h-[68px]">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 cursor-pointer shrink-0">
+          <Link
+            href="/"
+            className="flex items-center gap-3 cursor-pointer shrink-0"
+          >
             <div className="relative w-[120px] sm:w-[140px] lg:w-[150px] h-[30px] sm:h-[36px] lg:h-[38px]">
-              <Image src="/SOLMO_Logo.png" alt="SOLMO" fill priority className="object-contain" />
+              <Image
+                src="/SOLMO_Logo.png"
+                alt="SOLMO"
+                fill
+                priority
+                className="object-contain"
+              />
             </div>
           </Link>
 
-          {/* Desktop nav */}
+          {/* Desktop */}
           <div className="hidden lg:flex items-center gap-8 xl:gap-12 text-[12px] font-bold text-slate-500 uppercase tracking-widest">
             {NAV.map((section) =>
-              section.href ? (
+              isLinkSection(section) ? (
                 <Link
                   key={section.id}
                   href={section.href}
@@ -154,31 +181,32 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* ───────── Mobile Drawer ───────── */}
       {mobileOpen && (
         <div className="lg:hidden fixed inset-0 z-[60]">
-          {/* Backdrop */}
           <div
             onClick={() => setMobileOpen(false)}
             className="absolute inset-0 bg-slate-950/50 backdrop-blur-sm animate-fade-in"
           />
 
-          {/* Slide-in panel */}
           <aside
             className="absolute top-0 right-0 bottom-0 w-[88%] max-w-sm bg-white shadow-2xl flex flex-col animate-slide-in-r"
             style={{
-              paddingTop: "env(safe-area-inset-top)",
-              paddingBottom: "env(safe-area-inset-bottom)",
+              paddingTop: 'env(safe-area-inset-top)',
+              paddingBottom: 'env(safe-area-inset-bottom)',
             }}
           >
-            {/* Drawer header */}
             <div className="flex items-center justify-between px-5 h-16 border-b border-slate-100">
               <Link
                 href="/"
                 onClick={() => setMobileOpen(false)}
                 className="relative w-[120px] h-[30px]"
               >
-                <Image src="/SOLMO_Logo.png" alt="SOLMO" fill className="object-contain" />
+                <Image
+                  src="/SOLMO_Logo.png"
+                  alt="SOLMO"
+                  fill
+                  className="object-contain"
+                />
               </Link>
               <button
                 type="button"
@@ -186,23 +214,32 @@ export default function Header() {
                 aria-label="메뉴 닫기"
                 className="w-11 h-11 -mr-2 flex items-center justify-center text-slate-500 active:scale-90 transition-transform"
               >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                >
                   <line x1="6" y1="6" x2="18" y2="18" />
                   <line x1="18" y1="6" x2="6" y2="18" />
                 </svg>
               </button>
             </div>
 
-            {/* Nav list (scrollable) */}
             <nav className="flex-1 overflow-y-auto overscroll-contain px-2 py-4">
               {NAV.map((section) =>
-                section.href ? (
+                isLinkSection(section) ? (
                   <Link
                     key={section.id}
                     href={section.href}
                     onClick={() => setMobileOpen(false)}
                     className={`flex items-center justify-between px-4 py-4 mx-1 rounded-2xl text-base font-bold tracking-tight active:bg-slate-100 transition-all ${
-                      pathname === section.href ? "text-[#001F5B]" : "text-slate-700"
+                      pathname === section.href
+                        ? 'text-[#001F5B]'
+                        : 'text-slate-700'
                     }`}
                   >
                     {section.label}
@@ -214,7 +251,9 @@ export default function Header() {
                     section={section}
                     open={openSection === section.id}
                     onToggle={() =>
-                      setOpenSection(openSection === section.id ? null : section.id)
+                      setOpenSection(
+                        openSection === section.id ? null : section.id
+                      )
                     }
                     pathname={pathname}
                     onNavigate={() => setMobileOpen(false)}
@@ -223,7 +262,6 @@ export default function Header() {
               )}
             </nav>
 
-            {/* Footer CTA */}
             <div className="border-t border-slate-100 p-4 space-y-3 bg-slate-50">
               <Link
                 href="/support/contact"
@@ -259,7 +297,21 @@ export default function Header() {
   );
 }
 
-function MobileSection({ section, open, onToggle, pathname, onNavigate }) {
+type MobileSectionProps = {
+  section: NavSectionGroup;
+  open: boolean;
+  onToggle: () => void;
+  pathname: string;
+  onNavigate: () => void;
+};
+
+function MobileSection({
+  section,
+  open,
+  onToggle,
+  pathname,
+  onNavigate,
+}: MobileSectionProps) {
   return (
     <div className="mb-1">
       <button
@@ -277,7 +329,7 @@ function MobileSection({ section, open, onToggle, pathname, onNavigate }) {
           stroke="currentColor"
           strokeWidth="2.5"
           strokeLinecap="round"
-          className={`text-slate-400 transition-transform ${open ? "rotate-180" : ""}`}
+          className={`text-slate-400 transition-transform ${open ? 'rotate-180' : ''}`}
         >
           <polyline points="6 9 12 15 18 9" />
         </svg>
@@ -291,8 +343,8 @@ function MobileSection({ section, open, onToggle, pathname, onNavigate }) {
               onClick={onNavigate}
               className={`block px-6 py-3 mx-1 rounded-xl text-sm font-semibold active:bg-blue-50 transition-all ${
                 pathname === item.href
-                  ? "text-[#001F5B] bg-blue-50"
-                  : "text-slate-500 hover:text-slate-800"
+                  ? 'text-[#001F5B] bg-blue-50'
+                  : 'text-slate-500 hover:text-slate-800'
               }`}
             >
               {item.label}

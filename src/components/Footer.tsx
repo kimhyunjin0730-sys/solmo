@@ -1,0 +1,151 @@
+'use client';
+
+import Image from 'next/image';
+import Link from 'next/link';
+
+type FooterLink = { label: string; href: string };
+
+const COMPANY_LINKS: FooterLink[] = [
+  { label: '인사말', href: '/about/greetings' },
+  { label: '연혁', href: '/about/history' },
+  { label: '인증 및 특허', href: '/about/certifications' },
+  { label: '조직도', href: '/about/organization' },
+];
+
+const SOLUTION_LINKS: FooterLink[] = [
+  { label: '네트워크 보안', href: '/solutions/network-security' },
+  { label: '단말 / 서버 보안', href: '/solutions/endpoint-server-security' },
+  { label: '애플리케이션 보안', href: '/solutions/application-security' },
+  { label: 'OT 보안 & 시스템', href: '/solutions/ot-security' },
+];
+
+const SERVICE_LINKS: FooterLink[] = [
+  { label: '보안취약점 분석', href: '/services/vulnerability-analysis' },
+  { label: '보안프린트 구축', href: '/services/secure-printing' },
+  { label: '통합 유지보수', href: '/services/maintenance' },
+];
+
+const CLIENT_LINKS: FooterLink[] = [{ label: '고객사 현황', href: '/clients' }];
+
+const SUPPORT_LINKS: FooterLink[] = [
+  { label: '영업 문의', href: '/support/contact' },
+  { label: '오시는 길', href: '/support/location' },
+];
+
+export default function Footer() {
+  return (
+    <footer className="relative bg-slate-950 text-white py-20 border-t border-white/5 overflow-hidden">
+      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none -translate-x-1/3 -translate-y-1/3" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none translate-x-1/3 translate-y-1/3" />
+      <div
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        style={{
+          backgroundImage:
+            'linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)',
+          backgroundSize: '60px 60px',
+        }}
+      />
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/40 to-transparent" />
+
+      <div className="max-w-[1400px] mx-auto px-8 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-16">
+          <div className="lg:col-span-4 space-y-8">
+            <Link href="/" className="inline-block">
+              <div className="relative w-[180px] h-[45px] brightness-0 invert opacity-90">
+                <Image
+                  src="/SOLMO_Logo.png"
+                  alt="SOLMO"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </Link>
+            <p className="text-white/40 text-sm font-bold leading-relaxed max-w-sm italic">
+              &ldquo;고객과 함께 성장하는 최고의 보안 파트너&rdquo; <br />
+              솔모정보기술은 22년의 신뢰와 독보적인 기술력으로 <br />
+              기업의 소중한 정보를 보호합니다.
+            </p>
+          </div>
+
+          <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            <FooterLinkGroup title="Company" links={COMPANY_LINKS} />
+            <FooterLinkGroup title="Solutions" links={SOLUTION_LINKS} />
+            <FooterLinkGroup title="Services" links={SERVICE_LINKS} />
+            <FooterLinkGroup title="Clients" links={CLIENT_LINKS} />
+            <FooterLinkGroup title="Support" links={SUPPORT_LINKS} />
+          </div>
+        </div>
+
+        <div className="pt-12 border-t border-white/5">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-end">
+            <div className="space-y-4">
+              <div className="flex flex-wrap gap-x-6 gap-y-2 text-white/40 text-xs font-bold uppercase tracking-wider">
+                <span>대표이사 : 이병두</span>
+                <span className="opacity-30">|</span>
+                <span>사업자등록번호 : 122-81-74607</span>
+              </div>
+              <div className="flex flex-wrap gap-x-6 gap-y-2 text-white/40 text-xs font-bold uppercase tracking-wider">
+                <span>주소 : 서울특별시 광진구 아차산로 309, 남장빌딩 2층</span>
+              </div>
+              <div className="flex flex-wrap gap-x-6 gap-y-2 text-white/40 text-xs font-bold">
+                <span>
+                  Tel.{' '}
+                  <a
+                    href="tel:024028054"
+                    className="hover:text-white transition-colors"
+                  >
+                    02-402-8054
+                  </a>
+                </span>
+                <span>Fax. 02-402-8055</span>
+                <span>
+                  Email :{' '}
+                  <a
+                    href="mailto:solmoit01@solmo.co.kr"
+                    className="hover:text-white transition-colors"
+                  >
+                    solmoit01@solmo.co.kr
+                  </a>
+                </span>
+              </div>
+            </div>
+
+            <div className="lg:text-right">
+              <p className="text-white/20 text-[10px] font-black uppercase tracking-[0.3em]">
+                © 2026 SOLMO INFORMATION TECHNOLOGY. ALL RIGHTS RESERVED.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+function FooterLinkGroup({
+  title,
+  links,
+}: {
+  title: string;
+  links: FooterLink[];
+}) {
+  return (
+    <div className="space-y-6">
+      <h4 className="text-blue-500 font-black text-xs uppercase tracking-[0.3em]">
+        {title}
+      </h4>
+      <ul className="space-y-3">
+        {links.map((link) => (
+          <li key={link.href}>
+            <Link
+              href={link.href}
+              className="text-white/40 text-xs font-bold hover:text-white transition-colors tracking-tight"
+            >
+              {link.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
