@@ -1,7 +1,25 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:www.solmo.co.kr)"
+      "WebFetch(domain:www.solmo.co.kr)",
+      "Read(//c/Users/admin/my-web/my-js-web/**)",
+      "Read(//c/Users/admin/my-web/my-js-web/.vercel/**)",
+      "mcp__750e3b7f-7f56-49a6-9455-74dfb49ccd0b__list_teams",
+      "mcp__750e3b7f-7f56-49a6-9455-74dfb49ccd0b__get_project",
+      "Bash(ls \"C:/Users/admin/Downloads/\" | grep -i \"홈페이지\\\\|회사개요\\\\|260511\\\\|pptx\" | head)",
+      "Bash(python -m markitdown \"C:/Users/admin/Downloads/홈페이지_회사개요_260511.pptx\")",
+      "Bash(pip install *)",
+      "Bash(C:/Users/admin/AppData/Local/Programs/Python/Python312/python.exe -m markitdown \"C:/Users/admin/Downloads/홈페이지_회사개요_260511.pptx\")",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "mcp__750e3b7f-7f56-49a6-9455-74dfb49ccd0b__list_deployments",
+      "Bash(C:/Users/admin/AppData/Local/Programs/Python/Python312/python.exe -m markitdown \"C:/Users/admin/Downloads/홈페이지_솔루션_260511.pptx\")",
+      "Bash(git checkout *)",
+      "Bash(git pull *)",
+      "Bash(git merge *)",
+      "Bash(npm install *)",
+      "Bash(npx tsc *)",
+      "Bash(npm run *)"
     ]
   }
 }

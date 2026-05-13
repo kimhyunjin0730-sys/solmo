@@ -13,3 +13,5 @@ build/
 *.db
 *.db-journal
 prisma/dev.db
+tsconfig.tsbuildinfo
+.next/

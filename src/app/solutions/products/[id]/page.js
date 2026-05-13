@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getProduct, PRODUCT_LIST, CATEGORY_INFO } from "@/lib/products";
+import { getProduct, PRODUCT_LIST, CATEGORY_INFO } from "@/lib/products.legacy";
 import ProductDiagram from "@/components/ProductDiagrams";
 
 /* ──────────── Feature card with proper SVG iconography ──────────── */
