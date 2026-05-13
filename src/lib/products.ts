@@ -352,12 +352,12 @@ const networkSecurityProducts: Product[] = [
     assets: {
       logo: '/images/products/kornic-glory-wips/logo.png',
     },
-    name: 'WIPS (Wireless IPS)',
-    vendor: '코니카미놀타 / Kornic Glory',
+    name: 'WIPS 무선인증',
+    vendor: '코닉오토메이션',
     shortDescription:
-      '무선 네트워크 전용 침입 방지 시스템. 비인가 AP·세션 하이재킹을 차단.',
+      '무선 네트워크 환경에서 발생할 수 있는 다양한 위협을 실시간 탐지·차단하는 고성능 무선 침입 방지 시스템.',
     longDescription:
-      '코니카미놀타의 WIPS(Wireless Intrusion Prevention System) 솔루션은 무선 네트워크 환경에서 발생할 수 있는 다양한 위협을 실시간으로 탐지하고 차단합니다. 비인가 AP, 세션 하이재킹, 무선 도청 등 다양한 위협을 신속하게 식별합니다.',
+      '코닉오토메이션의 WIPS(Wireless Intrusion Prevention System) 솔루션은 무선 네트워크 환경에서 발생할 수 있는 다양한 위협을 실시간으로 탐지하고 차단하는 고성능 무선 침입 방지 시스템입니다. 이 솔루션은 무선 AP 주변 환경을 지속적으로 모니터링하며, 무단 접속 시도, 악성 AP, 세션 하이재킹 등 다양한 무선 공격을 신속하게 식별하여 네트워크 보안을 강화합니다.',
     officialUrl: 'https://www.kornicglory.co.kr/',
     features: [
       {
