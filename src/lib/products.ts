@@ -57,6 +57,11 @@ const networkSecurityProducts: Product[] = [
   {
     id: 'fortinet',
     categoryId: 'network-security',
+    assets: {
+      logo: '/images/products/fortinet/logo.png',
+      hero: '/images/products/fortinet/hero.png',
+      featureImages: ['/images/products/fortinet/feature-1.png', '/images/products/fortinet/feature-2.png', '/images/products/fortinet/feature-3.png', '/images/products/fortinet/feature-4.png', '/images/products/fortinet/feature-5.png', '/images/products/fortinet/feature-6.png'],
+    },
     name: 'FortiGate',
     vendor: 'Fortinet',
     shortDescription:
@@ -89,6 +94,10 @@ const networkSecurityProducts: Product[] = [
   {
     id: 'radware',
     categoryId: 'network-security',
+    assets: {
+      logo: '/images/products/radware/logo.png',
+      hero: '/images/products/radware/hero.png',
+    },
     name: 'Radware DDoS',
     vendor: 'Radware',
     shortDescription:
@@ -119,6 +128,9 @@ const networkSecurityProducts: Product[] = [
   {
     id: 'network-blackbox',
     categoryId: 'network-security',
+    assets: {
+      logo: '/images/products/network-blackbox/logo.png',
+    },
     name: 'Network BlackBox',
     vendor: 'Quad Miners',
     shortDescription:
@@ -154,6 +166,10 @@ const networkSecurityProducts: Product[] = [
   {
     id: 'piolink',
     categoryId: 'network-security',
+    assets: {
+      logo: '/images/products/piolink/logo.png',
+      hero: '/images/products/piolink/hero.png',
+    },
     name: 'PIOLINK PAS-K Switch',
     vendor: 'PIOLINK',
     shortDescription:
@@ -182,6 +198,10 @@ const networkSecurityProducts: Product[] = [
   {
     id: 'genian-ztna',
     categoryId: 'network-security',
+    assets: {
+      logo: '/images/products/genian-ztna/logo.png',
+      hero: '/images/products/genian-ztna/hero.png',
+    },
     name: 'Genian ZTNA / NAC',
     vendor: 'Genians',
     shortDescription:
@@ -214,6 +234,10 @@ const networkSecurityProducts: Product[] = [
   {
     id: 'nx-portrait',
     categoryId: 'network-security',
+    assets: {
+      logo: '/images/products/nx-portrait/logo.png',
+      hero: '/images/products/nx-portrait/hero.png',
+    },
     name: 'NX Portrait',
     vendor: '엔에스큐어',
     shortDescription:
@@ -244,6 +268,10 @@ const networkSecurityProducts: Product[] = [
   {
     id: 'entrolink',
     categoryId: 'network-security',
+    assets: {
+      logo: '/images/products/entrolink/logo.png',
+      hero: '/images/products/entrolink/hero.png',
+    },
     name: '엔트로링크 스위칭/방화벽',
     vendor: '엔트로링크',
     shortDescription:
@@ -272,6 +300,10 @@ const networkSecurityProducts: Product[] = [
   {
     id: 'kornic-glory-wips',
     categoryId: 'network-security',
+    assets: {
+      logo: '/images/products/kornic-glory-wips/logo.png',
+      hero: '/images/products/kornic-glory-wips/hero.png',
+    },
     name: 'WIPS (Wireless IPS)',
     vendor: '코니카미놀타 / Kornic Glory',
     shortDescription:
@@ -300,6 +332,10 @@ const networkSecurityProducts: Product[] = [
   {
     id: 'qradar',
     categoryId: 'network-security',
+    assets: {
+      logo: '/images/products/qradar/logo.png',
+      hero: '/images/products/qradar/hero.png',
+    },
     name: 'IBM QRadar',
     vendor: 'IBM',
     shortDescription:
@@ -337,6 +373,10 @@ const endpointServerProducts: Product[] = [
   {
     id: 'dbsafer',
     categoryId: 'endpoint-server-security',
+    assets: {
+      logo: '/images/products/dbsafer/logo.png',
+      hero: '/images/products/dbsafer/hero.png',
+    },
     name: 'DBSAFER',
     vendor: 'PNP Secure',
     shortDescription:
@@ -366,6 +406,10 @@ const endpointServerProducts: Product[] = [
   {
     id: 'netand-hiware',
     categoryId: 'endpoint-server-security',
+    assets: {
+      logo: '/images/products/netand-hiware/logo.png',
+      hero: '/images/products/netand-hiware/hero.png',
+    },
     name: 'HIWARE',
     vendor: 'NETAND',
     shortDescription:
@@ -396,6 +440,11 @@ const endpointServerProducts: Product[] = [
   {
     id: 'appcheck',
     categoryId: 'endpoint-server-security',
+    assets: {
+      logo: '/images/products/appcheck/logo.png',
+      hero: '/images/products/appcheck/hero.png',
+      featureImages: ['/images/products/appcheck/feature-1.png', '/images/products/appcheck/feature-2.png', '/images/products/appcheck/feature-3.png'],
+    },
     name: 'AppCheck Pro',
     vendor: '체크멀(Checkmal)',
     shortDescription:
@@ -425,6 +474,10 @@ const endpointServerProducts: Product[] = [
   {
     id: 'trendmicro-vision-one',
     categoryId: 'endpoint-server-security',
+    assets: {
+      logo: '/images/products/trendmicro-vision-one/logo.png',
+      hero: '/images/products/trendmicro-vision-one/hero.png',
+    },
     name: 'Trend Vision One',
     vendor: 'Trend Micro',
     shortDescription:
@@ -461,6 +514,11 @@ const applicationProducts: Product[] = [
   {
     id: 'xsecuritas',
     categoryId: 'application-security',
+    assets: {
+      logo: '/images/products/xsecuritas/logo.png',
+      hero: '/images/products/xsecuritas/hero.png',
+      featureImages: ['/images/products/xsecuritas/feature-1.png', '/images/products/xsecuritas/feature-2.png'],
+    },
     name: 'xSecuritas Screen Watermark',
     vendor: 'xSecuritas',
     shortDescription:
@@ -491,6 +549,10 @@ const applicationProducts: Product[] = [
   {
     id: 'sindoh-secure-print',
     categoryId: 'application-security',
+    assets: {
+      logo: '/images/products/sindoh-secure-print/logo.jpeg',
+      hero: '/images/products/sindoh-secure-print/hero.png',
+    },
     name: '신도 보안출력',
     vendor: '신도(SINDOH)',
     shortDescription:
@@ -519,6 +581,10 @@ const applicationProducts: Product[] = [
   {
     id: 'proofpoint',
     categoryId: 'application-security',
+    assets: {
+      logo: '/images/products/proofpoint/logo.png',
+      hero: '/images/products/proofpoint/hero.png',
+    },
     name: 'Proofpoint Email Protection',
     vendor: 'Proofpoint',
     shortDescription:
@@ -550,6 +616,9 @@ const applicationProducts: Product[] = [
   {
     id: 'cisco-esa',
     categoryId: 'application-security',
+    assets: {
+      logo: '/images/products/cisco-esa/logo.png',
+    },
     name: 'Cisco Email Security Appliance',
     vendor: 'Cisco',
     shortDescription:
@@ -579,6 +648,10 @@ const applicationProducts: Product[] = [
   {
     id: 'tilon-vdi',
     categoryId: 'application-security',
+    assets: {
+      logo: '/images/products/tilon-vdi/logo.png',
+      hero: '/images/products/tilon-vdi/hero.png',
+    },
     name: '틸론 VDI (Dstation)',
     vendor: 'Tilon',
     shortDescription:
@@ -608,6 +681,10 @@ const applicationProducts: Product[] = [
   {
     id: 'acronis',
     categoryId: 'application-security',
+    assets: {
+      logo: '/images/products/acronis/logo.png',
+      hero: '/images/products/acronis/hero.png',
+    },
     name: 'Acronis Cyber Protect',
     vendor: 'Acronis',
     shortDescription:
@@ -644,6 +721,10 @@ const otProducts: Product[] = [
   {
     id: 'txone',
     categoryId: 'ot-security',
+    assets: {
+      logo: '/images/products/txone/logo.png',
+      hero: '/images/products/txone/hero.png',
+    },
     name: 'TXOne OT Zero Trust',
     vendor: 'TXOne Networks',
     shortDescription:
@@ -675,6 +756,11 @@ const otProducts: Product[] = [
   {
     id: 'hitachi-storage',
     categoryId: 'ot-security',
+    assets: {
+      logo: '/images/products/hitachi-storage/logo.png',
+      hero: '/images/products/hitachi-storage/hero.png',
+      featureImages: ['/images/products/hitachi-storage/feature-1.png', '/images/products/hitachi-storage/feature-2.png', '/images/products/hitachi-storage/feature-3.png', '/images/products/hitachi-storage/feature-4.png'],
+    },
     name: 'Hitachi Storage',
     vendor: 'Hitachi Vantara',
     shortDescription:

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { CATEGORY_BY_ID, getProductsByCategory } from '@/lib/products';
 import type { ProductCategoryId } from '@/types/product';
 
@@ -44,10 +45,29 @@ export function SolutionCategoryView({
             <Link
               key={p.id}
               href={`/solutions/products/${p.id}`}
-              className="group bg-white border border-slate-200 rounded-3xl p-7 hover:border-[#001F5B] hover:shadow-xl hover:shadow-blue-900/5 transition-all"
+              className="group bg-white border border-slate-200 rounded-3xl p-7 hover:border-[#001F5B] hover:shadow-xl hover:shadow-blue-900/5 transition-all flex flex-col"
             >
+              {/* 벤더 로고 영역 (PPT에서 추출한 실제 로고) */}
+              <div className="h-14 mb-5 flex items-center">
+                {p.assets?.logo ? (
+                  <div className="relative h-12 w-32">
+                    <Image
+                      src={p.assets.logo}
+                      alt={`${p.vendor} 로고`}
+                      fill
+                      className="object-contain object-left"
+                      sizes="128px"
+                    />
+                  </div>
+                ) : (
+                  <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">
+                    {p.vendor}
+                  </span>
+                )}
+              </div>
+
               <div className="flex items-baseline justify-between mb-3">
-                <span className="text-[10px] font-black text-blue-600 uppercase tracking-widest">
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
                   {p.vendor}
                 </span>
                 {p.badges?.[0] && (
@@ -62,7 +82,7 @@ export function SolutionCategoryView({
               <p className="text-sm font-medium text-slate-500 leading-relaxed line-clamp-3 mb-5">
                 {p.shortDescription}
               </p>
-              <div className="flex items-center gap-2 text-xs font-bold text-slate-400 group-hover:text-[#001F5B] transition-colors">
+              <div className="mt-auto flex items-center gap-2 text-xs font-bold text-slate-400 group-hover:text-[#001F5B] transition-colors">
                 자세히 보기
                 <span className="transition-transform group-hover:translate-x-1">
                   →
