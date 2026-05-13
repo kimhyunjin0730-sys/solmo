@@ -76,12 +76,9 @@ export function SolutionCategoryView({
                   </span>
                 )}
               </div>
-              <h3 className="text-lg font-black text-slate-900 tracking-tight mb-2 group-hover:text-[#001F5B] transition-colors">
+              <h3 className="text-lg font-black text-slate-900 tracking-tight mb-5 group-hover:text-[#001F5B] transition-colors">
                 {p.name}
               </h3>
-              <p className="text-sm font-medium text-slate-500 leading-relaxed line-clamp-3 mb-5">
-                {p.shortDescription}
-              </p>
               <div className="mt-auto flex items-center gap-2 text-xs font-bold text-slate-400 group-hover:text-[#001F5B] transition-colors">
                 자세히 보기
                 <span className="transition-transform group-hover:translate-x-1">

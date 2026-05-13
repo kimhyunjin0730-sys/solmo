@@ -54,7 +54,7 @@ export default async function ProductDetailPage({
   return (
     <div className="min-h-screen bg-slate-50 pb-24">
       <div className="bg-white border-b border-slate-200">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 pt-20 sm:pt-24 pb-10">
+        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 pt-20 sm:pt-24 pb-6">
           <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-6">
             <Link href="/" className="hover:text-[#001F5B] transition-colors">
               HOME
@@ -112,12 +112,9 @@ export default async function ProductDetailPage({
                 ))}
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight mb-5">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
                 {product.name}
               </h1>
-              <p className="text-lg sm:text-xl font-bold text-slate-500 leading-relaxed">
-                {product.shortDescription}
-              </p>
             </div>
 
             <aside className="lg:col-span-4">
@@ -150,7 +147,7 @@ export default async function ProductDetailPage({
         </div>
       </div>
 
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 pt-12 grid lg:grid-cols-12 gap-10">
+      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 pt-8 grid lg:grid-cols-12 gap-10">
         <main className="lg:col-span-8 space-y-12">
           <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200">
             <div className="flex items-center gap-3 mb-5">
