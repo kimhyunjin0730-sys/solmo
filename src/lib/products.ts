@@ -66,7 +66,7 @@ const networkSecurityProducts: Product[] = [
     shortDescription:
       '글로벌 네트워크 방화벽 점유율 50% 이상의 차세대 방화벽(NGFW).',
     longDescription:
-      'FortiGate 차세대 방화벽(NGFW)은 하이브리드 환경에서 데이터와 자산, 사용자를 효율적으로 보호합니다. 특수 설계된 보안 프로세서가 네트워크 보안을 가속화하며, 알려진 침입·악성코드·클라우드 기반 애플리케이션 위협을 실시간으로 차단합니다. FortiGuard AI 기반 보안 서비스와 결합해 최신 위협을 정확하게 식별하고 광범위한 공격 표면을 보호합니다.',
+      'FortiGate 네트워크 방화벽은 전 세계 네트워크 방화벽 시장 점유율 50% 이상을 차지하고 있습니다.\nFortiGate 차세대 방화벽(NGFW)은 하이브리드 환경에서 데이터와 자산, 사용자를 효과적으로 보호합니다.\n특히 고도화된 보안 프로세서를 통해 네트워크 성능을 가속화하며, 데이터 침해, 랜섬웨어, 클라우드 기반 애플리케이션 증가에 따른 위협을 실시간으로 차단합니다. 또한 FortiGate NGFW는 FortiGuard AI 기반 보안 서비스를 제공하여 최신 지능형 위협에도 빠르고 정확하게 대응하며, 사이버 공격 예방과 보안 위험 관리를 지원합니다.',
     badges: ['Fortinet Expert Partner', 'NGFW'],
     officialUrl: 'https://www.fortinet.com/kr',
     features: [
