@@ -43,7 +43,8 @@
       "Read(//c/tmp/**)",
       "Bash(cp /tmp/pptx-extract/solutions/ppt/media/image15.png public/images/products/genian-ztna/components.png)",
       "Bash(cp /tmp/pptx-extract/solutions/ppt/media/image16.png public/images/products/genian-ztna/architecture.png)",
-      "Bash(git commit -m 'chore: bump engines.node 20.x → 22.x *)"
+      "Bash(git commit -m 'chore: bump engines.node 20.x → 22.x *)",
+      "Bash(git commit -m 'content\\(detail\\): drop Quick Quote aside from product hero *)"
     ]
   }
 }
