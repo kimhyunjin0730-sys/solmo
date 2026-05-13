@@ -51,6 +51,12 @@ export type Product = {
   longDescription: string;
   /** 핵심 기능 카드 */
   features: ProductFeature[];
+  /**
+   * 핵심 기능을 카드 대신 단순 불릿 리스트로 보여주고 싶을 때 사용.
+   * (예: PIOLINK는 PPT가 한 박스 안 3열 불릿 그리드.)
+   * 이 값이 있으면 features 카드 그리드 대신 이 리스트가 렌더됨.
+   */
+  featureBullets?: readonly string[];
   /** PPT에서 추출한 시각 자산 (로고·히어로·기능 아이콘) */
   assets?: ProductAssets;
   /** 공식 사이트 */

@@ -215,25 +215,23 @@ const networkSecurityProducts: Product[] = [
     longDescription:
       '파이오링크 PAS-K는 중단 없는 운영 및 통합된 네트워크 보안을 제공하는 차세대 방화벽 및 침입방지 시스템입니다. 네트워크 트래픽을 실시간 분석해 애플리케이션 계층의 공격과 다양한 형태의 위협으로부터 네트워크를 보호합니다.',
     officialUrl: 'https://www.piolink.com/kr',
-    features: [
-      {
-        icon: 'network',
-        title: '부하분산 / 트래픽 제어',
-        description:
-          '다양한 부하분산(Load Balancing), 다양한 리다이렉션, 다양한 이중화(Failover), TCP 멀티플렉싱, REST API 지원.',
-      },
-      {
-        icon: 'server',
-        title: '서버 오프로드 / 주소 변환',
-        description:
-          '서버 오프로드, 네트워크 주소 변환(NAT), 네트워크 레벨 보안, DDoS 방어 및 서버 정보 은폐, Script 기반 제어 및 설정.',
-      },
-      {
-        icon: 'shield',
-        title: '애플리케이션 보안 / 최적화',
-        description:
-          'HTTP 압축 및 메모리 캐싱, 네트워크 방화벽, 트랜잭션 보장 및 HTML 최적화, 트래픽 폭주 제어 및 연결 보장, 클라우드 오케스트레이션 연동 플러그인.',
-      },
+    features: [],
+    featureBullets: [
+      '다양한 부하분산(Load Balancing)',
+      '다양한 리다이렉션',
+      '다양한 이중화(Failover)',
+      'TCP 멀티플렉싱',
+      'REST API',
+      '서버 오프로드',
+      '네트워크 주소 변환',
+      '네트워크 레벨 보안',
+      'DDoS 방어 및 서버 정보 은폐',
+      'Script 기반 제어 및 설정',
+      'HTTP 압축 및 메모리 캐싱',
+      '네트워크 방화벽',
+      '트랜잭션 보장 및 HTML 최적화',
+      '트래픽 폭주 제어 및 연결 보장',
+      '클라우드 오케스트레이션 연동 플러그인 등',
     ],
   },
   {
