@@ -7,6 +7,10 @@ import {
   getProductById,
   PRODUCTS,
 } from '@/lib/products';
+import { FeatureFlowDiagram } from '@/components/FeatureFlowDiagram';
+
+/** 단계가 시퀀스로 의미 있는 제품은 features를 화살표 플로우로 렌더한다. */
+const FLOW_PRODUCTS = new Set(['network-blackbox']);
 
 type Params = { id: string };
 
@@ -196,44 +200,49 @@ export default async function ProductDetailPage({
               <span className="text-xs font-bold text-slate-400">핵심기능</span>
               <div className="flex-1 h-px bg-slate-200" />
             </div>
-            <div className="grid sm:grid-cols-2 gap-5">
-              {product.features.map((f, idx) => {
-                const img = featureImages[idx];
-                return (
-                  <div
-                    key={f.title}
-                    className="relative bg-white border border-slate-200 rounded-2xl p-6 hover:border-[#001F5B] hover:shadow-md transition-all overflow-hidden"
-                  >
-                    <span className="absolute -top-2 -right-2 text-[80px] font-black text-slate-50 leading-none select-none pointer-events-none">
-                      {String(idx + 1).padStart(2, '0')}
-                    </span>
-                    <div className="relative">
-                      {img ? (
-                        <div className="relative w-20 h-20 mb-4">
-                          <Image
-                            src={img}
-                            alt={f.title}
-                            fill
-                            className="object-contain"
-                            sizes="80px"
-                          />
-                        </div>
-                      ) : (
-                        <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#001F5B] to-indigo-700 text-white flex items-center justify-center text-xs font-black uppercase tracking-widest mb-4">
-                          {f.icon.slice(0, 2)}
-                        </div>
-                      )}
-                      <h4 className="text-base font-black text-slate-900 tracking-tight mb-2 leading-tight">
-                        {f.title}
-                      </h4>
-                      <p className="text-sm font-medium text-slate-500 leading-relaxed">
-                        {f.description}
-                      </p>
+
+            {FLOW_PRODUCTS.has(product.id) ? (
+              <FeatureFlowDiagram features={product.features} />
+            ) : (
+              <div className="grid sm:grid-cols-2 gap-5">
+                {product.features.map((f, idx) => {
+                  const img = featureImages[idx];
+                  return (
+                    <div
+                      key={f.title}
+                      className="relative bg-white border border-slate-200 rounded-2xl p-6 hover:border-[#001F5B] hover:shadow-md transition-all overflow-hidden"
+                    >
+                      <span className="absolute -top-2 -right-2 text-[80px] font-black text-slate-50 leading-none select-none pointer-events-none">
+                        {String(idx + 1).padStart(2, '0')}
+                      </span>
+                      <div className="relative">
+                        {img ? (
+                          <div className="relative w-20 h-20 mb-4">
+                            <Image
+                              src={img}
+                              alt={f.title}
+                              fill
+                              className="object-contain"
+                              sizes="80px"
+                            />
+                          </div>
+                        ) : (
+                          <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#001F5B] to-indigo-700 text-white flex items-center justify-center text-xs font-black uppercase tracking-widest mb-4">
+                            {f.icon.slice(0, 2)}
+                          </div>
+                        )}
+                        <h4 className="text-base font-black text-slate-900 tracking-tight mb-2 leading-tight">
+                          {f.title}
+                        </h4>
+                        <p className="text-sm font-medium text-slate-500 leading-relaxed">
+                          {f.description}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                })}
+              </div>
+            )}
           </section>
         </main>
 
