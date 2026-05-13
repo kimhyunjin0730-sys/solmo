@@ -110,7 +110,7 @@ export default function ContactPage() {
         <QuickCard
           tag="Call"
           big={TEL}
-          sub="평일 09:00 – 18:00"
+          sub="CALL 평일 8:30 ~ 17:30"
           href={`tel:${TEL.replace(/-/g, '')}`}
         />
         <QuickCard
