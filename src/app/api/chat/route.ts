@@ -356,8 +356,7 @@ export async function GET() {
       SMTP_USER: process.env.SMTP_USER ? 'set' : 'MISSING',
       SMTP_PASS: hasSmtp ? 'set' : 'MISSING',
       RECEIVER_EMAIL:
-        process.env.RECEIVER_EMAIL ||
-        'kimhyunjin0730@gmail.com (default)',
+        process.env.RECEIVER_EMAIL || 'solmoit01@solmo.co.kr (default)',
     },
   });
 }

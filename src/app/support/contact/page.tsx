@@ -293,18 +293,38 @@ export default function ContactPage() {
               </label>
 
               {errorMsg && (
-                <div className="px-5 py-4 rounded-2xl bg-red-50 border border-red-200 text-sm font-bold text-red-700">
-                  ⚠ {errorMsg}
+                <div className="px-5 py-4 rounded-2xl bg-amber-50 border border-amber-200 text-sm font-bold text-amber-800 space-y-3">
+                  <p className="leading-relaxed break-keep">
+                    ⚠ 자동 전송이 실패했어요. 아래 버튼으로 메일을 직접 보내시면
+                    같은 내용이 즉시 솔모정보기술({EMAIL})로 접수됩니다.
+                  </p>
+                  <a
+                    href={buildMailto(form)}
+                    className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-[#001F5B] text-white text-xs font-black uppercase tracking-wider hover:bg-blue-700 transition-all"
+                  >
+                    📧 메일로 직접 보내기 →
+                  </a>
                 </div>
               )}
 
-              <button
-                type="submit"
-                disabled={submitting}
-                className="w-full py-5 bg-[#001F5B] text-white font-black rounded-full hover:bg-blue-700 transition-all text-sm uppercase tracking-[0.2em] disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {submitting ? '전송 중...' : 'Submit Inquiry →'}
-              </button>
+              <div className="space-y-3">
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  className="w-full py-5 bg-[#001F5B] text-white font-black rounded-full hover:bg-blue-700 transition-all text-sm uppercase tracking-[0.2em] disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {submitting ? '전송 중...' : 'Submit Inquiry →'}
+                </button>
+                <p className="text-center text-[11px] font-bold text-slate-400">
+                  자동 전송이 안 되면{' '}
+                  <a
+                    href={buildMailto(form)}
+                    className="text-blue-600 hover:underline"
+                  >
+                    {EMAIL} 로 메일 직접 보내기
+                  </a>
+                </p>
+              </div>
             </form>
           )}
         </div>
@@ -315,6 +335,26 @@ export default function ContactPage() {
 
 const inputCls =
   'w-full bg-slate-50 border border-slate-100 rounded-full px-6 py-4 outline-none focus:border-blue-600 focus:bg-white transition-all font-bold text-sm text-slate-900 placeholder:text-slate-300';
+
+/**
+ * 폼 내용을 그대로 담은 mailto: 링크 생성.
+ * 자동 SMTP 전송이 안 되는 환경에서도 사용자가 클릭 한 번으로
+ * 본인 메일 클라이언트(Outlook / Gmail 등)에서 솔모로 바로 메일 보낼 수 있게 한다.
+ */
+function buildMailto(f: ContactForm): string {
+  const subject = `[솔모 문의] ${f.type} — ${f.company || f.name || '이름 미기재'}`;
+  const body = [
+    `[문의 유형] ${f.type}`,
+    `[성함 / 직함] ${f.name}`,
+    `[회사명 / 기관명] ${f.company}`,
+    `[연락처] ${f.phone}`,
+    `[회신 이메일] ${f.email}`,
+    '',
+    '────── 상세 내용 ──────',
+    f.message,
+  ].join('\n');
+  return `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
 
 function Field({
   label,

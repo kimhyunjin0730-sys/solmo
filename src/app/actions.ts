@@ -55,7 +55,9 @@ export async function submitInquiry(
   // ── Step 2: Email send (independent) ──
   const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
   const smtpPass = process.env.SMTP_PASS || process.env.EMAIL_PASS;
-  const receiver = process.env.RECEIVER_EMAIL || 'kimhyunjin0730@gmail.com';
+  // 기본 수신처: 솔모 공식 이메일.
+  // env 로 다른 주소를 받고 싶으면 RECEIVER_EMAIL 을 지정하면 됨.
+  const receiver = process.env.RECEIVER_EMAIL || 'solmoit01@solmo.co.kr';
 
   if (!smtpUser || !smtpPass) {
     mailError = 'SMTP credentials not set in environment';
