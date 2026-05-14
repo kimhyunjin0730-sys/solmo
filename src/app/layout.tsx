@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Bricolage_Grotesque, JetBrains_Mono, Fraunces } from 'next/font/google';
 import localFont from 'next/font/local';
+import { Analytics } from '@vercel/analytics/next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChatBot from '@/components/ChatBot';
@@ -96,6 +97,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <Footer />
           <ChatBot />
         </QueryProvider>
+        <Analytics />
       </body>
     </html>
   );
