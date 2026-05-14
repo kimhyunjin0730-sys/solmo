@@ -26,8 +26,10 @@ const PHOTO_CATEGORIES = new Set([
 /** 단계가 시퀀스로 의미 있는 제품은 features를 화살표 플로우로 렌더한다. */
 const FLOW_PRODUCTS = new Set(['network-blackbox']);
 
-/** 제품 라인업 가로 행으로 보여주는 모드 (PPT: 한 박스 안 5개 카드). */
-const ROW_PRODUCTS = new Set(['entrolink']);
+/** 제품 라인업 가로 행으로 보여주는 모드 (PPT: 한 박스 안 N개 카드).
+ *  - entrolink: LineIcon 사용
+ *  - hitachi-storage: featureImages 의 이소메트릭 일러스트 사용 */
+const ROW_PRODUCTS = new Set(['entrolink', 'hitachi-storage']);
 
 /**
  * PPT가 큰 thin-line blue outline 아이콘 (navy 박스 없이 floating) 스타일인 제품.
@@ -274,26 +276,49 @@ export default async function ProductDetailPage({
               </div>
             ) : ROW_PRODUCTS.has(product.id) ? (
               <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 sm:p-10">
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
-                  {product.features.map((f) => (
-                    <div
-                      key={f.title}
-                      className="text-center px-2 sm:px-3 py-4"
-                    >
-                      <div className="flex justify-center mb-4 text-[#001F5B]">
-                        <LineIcon
-                          name={f.icon}
-                          className="w-10 h-10 sm:w-12 sm:h-12"
-                        />
+                <div
+                  className={`grid gap-4 sm:gap-6 grid-cols-2 sm:grid-cols-3 ${
+                    product.features.length >= 5
+                      ? 'lg:grid-cols-5'
+                      : product.features.length === 4
+                        ? 'lg:grid-cols-4'
+                        : 'lg:grid-cols-5'
+                  }`}
+                >
+                  {product.features.map((f, idx) => {
+                    const img = featureImages[idx];
+                    return (
+                      <div
+                        key={f.title}
+                        className="text-center px-2 sm:px-3 py-4"
+                      >
+                        {img ? (
+                          <div className="relative w-full aspect-square mb-4 sm:mb-5">
+                            <Image
+                              src={img}
+                              alt={f.title}
+                              fill
+                              className="object-contain"
+                              sizes="(max-width: 768px) 40vw, 18vw"
+                            />
+                          </div>
+                        ) : (
+                          <div className="flex justify-center mb-4 text-[#001F5B]">
+                            <LineIcon
+                              name={f.icon}
+                              className="w-10 h-10 sm:w-12 sm:h-12"
+                            />
+                          </div>
+                        )}
+                        <h4 className="font-display text-base sm:text-lg font-bold text-[#001F5B] tracking-tight mb-2 leading-tight">
+                          {f.title}
+                        </h4>
+                        <p className="text-xs sm:text-[13px] font-medium text-slate-500 leading-relaxed">
+                          {f.description}
+                        </p>
                       </div>
-                      <h4 className="text-base sm:text-lg font-black text-[#001F5B] tracking-tight mb-2 leading-tight">
-                        {f.title}
-                      </h4>
-                      <p className="text-xs sm:text-[13px] font-bold text-slate-500 leading-relaxed">
-                        {f.description}
-                      </p>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             ) : FLOW_PRODUCTS.has(product.id) ? (

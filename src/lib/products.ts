@@ -856,8 +856,13 @@ const otProducts: Product[] = [
     categoryId: 'ot-security',
     assets: {
       logo: '/images/products/hitachi-storage/logo.png',
-      hero: '/images/products/hitachi-storage/hero.png',
-      featureImages: ['/images/products/hitachi-storage/feature-1.png', '/images/products/hitachi-storage/feature-2.png', '/images/products/hitachi-storage/feature-3.png', '/images/products/hitachi-storage/feature-4.png'],
+      featureImages: [
+        '/images/products/hitachi-storage/feature-0.png',
+        '/images/products/hitachi-storage/feature-1.png',
+        '/images/products/hitachi-storage/feature-2.png',
+        '/images/products/hitachi-storage/feature-3.png',
+        '/images/products/hitachi-storage/feature-4.png',
+      ],
     },
     name: 'Hitachi Storage',
     vendor: '효성인포메이션시스템',
@@ -867,28 +872,34 @@ const otProducts: Product[] = [
       '효성인포메이션시스템의 스토리지 솔루션은 다양한 산업 분야의 데이터 저장 및 관리 요구를 충족시키기 위해 설계된 엔터프라이즈급 스토리지 시스템입니다. 이 솔루션은 고성능과 안정성을 바탕으로 대용량 데이터 처리에 최적화되어 있으며, 블록 스토리지, 파일 스토리지, 오브젝트 스토리지 등 다양한 스토리지 방식을 지원합니다.',
     features: [
       {
-        icon: 'zap',
-        title: '고성능 처리',
+        icon: 'database',
+        title: '올플래시 & 하이브리드 스토리지',
+        description:
+          '미션 크리티컬 워크로드용 올플래시와 비용 최적화 하이브리드 모델을 모두 제공합니다.',
+      },
+      {
+        icon: 'network',
+        title: '네트워크 스토리지',
         description:
           '저지연·고처리량 IO 아키텍처로 대용량 워크로드를 안정적으로 처리합니다.',
       },
       {
         icon: 'lock',
-        title: '데이터 보호 / 암호화',
+        title: '데이터 보호',
         description:
-          '저장 단위 암호화와 복제·스냅샷을 통해 데이터 손실 위험을 최소화합니다.',
+          '저장 단위 암호화·복제·스냅샷으로 데이터 손실 위험을 최소화합니다.',
       },
       {
         icon: 'monitor',
-        title: '통합 모니터링',
+        title: '데이터센터 통합관리',
         description:
-          '단일 콘솔에서 다수의 스토리지 노드를 실시간 가시화하고 알람·이벤트를 통합 관리합니다.',
+          '단일 콘솔에서 다수의 스토리지 노드를 가시화·통합 관리합니다.',
       },
       {
         icon: 'bar-chart',
-        title: '분석 / 리포팅',
+        title: '비즈니스 플랫폼',
         description:
-          'AI 기반 용량·성능 분석으로 자원 사용 추세를 예측하고 운영 의사 결정을 지원합니다.',
+          'AI 기반 용량·성능 분석으로 운영 의사 결정과 비즈니스 인사이트를 지원합니다.',
       },
     ],
   },
