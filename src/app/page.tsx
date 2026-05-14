@@ -88,7 +88,7 @@ const STRENGTHS = [
   {
     num: '03',
     title: '자체 개발 솔루션',
-    desc: '기업부설연구소에서 개발한 xSecuritas — GS인증 1등급 스크린워터마크.',
+    desc: '기업부설연구소에서 개발한 xSecuritas — 자체 스크린워터마크 솔루션.',
   },
   {
     num: '04',

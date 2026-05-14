@@ -32,6 +32,20 @@ const SUPPORT_LINKS: FooterLink[] = [
   { label: '오시는 길', href: '/support/location' },
 ];
 
+/** Family Sites — 솔모 그룹/관련 사이트 (외부 링크) */
+const FAMILY_SITES: { label: string; href: string; sub: string }[] = [
+  {
+    label: '보안링스 홈페이지',
+    href: 'https://www.boanlinks.com/',
+    sub: 'boanlinks.com',
+  },
+  {
+    label: 'AI 보안링스',
+    href: 'https://bl-staging-web.apps.rtruesoft.kr/',
+    sub: 'AI 보안링스 사용자 웹',
+  },
+];
+
 export default function Footer() {
   return (
     <footer className="relative bg-slate-950 text-white py-20 border-t border-white/5 overflow-hidden">
@@ -73,6 +87,43 @@ export default function Footer() {
             <FooterLinkGroup title="Services" links={SERVICE_LINKS} />
             <FooterLinkGroup title="Clients" links={CLIENT_LINKS} />
             <FooterLinkGroup title="Support" links={SUPPORT_LINKS} />
+          </div>
+        </div>
+
+        {/* Family Sites — 솔모 + 보안링스 그룹 외부 링크 */}
+        <div className="mb-12 pt-10 border-t border-white/5">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+            <div className="flex items-center gap-3">
+              <span className="text-blue-500 font-mono font-black text-[11px] uppercase tracking-[0.3em]">
+                Family Sites
+              </span>
+              <span className="text-white/30 text-[11px] font-bold">
+                보안링스 그룹
+              </span>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              {FAMILY_SITES.map((site) => (
+                <a
+                  key={site.href}
+                  href={site.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group inline-flex items-center gap-3 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 hover:border-blue-400/40 rounded-full pl-5 pr-4 py-2.5 transition-all"
+                >
+                  <div className="flex flex-col leading-tight">
+                    <span className="text-white text-[13px] font-bold tracking-tight">
+                      {site.label}
+                    </span>
+                    <span className="text-white/35 text-[10px] font-mono tracking-wider">
+                      {site.sub}
+                    </span>
+                  </div>
+                  <span className="text-blue-400 text-sm group-hover:translate-x-0.5 transition-transform">
+                    ↗
+                  </span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
 
