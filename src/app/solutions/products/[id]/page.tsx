@@ -13,6 +13,7 @@ import { RadwareIcon } from '@/components/RadwareIcons';
 import { FeaturePhotoGrid } from '@/components/FeaturePhotoCard';
 import { TilonFeatureGrid } from '@/components/TilonFeatureGrid';
 import { CiscoEsaDiagram } from '@/components/CiscoEsaDiagram';
+import { ProofpointFeatureGrid } from '@/components/ProofpointFeatureGrid';
 
 /**
  * 단말/서버 보안 · 애플리케이션 보안 · OT 보안 카테고리는 features를
@@ -199,8 +200,9 @@ export default async function ProductDetailPage({
             <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200">
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-blue-600 font-mono font-medium text-[10px] uppercase tracking-[0.4em]">
-                  Product View
+                  Key Features
                 </span>
+                <span className="text-xs font-bold text-slate-400">핵심기능</span>
                 <div className="flex-1 h-px bg-slate-100" />
               </div>
               <div className="relative w-full">
@@ -329,6 +331,8 @@ export default async function ProductDetailPage({
               <TilonFeatureGrid features={product.features} />
             ) : product.id === 'cisco-esa' ? (
               <CiscoEsaDiagram />
+            ) : product.id === 'proofpoint' ? (
+              <ProofpointFeatureGrid features={product.features} />
             ) : PHOTO_CATEGORIES.has(product.categoryId) &&
               featureScreenshots.length === 0 ? (
               <FeaturePhotoGrid features={product.features} />

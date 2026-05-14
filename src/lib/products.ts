@@ -661,30 +661,14 @@ const applicationProducts: Product[] = [
       logo: '/images/products/sindoh-secure-print/logo.jpeg',
       hero: '/images/products/sindoh-secure-print/hero.png',
     },
-    name: '신도 보안출력',
+    name: '보안복합기',
     vendor: '신도(SINDOH)',
     shortDescription:
       '출력 시점의 정보 유출을 방어하는 특화 솔루션. 사용자 인증·체크·모니터링 일체.',
     longDescription:
       '신도리코 보안복합기는 기업의 문서 출력 및 관리 과정에서 발생할 수 있는 보안 위협을 효과적으로 차단하는 보안 특화 복합기 솔루션입니다. 사용자 인증 기술 기반으로 비인가 사용자의 출력 및 기기 접근을 차단하며, 출력 기록의 체계적 관리 및 모니터링 기능을 제공합니다. 또한, 보안 문서 워터마크 삽입과 같은 출력물 자체에 대한 보안 기능도 포함하여 문서 유출 방지와 위변조 방지에 특화되어 있습니다.',
     officialUrl: 'https://www.sindoh.com',
-    features: [
-      {
-        icon: 'user-check',
-        title: '사용자 인증 출력',
-        description: '본인 인증 후에만 출력하도록 보안 큐를 적용합니다.',
-      },
-      {
-        icon: 'file-text',
-        title: '워터마크/복사 방지',
-        description: '인쇄물에 사용자 정보를 새기고 복사 시 추적을 남깁니다.',
-      },
-      {
-        icon: 'monitor',
-        title: '출력 모니터링',
-        description: '출력 이력·매수를 실시간으로 추적합니다.',
-      },
-    ],
+    features: [],
   },
   {
     id: 'proofpoint',
@@ -692,8 +676,8 @@ const applicationProducts: Product[] = [
     assets: {
       logo: '/images/products/proofpoint/logo.png',
     },
-    name: 'Proofpoint Email Protection',
-    vendor: 'Proofpoint',
+    name: 'Proofpoint 이메일 보안',
+    vendor: 'Proofpoint, Inc.',
     shortDescription:
       '대규모 이메일 환경의 표적·피싱 공격을 실시간 식별하고 차단합니다.',
     longDescription:
