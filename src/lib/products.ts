@@ -628,7 +628,7 @@ const applicationProducts: Product[] = [
       hero: '/images/products/xsecuritas/hero.png',
     },
     name: 'xSecuritas Screen Watermark',
-    vendor: 'xSecuritas',
+    vendor: '(주)솔모정보기술',
     shortDescription:
       '화면 워터마크·캡처 차단·웹캠 워터마크로 화면 기반 유출을 차단.',
     longDescription:
@@ -637,20 +637,44 @@ const applicationProducts: Product[] = [
     officialUrl: 'https://www.xsecuritas.com',
     features: [
       {
-        icon: 'eye',
-        title: '동적 워터마크',
-        description:
-          '사용자 ID·시간·IP를 화면에 동적으로 새겨 유출 추적을 가능하게 합니다.',
+        icon: 'screen-wm-ent',
+        title: 'Screen Watermark Solution Enterprise',
+        description: '기업용 화면 워터마크 솔루션',
       },
       {
-        icon: 'camera-off',
-        title: '캡처 차단',
-        description: 'Print Screen·녹화 도구·웹캠 촬영까지 차단합니다.',
+        icon: 'screen-wm-per',
+        title: 'Screen Watermark Solution Personal',
+        description: '개인용 화면 워터마크 솔루션',
       },
       {
-        icon: 'monitor',
-        title: '멀티 OS / VDI',
-        description: 'Windows·macOS·Linux·VDI 모두 단일 정책으로 운영합니다.',
+        icon: 'print-wm-ent',
+        title: 'Print Watermark Solution Enterprise',
+        description: '기업용 출력물 워터마크 솔루션',
+      },
+      {
+        icon: 'print-wm-per',
+        title: 'Print Watermark Solution Personal',
+        description: '개인용 출력물 워터마크 솔루션',
+      },
+      {
+        icon: 'webcam-bl-ent',
+        title: 'Block Webcam & Microphone Solution Enterprise',
+        description: '기업용 웹캠·마이크 차단 솔루션',
+      },
+      {
+        icon: 'webcam-bl-per',
+        title: 'Block Webcam & Microphone Solution Personal',
+        description: '개인용 웹캠·마이크 차단 솔루션',
+      },
+      {
+        icon: 'webcam-wm-video',
+        title: 'Webcam Watermark For Video Conferencing',
+        description: '화상 회의용 웹캠 워터마크',
+      },
+      {
+        icon: 'secure-pc',
+        title: 'Secure PC',
+        description: 'PC 보안 종합 솔루션',
       },
     ],
   },
