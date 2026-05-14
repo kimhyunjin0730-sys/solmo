@@ -24,6 +24,11 @@ export type ProductFeature = {
   icon: string;
   title: string;
   description: string;
+  /**
+   * 설명을 쉼표로 이어 쓰지 않고 줄바꿈 불릿으로 보여주고 싶을 때.
+   * 있으면 description 대신 이 배열이 줄단위로 렌더됨.
+   */
+  bullets?: readonly string[];
 };
 
 /** PPT에서 추출한 실제 자산. /public/images/products/{id}/ 에 저장됨. */

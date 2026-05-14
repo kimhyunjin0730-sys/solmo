@@ -10,6 +10,18 @@ import {
 import { FeatureFlowDiagram } from '@/components/FeatureFlowDiagram';
 import { LineIcon } from '@/components/LineIcon';
 import { RadwareIcon } from '@/components/RadwareIcons';
+import { FeaturePhotoGrid } from '@/components/FeaturePhotoCard';
+
+/**
+ * 단말/서버 보안 · 애플리케이션 보안 · OT 보안 카테고리는 features를
+ * 홈 화면 ServiceCard 스타일(사진 배경 카드)로 렌더. 네트워크 보안은
+ * 기존 outline 아이콘 카드 유지.
+ */
+const PHOTO_CATEGORIES = new Set([
+  'endpoint-server-security',
+  'application-security',
+  'ot-security',
+]);
 
 /** 단계가 시퀀스로 의미 있는 제품은 features를 화살표 플로우로 렌더한다. */
 const FLOW_PRODUCTS = new Set(['network-blackbox']);
@@ -286,6 +298,9 @@ export default async function ProductDetailPage({
               </div>
             ) : FLOW_PRODUCTS.has(product.id) ? (
               <FeatureFlowDiagram features={product.features} />
+            ) : PHOTO_CATEGORIES.has(product.categoryId) &&
+              featureScreenshots.length === 0 ? (
+              <FeaturePhotoGrid features={product.features} />
             ) : (
               <div
                 className={`grid sm:grid-cols-2 gap-5 ${
@@ -343,12 +358,26 @@ export default async function ProductDetailPage({
                             <LineIcon name={f.icon} className="w-6 h-6" />
                           </div>
                         )}
-                        <h4 className="text-base font-black text-slate-900 tracking-tight mb-2 leading-tight">
+                        <h4 className="font-display text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-3 leading-snug">
                           {f.title}
                         </h4>
-                        <p className="text-sm font-medium text-slate-500 leading-relaxed">
-                          {f.description}
-                        </p>
+                        {f.bullets && f.bullets.length > 0 ? (
+                          <ul className="space-y-1.5">
+                            {f.bullets.map((b) => (
+                              <li
+                                key={b}
+                                className="text-sm font-medium text-slate-500 leading-relaxed flex items-start gap-2"
+                              >
+                                <span className="text-blue-400 shrink-0">–</span>
+                                <span>{b}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p className="text-sm font-medium text-slate-500 leading-relaxed">
+                            {f.description}
+                          </p>
+                        )}
                       </div>
                     </div>
                   );
