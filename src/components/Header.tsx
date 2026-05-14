@@ -32,7 +32,7 @@ const NAV: readonly NavSection[] = [
     label: 'COMPANY',
     items: [
       { label: '인사말', href: '/about/greetings' },
-      { label: '연혁', href: '/about/history' },
+      { label: '연혁 및 실적', href: '/about/history' },
       { label: '인증 및 특허', href: '/about/certifications' },
       { label: '조직도', href: '/about/organization' },
     ],
