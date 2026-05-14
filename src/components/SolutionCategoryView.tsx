@@ -18,24 +18,24 @@ export function SolutionCategoryView({
   return (
     <div className="space-y-14 pb-8">
       <header className="max-w-4xl">
-        <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-3 block">
+        <span className="font-mono text-blue-600 text-[10px] font-medium uppercase tracking-[0.4em] mb-3 block">
           {category.englishName}
         </span>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+        <h1 className="font-display text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight leading-[1.1] mb-5">
           {category.name}
         </h1>
-        <p className="text-slate-500 font-bold text-base sm:text-lg leading-relaxed">
+        <p className="text-slate-500 font-medium text-base sm:text-lg leading-relaxed">
           {category.tagline}
         </p>
       </header>
 
       <section>
         <div className="flex items-center gap-4 mb-6">
-          <h4 className="text-xs font-black text-blue-600 uppercase tracking-[0.5em] whitespace-nowrap">
+          <h4 className="font-mono text-xs font-medium text-blue-600 uppercase tracking-[0.5em] whitespace-nowrap">
             Lineup
           </h4>
-          <span className="text-xs font-bold text-slate-400">
-            {products.length} products
+          <span className="font-mono text-xs font-medium text-slate-400 tabular-nums">
+            {String(products.length).padStart(2, '0')} products
           </span>
           <div className="flex-1 h-px bg-slate-200" />
         </div>
@@ -67,19 +67,19 @@ export function SolutionCategoryView({
               </div>
 
               <div className="flex items-baseline justify-between mb-3">
-                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                <span className="font-mono text-[10px] font-medium text-slate-400 uppercase tracking-widest">
                   {p.vendor}
                 </span>
                 {p.badges?.[0] && (
-                  <span className="text-[9px] font-black text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full px-2 py-0.5 uppercase tracking-wider">
+                  <span className="font-mono text-[9px] font-medium text-emerald-600 bg-emerald-50 border border-emerald-100 rounded-full px-2 py-0.5 uppercase tracking-wider">
                     {p.badges[0]}
                   </span>
                 )}
               </div>
-              <h3 className="text-lg font-black text-slate-900 tracking-tight mb-5 group-hover:text-[#001F5B] transition-colors">
+              <h3 className="font-display text-xl font-bold text-slate-900 tracking-tight leading-snug mb-5 group-hover:text-[#001F5B] transition-colors">
                 {p.name}
               </h3>
-              <div className="mt-auto flex items-center gap-2 text-xs font-bold text-slate-400 group-hover:text-[#001F5B] transition-colors">
+              <div className="mt-auto flex items-center gap-2 font-mono text-[11px] font-medium text-slate-400 uppercase tracking-wider group-hover:text-[#001F5B] transition-colors">
                 자세히 보기
                 <span className="transition-transform group-hover:translate-x-1">
                   →

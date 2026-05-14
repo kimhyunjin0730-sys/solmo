@@ -118,21 +118,23 @@ export default function CertificationsPage() {
     <div className="space-y-12 pb-10">
       <header className="max-w-[1400px] mx-auto text-left flex flex-col md:flex-row justify-between items-end gap-6 pt-2">
         <div className="max-w-2xl">
-          <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">
+          <span className="font-mono text-blue-600 text-[10px] font-medium uppercase tracking-[0.4em] mb-3 block">
             Proof of Innovation
           </span>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-3 leading-snug">
+          <h3 className="font-display text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight mb-4 leading-[1.1]">
             기술로 증명하고{' '}
             <span className="text-blue-600">신뢰로 응답합니다.</span>
           </h3>
-          <p className="text-slate-500 font-medium text-sm leading-relaxed">
-            솔모정보기술은 22년간 축적된 지적 자산과 대내외 공인 인증을 통해
-            가장 안전하고 검증된 보안 경험을 제시합니다.
+          <p className="text-slate-500 font-medium text-base leading-relaxed">
+            솔모정보기술은{' '}
+            <span className="font-display font-bold text-slate-700">22년간</span>{' '}
+            축적된 지적 자산과 대내외 공인 인증을 통해 가장 안전하고 검증된
+            보안 경험을 제시합니다.
           </p>
         </div>
         <div className="hidden lg:block">
           <div className="w-32 h-32 rounded-full border border-blue-600/20 flex items-center justify-center animate-pulse">
-            <span className="text-blue-600 font-black text-[10px] uppercase tracking-widest">
+            <span className="font-mono text-blue-600 text-[10px] font-medium uppercase tracking-[0.3em]">
               ISO Certified
             </span>
           </div>
@@ -149,7 +151,7 @@ export default function CertificationsPage() {
 
       <div className="bg-slate-900 -mx-8 px-8 py-40 rounded-[5rem] text-center relative overflow-hidden">
         <div className="max-w-4xl mx-auto relative z-10 space-y-12">
-          <h4 className="text-4xl font-black text-white italic tracking-tighter">
+          <h4 className="font-serif italic text-5xl sm:text-6xl font-medium text-white tracking-tight">
             Technology Beyond Limits
           </h4>
           <p className="text-white/40 font-bold max-w-2xl mx-auto text-[15px] leading-relaxed">
@@ -185,7 +187,7 @@ function InteractiveSection({
   return (
     <div className="max-w-[1400px] mx-auto space-y-16">
       <div className="flex items-center gap-8">
-        <h4 className="text-sm font-black text-blue-600 uppercase tracking-[0.6em] whitespace-nowrap">
+        <h4 className="font-mono text-sm font-medium text-blue-600 uppercase tracking-[0.5em] whitespace-nowrap">
           {title}
         </h4>
         <div className="w-full h-px bg-slate-100" />
@@ -264,11 +266,13 @@ function BigStatItem({
 }) {
   return (
     <div className="text-center group">
-      <div className="text-7xl font-black text-white italic tracking-tighter mb-4 group-hover:text-blue-500 transition-colors">
+      <div className="font-display text-7xl sm:text-8xl font-bold text-white tracking-tight tabular-nums mb-4 group-hover:text-blue-500 transition-colors">
         {value}
-        <span className="text-2xl text-blue-500 ml-1">{unit}</span>
+        <span className="font-serif italic text-2xl text-blue-500 ml-2 font-medium">
+          {unit}
+        </span>
       </div>
-      <div className="text-[10px] font-black text-white/30 uppercase tracking-[0.4em]">
+      <div className="font-mono text-[10px] font-medium text-white/40 uppercase tracking-[0.4em]">
         {label}
       </div>
     </div>

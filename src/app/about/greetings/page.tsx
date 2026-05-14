@@ -11,7 +11,7 @@ export default function GreetingsPage() {
   return (
     <div className="max-w-3xl mx-auto px-5 sm:px-8 pb-10 space-y-12">
       <section className="space-y-6">
-        <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight leading-snug">
+        <h4 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight leading-[1.25]">
           <span className="text-blue-600">초연결 및 AI 시대</span>, 정보보안은
           기업의 생존과 경쟁력을 좌우합니다.
         </h4>
@@ -52,14 +52,14 @@ export default function GreetingsPage() {
         </div>
 
         {/* Signature */}
-        <div className="pt-6 flex items-baseline gap-3">
-          <span className="text-xs font-black text-slate-400 uppercase tracking-[0.3em]">
+        <div className="pt-6 flex items-baseline gap-3 flex-wrap">
+          <span className="font-mono text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em]">
             대표이사
           </span>
-          <span className="text-2xl font-black text-slate-900 tracking-tight">
+          <span className="font-display text-2xl font-bold text-slate-900 tracking-tight">
             이병두
           </span>
-          <span className="text-base font-bold text-slate-400 italic">
+          <span className="font-serif italic text-lg text-slate-400">
             Lee Byung-Doo
           </span>
         </div>
@@ -76,10 +76,10 @@ export default function GreetingsPage() {
         <div className="absolute inset-0 bg-[#001F5B]/40 backdrop-blur-[2px]" />
         <div className="absolute inset-0 p-10 lg:p-14 flex flex-col justify-between">
           <div>
-            <span className="text-blue-400 font-black text-[10px] uppercase tracking-[0.5em] mb-3 block">
+            <span className="font-mono text-blue-400 text-[10px] font-medium uppercase tracking-[0.5em] mb-4 block">
               CEO Message
             </span>
-            <h3 className="text-white text-2xl lg:text-3xl font-black leading-tight tracking-tighter">
+            <h3 className="font-display text-white text-3xl lg:text-4xl font-bold leading-[1.25] tracking-tight">
               &ldquo;고객과 함께 성장하는 <br />
               최고의 보안 파트너가 <br />
               되겠습니다.&rdquo;
@@ -87,10 +87,12 @@ export default function GreetingsPage() {
           </div>
           <div className="text-white">
             <div className="w-12 h-1 bg-blue-500 mb-6 rounded-full" />
-            <p className="text-[10px] font-black tracking-widest uppercase mb-1">
+            <p className="font-mono text-[10px] font-medium tracking-[0.3em] uppercase mb-1 opacity-80">
               Representative Director
             </p>
-            <p className="text-3xl font-black italic">Lee Byung-Doo</p>
+            <p className="font-serif italic text-4xl font-medium">
+              Lee Byung-Doo
+            </p>
           </div>
         </div>
       </aside>

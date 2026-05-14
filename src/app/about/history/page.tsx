@@ -222,15 +222,16 @@ export default function HistoryPage() {
 
   return (
     <div className="pb-10">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 mb-8">
-        <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-2 block">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 mb-10">
+        <span className="font-mono text-blue-600 text-[10px] font-medium uppercase tracking-[0.4em] mb-3 block">
           Our Journey
         </span>
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-[#001F5B] tracking-tight leading-snug">
+        <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#001F5B] tracking-tight leading-[1.1] mb-3">
           연혁 및 실적
         </h1>
-        <p className="mt-2 text-sm font-medium text-slate-500">
-          22년의 신뢰. 2002년 설립 이래 정보통신 보안 분야의 핵심 기술력을 축적해
+        <p className="text-base font-medium text-slate-500 leading-relaxed">
+          <span className="font-display font-bold text-slate-700">22년</span>의
+          신뢰. 2002년 설립 이래 정보통신 보안 분야의 핵심 기술력을 축적해
           왔습니다.
         </p>
       </div>
@@ -263,15 +264,15 @@ export default function HistoryPage() {
               >
                 <div className="lg:col-span-3">
                   <div className="lg:sticky lg:top-40 bg-slate-50 p-6 sm:p-8 rounded-2xl border border-slate-100">
-                    <div className="text-[11px] font-bold text-blue-600 mb-2 uppercase tracking-[0.2em]">
+                    <div className="font-mono text-[10px] font-medium text-blue-600 mb-3 uppercase tracking-[0.3em]">
                       Period
                     </div>
-                    <div className="text-xl sm:text-2xl font-extrabold text-[#001F5B] leading-tight tracking-tight">
+                    <div className="font-display text-2xl sm:text-3xl font-bold text-[#001F5B] leading-tight tracking-tight tabular-nums">
                       {period}
                     </div>
                     <div className="mt-5 w-10 h-0.5 bg-blue-600 rounded-full" />
-                    <div className="mt-3 text-xs font-medium text-slate-400">
-                      {items.length} entries
+                    <div className="mt-3 font-mono text-xs font-medium text-slate-400 tabular-nums">
+                      {String(items.length).padStart(2, '0')} entries
                     </div>
                   </div>
                 </div>
@@ -283,13 +284,13 @@ export default function HistoryPage() {
                         <div className="w-px flex-1 bg-slate-100 min-h-[28px]" />
                       </div>
                       <div className="pb-5 sm:pb-6 min-w-0 flex-1">
-                        <div className="flex items-center gap-3 mb-1.5">
-                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                        <div className="flex items-center gap-3 mb-2">
+                          <span className="font-mono text-[10px] font-medium text-slate-400 uppercase tracking-[0.2em]">
                             {item.category}
                           </span>
                           <div className="h-px flex-grow bg-slate-100" />
                         </div>
-                        <p className="text-sm sm:text-base font-semibold text-slate-800 tracking-tight group-hover:text-blue-600 transition-colors leading-relaxed">
+                        <p className="text-base sm:text-lg font-semibold text-slate-800 tracking-tight group-hover:text-blue-600 transition-colors leading-relaxed">
                           {item.title}
                         </p>
                       </div>

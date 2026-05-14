@@ -101,13 +101,13 @@ export default function OrganizationPage() {
   return (
     <div className="space-y-12 pb-10">
       <div className="text-center max-w-3xl mx-auto px-2">
-        <span className="text-blue-600 font-black text-[10px] sm:text-xs uppercase tracking-[0.3em] sm:tracking-widest mb-2 block">
+        <span className="font-mono text-blue-600 text-[10px] font-medium uppercase tracking-[0.4em] mb-3 block">
           Organization
         </span>
-        <h3 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tighter mb-4 leading-tight">
+        <h3 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight mb-5 leading-[1.05]">
           효율적인 의사결정 체계
         </h3>
-        <p className="text-slate-500 font-bold text-xs sm:text-sm lg:text-base leading-relaxed">
+        <p className="text-slate-500 font-medium text-sm sm:text-base leading-relaxed">
           솔모정보기술은 전문성과 신뢰를 바탕으로 각 부서 간의 유기적인 협력
           체계를 구축하고 있습니다.
         </p>
@@ -118,7 +118,7 @@ export default function OrganizationPage() {
       {/* 사업부별 업무 영역 카드 */}
       <section className="max-w-6xl mx-auto">
         <div className="flex items-center gap-4 mb-6">
-          <h4 className="text-sm font-black text-blue-600 uppercase tracking-[0.5em] whitespace-nowrap">
+          <h4 className="font-mono text-sm font-medium text-blue-600 uppercase tracking-[0.4em] whitespace-nowrap">
             Business Scope
           </h4>
           <div className="w-full h-px bg-slate-200" />
@@ -135,7 +135,7 @@ export default function OrganizationPage() {
                   {d.dept}
                 </span>
               </div>
-              <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">
+              <div className="font-mono text-[10px] font-medium text-slate-400 uppercase tracking-[0.3em] mb-2">
                 사업 영역
               </div>
               <ul className="space-y-1.5">
@@ -156,14 +156,20 @@ export default function OrganizationPage() {
 
       <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-20 items-center">
         <div className="order-2 lg:order-1">
-          <h4 className="text-2xl sm:text-3xl font-black text-slate-900 mb-4 sm:mb-6 tracking-tight leading-tight">
+          <h4 className="font-display text-3xl sm:text-4xl font-bold text-slate-900 mb-5 sm:mb-7 tracking-tight leading-[1.15]">
             전문 엔지니어 중심의 <br />
             인력 현황
           </h4>
-          <p className="text-slate-500 font-bold text-sm sm:text-[15px] leading-relaxed mb-8 sm:mb-12">
-            총 47명의 구성원 중 50% 이상이 특급 및 고급 기술자로 구성되어
-            있습니다. 이는 대규모 공공 및 금융 프로젝트에서 솔모정보기술이
-            신뢰받는 가장 큰 이유입니다.
+          <p className="text-slate-500 font-medium text-base leading-relaxed mb-8 sm:mb-12">
+            총{' '}
+            <span className="font-display font-bold text-slate-700 tabular-nums">
+              47명
+            </span>
+            의 구성원 중{' '}
+            <span className="font-display font-bold text-slate-700">50%</span>
+            {' '}이상이 특급 및 고급 기술자로 구성되어 있습니다. 이는 대규모
+            공공 및 금융 프로젝트에서 솔모정보기술이 신뢰받는 가장 큰
+            이유입니다.
           </p>
           <div className="space-y-5 sm:space-y-6">
             {PERSONNEL_DATA.map((item) => (
@@ -174,10 +180,10 @@ export default function OrganizationPage() {
                 />
                 <div className="min-w-0 flex-1">
                   <div className="flex items-baseline gap-3 mb-1 flex-wrap">
-                    <span className="text-base sm:text-lg font-black text-slate-900">
+                    <span className="font-display text-lg sm:text-xl font-bold text-slate-900">
                       {item.label}
                     </span>
-                    <span className="text-blue-600 font-black text-lg sm:text-xl italic">
+                    <span className="font-serif italic text-blue-600 font-medium text-2xl tabular-nums">
                       {item.value}%
                     </span>
                   </div>

@@ -119,7 +119,7 @@ export default async function ProductDetailPage({
               ))}
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-[1.1]">
               {product.name}
             </h1>
           </div>
@@ -130,7 +130,7 @@ export default async function ProductDetailPage({
         <main className="lg:col-span-8 space-y-12">
           <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200">
             <div className="flex items-center gap-3 mb-5">
-              <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em]">
+              <span className="text-blue-600 font-mono font-medium text-[10px] uppercase tracking-[0.4em]">
                 Overview
               </span>
               <div className="flex-1 h-px bg-slate-100" />
@@ -158,7 +158,7 @@ export default async function ProductDetailPage({
               className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200"
             >
               <div className="flex items-center gap-3 mb-6">
-                <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em]">
+                <span className="text-blue-600 font-mono font-medium text-[10px] uppercase tracking-[0.4em]">
                   Diagram
                 </span>
                 <span className="text-xs font-bold text-slate-500">
@@ -182,7 +182,7 @@ export default async function ProductDetailPage({
           {product.assets?.hero && (
             <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200">
               <div className="flex items-center gap-3 mb-6">
-                <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em]">
+                <span className="text-blue-600 font-mono font-medium text-[10px] uppercase tracking-[0.4em]">
                   Product View
                 </span>
                 <div className="flex-1 h-px bg-slate-100" />
@@ -204,7 +204,7 @@ export default async function ProductDetailPage({
             (product.featureGroups && product.featureGroups.length > 0)) && (
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em]">
+              <span className="text-blue-600 font-mono font-medium text-[10px] uppercase tracking-[0.4em]">
                 Key Features
               </span>
               <span className="text-xs font-bold text-slate-400">핵심기능</span>
@@ -361,7 +361,7 @@ export default async function ProductDetailPage({
 
         <aside className="lg:col-span-4 space-y-6">
           <div className="bg-white rounded-3xl p-7 border border-slate-200 sticky top-28">
-            <div className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-3">
+            <div className="text-blue-600 font-mono font-medium text-[10px] uppercase tracking-[0.4em] mb-3">
               Same Category
             </div>
             <h4 className="text-lg font-black text-slate-900 tracking-tight mb-5">
