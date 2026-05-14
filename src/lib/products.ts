@@ -493,49 +493,49 @@ const endpointServerProducts: Product[] = [
     officialUrl: 'https://www.netand.co.kr',
     features: [
       {
-        icon: 'server',
+        icon: 'hiware-psm',
         title: '시스템 접근제어 (HIWARE PSM)',
         description:
           '서버, 네트워크 등 시스템에 대한 접근제어와 권한 관리.',
       },
       {
-        icon: 'database',
+        icon: 'hiware-dbam',
         title: 'DB 접근제어 (HIWARE DBAM)',
         description:
           '데이터베이스에 대한 접근제어와 권한 관리.',
       },
       {
-        icon: 'shield-check',
+        icon: 'hiware-im',
         title: '시스템 계정관리 (HIWARE iM)',
         description:
           '서버, 네트워크 등 시스템에 대한 계정 및 패스워드 통합 관리.',
       },
       {
-        icon: 'database',
+        icon: 'hiware-dbm',
         title: 'DB 계정관리 (HIWARE DBM)',
         description:
           '데이터베이스에 대한 계정 및 패스워드 통합 관리.',
       },
       {
-        icon: 'user-check',
+        icon: 'hiware-adim',
         title: 'AD 계정관리 (HIWARE ADiM)',
         description:
           'Active Directory에 대한 계정 및 패스워드 통합 관리.',
       },
       {
-        icon: 'key',
+        icon: 'hiware-securekey',
         title: 'SSH CA 키 관리 (HIWARE SecureKey)',
         description:
-          '제로트러스트를 위한 서명키 인증 보안.',
+          '제로트러스트를 위한 SSH 키 인증 보안.',
       },
       {
-        icon: 'monitor',
+        icon: 'hiware-cctv',
         title: 'CCTV 패스워드 관리 (HIWARE CCTV PM)',
         description:
           'CCTV의 계정 현황 및 패스워드 관리.',
       },
       {
-        icon: 'lock',
+        icon: 'hiware-otp',
         title: '모바일 OTP (HIWARE MobileOTP)',
         description:
           '사용자 인증 강화를 위한 추가 보안 인증.',
