@@ -457,20 +457,24 @@ const endpointServerProducts: Product[] = [
     officialUrl: 'https://www.pnpsecure.com/02_1_dbsafer-db/',
     features: [
       {
-        icon: 'database',
-        title: '전수 접근 통제',
-        description: 'DB 세션·SQL 단위로 인가/거부 정책을 적용합니다.',
+        icon: 'dbsafer-db',
+        title: 'DBSAFER DB',
+        description: 'DB 접근제어 — 디비세이퍼 DB',
       },
       {
-        icon: 'server',
-        title: 'Server Agent로 우회 차단',
-        description:
-          '네트워크 우회 접속까지 에이전트로 완벽 차단합니다.',
+        icon: 'dbsafer-am',
+        title: 'DBSAFER AM',
+        description: 'SYSTEM 접근제어 — 디비세이퍼 AM',
       },
       {
-        icon: 'cloud',
-        title: '클라우드/가상화 대응',
-        description: '온프레미스와 클라우드 DB 모두 단일 정책으로 관리합니다.',
+        icon: 'dbsafer-os',
+        title: 'DBSAFER OS',
+        description: 'OS 접근제어 — 디비세이퍼 OS',
+      },
+      {
+        icon: 'dbsafer-im',
+        title: 'DBSAFER IM',
+        description: '통합계정관리 — 디비세이퍼 IM',
       },
     ],
   },
