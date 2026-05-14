@@ -11,6 +11,7 @@ import { FeatureFlowDiagram } from '@/components/FeatureFlowDiagram';
 import { LineIcon } from '@/components/LineIcon';
 import { RadwareIcon } from '@/components/RadwareIcons';
 import { FeaturePhotoGrid } from '@/components/FeaturePhotoCard';
+import { TilonFeatureGrid } from '@/components/TilonFeatureGrid';
 
 /**
  * 단말/서버 보안 · 애플리케이션 보안 · OT 보안 카테고리는 features를
@@ -323,6 +324,8 @@ export default async function ProductDetailPage({
               </div>
             ) : FLOW_PRODUCTS.has(product.id) ? (
               <FeatureFlowDiagram features={product.features} />
+            ) : product.id === 'tilon-vdi' ? (
+              <TilonFeatureGrid features={product.features} />
             ) : PHOTO_CATEGORIES.has(product.categoryId) &&
               featureScreenshots.length === 0 ? (
               <FeaturePhotoGrid features={product.features} />

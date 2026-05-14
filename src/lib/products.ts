@@ -758,7 +758,7 @@ const applicationProducts: Product[] = [
     assets: {
       logo: '/images/products/tilon-vdi/logo.png',
     },
-    name: '틸론 VDI (Dstation)',
+    name: '틸론 VDI (가상데스크인프라)',
     vendor: 'Tilon',
     shortDescription:
       '중앙 집중형 가상 데스크톱 환경. 장소·디바이스 제약 없는 안전한 업무 환경.',
@@ -768,28 +768,52 @@ const applicationProducts: Product[] = [
     officialUrl: 'https://www.tilon.com/',
     features: [
       {
-        icon: 'users',
+        icon: 'dds',
         title: 'DDS (Dstation Directory Service)',
         description:
-          '사용자와 가상데스크톱을 위한 디렉터리 정보 통합 관리. DDS의 기본 AD 통합으로 운영편리 가능. 인증·계정·권한 로그 기록 (변조 불가). Active Directory를 대체한 보안성과 자체 VDI 인증 지원.',
+          '사용자·가상데스크톱 디렉터리 정보 통합 관리. Active Directory 대체 자체 VDI 인증 지원.',
+        bullets: [
+          '사용자·가상데스크톱 디렉터리 정보 통합 관리',
+          'AD 통합으로 운영 편의성 제공',
+          '인증·계정·권한 로그 기록 (변조 불가)',
+          'Active Directory 대체 보안성·자체 VDI 인증 지원',
+        ],
       },
       {
-        icon: 'shield-check',
+        icon: 'dac',
         title: 'DAC (Dstation Access Control)',
         description:
-          '가상망에 접근 통제. 사용자·단말(IP·MAC) 정보 기반 가상 데스크톱 접근 통제. 가상 데스크톱 자원 접근 통제. 네트워크·USB·파일 입출력 설정 통제. 사용자 데이터 보호. 화면 캡처 차단. 파일/폴더/네트워크 등 인가/거부 사용자/모듈 접근 완벽 제어.',
+          '가상망 접근 통제. 사용자·단말 기반 가상 데스크톱 접근 통제와 네트워크·USB·파일 입출력 통제.',
+        bullets: [
+          '사용자·단말(IP·MAC) 기반 접근 통제',
+          '가상 데스크톱 자원·네트워크·USB 통제',
+          '화면 캡처 차단으로 사용자 데이터 보호',
+          '파일·폴더·네트워크 인가/거부 완벽 제어',
+        ],
       },
       {
-        icon: 'lock',
+        icon: 'ddp',
         title: 'DDP (Dstation Data Protection)',
         description:
-          '전송 데이터 보호. 표준 프로토콜(HTTPS, TLS 1.2) 암호화 사용. RSA-2048(키교환), SHA-256(해시) 등 알고리즘 자체 보호 및 저장 데이터 보호. 모든 통신 구간 암호화와 중요 정보 저장 시 정보 가치/생성·운영 관리·이력 기밀성 및 무결성 강화.',
+          '표준 프로토콜 암호화 기반 전송 데이터 보호. 저장 데이터 기밀성·무결성 강화.',
+        bullets: [
+          'HTTPS·TLS 1.2 표준 프로토콜 암호화',
+          'RSA-2048·SHA-256 알고리즘 자체 보호',
+          '모든 통신 구간 암호화 적용',
+          '저장 데이터 기밀성·무결성 강화',
+        ],
       },
       {
-        icon: 'monitor',
+        icon: 'dms',
         title: 'DMS (Dstation Monitoring Service)',
         description:
-          '서비스·프로세스 실시간 감시로 무결성 보호. 성능 실적·로그 기록 관리자 화면에 보장. 정보 자산 모니터링과 로그 기록 관리자에게 정보 보호 및 가용성·안전성 보장. 제품 위변조 주기적 검증으로 무결성과 안전성을 보장.',
+          '서비스·프로세스 실시간 감시로 무결성 보호. 위변조 주기적 검증으로 가용성·안전성 보장.',
+        bullets: [
+          '서비스·프로세스 실시간 감시',
+          '성능·로그 관리자 대시보드 제공',
+          '정보 자산 모니터링·로그 기록 관리',
+          '제품 위변조 주기적 검증으로 무결성 보장',
+        ],
       },
     ],
   },
