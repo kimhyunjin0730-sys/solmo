@@ -261,7 +261,7 @@ function DesktopTree() {
         className="absolute inset-0 w-full h-full"
         aria-hidden="true"
       >
-        {/* CEO → staff junction */}
+        {/* CEO 에서 division bus 까지 내려가는 세로 줄기 */}
         <line
           x1="50"
           y1="13"
@@ -270,7 +270,7 @@ function DesktopTree() {
           stroke="#cbd5e1"
           strokeWidth="0.3"
         />
-        {/* Staff left side line */}
+        {/* 경영관리팀 (좌상) — CEO 줄기에서 왼쪽 */}
         <line
           x1="50"
           y1="24"
@@ -279,32 +279,41 @@ function DesktopTree() {
           stroke="#cbd5e1"
           strokeWidth="0.3"
         />
-        {/* Staff right side line */}
+        {/* SI사업부 (우상) — CEO 줄기에서 오른쪽 */}
+        <line
+          x1="50"
+          y1="24"
+          x2="78"
+          y2="24"
+          stroke="#cbd5e1"
+          strokeWidth="0.3"
+        />
+        {/* 기업부설연구소 (좌하) — CEO 줄기에서 왼쪽 한 단계 아래 */}
         <line
           x1="50"
           y1="36"
-          x2="78"
+          x2="34"
           y2="36"
           stroke="#cbd5e1"
           strokeWidth="0.3"
         />
-        {/* Horizontal bus to 6 divisions */}
+        {/* 사업부 6개 위쪽의 가로 버스 (CEO 줄기에서 좌우로 펼침) */}
         <line
           x1={colCenters[0]}
-          y1="60"
+          y1="50"
           x2={colCenters[5]}
-          y2="60"
+          y2="50"
           stroke="#cbd5e1"
           strokeWidth="0.3"
         />
-        {/* 6 vertical drops */}
+        {/* 각 사업부 위로 내려오는 짧은 세로 드롭 */}
         {colCenters.map((cx) => (
           <line
             key={`drop-${cx}`}
             x1={cx}
-            y1="60"
+            y1="50"
             x2={cx}
-            y2="70"
+            y2="56"
             stroke="#cbd5e1"
             strokeWidth="0.3"
           />
