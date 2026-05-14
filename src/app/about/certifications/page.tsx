@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: '인증 및 특허',
   description:
-    '솔모정보기술의 보유 인증 / 자격 / 특허 — ISO 4종, 메인비즈·이노비즈, GS 1등급, 신용평가 BB+, 그리고 보안 특허.',
+    '솔모정보기술의 보유 인증 / 자격 / 특허 — ISO 4종, 메인비즈·이노비즈, 신용평가 BB+, 그리고 보안 특허.',
 };
 
 type Cert = {
