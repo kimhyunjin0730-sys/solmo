@@ -36,34 +36,41 @@ const PERSONNEL_DATA: readonly Personnel[] = [
   },
 ];
 
-/** 사업부 구성 (PPT 회사개요 슬라이드 6 기준). */
+/** CEO 직속 스태프 부서 (사업부와 별개). */
+const STAFF_UNITS = ['경영관리팀', '기업부설연구소', 'SI사업부'] as const;
+
+/** 사업부 6개. PPT 회사개요 조직도. */
 type Division = {
+  /** 부서명 */
   dept: string;
-  team: string;
-  /** 사업부 핵심 업무 영역 */
+  /** 사업 영역 */
   scope: readonly string[];
 };
 
 const DIVISIONS: readonly Division[] = [
   {
-    dept: 'SI사업부',
-    team: 'SI사업팀',
-    scope: ['시스템 통합', '전산 인프라', '구축 사업'],
+    dept: '사업 1부',
+    scope: ['시스템접근제어', '백업솔루션', '서버 백신'],
   },
   {
-    dept: '사업1부',
-    team: '솔루션사업팀',
-    scope: ['방화벽', '네트워크 보안', '엔드포인트'],
+    dept: '사업 2부',
+    scope: ['방화벽', '무선보안'],
   },
   {
-    dept: '사업2부',
-    team: 'NW기술팀',
-    scope: ['NAC', '통합 로그 관리', 'L4·L7 / 무선 보안'],
+    dept: '사업 3부',
+    scope: ['NAC', '통합로그관리', '그 외 보안솔루션'],
   },
   {
-    dept: '사업3부',
-    team: '보안관제사업팀',
-    scope: ['VDI', '내부정보 유출 방지', '백업 / 복구'],
+    dept: '사업 4부',
+    scope: ['네트워크 보안'],
+  },
+  {
+    dept: '솔루션사업부',
+    scope: ['VDI', '보안복합기', 'Radware'],
+  },
+  {
+    dept: '기술지원부',
+    scope: ['사업지원', '고객관리', '유지보수'],
   },
 ];
 
@@ -109,34 +116,35 @@ export default function OrganizationPage() {
       <OrgChart />
 
       {/* 사업부별 업무 영역 카드 */}
-      <section className="max-w-5xl mx-auto">
+      <section className="max-w-6xl mx-auto">
         <div className="flex items-center gap-4 mb-6">
           <h4 className="text-sm font-black text-blue-600 uppercase tracking-[0.5em] whitespace-nowrap">
             Business Scope
           </h4>
           <div className="w-full h-px bg-slate-200" />
         </div>
-        <div className="grid sm:grid-cols-2 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {DIVISIONS.map((d) => (
             <div
               key={d.dept}
               className="bg-white border border-slate-200 rounded-2xl p-6 hover:border-blue-600 hover:shadow-md transition-all"
             >
-              <div className="flex items-baseline gap-3 mb-3">
-                <span className="text-xs font-black text-blue-600 uppercase tracking-widest">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="w-2 h-2 rounded-sm bg-red-500" />
+                <span className="text-base font-black text-[#001F5B] tracking-tight">
                   {d.dept}
                 </span>
-                <span className="text-lg font-black text-slate-900 tracking-tight">
-                  {d.team}
-                </span>
+              </div>
+              <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">
+                사업 영역
               </div>
               <ul className="space-y-1.5">
                 {d.scope.map((s) => (
                   <li
                     key={s}
-                    className="text-sm font-bold text-slate-500 flex items-center gap-2"
+                    className="text-sm font-bold text-slate-600 flex items-center gap-2"
                   >
-                    <span className="w-1 h-1 rounded-full bg-slate-300" />
+                    <span className="text-slate-400">–</span>
                     {s}
                   </li>
                 ))}
@@ -185,7 +193,10 @@ export default function OrganizationPage() {
         <div className="relative group order-1 lg:order-2">
           <div className="absolute inset-0 bg-blue-100/30 rounded-full blur-[100px]" />
           <div className="relative bg-white p-8 sm:p-12 lg:p-16 rounded-[2.5rem] sm:rounded-[4rem] shadow-2xl border border-slate-100 flex justify-center items-center">
-            <svg viewBox="0 0 100 100" className="w-full max-w-[260px] sm:max-w-[350px]">
+            <svg
+              viewBox="0 0 100 100"
+              className="w-full max-w-[260px] sm:max-w-[350px]"
+            >
               {paths}
               <circle cx="50" cy="50" r="22" fill="white" />
               <text
@@ -218,78 +229,25 @@ export default function OrganizationPage() {
 
 function OrgChart() {
   return (
-    <div className="relative p-5 sm:p-10 lg:p-16 bg-slate-50 rounded-[2rem] sm:rounded-[3rem] lg:rounded-[4rem] border border-slate-100">
+    <div className="relative p-5 sm:p-10 lg:p-14 bg-slate-50 rounded-[2rem] sm:rounded-[3rem] lg:rounded-[4rem] border border-slate-100">
       <div className="hidden md:block">
         <DesktopTree />
       </div>
       <div className="md:hidden">
-        <div className="flex justify-center">
-          <div className="bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white rounded-full px-8 py-4 shadow-lg shadow-indigo-900/20 text-center">
-            <div className="text-[9px] font-black uppercase tracking-[0.25em] opacity-70 mb-0.5">
-              CEO
-            </div>
-            <div className="text-base font-black tracking-tight">대표이사</div>
-          </div>
-        </div>
-
-        <MobileConnector />
-
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-white border border-slate-200 rounded-2xl px-3 py-3 text-center">
-            <div className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-0.5">
-              Staff
-            </div>
-            <div className="text-xs font-black text-slate-700 tracking-tight">
-              기업부설연구소
-            </div>
-          </div>
-          <div className="bg-white border border-slate-200 rounded-2xl px-3 py-3 text-center">
-            <div className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-0.5">
-              Staff
-            </div>
-            <div className="text-xs font-black text-slate-700 tracking-tight">
-              경영관리부
-            </div>
-          </div>
-        </div>
-
-        <MobileConnector />
-
-        <div className="space-y-3">
-          {DIVISIONS.map((d) => (
-            <div
-              key={d.dept}
-              className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm"
-            >
-              <div className="bg-[#001F5B] text-white px-5 py-2.5 flex items-center justify-between">
-                <span className="text-xs font-black tracking-tight">
-                  {d.dept}
-                </span>
-                <span className="text-[9px] font-black uppercase tracking-widest opacity-50">
-                  Division
-                </span>
-              </div>
-              <div className="px-5 py-4 flex items-center justify-between">
-                <div className="text-base font-black text-slate-900 tracking-tight">
-                  {d.team}
-                </div>
-                <div className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
-              </div>
-            </div>
-          ))}
-        </div>
+        <MobileTree />
       </div>
     </div>
   );
 }
 
 function DesktopTree() {
-  const colCenters = [12.5, 37.5, 62.5, 87.5] as const;
+  // 6 divisions evenly distributed
+  const colCenters = [8.5, 25, 41.5, 58.5, 75, 91.5] as const;
 
   return (
     <div
-      className="relative w-full max-w-5xl mx-auto"
-      style={{ aspectRatio: '5 / 4' }}
+      className="relative w-full max-w-6xl mx-auto"
+      style={{ aspectRatio: '6 / 4' }}
     >
       <svg
         viewBox="0 0 100 100"
@@ -297,59 +255,81 @@ function DesktopTree() {
         className="absolute inset-0 w-full h-full"
         aria-hidden="true"
       >
-        <line x1="50" y1="14" x2="50" y2="32" stroke="#cbd5e1" strokeWidth="0.3" />
-        <line x1="22" y1="32" x2="78" y2="32" stroke="#cbd5e1" strokeWidth="0.3" />
-        <line x1="50" y1="32" x2="50" y2="52" stroke="#cbd5e1" strokeWidth="0.3" />
+        {/* CEO → staff junction */}
         <line
-          x1={colCenters[0]}
-          y1="52"
-          x2={colCenters[3]}
-          y2="52"
+          x1="50"
+          y1="13"
+          x2="50"
+          y2="50"
           stroke="#cbd5e1"
           strokeWidth="0.3"
         />
+        {/* Staff left side line */}
+        <line
+          x1="50"
+          y1="24"
+          x2="22"
+          y2="24"
+          stroke="#cbd5e1"
+          strokeWidth="0.3"
+        />
+        {/* Staff right side line */}
+        <line
+          x1="50"
+          y1="36"
+          x2="78"
+          y2="36"
+          stroke="#cbd5e1"
+          strokeWidth="0.3"
+        />
+        {/* Horizontal bus to 6 divisions */}
+        <line
+          x1={colCenters[0]}
+          y1="60"
+          x2={colCenters[5]}
+          y2="60"
+          stroke="#cbd5e1"
+          strokeWidth="0.3"
+        />
+        {/* 6 vertical drops */}
         {colCenters.map((cx) => (
           <line
-            key={`d-${cx}`}
+            key={`drop-${cx}`}
             x1={cx}
-            y1="52"
+            y1="60"
             x2={cx}
-            y2="60"
-            stroke="#cbd5e1"
-            strokeWidth="0.3"
-          />
-        ))}
-        {colCenters.map((cx) => (
-          <line
-            key={`t-${cx}`}
-            x1={cx}
-            y1="72"
-            x2={cx}
-            y2="80"
+            y2="70"
             stroke="#cbd5e1"
             strokeWidth="0.3"
           />
         ))}
       </svg>
 
+      {/* CEO */}
       <Node
-        title="대표이사"
-        tag="CEO"
+        title="CEO"
         variant="highlight"
         style={{ top: '0%', left: '50%', transform: 'translateX(-50%)' }}
       />
 
+      {/* Staff units — 좌우 분기 */}
+      <Node
+        title="경영관리팀"
+        variant="muted"
+        style={{ top: '21%', left: '22%', transform: 'translateX(-50%)' }}
+      />
+      <Node
+        title="SI사업부"
+        variant="muted"
+        style={{ top: '21%', left: '78%', transform: 'translateX(-50%)' }}
+      />
       <Node
         title="기업부설연구소"
         variant="muted"
-        style={{ top: '27%', left: '22%', transform: 'translateX(-50%)' }}
-      />
-      <Node
-        title="경영관리부"
-        variant="muted"
-        style={{ top: '27%', left: '78%', transform: 'translateX(-50%)' }}
+        style={{ top: '33%', left: '34%', transform: 'translateX(-50%)' }}
       />
 
+      {/* 6 Divisions */}
       {DIVISIONS.map((d, i) => (
         <Node
           key={d.dept}
@@ -363,17 +343,82 @@ function DesktopTree() {
         />
       ))}
 
+      {/* Each division's scope (사업 영역) under its node */}
       {DIVISIONS.map((d, i) => (
-        <TeamNode
-          key={d.team}
-          title={d.team}
+        <ScopeBox
+          key={`scope-${d.dept}`}
+          scopes={d.scope}
           style={{
-            top: '75%',
+            top: '70%',
             left: `${colCenters[i]}%`,
             transform: 'translateX(-50%)',
           }}
         />
       ))}
+    </div>
+  );
+}
+
+function MobileTree() {
+  return (
+    <div className="space-y-4">
+      <div className="flex justify-center">
+        <div className="bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white rounded-full px-8 py-4 shadow-lg shadow-indigo-900/20 text-center">
+          <div className="text-[9px] font-black uppercase tracking-[0.25em] opacity-70 mb-0.5">
+            CEO
+          </div>
+          <div className="text-base font-black tracking-tight">대표이사</div>
+        </div>
+      </div>
+
+      <MobileConnector />
+
+      <div className="grid grid-cols-3 gap-2">
+        {STAFF_UNITS.map((unit) => (
+          <div
+            key={unit}
+            className="bg-white border border-slate-200 rounded-xl px-2 py-3 text-center"
+          >
+            <div className="text-[8px] font-black uppercase tracking-widest text-slate-400 mb-0.5">
+              Staff
+            </div>
+            <div className="text-[11px] font-black text-slate-700 tracking-tight">
+              {unit}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <MobileConnector />
+
+      <div className="space-y-3">
+        {DIVISIONS.map((d) => (
+          <div
+            key={d.dept}
+            className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm"
+          >
+            <div className="bg-[#001F5B] text-white px-5 py-2.5 flex items-center justify-between">
+              <span className="text-xs font-black tracking-tight">
+                {d.dept}
+              </span>
+              <span className="text-[9px] font-black uppercase tracking-widest opacity-50">
+                Division
+              </span>
+            </div>
+            <ul className="px-5 py-4 space-y-1">
+              {d.scope.map((s) => (
+                <li
+                  key={s}
+                  className="text-xs font-bold text-slate-600 flex items-center gap-2"
+                >
+                  <span className="text-slate-400">–</span>
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
@@ -392,12 +437,14 @@ function Node({
   style?: CSSProperties;
 }) {
   let cls =
-    'absolute px-5 py-3 rounded-full text-sm font-black tracking-tight whitespace-nowrap shadow-md border transition-all';
+    'absolute px-4 py-2.5 rounded-full text-xs font-black tracking-tight whitespace-nowrap shadow-md border transition-all';
   if (variant === 'highlight')
     cls +=
       ' bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white border-indigo-500 px-7 py-4 text-base shadow-xl shadow-indigo-900/20';
-  else if (variant === 'dark') cls += ' bg-[#001F5B] text-white border-[#001F5B]';
-  else if (variant === 'muted') cls += ' bg-white text-slate-500 border-slate-200';
+  else if (variant === 'dark')
+    cls += ' bg-[#001F5B] text-white border-[#001F5B]';
+  else if (variant === 'muted')
+    cls += ' bg-white text-slate-500 border-slate-200';
   else cls += ' bg-white text-slate-700 border-slate-200';
 
   return (
@@ -412,15 +459,32 @@ function Node({
   );
 }
 
-function TeamNode({ title, style }: { title: string; style?: CSSProperties }) {
+function ScopeBox({
+  scopes,
+  style,
+}: {
+  scopes: readonly string[];
+  style?: CSSProperties;
+}) {
   return (
     <div
-      className="absolute bg-white border border-slate-200 rounded-2xl px-4 py-4 text-center shadow-sm hover:border-blue-600 hover:shadow-md transition-all min-w-[110px]"
+      className="absolute bg-cyan-50/80 border border-cyan-200 rounded-xl px-3 py-3 shadow-sm min-w-[110px] max-w-[150px]"
       style={style}
     >
-      <div className="text-xs font-black text-slate-900 tracking-tight leading-tight">
-        {title}
+      <div className="text-[8px] font-black uppercase tracking-widest text-cyan-700 mb-1.5">
+        사업 영역
       </div>
+      <ul className="space-y-0.5">
+        {scopes.map((s) => (
+          <li
+            key={s}
+            className="text-[10px] font-bold text-slate-700 leading-tight flex gap-1"
+          >
+            <span className="text-slate-400">–</span>
+            <span>{s}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
