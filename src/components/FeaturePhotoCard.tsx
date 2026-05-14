@@ -51,15 +51,17 @@ const PHOTO_BY_ICON: Record<string, string> = {
     'https://images.unsplash.com/photo-1565008447742-97f6f38c985c?auto=format&fit=crop&q=80&w=1200',
   usb:
     'https://images.unsplash.com/photo-1592664474505-fea3df37d1cd?auto=format&fit=crop&q=80&w=1200',
-  // Operations / savings / package / refresh
+  // Operations / savings / package / refresh — Acronis 백업·복구 톤
   gauge:
     'https://images.unsplash.com/photo-1551808525-51a94da548ce?auto=format&fit=crop&q=80&w=1200',
   savings:
     'https://images.unsplash.com/photo-1579621908742-d4c4bb6f7f37?auto=format&fit=crop&q=80&w=1200',
+  // 30+ workload protection — multi-cloud / data center 톤
   package:
-    'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=1200',
+    'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=1400',
+  // 빠르고 안정적인 복구 — long-exposure light trails (속도/복구)
   'refresh-ccw':
-    'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=1200',
+    'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&q=80&w=1400',
   // File / users / camera
   'file-text':
     'https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&q=80&w=1200',
@@ -121,21 +123,58 @@ function FeaturePhotoCard({
 }) {
   const bg = getPhoto(feature.icon);
   return (
-    <article className="group relative h-[420px] sm:h-[460px] rounded-3xl overflow-hidden shadow-lg hover:-translate-y-1 transition-transform duration-300">
+    <article className="group relative h-[440px] sm:h-[480px] rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-500">
+      {/* Background photo */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={bg}
         alt=""
-        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+        className="w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-[1400ms]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/55 to-slate-950/10" />
-      <div className="absolute bottom-7 sm:bottom-8 left-7 sm:left-8 right-7 sm:right-8">
-        <span className="font-display text-blue-400 font-bold text-3xl tabular-nums block mb-3 tracking-tight">
+
+      {/* Layered gradients — top fade for legibility on top text, bottom for body */}
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/65 to-slate-950/20" />
+      <div className="absolute inset-0 bg-gradient-to-br from-[#001F5B]/30 via-transparent to-transparent" />
+
+      {/* Decorative corner: number stamp + accent line */}
+      <div className="absolute top-7 sm:top-8 left-7 sm:left-8 flex items-center gap-3">
+        <span className="font-mono text-[10px] font-medium text-blue-300/80 uppercase tracking-[0.4em]">
+          Feature
+        </span>
+        <div className="h-px w-10 bg-blue-300/40" />
+        <span className="font-display text-blue-300 font-bold text-base tabular-nums tracking-tight">
           {String(index + 1).padStart(2, '0')}
         </span>
-        <h4 className="font-display text-white text-2xl sm:text-3xl font-bold mb-4 tracking-tight leading-tight">
+      </div>
+
+      {/* Decorative top-right corner accent — subtle circle motif */}
+      <svg
+        className="absolute top-6 right-6 sm:top-7 sm:right-7 opacity-30 group-hover:opacity-50 transition-opacity"
+        width="48"
+        height="48"
+        viewBox="0 0 48 48"
+        fill="none"
+        aria-hidden="true"
+      >
+        <circle
+          cx="24"
+          cy="24"
+          r="22"
+          stroke="white"
+          strokeWidth="1"
+          strokeDasharray="2 3"
+        />
+        <circle cx="24" cy="24" r="3" fill="white" />
+      </svg>
+
+      {/* Body */}
+      <div className="absolute bottom-7 sm:bottom-9 left-7 sm:left-9 right-7 sm:right-9">
+        <h4 className="font-display text-white text-2xl sm:text-[28px] font-bold mb-3 tracking-tight leading-[1.15]">
           {feature.title}
         </h4>
+
+        {/* Accent line */}
+        <div className="h-0.5 w-10 bg-blue-400 mb-4 group-hover:w-16 transition-all duration-500" />
 
         {feature.bullets && feature.bullets.length > 0 ? (
           <ul className="space-y-1.5 mb-6">
@@ -150,12 +189,12 @@ function FeaturePhotoCard({
             ))}
           </ul>
         ) : (
-          <p className="text-white/70 text-sm sm:text-[15px] font-medium leading-relaxed mb-6">
+          <p className="text-white/75 text-sm sm:text-[15px] font-medium leading-relaxed mb-6">
             {feature.description}
           </p>
         )}
 
-        <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/15 backdrop-blur text-white text-base group-hover:bg-blue-600 transition-colors">
+        <div className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-white text-lg group-hover:bg-blue-600 group-hover:border-blue-500 group-hover:scale-110 transition-all duration-300">
           →
         </div>
       </div>
