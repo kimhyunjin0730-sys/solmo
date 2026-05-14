@@ -129,12 +129,23 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-sans);
   font-style: normal;
+  /* 한글 헤드라인이 어절 중간에서 잘리지 않도록 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  text-wrap: balance;
 }
 
 /* 긴 본문의 한글 줄바꿈 자연스럽게 */
 p, li {
   word-break: keep-all;
   overflow-wrap: break-word;
+  /* 모던 브라우저에서 단어/구절 단위 줄바꿈 최적화 */
+  text-wrap: pretty;
+}
+
+/* span / div 등 인라인 텍스트 컨테이너도 한글 어절 보호 (라틴 영향 없음) */
+span, div, a, button, label {
+  word-break: keep-all;
 }
 
 /* Tabular nums — for stats and version numbers */

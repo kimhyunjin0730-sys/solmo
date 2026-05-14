@@ -41,6 +41,48 @@ const ROW_PRODUCTS = new Set(['entrolink', 'hitachi-storage']);
  */
 const OUTLINE_ICON_PRODUCTS = new Set(['kornic-glory-wips']);
 
+/**
+ * 한국어 longDescription 을 문장 단위 문단으로 쪼갠다.
+ * - 우선 명시적 줄바꿈(\n\n) 이 있으면 그대로 사용
+ * - 그렇지 않으면 '다.', '요.', '됩니다.' 등 한국어 종결어미 + space 패턴으로 분리
+ * - 한 문장 단독은 통째로 한 문단으로 반환
+ */
+function splitSentencesIntoParagraphs(text: string): string[] {
+  if (!text) return [];
+  // 1) 명시적 문단 분리가 있으면 그대로
+  const explicit = text
+    .split(/\n\s*\n/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (explicit.length > 1) return explicit;
+
+  // 2) 한국어 종결어미(다./요./임./함.) + 공백/끝 패턴으로 분리
+  //    Lookbehind 로 종결 기호 보존
+  const parts = text
+    .replace(/\n+/g, ' ')
+    .split(/(?<=(?:다|요|임|함|음|죠|네|까|냐)\.)\s+/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  if (parts.length <= 1) return [text.trim()];
+
+  // 3) 너무 짧은 문장이 너무 많으면 2 문장씩 묶어서 문단으로
+  const target: string[] = [];
+  let buf = '';
+  for (const s of parts) {
+    if (!buf) {
+      buf = s;
+    } else if (buf.length < 60) {
+      buf += ' ' + s;
+    } else {
+      target.push(buf);
+      buf = s;
+    }
+  }
+  if (buf) target.push(buf);
+  return target;
+}
+
 type Params = { id: string };
 
 export async function generateStaticParams(): Promise<Params[]> {
@@ -153,9 +195,11 @@ export default async function ProductDetailPage({
               </span>
               <div className="flex-1 h-px bg-slate-100" />
             </div>
-            <p className="text-base sm:text-[17px] text-slate-700 leading-loose font-medium whitespace-pre-line">
-              {product.longDescription}
-            </p>
+            <div className="space-y-4 text-base sm:text-[17px] text-slate-700 leading-loose font-medium">
+              {splitSentencesIntoParagraphs(product.longDescription).map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
+            </div>
             {product.officialUrl && (
               <a
                 href={product.officialUrl}
