@@ -156,8 +156,17 @@ function localFallback(msg: string): string {
   )
     return '화면/출력물/웹캠 워터마크는 솔모 자체 개발 xSecuritas 제품군이에요. Screen WM · Output WM · Webcam BL · Webcam WM · Secure PC 등 8개 라인업으로 Enterprise/Personal 모두 지원합니다. /solutions/products/xsecuritas';
 
-  if (t.includes('백업') || t.includes('복구') || t.includes('랜섬'))
-    return '백업과 복구는 Acronis Cyber Protect — 30+ 워크로드 보호와 빠른 복구가 강점입니다. 랜섬웨어 차단까지 같이 보시려면 AppCheck Pro도 함께 검토하시면 좋아요. /solutions/products/acronis';
+  if (t.includes('랜섬') || t.includes('appcheck') || t.includes('앱체크') || t.includes('체크멀'))
+    return '랜섬웨어 대응은 AppCheck Pro(체크멀) — 사전 방어·탐지·차단·자동 복구를 한 번에. 랜섬가드로 손상 파일을 드라이버 수준에서 실시간 백업하고, 기존 백신과 충돌 없이 함께 설치·운용됩니다. /solutions/products/appcheck';
+
+  if (t.includes('백업') || t.includes('복구'))
+    return '백업과 복구는 Acronis Cyber Protect — 30+ 워크로드 보호와 빠른 복구가 강점입니다. 랜섬웨어 전용 방어가 필요하면 AppCheck Pro(체크멀)도 함께 보세요. /solutions/products/acronis';
+
+  if (t.includes('db 접근') || t.includes('디비') || t.includes('dbsafer') || t.includes('데이터베이스 접근'))
+    return 'DB·OS 접근제어는 DBSAFER(PNP Secure) — DB·System·OS·통합계정관리를 하나로 묶은 All-in-One 4-모듈(DB/AM/OS/IM) 구성이에요. 국내 유일 Server Agent로 우회접속까지 차단합니다. /solutions/products/dbsafer';
+
+  if (t.includes('계정관리') || t.includes('iam') || t.includes('hiware') || t.includes('하이웨어') || t.includes('통합 접근'))
+    return '통합 접근제어·계정관리(IAM)는 HIWARE(NETAND) — 8개 모듈을 3개 카테고리로 제공해요. 접근제어(PSM·DBAM), 계정관리(iM·DBM·ADiM), 기타 인증·관리(SecureKey·CCTV PM·MobileOTP). 서버·네트워크·DB·AD·CCTV까지 통합 관리합니다. /solutions/products/netand-hiware';
 
   if (t.includes('출력') || t.includes('프린트') || t.includes('복합기'))
     return '출력 보안은 신도 보안복합기를 추천드려요. 인증 출력, 워터마크/복사 방지, 출력 이력 추적까지 한 장비에서 가능합니다. /solutions/products/sindoh-secure-print';

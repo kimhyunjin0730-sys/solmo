@@ -30,9 +30,18 @@ const STATIC_INFO = `
    - 엔트로링크 (Entrolink — 통합 보안)
 
 2. 단말 / 서버 보안 (Endpoint & Server Security)
-   - DBSAFER (DB 접근 통제)
-   - NETAND HIWARE (서버 접근 통제)
-   - AppCheck Pro (랜섬웨어 차단)
+   - DBSAFER (PNP Secure) — All-in-One 접근제어 4-모듈:
+     · DBSAFER DB (DB 접근제어)
+     · DBSAFER AM (System 접근제어)
+     · DBSAFER OS (OS 접근제어)
+     · DBSAFER IM (통합계정관리)
+     국내 유일 Server Agent로 우회접속까지 차단
+   - HIWARE (NETAND) — 통합 접근제어·계정관리(IAM) 8-모듈:
+     · 접근제어: PSM(시스템) · DBAM(DB)
+     · 계정관리: iM(시스템) · DBM(DB) · ADiM(Active Directory)
+     · 기타 인증·관리: SecureKey(SSH CA 키) · CCTV PM · MobileOTP
+   - AppCheck Pro (체크멀) — 안티랜섬웨어 전문:
+     랜섬웨어 사전 방어·탐지·차단·자동 복구, 랜섬가드, 기존 백신과 호환
    - Trend Vision One (XDR · 차세대 백신)
    - Kornic Glory WIPS (무선 침입 방지)
    - NX Portrait (단말 가시성)
