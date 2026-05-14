@@ -3,14 +3,13 @@
 import { useState } from 'react';
 
 /**
- * 통합된 4개 카테고리. 'Innovation'·'Foundation'을 '연혁'(History)으로 합침.
+ * 통합된 3개 카테고리. '성과/인증' 필터는 제거하고 '연혁(History)' 으로 흡수.
  *
- *   History     — 회사 자체 이벤트(설립, 인증, 특허, 법인명 변경 등)
- *   Partner     — 글로벌 벤더와의 파트너 등록·승격
- *   Project     — 고객사 구축 실적
- *   Achievement — 외부 수상·등급·평가
+ *   History — 회사 자체 이벤트(설립, 인증, 특허, 법인명 변경, 등급 등)
+ *   Partner — 글로벌 벤더와의 파트너 등록·승격
+ *   Project — 고객사 구축 실적
  */
-type HistoryCategory = 'History' | 'Partner' | 'Project' | 'Achievement';
+type HistoryCategory = 'History' | 'Partner' | 'Project';
 
 type HistoryItem = {
   year: string;
@@ -205,12 +204,24 @@ const HISTORY_DATA: readonly HistoryItem[] = [
 
 const PERIODS = ['2020 – Present', '2011 – 2020', '2002 – 2010'] as const;
 
+/** 타임라인 내 카테고리 표시 순서 (연혁 → 파트너십 → 주요 실적). */
+const CATEGORY_ORDER: Record<HistoryCategory, number> = {
+  History: 0,
+  Partner: 1,
+  Project: 2,
+};
+
+const CATEGORY_LABEL_KR: Record<HistoryCategory, string> = {
+  History: '연혁',
+  Partner: '파트너십',
+  Project: '주요 실적',
+};
+
 const FILTERS: readonly { value: 'All' | HistoryCategory; label: string }[] = [
   { value: 'All', label: '전체' },
-  { value: 'Project', label: '주요 실적' },
-  { value: 'Partner', label: '파트너십' },
   { value: 'History', label: '연혁' },
-  { value: 'Achievement', label: '성과 / 인증' },
+  { value: 'Partner', label: '파트너십' },
+  { value: 'Project', label: '주요 실적' },
 ];
 
 export default function HistoryPage() {
@@ -255,7 +266,13 @@ export default function HistoryPage() {
 
         <div className="space-y-16 sm:space-y-24">
           {PERIODS.map((period) => {
-            const items = filtered.filter((i) => i.year === period);
+            const items = filtered
+              .filter((i) => i.year === period)
+              .slice()
+              .sort(
+                (a, b) =>
+                  CATEGORY_ORDER[a.category] - CATEGORY_ORDER[b.category],
+              );
             if (items.length === 0) return null;
             return (
               <div
@@ -285,8 +302,11 @@ export default function HistoryPage() {
                       </div>
                       <div className="pb-5 sm:pb-6 min-w-0 flex-1">
                         <div className="flex items-center gap-3 mb-2">
-                          <span className="font-mono text-[10px] font-medium text-slate-400 uppercase tracking-[0.2em]">
+                          <span className="font-mono text-[10px] font-medium text-blue-600 uppercase tracking-[0.25em]">
                             {item.category}
+                          </span>
+                          <span className="text-[11px] font-bold text-slate-500">
+                            {CATEGORY_LABEL_KR[item.category]}
                           </span>
                           <div className="h-px flex-grow bg-slate-100" />
                         </div>
