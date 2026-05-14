@@ -196,8 +196,12 @@ export default async function ProductDetailPage({
             </section>
           ))}
 
-          {/* 히어로 이미지 (PPT 본문 중앙의 대표 다이어그램/제품 사진) */}
-          {product.assets?.hero && (
+          {/* 히어로 이미지를 Key Features 로 렌더 — features/bullets/groups 가 없는 경우에만.
+              그렇지 않으면 아래 Key Features 섹션과 라벨이 중복되므로 숨긴다. */}
+          {product.assets?.hero &&
+            product.features.length === 0 &&
+            (!product.featureBullets || product.featureBullets.length === 0) &&
+            (!product.featureGroups || product.featureGroups.length === 0) && (
             <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200">
               <div className="flex items-center gap-3 mb-6">
                 <span className="text-blue-600 font-mono font-medium text-[10px] uppercase tracking-[0.4em]">
