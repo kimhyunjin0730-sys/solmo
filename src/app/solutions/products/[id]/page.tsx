@@ -12,6 +12,7 @@ import { LineIcon } from '@/components/LineIcon';
 import { RadwareIcon } from '@/components/RadwareIcons';
 import { FeaturePhotoGrid } from '@/components/FeaturePhotoCard';
 import { TilonFeatureGrid } from '@/components/TilonFeatureGrid';
+import { CiscoEsaDiagram } from '@/components/CiscoEsaDiagram';
 
 /**
  * 단말/서버 보안 · 애플리케이션 보안 · OT 보안 카테고리는 features를
@@ -326,6 +327,8 @@ export default async function ProductDetailPage({
               <FeatureFlowDiagram features={product.features} />
             ) : product.id === 'tilon-vdi' ? (
               <TilonFeatureGrid features={product.features} />
+            ) : product.id === 'cisco-esa' ? (
+              <CiscoEsaDiagram />
             ) : PHOTO_CATEGORIES.has(product.categoryId) &&
               featureScreenshots.length === 0 ? (
               <FeaturePhotoGrid features={product.features} />
