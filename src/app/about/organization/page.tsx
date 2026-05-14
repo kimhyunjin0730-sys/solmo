@@ -253,7 +253,7 @@ function DesktopTree() {
   return (
     <div
       className="relative w-full max-w-6xl mx-auto"
-      style={{ aspectRatio: '6 / 4' }}
+      style={{ aspectRatio: '6 / 4.6' }}
     >
       <svg
         viewBox="0 0 100 100"
@@ -369,11 +369,11 @@ function MobileTree() {
   return (
     <div className="space-y-4">
       <div className="flex justify-center">
-        <div className="bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white rounded-full px-8 py-4 shadow-lg shadow-indigo-900/20 text-center">
-          <div className="text-[9px] font-black uppercase tracking-[0.25em] opacity-70 mb-0.5">
+        <div className="bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white rounded-full px-10 py-5 shadow-lg shadow-indigo-900/20 text-center">
+          <div className="text-[11px] font-black uppercase tracking-[0.25em] opacity-70 mb-1">
             CEO
           </div>
-          <div className="text-base font-black tracking-tight">대표이사</div>
+          <div className="text-lg font-black tracking-tight">대표이사</div>
         </div>
       </div>
 
@@ -383,12 +383,12 @@ function MobileTree() {
         {STAFF_UNITS.map((unit) => (
           <div
             key={unit}
-            className="bg-white border border-slate-200 rounded-xl px-2 py-3 text-center"
+            className="bg-white border border-slate-200 rounded-xl px-2 py-4 text-center"
           >
-            <div className="text-[8px] font-black uppercase tracking-widest text-slate-400 mb-0.5">
+            <div className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">
               Staff
             </div>
-            <div className="text-[11px] font-black text-slate-700 tracking-tight">
+            <div className="text-[13px] font-black text-slate-700 tracking-tight break-keep">
               {unit}
             </div>
           </div>
@@ -403,19 +403,19 @@ function MobileTree() {
             key={d.dept}
             className="bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm"
           >
-            <div className="bg-[#001F5B] text-white px-5 py-2.5 flex items-center justify-between">
-              <span className="text-xs font-black tracking-tight">
+            <div className="bg-[#001F5B] text-white px-5 py-3 flex items-center justify-between">
+              <span className="text-sm font-black tracking-tight">
                 {d.dept}
               </span>
-              <span className="text-[9px] font-black uppercase tracking-widest opacity-50">
+              <span className="text-[10px] font-black uppercase tracking-widest opacity-50">
                 Division
               </span>
             </div>
-            <ul className="px-5 py-4 space-y-1">
+            <ul className="px-5 py-4 space-y-1.5">
               {d.scope.map((s) => (
                 <li
                   key={s}
-                  className="text-xs font-bold text-slate-600 flex items-center gap-2"
+                  className="text-sm font-bold text-slate-600 flex items-center gap-2"
                 >
                   <span className="text-slate-400">–</span>
                   {s}
@@ -443,20 +443,20 @@ function Node({
   style?: CSSProperties;
 }) {
   let cls =
-    'absolute px-4 py-2.5 rounded-full text-xs font-black tracking-tight whitespace-nowrap shadow-md border transition-all';
+    'absolute px-6 py-3 rounded-full text-[15px] font-black tracking-tight whitespace-nowrap shadow-md border transition-all';
   if (variant === 'highlight')
     cls +=
-      ' bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white border-indigo-500 px-7 py-4 text-base shadow-xl shadow-indigo-900/20';
+      ' bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white border-indigo-500 px-10 py-5 text-xl shadow-xl shadow-indigo-900/20';
   else if (variant === 'dark')
     cls += ' bg-[#001F5B] text-white border-[#001F5B]';
   else if (variant === 'muted')
-    cls += ' bg-white text-slate-500 border-slate-200';
+    cls += ' bg-white text-slate-600 border-slate-200';
   else cls += ' bg-white text-slate-700 border-slate-200';
 
   return (
     <div className={cls} style={style}>
       {tag && (
-        <span className="text-[9px] font-black uppercase tracking-widest opacity-70 mr-2">
+        <span className="text-[11px] font-black uppercase tracking-widest opacity-70 mr-2">
           {tag}
         </span>
       )}
@@ -474,17 +474,17 @@ function ScopeBox({
 }) {
   return (
     <div
-      className="absolute bg-cyan-50/80 border border-cyan-200 rounded-xl px-3 py-3 shadow-sm min-w-[110px] max-w-[150px]"
+      className="absolute bg-cyan-50/80 border border-cyan-200 rounded-xl px-4 py-4 shadow-sm min-w-[140px] max-w-[180px]"
       style={style}
     >
-      <div className="text-[8px] font-black uppercase tracking-widest text-cyan-700 mb-1.5">
+      <div className="text-[11px] font-black uppercase tracking-[0.2em] text-cyan-700 mb-2">
         사업 영역
       </div>
-      <ul className="space-y-0.5">
+      <ul className="space-y-1.5">
         {scopes.map((s) => (
           <li
             key={s}
-            className="text-[10px] font-bold text-slate-700 leading-tight flex gap-1"
+            className="text-[14px] font-bold text-slate-700 leading-snug flex gap-1.5 break-keep"
           >
             <span className="text-slate-400">–</span>
             <span>{s}</span>
