@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
-/* ───────── Pretendard (한국어 모던 웹 표준 폰트) ───────── */
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+/* Pretendard Variable · SUIT 은 next/font/local 로 self-host 됨 (layout.tsx). */
 
 :root {
   --background: #ffffff;
@@ -24,20 +23,24 @@
   --border-soft: #e2e8f0;
   --border-faint: #f1f5f9;
 
-  /* ─── Typography stack ─── */
-  --font-sans:
-    "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
-    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "맑은 고딕",
-    system-ui, sans-serif;
-  /* `--font-display`, `--font-mono`, `--font-serif` are injected by
-     next/font (Bricolage Grotesque / JetBrains Mono / Fraunces). */
+  /* ─── Typography stack ───
+     실제 폰트 변수는 next/font/local + next/font/google 이 주입한다.
+     --font-sans     Pretendard Variable
+     --font-display  SUIT (한국어 디스플레이)
+     --font-latin    Bricolage Grotesque (라틴 액센트)
+     --font-mono     JetBrains Mono
+     --font-serif    Fraunces                                              */
+  --font-system-fallback:
+    -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Noto Sans KR", "Malgun Gothic", "맑은 고딕", system-ui, sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-display: var(--font-display), var(--font-sans);
+  --font-sans: var(--font-sans), var(--font-system-fallback);
+  --font-display: var(--font-display), var(--font-sans), var(--font-system-fallback);
+  --font-latin: var(--font-latin), var(--font-sans), var(--font-system-fallback);
   --font-mono: var(--font-mono), ui-monospace, monospace;
   --font-serif: var(--font-serif), Georgia, serif;
 }
@@ -61,10 +64,17 @@ body {
 }
 
 /* ───────── Typography utility classes ─────────
-   라틴 디스플레이 헤드라인용 — 한글이 섞이면 자동으로 Pretendard로
-   폴백되므로 양쪽 모두 자연스러움. */
+   font-display: SUIT — 한국어 디스플레이용 (큰 헤드라인 / 강조 라벨).
+   라틴이 섞이면 SUIT 의 라틴이 잘 어울리고, fallback 으로 Pretendard 사용. */
 .font-display {
-  font-family: var(--font-display, var(--font-sans));
+  font-family: var(--font-display);
+  letter-spacing: -0.025em;
+  font-feature-settings: "ss01" on, "ss02" on;
+}
+
+/* font-latin: Bricolage Grotesque — 영문 전용 큰 글자 (브랜드 / 헤로 영문). */
+.font-latin {
+  font-family: var(--font-latin);
   letter-spacing: -0.02em;
   font-feature-settings: "ss01" on, "ss02" on;
 }

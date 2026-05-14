@@ -2,23 +2,51 @@ import './globals.css';
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import { Bricolage_Grotesque, JetBrains_Mono, Fraunces } from 'next/font/google';
+import localFont from 'next/font/local';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ChatBot from '@/components/ChatBot';
 import { QueryProvider } from '@/providers/QueryProvider';
 
 /**
- * 타이포그래피 시스템
+ * 타이포그래피 시스템 (셀프 호스팅)
  *
- *  --font-sans     Pretendard (한글 + 라틴 모두 — 본문, UI 기본)
- *  --font-display  Bricolage Grotesque (영문 디스플레이 — 큰 헤드라인)
- *  --font-serif    Fraunces (선택적 serif accent — 풀 인용문, 이병두 등 이름)
+ *  --font-sans     Pretendard Variable (한글 + 라틴 본문)
+ *  --font-display  SUIT (한국어 디스플레이 — 큰 헤드라인 / 강조)
+ *  --font-latin    Bricolage Grotesque (라틴 전용 디스플레이 액센트)
+ *  --font-serif    Fraunces (선택적 serif accent)
  *  --font-mono     JetBrains Mono (라벨·코드·tabular nums)
  */
 
+// 한국어 본문 — Pretendard Variable (single woff2 covers 100–900)
+const pretendard = localFont({
+  src: '../../public/fonts/PretendardVariable.woff2',
+  variable: '--font-sans',
+  weight: '45 920',
+  style: 'normal',
+  display: 'swap',
+});
+
+// 한국어 디스플레이 — SUIT 9개 weight 로컬 등록
+const suit = localFont({
+  src: [
+    { path: '../../public/fonts/SUIT-Thin.ttf', weight: '100', style: 'normal' },
+    { path: '../../public/fonts/SUIT-ExtraLight.ttf', weight: '200', style: 'normal' },
+    { path: '../../public/fonts/SUIT-Light.ttf', weight: '300', style: 'normal' },
+    { path: '../../public/fonts/SUIT-Regular.ttf', weight: '400', style: 'normal' },
+    { path: '../../public/fonts/SUIT-Medium.ttf', weight: '500', style: 'normal' },
+    { path: '../../public/fonts/SUIT-SemiBold.ttf', weight: '600', style: 'normal' },
+    { path: '../../public/fonts/SUIT-Bold.ttf', weight: '700', style: 'normal' },
+    { path: '../../public/fonts/SUIT-ExtraBold.ttf', weight: '800', style: 'normal' },
+    { path: '../../public/fonts/SUIT-Heavy.ttf', weight: '900', style: 'normal' },
+  ],
+  variable: '--font-display',
+  display: 'swap',
+});
+
 const bricolage = Bricolage_Grotesque({
   subsets: ['latin'],
-  variable: '--font-display',
+  variable: '--font-latin',
   weight: ['400', '500', '600', '700', '800'],
   display: 'swap',
 });
@@ -59,7 +87,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="ko"
-      className={`h-full antialiased ${bricolage.variable} ${mono.variable} ${fraunces.variable}`}
+      className={`h-full antialiased ${pretendard.variable} ${suit.variable} ${bricolage.variable} ${mono.variable} ${fraunces.variable}`}
     >
       <body className="min-h-full flex flex-col">
         <QueryProvider>
