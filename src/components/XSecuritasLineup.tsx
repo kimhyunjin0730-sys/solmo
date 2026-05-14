@@ -180,14 +180,9 @@ export function XSecuritasLineup({
 
       {/* 헤더 */}
       <div className="relative flex items-center justify-between mb-6 sm:mb-8">
-        <div>
-          <p className="font-mono text-[10px] sm:text-[11px] font-bold text-blue-600 tracking-[0.3em] uppercase mb-1">
-            Product Lineup
-          </p>
-          <h4 className="font-display text-[#001F5B] text-xl sm:text-2xl font-bold tracking-tight">
-            8개 제품군
-          </h4>
-        </div>
+        <p className="font-mono text-[10px] sm:text-[11px] font-bold text-blue-600 tracking-[0.3em] uppercase">
+          Product Lineup
+        </p>
         <div className="hidden sm:flex items-center gap-3 text-[11px] font-mono text-slate-500">
           <span className="inline-flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-sm bg-sky-400" />
