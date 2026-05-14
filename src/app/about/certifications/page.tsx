@@ -61,19 +61,9 @@ const CORPORATE_CERTS: readonly Cert[] = [
     desc: '기술혁신형 중소기업 인증 — 기술 우위·R&D 역량을 정부가 공인',
     period: '2024.12.23 ~ 2027.12.22',
   },
-  {
-    title: '직접생산확인증명서',
-    img: '/images/인증 및 특허/직접생산확인.jpg',
-    desc: '자체 생산 인프라 및 기술력을 인정받은 공공 조달 적격 인증',
-  },
 ];
 
 const QUALITY_CERTS: readonly Cert[] = [
-  {
-    title: 'GS 인증 1등급',
-    img: '/images/인증 및 특허/GS인증.png',
-    desc: '소프트웨어 품질 인증 최고 등급 (자체 개발 xSecuritas 솔루션)',
-  },
   {
     title: 'ISO 통합 인증 (4종)',
     img: '/certs/iso-certs-preview.jpg',
