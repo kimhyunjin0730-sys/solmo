@@ -14,10 +14,10 @@ const STORAGE_KEY = 'solmo_chat_session';
 const STORAGE_MSGS = 'solmo_chat_messages';
 
 const SUGGESTIONS: readonly string[] = [
-  '여기 뭐하는 곳이야?',
-  '보안 솔루션 추천해줘',
+  '솔모는 뭐하는 회사야?',
+  '이메일 보안 솔루션 추천해줘',
+  '화면 워터마크는 뭐가 있어?',
   '견적 문의하고 싶어요',
-  '회사 위치가 어디예요?',
 ];
 
 type Role = 'user' | 'assistant' | 'system';
@@ -36,7 +36,7 @@ type ChatResponse = {
 const WELCOME: Message = {
   role: 'assistant',
   content:
-    '안녕하세요! 솔모정보기술 AI 상담원이에요.\n보안 솔루션, 회사 정보, 견적 문의 등 편하게 물어보세요.',
+    '안녕하세요, 솔모정보기술 AI 상담원 솔모봇이에요.\n네트워크 · 단말/서버 · 애플리케이션 · OT 4개 분야 26+ 보안 솔루션, 회사 정보, 견적 등 무엇이든 편하게 물어봐 주세요.',
 };
 
 async function sendChatRequest(payload: {
