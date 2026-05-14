@@ -12,6 +12,8 @@
   --brand-blue: #2563eb;
   --brand-blue-light: #60a5fa;
   --brand-indigo: #4338ca;
+  --brand-coral: #f87171;
+  --brand-mint: #10b981;
   --ink-strong: #0f172a;
   --ink-body: #334155;
   --ink-muted: #64748b;
@@ -21,16 +23,23 @@
   --surface-soft: #f1f5f9;
   --border-soft: #e2e8f0;
   --border-faint: #f1f5f9;
+
+  /* ─── Typography stack ─── */
   --font-sans:
     "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
     "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "맑은 고딕",
     system-ui, sans-serif;
+  /* `--font-display`, `--font-mono`, `--font-serif` are injected by
+     next/font (Bricolage Grotesque / JetBrains Mono / Fraunces). */
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
+  --font-display: var(--font-display), var(--font-sans);
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+  --font-serif: var(--font-serif), Georgia, serif;
 }
 
 html {
@@ -49,6 +58,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+}
+
+/* ───────── Typography utility classes ─────────
+   라틴 디스플레이 헤드라인용 — 한글이 섞이면 자동으로 Pretendard로
+   폴백되므로 양쪽 모두 자연스러움. */
+.font-display {
+  font-family: var(--font-display, var(--font-sans));
+  letter-spacing: -0.02em;
+  font-feature-settings: "ss01" on, "ss02" on;
+}
+
+/* 라벨·코드·tabular nums (예: 2026.04.15, "PRODUCT VIEW", 버전 등) */
+.font-mono {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  letter-spacing: 0;
+}
+
+/* 인용·서명 등 감성 헤드 — 영문 이름(Lee Byung-Doo) 등 */
+.font-serif {
+  font-family: var(--font-serif, Georgia, serif);
 }
 
 /* ───────── Background pattern utilities ───────── */
@@ -106,6 +135,11 @@ h1, h2, h3, h4, h5, h6 {
 p, li {
   word-break: keep-all;
   overflow-wrap: break-word;
+}
+
+/* Tabular nums — for stats and version numbers */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 
 /* ───────── Mobile / Tablet (≤1024px) — app-like polish ───────── */

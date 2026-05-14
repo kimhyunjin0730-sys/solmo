@@ -8,7 +8,7 @@ type AboutNavItem = { name: string; href: string };
 
 const NAV_ITEMS: readonly AboutNavItem[] = [
   { name: '인사말', href: '/about/greetings' },
-  { name: '연혁', href: '/about/history' },
+  { name: '연혁 및 실적', href: '/about/history' },
   { name: '인증 및 특허', href: '/about/certifications' },
   { name: '조직도', href: '/about/organization' },
 ];

@@ -10,12 +10,30 @@ import {
 import { FeatureFlowDiagram } from '@/components/FeatureFlowDiagram';
 import { LineIcon } from '@/components/LineIcon';
 import { RadwareIcon } from '@/components/RadwareIcons';
+import { FeaturePhotoGrid } from '@/components/FeaturePhotoCard';
+import { TilonFeatureGrid } from '@/components/TilonFeatureGrid';
+import { CiscoEsaDiagram } from '@/components/CiscoEsaDiagram';
+import { ProofpointFeatureGrid } from '@/components/ProofpointFeatureGrid';
+import { XSecuritasLineup } from '@/components/XSecuritasLineup';
+
+/**
+ * 단말/서버 보안 · 애플리케이션 보안 · OT 보안 카테고리는 features를
+ * 홈 화면 ServiceCard 스타일(사진 배경 카드)로 렌더. 네트워크 보안은
+ * 기존 outline 아이콘 카드 유지.
+ */
+const PHOTO_CATEGORIES = new Set([
+  'endpoint-server-security',
+  'application-security',
+  'ot-security',
+]);
 
 /** 단계가 시퀀스로 의미 있는 제품은 features를 화살표 플로우로 렌더한다. */
 const FLOW_PRODUCTS = new Set(['network-blackbox']);
 
-/** 제품 라인업 가로 행으로 보여주는 모드 (PPT: 한 박스 안 5개 카드). */
-const ROW_PRODUCTS = new Set(['entrolink']);
+/** 제품 라인업 가로 행으로 보여주는 모드 (PPT: 한 박스 안 N개 카드).
+ *  - entrolink: LineIcon 사용
+ *  - hitachi-storage: featureImages 의 이소메트릭 일러스트 사용 */
+const ROW_PRODUCTS = new Set(['entrolink', 'hitachi-storage']);
 
 /**
  * PPT가 큰 thin-line blue outline 아이콘 (navy 박스 없이 floating) 스타일인 제품.
@@ -119,7 +137,7 @@ export default async function ProductDetailPage({
               ))}
             </div>
 
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-tight">
+            <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 tracking-tight leading-[1.1]">
               {product.name}
             </h1>
           </div>
@@ -130,7 +148,7 @@ export default async function ProductDetailPage({
         <main className="lg:col-span-8 space-y-12">
           <section className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200">
             <div className="flex items-center gap-3 mb-5">
-              <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em]">
+              <span className="text-blue-600 font-mono font-medium text-[10px] uppercase tracking-[0.4em]">
                 Overview
               </span>
               <div className="flex-1 h-px bg-slate-100" />
@@ -158,7 +176,7 @@ export default async function ProductDetailPage({
               className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200"
             >
               <div className="flex items-center gap-3 mb-6">
-                <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em]">
+                <span className="text-blue-600 font-mono font-medium text-[10px] uppercase tracking-[0.4em]">
                   Diagram
                 </span>
                 <span className="text-xs font-bold text-slate-500">
@@ -182,9 +200,10 @@ export default async function ProductDetailPage({
           {product.assets?.hero && (
             <section className="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200">
               <div className="flex items-center gap-3 mb-6">
-                <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em]">
-                  Product View
+                <span className="text-blue-600 font-mono font-medium text-[10px] uppercase tracking-[0.4em]">
+                  Key Features
                 </span>
+                <span className="text-xs font-bold text-slate-400">핵심기능</span>
                 <div className="flex-1 h-px bg-slate-100" />
               </div>
               <div className="relative w-full">
@@ -204,7 +223,7 @@ export default async function ProductDetailPage({
             (product.featureGroups && product.featureGroups.length > 0)) && (
           <section>
             <div className="flex items-center gap-3 mb-6">
-              <span className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em]">
+              <span className="text-blue-600 font-mono font-medium text-[10px] uppercase tracking-[0.4em]">
                 Key Features
               </span>
               <span className="text-xs font-bold text-slate-400">핵심기능</span>
@@ -262,30 +281,64 @@ export default async function ProductDetailPage({
               </div>
             ) : ROW_PRODUCTS.has(product.id) ? (
               <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 sm:p-10">
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
-                  {product.features.map((f) => (
-                    <div
-                      key={f.title}
-                      className="text-center px-2 sm:px-3 py-4"
-                    >
-                      <div className="flex justify-center mb-4 text-[#001F5B]">
-                        <LineIcon
-                          name={f.icon}
-                          className="w-10 h-10 sm:w-12 sm:h-12"
-                        />
+                <div
+                  className={`grid gap-4 sm:gap-6 grid-cols-2 sm:grid-cols-3 ${
+                    product.features.length >= 5
+                      ? 'lg:grid-cols-5'
+                      : product.features.length === 4
+                        ? 'lg:grid-cols-4'
+                        : 'lg:grid-cols-5'
+                  }`}
+                >
+                  {product.features.map((f, idx) => {
+                    const img = featureImages[idx];
+                    return (
+                      <div
+                        key={f.title}
+                        className="text-center px-2 sm:px-3 py-4"
+                      >
+                        {img ? (
+                          <div className="relative w-full aspect-square mb-4 sm:mb-5">
+                            <Image
+                              src={img}
+                              alt={f.title}
+                              fill
+                              className="object-contain"
+                              sizes="(max-width: 768px) 40vw, 18vw"
+                            />
+                          </div>
+                        ) : (
+                          <div className="flex justify-center mb-4 text-[#001F5B]">
+                            <LineIcon
+                              name={f.icon}
+                              className="w-10 h-10 sm:w-12 sm:h-12"
+                            />
+                          </div>
+                        )}
+                        <h4 className="font-display text-base sm:text-lg font-bold text-[#001F5B] tracking-tight mb-2 leading-tight">
+                          {f.title}
+                        </h4>
+                        <p className="text-xs sm:text-[13px] font-medium text-slate-500 leading-relaxed">
+                          {f.description}
+                        </p>
                       </div>
-                      <h4 className="text-base sm:text-lg font-black text-[#001F5B] tracking-tight mb-2 leading-tight">
-                        {f.title}
-                      </h4>
-                      <p className="text-xs sm:text-[13px] font-bold text-slate-500 leading-relaxed">
-                        {f.description}
-                      </p>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             ) : FLOW_PRODUCTS.has(product.id) ? (
               <FeatureFlowDiagram features={product.features} />
+            ) : product.id === 'tilon-vdi' ? (
+              <TilonFeatureGrid features={product.features} />
+            ) : product.id === 'cisco-esa' ? (
+              <CiscoEsaDiagram />
+            ) : product.id === 'proofpoint' ? (
+              <ProofpointFeatureGrid features={product.features} />
+            ) : product.id === 'xsecuritas' ? (
+              <XSecuritasLineup features={product.features} />
+            ) : PHOTO_CATEGORIES.has(product.categoryId) &&
+              featureScreenshots.length === 0 ? (
+              <FeaturePhotoGrid features={product.features} />
             ) : (
               <div
                 className={`grid sm:grid-cols-2 gap-5 ${
@@ -343,12 +396,26 @@ export default async function ProductDetailPage({
                             <LineIcon name={f.icon} className="w-6 h-6" />
                           </div>
                         )}
-                        <h4 className="text-base font-black text-slate-900 tracking-tight mb-2 leading-tight">
+                        <h4 className="font-display text-lg sm:text-xl font-bold text-slate-900 tracking-tight mb-3 leading-snug">
                           {f.title}
                         </h4>
-                        <p className="text-sm font-medium text-slate-500 leading-relaxed">
-                          {f.description}
-                        </p>
+                        {f.bullets && f.bullets.length > 0 ? (
+                          <ul className="space-y-1.5">
+                            {f.bullets.map((b) => (
+                              <li
+                                key={b}
+                                className="text-sm font-medium text-slate-500 leading-relaxed flex items-start gap-2"
+                              >
+                                <span className="text-blue-400 shrink-0">–</span>
+                                <span>{b}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : (
+                          <p className="text-sm font-medium text-slate-500 leading-relaxed">
+                            {f.description}
+                          </p>
+                        )}
                       </div>
                     </div>
                   );
@@ -361,7 +428,7 @@ export default async function ProductDetailPage({
 
         <aside className="lg:col-span-4 space-y-6">
           <div className="bg-white rounded-3xl p-7 border border-slate-200 sticky top-28">
-            <div className="text-blue-600 font-black text-[10px] uppercase tracking-[0.4em] mb-3">
+            <div className="text-blue-600 font-mono font-medium text-[10px] uppercase tracking-[0.4em] mb-3">
               Same Category
             </div>
             <h4 className="text-lg font-black text-slate-900 tracking-tight mb-5">

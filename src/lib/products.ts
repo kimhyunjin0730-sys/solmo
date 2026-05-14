@@ -364,19 +364,35 @@ const networkSecurityProducts: Product[] = [
         icon: 'shield-check',
         title: '외부 무선 위협 차단',
         description:
-          '내부정보 유출 방지, 내부 사용자 + 외부 접속 방지, 방문자 관리.',
+          '내부정보 유출 방지 / 내부 사용자 + 외부 접속 방지 / 방문자 관리',
+        bullets: [
+          '내부정보 유출 방지',
+          '내부 사용자 + 외부 접속 방지',
+          '방문자 관리',
+        ],
       },
       {
         icon: 'users',
         title: '자가 단말 제어 및 외부시스템 연동',
         description:
-          '인가되지 않은 비인가 AP, 사용자 무선 기기 관리, 스마트폰을 이용한 테더링 차단, 인증 솔루션 + 자산 정보 관리 제어.',
+          '인가되지 않은 비인가 AP / 사용자 무선 기기 관리 / 스마트폰 테더링 차단 / 인증솔루션 + 자산정보 관리 제어',
+        bullets: [
+          '인가되지 않은 비인가 AP',
+          '사용자 무선 기기 관리',
+          '스마트폰을 이용한 테더링',
+          '인증솔루션 + 자산 정보 관리 제어',
+        ],
       },
       {
         icon: 'radar',
         title: '지능형 무선 자산 가시성 확보',
         description:
-          '외부 해킹 공격 방어 및 무선 해킹 모니터링, 외부 침입 신호 위치추적 및 삼각측량법을 활용한 표시, WEP Cracking.',
+          '외부 해킹 공격 방어 및 무선 해킹 모니터링 / 외부 침입 신호 위치추적 및 삼각측량법 / WEP Cracking',
+        bullets: [
+          '외부 해킹 공격 방어 및 무선 해킹 모니터링',
+          '외부 침입 신호 위치추적 및 삼각측량법을 활용한 표시',
+          'WEP Cracking',
+        ],
       },
     ],
   },
@@ -612,7 +628,7 @@ const applicationProducts: Product[] = [
       hero: '/images/products/xsecuritas/hero.png',
     },
     name: 'xSecuritas Screen Watermark',
-    vendor: 'xSecuritas',
+    vendor: '(주)솔모정보기술',
     shortDescription:
       '화면 워터마크·캡처 차단·웹캠 워터마크로 화면 기반 유출을 차단.',
     longDescription:
@@ -621,20 +637,44 @@ const applicationProducts: Product[] = [
     officialUrl: 'https://www.xsecuritas.com',
     features: [
       {
-        icon: 'eye',
-        title: '동적 워터마크',
-        description:
-          '사용자 ID·시간·IP를 화면에 동적으로 새겨 유출 추적을 가능하게 합니다.',
+        icon: 'screen-wm-ent',
+        title: 'Screen Watermark Solution Enterprise',
+        description: '기업용 화면 워터마크 솔루션',
       },
       {
-        icon: 'camera-off',
-        title: '캡처 차단',
-        description: 'Print Screen·녹화 도구·웹캠 촬영까지 차단합니다.',
+        icon: 'screen-wm-per',
+        title: 'Screen Watermark Solution Personal',
+        description: '개인용 화면 워터마크 솔루션',
       },
       {
-        icon: 'monitor',
-        title: '멀티 OS / VDI',
-        description: 'Windows·macOS·Linux·VDI 모두 단일 정책으로 운영합니다.',
+        icon: 'print-wm-ent',
+        title: 'Print Watermark Solution Enterprise',
+        description: '기업용 출력물 워터마크 솔루션',
+      },
+      {
+        icon: 'print-wm-per',
+        title: 'Print Watermark Solution Personal',
+        description: '개인용 출력물 워터마크 솔루션',
+      },
+      {
+        icon: 'webcam-bl-ent',
+        title: 'Block Webcam & Microphone Solution Enterprise',
+        description: '기업용 웹캠·마이크 차단 솔루션',
+      },
+      {
+        icon: 'webcam-bl-per',
+        title: 'Block Webcam & Microphone Solution Personal',
+        description: '개인용 웹캠·마이크 차단 솔루션',
+      },
+      {
+        icon: 'webcam-wm-video',
+        title: 'Webcam Watermark For Video Conferencing',
+        description: '화상 회의용 웹캠 워터마크',
+      },
+      {
+        icon: 'secure-pc',
+        title: 'Secure PC',
+        description: 'PC 보안 종합 솔루션',
       },
     ],
   },
@@ -645,30 +685,14 @@ const applicationProducts: Product[] = [
       logo: '/images/products/sindoh-secure-print/logo.jpeg',
       hero: '/images/products/sindoh-secure-print/hero.png',
     },
-    name: '신도 보안출력',
+    name: '보안복합기',
     vendor: '신도(SINDOH)',
     shortDescription:
       '출력 시점의 정보 유출을 방어하는 특화 솔루션. 사용자 인증·체크·모니터링 일체.',
     longDescription:
       '신도리코 보안복합기는 기업의 문서 출력 및 관리 과정에서 발생할 수 있는 보안 위협을 효과적으로 차단하는 보안 특화 복합기 솔루션입니다. 사용자 인증 기술 기반으로 비인가 사용자의 출력 및 기기 접근을 차단하며, 출력 기록의 체계적 관리 및 모니터링 기능을 제공합니다. 또한, 보안 문서 워터마크 삽입과 같은 출력물 자체에 대한 보안 기능도 포함하여 문서 유출 방지와 위변조 방지에 특화되어 있습니다.',
     officialUrl: 'https://www.sindoh.com',
-    features: [
-      {
-        icon: 'user-check',
-        title: '사용자 인증 출력',
-        description: '본인 인증 후에만 출력하도록 보안 큐를 적용합니다.',
-      },
-      {
-        icon: 'file-text',
-        title: '워터마크/복사 방지',
-        description: '인쇄물에 사용자 정보를 새기고 복사 시 추적을 남깁니다.',
-      },
-      {
-        icon: 'monitor',
-        title: '출력 모니터링',
-        description: '출력 이력·매수를 실시간으로 추적합니다.',
-      },
-    ],
+    features: [],
   },
   {
     id: 'proofpoint',
@@ -676,8 +700,8 @@ const applicationProducts: Product[] = [
     assets: {
       logo: '/images/products/proofpoint/logo.png',
     },
-    name: 'Proofpoint Email Protection',
-    vendor: 'Proofpoint',
+    name: 'Proofpoint 이메일 보안',
+    vendor: 'Proofpoint, Inc.',
     shortDescription:
       '대규모 이메일 환경의 표적·피싱 공격을 실시간 식별하고 차단합니다.',
     longDescription:
@@ -742,7 +766,7 @@ const applicationProducts: Product[] = [
     assets: {
       logo: '/images/products/tilon-vdi/logo.png',
     },
-    name: '틸론 VDI (Dstation)',
+    name: '틸론 VDI (가상데스크인프라)',
     vendor: 'Tilon',
     shortDescription:
       '중앙 집중형 가상 데스크톱 환경. 장소·디바이스 제약 없는 안전한 업무 환경.',
@@ -752,28 +776,52 @@ const applicationProducts: Product[] = [
     officialUrl: 'https://www.tilon.com/',
     features: [
       {
-        icon: 'users',
+        icon: 'dds',
         title: 'DDS (Dstation Directory Service)',
         description:
-          '사용자와 가상데스크톱을 위한 디렉터리 정보 통합 관리. DDS의 기본 AD 통합으로 운영편리 가능. 인증·계정·권한 로그 기록 (변조 불가). Active Directory를 대체한 보안성과 자체 VDI 인증 지원.',
+          '사용자·가상데스크톱 디렉터리 정보 통합 관리. Active Directory 대체 자체 VDI 인증 지원.',
+        bullets: [
+          '사용자·가상데스크톱 디렉터리 정보 통합 관리',
+          'AD 통합으로 운영 편의성 제공',
+          '인증·계정·권한 로그 기록 (변조 불가)',
+          'Active Directory 대체 보안성·자체 VDI 인증 지원',
+        ],
       },
       {
-        icon: 'shield-check',
+        icon: 'dac',
         title: 'DAC (Dstation Access Control)',
         description:
-          '가상망에 접근 통제. 사용자·단말(IP·MAC) 정보 기반 가상 데스크톱 접근 통제. 가상 데스크톱 자원 접근 통제. 네트워크·USB·파일 입출력 설정 통제. 사용자 데이터 보호. 화면 캡처 차단. 파일/폴더/네트워크 등 인가/거부 사용자/모듈 접근 완벽 제어.',
+          '가상망 접근 통제. 사용자·단말 기반 가상 데스크톱 접근 통제와 네트워크·USB·파일 입출력 통제.',
+        bullets: [
+          '사용자·단말(IP·MAC) 기반 접근 통제',
+          '가상 데스크톱 자원·네트워크·USB 통제',
+          '화면 캡처 차단으로 사용자 데이터 보호',
+          '파일·폴더·네트워크 인가/거부 완벽 제어',
+        ],
       },
       {
-        icon: 'lock',
+        icon: 'ddp',
         title: 'DDP (Dstation Data Protection)',
         description:
-          '전송 데이터 보호. 표준 프로토콜(HTTPS, TLS 1.2) 암호화 사용. RSA-2048(키교환), SHA-256(해시) 등 알고리즘 자체 보호 및 저장 데이터 보호. 모든 통신 구간 암호화와 중요 정보 저장 시 정보 가치/생성·운영 관리·이력 기밀성 및 무결성 강화.',
+          '표준 프로토콜 암호화 기반 전송 데이터 보호. 저장 데이터 기밀성·무결성 강화.',
+        bullets: [
+          'HTTPS·TLS 1.2 표준 프로토콜 암호화',
+          'RSA-2048·SHA-256 알고리즘 자체 보호',
+          '모든 통신 구간 암호화 적용',
+          '저장 데이터 기밀성·무결성 강화',
+        ],
       },
       {
-        icon: 'monitor',
+        icon: 'dms',
         title: 'DMS (Dstation Monitoring Service)',
         description:
-          '서비스·프로세스 실시간 감시로 무결성 보호. 성능 실적·로그 기록 관리자 화면에 보장. 정보 자산 모니터링과 로그 기록 관리자에게 정보 보호 및 가용성·안전성 보장. 제품 위변조 주기적 검증으로 무결성과 안전성을 보장.',
+          '서비스·프로세스 실시간 감시로 무결성 보호. 위변조 주기적 검증으로 가용성·안전성 보장.',
+        bullets: [
+          '서비스·프로세스 실시간 감시',
+          '성능·로그 관리자 대시보드 제공',
+          '정보 자산 모니터링·로그 기록 관리',
+          '제품 위변조 주기적 검증으로 무결성 보장',
+        ],
       },
     ],
   },
@@ -833,33 +881,20 @@ const otProducts: Product[] = [
       'TXOne은 OT(운영기술) 환경을 위한 전문 보안 솔루션으로, 산업제어시스템(ICS) 및 제조 현장의 설비와 네트워크를 사이버 위협으로부터 보호하는 데 특화되어 있습니다. 실시간 위협 탐지 및 차단 기능을 제공하며, OT 환경에 적합한 안정성과 가용성을 보장하여 생산 설비의 안정운영을 지원합니다.',
     badges: ['OT 특화'],
     officialUrl: 'https://www.txone.com',
-    features: [
-      {
-        icon: 'factory',
-        title: 'OT 특화 IPS',
-        description:
-          '산업 프로토콜을 인지하는 침입 방지로 생산 라인을 보호합니다.',
-      },
-      {
-        icon: 'usb',
-        title: 'Portable Inspector',
-        description:
-          '오프라인 환경의 자산을 점검하는 휴대형 검사 장비를 제공합니다.',
-      },
-      {
-        icon: 'shield-check',
-        title: 'Zero Trust 운영',
-        description: '신뢰 전제 없이 OT 자산 간 통신을 최소 권한으로 제한합니다.',
-      },
-    ],
+    features: [],
   },
   {
     id: 'hitachi-storage',
     categoryId: 'ot-security',
     assets: {
       logo: '/images/products/hitachi-storage/logo.png',
-      hero: '/images/products/hitachi-storage/hero.png',
-      featureImages: ['/images/products/hitachi-storage/feature-1.png', '/images/products/hitachi-storage/feature-2.png', '/images/products/hitachi-storage/feature-3.png', '/images/products/hitachi-storage/feature-4.png'],
+      featureImages: [
+        '/images/products/hitachi-storage/feature-0.png',
+        '/images/products/hitachi-storage/feature-1.png',
+        '/images/products/hitachi-storage/feature-2.png',
+        '/images/products/hitachi-storage/feature-3.png',
+        '/images/products/hitachi-storage/feature-4.png',
+      ],
     },
     name: 'Hitachi Storage',
     vendor: '효성인포메이션시스템',
@@ -869,28 +904,34 @@ const otProducts: Product[] = [
       '효성인포메이션시스템의 스토리지 솔루션은 다양한 산업 분야의 데이터 저장 및 관리 요구를 충족시키기 위해 설계된 엔터프라이즈급 스토리지 시스템입니다. 이 솔루션은 고성능과 안정성을 바탕으로 대용량 데이터 처리에 최적화되어 있으며, 블록 스토리지, 파일 스토리지, 오브젝트 스토리지 등 다양한 스토리지 방식을 지원합니다.',
     features: [
       {
-        icon: 'zap',
-        title: '고성능 처리',
+        icon: 'database',
+        title: '올플래시 & 하이브리드 스토리지',
+        description:
+          '미션 크리티컬 워크로드용 올플래시와 비용 최적화 하이브리드 모델을 모두 제공합니다.',
+      },
+      {
+        icon: 'network',
+        title: '네트워크 스토리지',
         description:
           '저지연·고처리량 IO 아키텍처로 대용량 워크로드를 안정적으로 처리합니다.',
       },
       {
         icon: 'lock',
-        title: '데이터 보호 / 암호화',
+        title: '데이터 보호',
         description:
-          '저장 단위 암호화와 복제·스냅샷을 통해 데이터 손실 위험을 최소화합니다.',
+          '저장 단위 암호화·복제·스냅샷으로 데이터 손실 위험을 최소화합니다.',
       },
       {
         icon: 'monitor',
-        title: '통합 모니터링',
+        title: '데이터센터 통합관리',
         description:
-          '단일 콘솔에서 다수의 스토리지 노드를 실시간 가시화하고 알람·이벤트를 통합 관리합니다.',
+          '단일 콘솔에서 다수의 스토리지 노드를 가시화·통합 관리합니다.',
       },
       {
         icon: 'bar-chart',
-        title: '분석 / 리포팅',
+        title: '비즈니스 플랫폼',
         description:
-          'AI 기반 용량·성능 분석으로 자원 사용 추세를 예측하고 운영 의사 결정을 지원합니다.',
+          'AI 기반 용량·성능 분석으로 운영 의사 결정과 비즈니스 인사이트를 지원합니다.',
       },
     ],
   },
