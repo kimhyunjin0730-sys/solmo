@@ -66,7 +66,8 @@
       "Bash(cp \"/c/Users/admin/Downloads/2. 솔모정보기술-중소기업확인서\\(26.04.01-27.03.31\\).pdf\" \"public/certs/sme-cert.pdf\")",
       "Bash(cp \"/c/Users/admin/Downloads/3. 솔모정보기술-메인비즈확인서\\(2025.01.14-2028.01.13\\).pdf\" \"public/certs/mainbiz-cert.pdf\")",
       "Bash(cp \"/c/Users/admin/Downloads/4. 솔모정보기술-이노비즈_확인서\\(2024.12.23-2027.12.22\\).pdf\" \"public/certs/innobiz-cert.pdf\")",
-      "Bash(cp \"/c/Users/admin/Downloads/5. ISO 통합본 [9001-2015, 14001-2015, 37301-2021, 37301-2021, 45001-2018.pdf\" \"public/certs/iso-certs.pdf\")"
+      "Bash(cp \"/c/Users/admin/Downloads/5. ISO 통합본 [9001-2015, 14001-2015, 37301-2021, 37301-2021, 45001-2018.pdf\" \"public/certs/iso-certs.pdf\")",
+      "Bash(git commit -m 'content\\(txone\\): drop Key Features section *)"
     ]
   }
 }

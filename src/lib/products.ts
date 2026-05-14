@@ -849,25 +849,7 @@ const otProducts: Product[] = [
       'TXOne은 OT(운영기술) 환경을 위한 전문 보안 솔루션으로, 산업제어시스템(ICS) 및 제조 현장의 설비와 네트워크를 사이버 위협으로부터 보호하는 데 특화되어 있습니다. 실시간 위협 탐지 및 차단 기능을 제공하며, OT 환경에 적합한 안정성과 가용성을 보장하여 생산 설비의 안정운영을 지원합니다.',
     badges: ['OT 특화'],
     officialUrl: 'https://www.txone.com',
-    features: [
-      {
-        icon: 'factory',
-        title: 'OT 특화 IPS',
-        description:
-          '산업 프로토콜을 인지하는 침입 방지로 생산 라인을 보호합니다.',
-      },
-      {
-        icon: 'usb',
-        title: 'Portable Inspector',
-        description:
-          '오프라인 환경의 자산을 점검하는 휴대형 검사 장비를 제공합니다.',
-      },
-      {
-        icon: 'shield-check',
-        title: 'Zero Trust 운영',
-        description: '신뢰 전제 없이 OT 자산 간 통신을 최소 권한으로 제한합니다.',
-      },
-    ],
+    features: [],
   },
   {
     id: 'hitachi-storage',
