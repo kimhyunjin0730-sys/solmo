@@ -21,8 +21,15 @@ const SOLUTIONS: readonly Solution[] = [
     num: '01',
     tag: 'Network Security',
     title: '네트워크 보안',
-    desc: '차세대 방화벽부터 NAC, NDR, SIEM까지 — 외부 위협을 원천 봉쇄하는 다층 방어 체계.',
-    products: ['FortiNet UTM', 'Genian ZTNA/NAC', 'IBM QRadar', 'Network BlackBox'],
+    desc: '차세대 방화벽 · NAC · NDR · SIEM · DDoS 방어까지 — 외부 위협을 원천 봉쇄하는 다층 방어 체계.',
+    products: [
+      'FortiNet UTM',
+      'Genian ZTNA / NAC',
+      'IBM QRadar',
+      'Radware DDoS',
+      'PIOLINK Switch',
+      'Network BlackBox',
+    ],
     accent: 'from-blue-500 to-blue-700',
     dot: 'bg-blue-600',
   },
@@ -31,8 +38,15 @@ const SOLUTIONS: readonly Solution[] = [
     num: '02',
     tag: 'Endpoint & Server Security',
     title: '단말 / 서버 보안',
-    desc: 'DB·OS 접근 통제부터 차세대 백신·XDR까지 — 단말과 서버를 동시에 방어합니다.',
-    products: ['DBSAFER', 'NETAND HIWARE', 'AppCheck Pro', 'Trend Vision One'],
+    desc: 'DB·OS 접근통제, AI 기반 차세대 EDR·XDR, 무선 침입 방지(WIPS)까지 — 단말과 서버를 동시에 방어.',
+    products: [
+      'DBSAFER',
+      'NETAND HIWARE',
+      'AppCheck Pro',
+      'Trend Vision One',
+      'Kornic WIPS',
+      'NX Portrait',
+    ],
     accent: 'from-sky-500 to-sky-700',
     dot: 'bg-sky-600',
   },
@@ -41,8 +55,15 @@ const SOLUTIONS: readonly Solution[] = [
     num: '03',
     tag: 'Application Security',
     title: '애플리케이션 보안',
-    desc: '화면 워터마크·보안 출력·이메일 보안·VDI·백업까지, 업무 애플리케이션 전 구간 보호.',
-    products: ['xSecuritas (자체개발)', '신도 보안출력', 'Proofpoint', 'Acronis'],
+    desc: '화면 워터마크·보안복합기·이메일 보안·VDI·백업까지, 업무 애플리케이션 전 구간 보호.',
+    products: [
+      'xSecuritas (자체개발)',
+      '보안복합기 (SINDOH)',
+      'Proofpoint 이메일 보안',
+      'Cisco ESA',
+      '틸론 VDI',
+      'Acronis Cyber Protect',
+    ],
     accent: 'from-indigo-500 to-indigo-700',
     dot: 'bg-indigo-600',
   },
@@ -51,7 +72,7 @@ const SOLUTIONS: readonly Solution[] = [
     num: '04',
     tag: 'OT Security',
     title: 'OT 보안 & 시스템',
-    desc: '산업 현장(OT)과 미션 크리티컬 스토리지까지, IT 보안의 경계를 확장합니다.',
+    desc: '산업 현장(OT) Zero Trust와 미션 크리티컬 스토리지까지, IT 보안의 경계를 확장합니다.',
     products: ['TXOne OT Zero Trust', 'Hitachi Storage'],
     accent: 'from-violet-500 to-violet-700',
     dot: 'bg-violet-600',
@@ -62,16 +83,19 @@ const VENDOR_BRANDS = [
   'Fortinet',
   'PIOLINK',
   'Genians',
-  'Acronis',
   'IBM',
+  'Radware',
+  'Cisco',
+  'Trend Micro',
+  'Proofpoint',
+  'Acronis',
+  'Tilon',
   'NETAND',
   '신도리코',
-  'Proofpoint',
   'PNP Secure',
-  'Cisco',
   'TXOne',
-  'Trend Micro',
-  'Tilon',
+  'Hitachi',
+  '코닉글로리',
 ] as const;
 
 const STRENGTHS = [
@@ -100,7 +124,7 @@ const STRENGTHS = [
 const BIG_STATS = [
   { value: '98', suffix: '%', label: '고객 재계약률', desc: '장기 파트너십' },
   { value: '47', suffix: '', label: '전문 엔지니어', desc: '특급·고급 50% 이상' },
-  { value: '21', suffix: '+', label: '취급 솔루션', desc: '4 카테고리 통합' },
+  { value: '26', suffix: '+', label: '취급 솔루션', desc: '4 카테고리 통합' },
 ] as const;
 
 type News = { date: string; category: string; title: string; desc: string };
@@ -109,8 +133,8 @@ const NEWS: readonly News[] = [
   {
     date: '2025.07',
     category: 'Certification',
-    title: 'ISO 9001 / 14001 / 27001 / 45001 4종 인증 획득',
-    desc: '품질·환경·정보보호·안전보건 4개 영역의 ISO 인증을 동시에 확보하며 글로벌 수준의 경영 시스템을 입증했습니다.',
+    title: 'ISO 9001 / 14001 / 37301 / 45001 4종 인증 획득',
+    desc: '품질·환경·컴플라이언스·안전보건 4개 영역의 ISO 인증을 동시에 확보하며 글로벌 수준의 경영 시스템을 입증했습니다.',
   },
   {
     date: '2024.06',
@@ -138,9 +162,10 @@ export default function Home() {
             alt=""
             fill
             priority
-            className="object-cover opacity-20"
+            className="object-cover opacity-35"
           />
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900/80 to-slate-900/40" />
+          {/* 살짝 옅어진 오버레이 — 배경 이미지가 좀 더 비치게 */}
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-900/60 to-slate-900/25" />
           <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px]" />
           <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-indigo-600/15 rounded-full blur-[140px]" />
           <div
@@ -162,7 +187,7 @@ export default function Home() {
               </span>
             </div>
 
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] tracking-tight mb-5 sm:mb-6">
+            <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] tracking-tight mb-5 sm:mb-6">
               미래를 보호하는
               <br />
               <span className="bg-gradient-to-r from-blue-300 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
@@ -242,7 +267,7 @@ export default function Home() {
               </h2>
               <p className="text-slate-500 text-sm sm:text-base font-medium max-w-xl leading-relaxed">
                 글로벌 파트너의 검증된 제품과 솔모의 자체 기술이 결합된 종합
-                보안 라인업 — 4 카테고리, 21+ 제품.
+                보안 라인업 — 4 카테고리, 26+ 제품.
               </p>
             </div>
             <Link
