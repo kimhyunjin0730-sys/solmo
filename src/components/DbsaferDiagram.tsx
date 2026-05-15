@@ -79,18 +79,13 @@ function HexModule({ feature }: { feature: ProductFeature }) {
         </div>
       </div>
 
-      {/* 하단 카드 */}
-      <div className="mt-3 bg-white border border-slate-200 rounded-2xl px-4 py-3 text-center w-full group-hover:border-slate-300 group-hover:shadow-md transition-all">
-        <span
-          className={`font-mono text-[9px] font-bold ${style.code} tracking-[0.2em] uppercase`}
-        >
-          {code}
-        </span>
-        <p className="font-display text-[14px] sm:text-[15px] font-bold text-[#001F5B] tracking-tight leading-tight mt-1 break-keep">
+      {/* 하단 카드 — PPT 톤: 큰 역할 텍스트 + 부제(디비세이퍼 XX) */}
+      <div className="mt-3 bg-white border border-slate-200 rounded-2xl px-4 py-4 text-center w-full group-hover:border-slate-300 group-hover:shadow-md transition-all">
+        <p className="font-display text-[16px] sm:text-[18px] font-extrabold text-[#001F5B] tracking-tight leading-tight break-keep">
           {role}
         </p>
         {korName && (
-          <p className={`text-[11px] font-medium ${style.label} mt-0.5`}>
+          <p className={`text-[12px] sm:text-[13px] font-bold ${style.label} mt-1.5 break-keep`}>
             {korName}
           </p>
         )}
