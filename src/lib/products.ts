@@ -783,49 +783,25 @@ const applicationProducts: Product[] = [
         icon: 'dds',
         title: 'DDS (Dstation Directory Service)',
         description:
-          '사용자·가상데스크톱 디렉터리 정보 통합 관리. Active Directory 대체 자체 VDI 인증 지원.',
-        bullets: [
-          '사용자·가상데스크톱 디렉터리 정보 통합 관리',
-          'AD 통합으로 운영 편의성 제공',
-          '인증·계정·권한 로그 기록 (변조 불가)',
-          'Active Directory 대체 보안성·자체 VDI 인증 지원',
-        ],
+          'Active Directory를 대체한 보안된 자체 VDI 인증 지원',
       },
       {
         icon: 'dac',
         title: 'DAC (Dstation Access Control)',
         description:
-          '가상망 접근 통제. 사용자·단말 기반 가상 데스크톱 접근 통제와 네트워크·USB·파일 입출력 통제.',
-        bullets: [
-          '사용자·단말(IP·MAC) 기반 접근 통제',
-          '가상 데스크톱 자원·네트워크·USB 통제',
-          '화면 캡처 차단으로 사용자 데이터 보호',
-          '파일·폴더·네트워크 인가/거부 완벽 제어',
-        ],
+          '파일/폴더/네트워크 등 인가되지 않는 사용자/모듈 접근 완벽 제어',
       },
       {
         icon: 'ddp',
         title: 'DDP (Dstation Data Protection)',
         description:
-          '표준 프로토콜 암호화 기반 전송 데이터 보호. 저장 데이터 기밀성·무결성 강화.',
-        bullets: [
-          'HTTPS·TLS 1.2 표준 프로토콜 암호화',
-          'RSA-2048·SHA-256 알고리즘 자체 보호',
-          '모든 통신 구간 암호화 적용',
-          '저장 데이터 기밀성·무결성 강화',
-        ],
+          '모든 통신 구간 암호화와 중요 정보 저장 시 암호키 생성으로 전송 데이터 기밀성 및 무결성 강화',
       },
       {
         icon: 'dms',
         title: 'DMS (Dstation Monitoring Service)',
         description:
-          '서비스·프로세스 실시간 감시로 무결성 보호. 위변조 주기적 검증으로 가용성·안전성 보장.',
-        bullets: [
-          '서비스·프로세스 실시간 감시',
-          '성능·로그 관리자 대시보드 제공',
-          '정보 자산 모니터링·로그 기록 관리',
-          '제품 위변조 주기적 검증으로 무결성 보장',
-        ],
+          '제품 위변조 주기적 검증으로 무결성과 안전성 보장',
       },
     ],
   },
