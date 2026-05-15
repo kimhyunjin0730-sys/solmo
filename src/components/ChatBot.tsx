@@ -331,15 +331,11 @@ export default function ChatBot() {
                 <SolmoMark size={44} variant="on-dark" />
               </div>
               <div className="relative min-w-0 flex-1">
-                <div className="font-display text-base font-bold tracking-tight truncate">
-                  솔모봇 <span className="font-mono text-white/70 text-sm">SolmoBot</span>
+                <div className="font-mono text-[11px] font-bold uppercase tracking-[0.3em] text-white/60">
+                  Chatbot
                 </div>
-                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 flex items-center gap-1.5 mt-0.5">
-                  <span className="relative flex w-1.5 h-1.5">
-                    <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-60" />
-                    <span className="relative w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  </span>
-                  Online · 24/7 AI
+                <div className="font-display text-lg font-bold tracking-tight text-white mt-0.5 truncate">
+                  무엇이든 물어보세요
                 </div>
               </div>
               <button
