@@ -78,49 +78,59 @@ const WELCOME: Message = {
     '안녕하세요, 솔모정보기술의 AI 상담원 솔모봇입니다.\n네트워크 · 단말/서버 · 애플리케이션 · OT 4개 분야의 26개+ 보안 솔루션, 회사 정보, 도입 견적 등 무엇이든 편하게 문의해 주세요.',
 };
 
-/* ──────────── 봇 일러스트 (SVG) ──────────── */
+/* ──────────── 브랜드 마크 (로봇 X, 채팅 말풍선 / S 레터마크) ──────────── */
 
-function BotAvatar({ className = '', size = 40 }: { className?: string; size?: number }) {
+/** FAB 버튼용 — 채팅 말풍선 SVG */
+function ChatGlyph({ size = 22 }: { size?: number }) {
   return (
     <svg
-      className={className}
       width={size}
       height={size}
-      viewBox="0 0 48 48"
+      viewBox="0 0 24 24"
       fill="none"
       aria-hidden="true"
     >
-      <defs>
-        <linearGradient id="bot-body" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#60A5FA" />
-          <stop offset="100%" stopColor="#1E40AF" />
-        </linearGradient>
-        <linearGradient id="bot-screen" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#0B1B3F" />
-          <stop offset="100%" stopColor="#001440" />
-        </linearGradient>
-      </defs>
-      {/* 안테나 */}
-      <line x1="24" y1="3" x2="24" y2="9" stroke="#93C5FD" strokeWidth="2" strokeLinecap="round" />
-      <circle cx="24" cy="3" r="2" fill="#A78BFA" />
-      <circle cx="24" cy="3" r="3.5" fill="#A78BFA" opacity="0.3" />
-      {/* 머리 */}
-      <rect x="8" y="9" width="32" height="26" rx="9" fill="url(#bot-body)" />
-      {/* 스크린 영역 */}
-      <rect x="13" y="14" width="22" height="16" rx="4" fill="url(#bot-screen)" />
-      {/* 눈 */}
-      <circle cx="19" cy="22" r="2.4" fill="#60A5FA" />
-      <circle cx="29" cy="22" r="2.4" fill="#60A5FA" />
-      <circle cx="19.8" cy="21.4" r="0.8" fill="white" />
-      <circle cx="29.8" cy="21.4" r="0.8" fill="white" />
-      {/* 작은 미소 */}
-      <path d="M21 26.5q3 1.8 6 0" stroke="#93C5FD" strokeWidth="1.2" strokeLinecap="round" fill="none" />
-      {/* 목/몸 */}
-      <rect x="20" y="35" width="8" height="3" rx="1" fill="#1E3A8A" />
-      <rect x="14" y="38" width="20" height="7" rx="3" fill="#0F2A5C" />
-      <circle cx="20" cy="41.5" r="1" fill="#60A5FA" />
-      <circle cx="28" cy="41.5" r="1" fill="#A78BFA" />
+      <path
+        d="M4 5h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-8l-5 4v-4H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"
+        fill="currentColor"
+        opacity="0.95"
+      />
+      <circle cx="8" cy="11.5" r="1.2" fill="#001F5B" />
+      <circle cx="12" cy="11.5" r="1.2" fill="#001F5B" />
+      <circle cx="16" cy="11.5" r="1.2" fill="#001F5B" />
     </svg>
+  );
+}
+
+/** 어시스턴트 메시지·헤더용 — 솔모 'S' 레터마크 배지 */
+function SolmoMark({
+  size = 36,
+  variant = 'on-dark',
+}: {
+  size?: number;
+  variant?: 'on-dark' | 'on-light';
+}) {
+  const onDark = variant === 'on-dark';
+  return (
+    <div
+      className={
+        onDark
+          ? 'rounded-2xl bg-white/15 ring-1 ring-white/20 backdrop-blur-sm flex items-center justify-center'
+          : 'rounded-2xl bg-gradient-to-br from-indigo-600 to-[#001F5B] ring-1 ring-white shadow-sm flex items-center justify-center'
+      }
+      style={{ width: size, height: size }}
+    >
+      <span
+        className={
+          onDark
+            ? 'font-display font-extrabold text-white tracking-tighter'
+            : 'font-display font-extrabold text-white tracking-tighter'
+        }
+        style={{ fontSize: Math.max(13, size * 0.5) }}
+      >
+        S
+      </span>
+    </div>
   );
 }
 
@@ -288,8 +298,8 @@ export default function ChatBot() {
         >
           <span className="absolute inset-0 rounded-full bg-blue-600 opacity-30 group-hover:opacity-50 blur-xl transition-opacity" />
           <span className="relative flex items-center gap-3 bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white pl-3 pr-5 py-3 rounded-full shadow-2xl shadow-indigo-900/30 hover:scale-105 transition-transform">
-            <span className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center">
-              <BotAvatar size={28} />
+            <span className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center text-white">
+              <ChatGlyph size={22} />
             </span>
             <span className="text-sm font-bold tracking-tight pr-1 hidden sm:block">
               상담하기
@@ -317,8 +327,8 @@ export default function ChatBot() {
               <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-blue-400/20 blur-3xl pointer-events-none" />
               <div className="absolute -bottom-10 -left-6 w-32 h-32 rounded-full bg-fuchsia-400/15 blur-3xl pointer-events-none" />
 
-              <div className="relative w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center shrink-0 ring-1 ring-white/20">
-                <BotAvatar size={36} />
+              <div className="relative shrink-0">
+                <SolmoMark size={44} variant="on-dark" />
               </div>
               <div className="relative min-w-0 flex-1">
                 <div className="font-display text-base font-bold tracking-tight truncate">
@@ -467,8 +477,8 @@ function Bubble({ role, content }: { role: Role; content: string }) {
   return (
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
       {!isUser && (
-        <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-indigo-600 to-[#001F5B] flex items-center justify-center shrink-0 mr-2 mt-0.5 ring-1 ring-white shadow-sm">
-          <BotAvatar size={24} />
+        <div className="shrink-0 mr-2 mt-0.5">
+          <SolmoMark size={36} variant="on-light" />
         </div>
       )}
       <div
@@ -487,8 +497,8 @@ function Bubble({ role, content }: { role: Role; content: string }) {
 function TypingDots() {
   return (
     <div className="flex justify-start">
-      <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-indigo-600 to-[#001F5B] flex items-center justify-center shrink-0 mr-2 mt-0.5 ring-1 ring-white shadow-sm">
-        <BotAvatar size={24} />
+      <div className="shrink-0 mr-2 mt-0.5">
+        <SolmoMark size={36} variant="on-light" />
       </div>
       <div className="bg-white border border-slate-200 rounded-2xl rounded-bl-md px-5 py-4 flex gap-1.5 items-center shadow-sm">
         <span
