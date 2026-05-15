@@ -333,12 +333,10 @@ export default async function ProductDetailPage({
             ) : ROW_PRODUCTS.has(product.id) ? (
               <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-3xl p-6 sm:p-10">
                 <div
-                  className={`grid gap-4 sm:gap-6 grid-cols-2 sm:grid-cols-3 ${
-                    product.features.length >= 5
-                      ? 'lg:grid-cols-5'
-                      : product.features.length === 4
-                        ? 'lg:grid-cols-4'
-                        : 'lg:grid-cols-5'
+                  className={`grid gap-5 sm:gap-6 grid-cols-2 sm:grid-cols-3 ${
+                    product.features.length === 4
+                      ? 'lg:grid-cols-4'
+                      : 'lg:grid-cols-3 xl:grid-cols-5'
                   }`}
                 >
                   {product.features.map((f, idx) => {
@@ -346,7 +344,7 @@ export default async function ProductDetailPage({
                     return (
                       <div
                         key={f.title}
-                        className="text-center px-2 sm:px-3 py-4"
+                        className="text-center px-1 sm:px-3 py-4"
                       >
                         {img ? (
                           <div className="relative w-full aspect-square mb-4 sm:mb-5">
@@ -366,10 +364,10 @@ export default async function ProductDetailPage({
                             />
                           </div>
                         )}
-                        <h4 className="font-display text-base sm:text-lg font-bold text-[#001F5B] tracking-tight mb-2 leading-tight">
+                        <h4 className="font-display text-[15px] sm:text-lg font-bold text-[#001F5B] tracking-tight mb-2 leading-snug break-keep">
                           {f.title}
                         </h4>
-                        <p className="text-xs sm:text-[13px] font-medium text-slate-500 leading-relaxed">
+                        <p className="text-xs sm:text-[13px] font-medium text-slate-500 leading-relaxed break-keep">
                           {f.description}
                         </p>
                       </div>
