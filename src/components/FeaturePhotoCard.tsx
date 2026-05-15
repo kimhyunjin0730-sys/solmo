@@ -106,7 +106,7 @@ export function FeaturePhotoGrid({
         : 'lg:grid-cols-2';
 
   return (
-    <div className={`grid sm:grid-cols-2 gap-5 sm:gap-6 ${cols}`}>
+    <div className={`grid grid-cols-1 gap-5 sm:gap-6 ${cols}`}>
       {features.map((f, idx) => (
         <FeaturePhotoCard key={f.title} feature={f} index={idx} />
       ))}
