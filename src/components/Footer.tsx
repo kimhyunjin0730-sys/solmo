@@ -35,14 +35,9 @@ const SUPPORT_LINKS: FooterLink[] = [
 /** Family Sites — 솔모 그룹/관련 사이트 (외부 링크) */
 const FAMILY_SITES: { label: string; href: string; sub: string }[] = [
   {
-    label: '보안링스 홈페이지',
-    href: 'https://www.boanlinks.com/',
-    sub: 'boanlinks.com',
-  },
-  {
-    label: 'AI 보안링스',
+    label: '보안검진 및 매칭서비스',
     href: 'https://bl-staging-web.apps.rtruesoft.kr/',
-    sub: 'AI 보안링스 사용자 웹',
+    sub: 'AI 보안링스 바로가기',
   },
 ];
 

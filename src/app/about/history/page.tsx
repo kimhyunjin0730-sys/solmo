@@ -204,11 +204,11 @@ const HISTORY_DATA: readonly HistoryItem[] = [
 
 const PERIODS = ['2020 – Present', '2011 – 2020', '2002 – 2010'] as const;
 
-/** 타임라인 내 카테고리 표시 순서 (연혁 → 파트너십 → 주요 실적). */
+/** 타임라인 내 카테고리 표시 순서 (주요 실적 → 파트너십 → 연혁). */
 const CATEGORY_ORDER: Record<HistoryCategory, number> = {
-  History: 0,
+  Project: 0,
   Partner: 1,
-  Project: 2,
+  History: 2,
 };
 
 const CATEGORY_LABEL_KR: Record<HistoryCategory, string> = {
@@ -219,9 +219,9 @@ const CATEGORY_LABEL_KR: Record<HistoryCategory, string> = {
 
 const FILTERS: readonly { value: 'All' | HistoryCategory; label: string }[] = [
   { value: 'All', label: '전체' },
-  { value: 'History', label: '연혁' },
-  { value: 'Partner', label: '파트너십' },
   { value: 'Project', label: '주요 실적' },
+  { value: 'Partner', label: '파트너십' },
+  { value: 'History', label: '연혁' },
 ];
 
 export default function HistoryPage() {

@@ -194,25 +194,10 @@ export default function Home() {
                 지능형 보안의 기준.
               </span>
             </h1>
-            <p className="text-white/60 text-sm sm:text-base font-medium max-w-xl leading-relaxed mb-8">
+            <p className="text-white/60 text-sm sm:text-base font-medium max-w-xl leading-relaxed break-keep">
               솔모정보기술은 22년의 업력과 화이트해커급 기술력을 바탕으로 귀사의
               정보 자산을 가장 안전하게 지켜드립니다.
             </p>
-
-            <div className="flex flex-wrap gap-3 sm:gap-4">
-              <Link
-                href="#solutions"
-                className="px-6 py-3 bg-blue-600 text-white font-bold rounded-full hover:bg-blue-500 transition-all shadow-xl shadow-blue-600/30 text-xs tracking-tight"
-              >
-                솔루션 살펴보기 →
-              </Link>
-              <Link
-                href="/support/contact"
-                className="px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold rounded-full hover:bg-white/20 transition-all text-xs tracking-tight"
-              >
-                전문가 상담 신청
-              </Link>
-            </div>
           </div>
 
           <div className="mt-10 sm:mt-14 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-4xl">
