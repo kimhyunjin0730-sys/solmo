@@ -135,7 +135,7 @@ export function DbsaferDiagram({
       </div>
 
       {/* 4-모듈 헥사곤 그리드 */}
-      <div className="relative grid grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6 pt-4">
+      <div className="relative grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5 pt-4">
         {features.map((f) => (
           <HexModule key={f.title} feature={f} />
         ))}
