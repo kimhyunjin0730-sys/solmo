@@ -13,11 +13,50 @@ import { useMutation } from '@tanstack/react-query';
 const STORAGE_KEY = 'solmo_chat_session';
 const STORAGE_MSGS = 'solmo_chat_messages';
 
-const SUGGESTIONS: readonly string[] = [
-  '솔모는 뭐하는 회사야?',
-  '이메일 보안 솔루션 추천해줘',
-  '화면 워터마크는 뭐가 있어?',
-  '견적 문의하고 싶어요',
+/**
+ * 빠른 질문 — 소개 / 솔루션 / 문의 3 카테고리로 정리.
+ * 답변은 라우터 fallback + AI 시스템 프롬프트에서 자연스러운 한국어로
+ * 처리하도록 설계됨.
+ */
+type SuggestionGroup = {
+  id: 'intro' | 'solution' | 'inquiry';
+  label: string;
+  hint: string;
+  items: readonly string[];
+};
+
+const SUGGESTION_GROUPS: readonly SuggestionGroup[] = [
+  {
+    id: 'intro',
+    label: '소개',
+    hint: '회사 / 인증 / 조직',
+    items: [
+      '솔모정보기술은 어떤 회사인가요?',
+      '보유한 인증과 자격이 궁금합니다.',
+      '연혁과 주요 실적을 알려주세요.',
+    ],
+  },
+  {
+    id: 'solution',
+    label: '솔루션',
+    hint: '4개 분야 26+ 제품',
+    items: [
+      '이메일 보안 솔루션을 추천해 주세요.',
+      'VDI(가상 데스크톱)는 어떤 제품이 있나요?',
+      '화면 워터마크 솔루션이 궁금합니다.',
+      '랜섬웨어·백업 솔루션을 알려주세요.',
+    ],
+  },
+  {
+    id: 'inquiry',
+    label: '문의',
+    hint: '견적 / 상담 / 연락',
+    items: [
+      '도입 견적을 받고 싶습니다.',
+      '전문가 상담을 신청하고 싶습니다.',
+      '회사 위치와 연락처를 알려주세요.',
+    ],
+  },
 ];
 
 type Role = 'user' | 'assistant' | 'system';
@@ -36,8 +75,56 @@ type ChatResponse = {
 const WELCOME: Message = {
   role: 'assistant',
   content:
-    '안녕하세요, 솔모정보기술 AI 상담원 솔모봇이에요.\n네트워크 · 단말/서버 · 애플리케이션 · OT 4개 분야 26+ 보안 솔루션, 회사 정보, 견적 등 무엇이든 편하게 물어봐 주세요.',
+    '안녕하세요, 솔모정보기술의 AI 상담원 솔모봇입니다.\n네트워크 · 단말/서버 · 애플리케이션 · OT 4개 분야의 26개+ 보안 솔루션, 회사 정보, 도입 견적 등 무엇이든 편하게 문의해 주세요.',
 };
+
+/* ──────────── 봇 일러스트 (SVG) ──────────── */
+
+function BotAvatar({ className = '', size = 40 }: { className?: string; size?: number }) {
+  return (
+    <svg
+      className={className}
+      width={size}
+      height={size}
+      viewBox="0 0 48 48"
+      fill="none"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="bot-body" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#60A5FA" />
+          <stop offset="100%" stopColor="#1E40AF" />
+        </linearGradient>
+        <linearGradient id="bot-screen" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#0B1B3F" />
+          <stop offset="100%" stopColor="#001440" />
+        </linearGradient>
+      </defs>
+      {/* 안테나 */}
+      <line x1="24" y1="3" x2="24" y2="9" stroke="#93C5FD" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="24" cy="3" r="2" fill="#A78BFA" />
+      <circle cx="24" cy="3" r="3.5" fill="#A78BFA" opacity="0.3" />
+      {/* 머리 */}
+      <rect x="8" y="9" width="32" height="26" rx="9" fill="url(#bot-body)" />
+      {/* 스크린 영역 */}
+      <rect x="13" y="14" width="22" height="16" rx="4" fill="url(#bot-screen)" />
+      {/* 눈 */}
+      <circle cx="19" cy="22" r="2.4" fill="#60A5FA" />
+      <circle cx="29" cy="22" r="2.4" fill="#60A5FA" />
+      <circle cx="19.8" cy="21.4" r="0.8" fill="white" />
+      <circle cx="29.8" cy="21.4" r="0.8" fill="white" />
+      {/* 작은 미소 */}
+      <path d="M21 26.5q3 1.8 6 0" stroke="#93C5FD" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+      {/* 목/몸 */}
+      <rect x="20" y="35" width="8" height="3" rx="1" fill="#1E3A8A" />
+      <rect x="14" y="38" width="20" height="7" rx="3" fill="#0F2A5C" />
+      <circle cx="20" cy="41.5" r="1" fill="#60A5FA" />
+      <circle cx="28" cy="41.5" r="1" fill="#A78BFA" />
+    </svg>
+  );
+}
+
+/* ──────────── API ──────────── */
 
 async function sendChatRequest(payload: {
   messages: Message[];
@@ -58,11 +145,14 @@ async function sendChatRequest(payload: {
   return data as ChatResponse;
 }
 
+/* ──────────── 메인 컴포넌트 ──────────── */
+
 export default function ChatBot() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([WELCOME]);
   const [input, setInput] = useState('');
   const [sessionId, setSessionId] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<SuggestionGroup['id']>('intro');
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -89,7 +179,7 @@ export default function ChatBot() {
         {
           role: 'assistant',
           content:
-            '죄송합니다, 일시적인 오류가 발생했습니다. 잠시 후 다시 시도해주세요. 급한 문의는 02-402-8054 로 연락해주세요.',
+            '죄송합니다. 일시적인 오류가 발생했습니다. 잠시 후 다시 시도해 주세요. 급한 문의는 02-402-8054 로 연락 주시면 됩니다.',
         },
       ]);
     },
@@ -163,6 +253,7 @@ export default function ChatBot() {
   const reset = () => {
     setMessages([WELCOME]);
     setSessionId(null);
+    setActiveTab('intro');
     try {
       localStorage.removeItem(STORAGE_KEY);
       localStorage.removeItem(STORAGE_MSGS);
@@ -183,24 +274,28 @@ export default function ChatBot() {
     }
   };
 
+  const activeGroup =
+    SUGGESTION_GROUPS.find((g) => g.id === activeTab) ?? SUGGESTION_GROUPS[0];
+
   return (
     <>
+      {/* FAB 토글 버튼 */}
       {!open && (
         <button
           onClick={() => setOpen(true)}
           aria-label="챗봇 열기"
           className="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-[60] group"
         >
-          <span className="absolute inset-0 rounded-full bg-blue-600 opacity-30 group-hover:opacity-50 blur-xl transition-opacity"></span>
-          <span className="relative flex items-center gap-3 bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white pl-5 pr-6 py-4 rounded-full shadow-2xl shadow-indigo-900/30 hover:scale-105 transition-transform">
-            <span className="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center text-lg">
-              💬
+          <span className="absolute inset-0 rounded-full bg-blue-600 opacity-30 group-hover:opacity-50 blur-xl transition-opacity" />
+          <span className="relative flex items-center gap-3 bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white pl-3 pr-5 py-3 rounded-full shadow-2xl shadow-indigo-900/30 hover:scale-105 transition-transform">
+            <span className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center">
+              <BotAvatar size={28} />
             </span>
-            <span className="text-sm font-black tracking-tight pr-1 hidden sm:block">
+            <span className="text-sm font-bold tracking-tight pr-1 hidden sm:block">
               상담하기
             </span>
           </span>
-          <span className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-white animate-pulse"></span>
+          <span className="absolute top-1 right-1 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-white animate-pulse" />
         </button>
       )}
 
@@ -215,60 +310,100 @@ export default function ChatBot() {
           <div
             role="dialog"
             aria-label="솔모정보기술 챗봇"
-            className="fixed z-[60] bg-white shadow-2xl flex flex-col overflow-hidden inset-x-0 bottom-0 top-16 rounded-t-[2rem] sm:inset-auto sm:bottom-7 sm:right-7 sm:top-auto sm:w-[400px] sm:h-[640px] sm:max-h-[calc(100vh-4rem)] sm:rounded-[2rem] border border-slate-200 animate-chat-in"
+            className="fixed z-[60] bg-white shadow-2xl flex flex-col overflow-hidden inset-x-0 bottom-0 top-16 rounded-t-[2rem] sm:inset-auto sm:bottom-7 sm:right-7 sm:top-auto sm:w-[420px] sm:h-[680px] sm:max-h-[calc(100vh-4rem)] sm:rounded-[2rem] border border-slate-200 animate-chat-in"
           >
-            <div className="bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white px-5 py-4 flex items-center gap-3 shrink-0">
-              <div className="w-11 h-11 rounded-full bg-white/15 flex items-center justify-center text-xl shrink-0">
-                🤖
+            {/* 헤더 — 그라데이션 + 메시 후광 */}
+            <div className="relative bg-gradient-to-br from-indigo-600 via-[#1E3A8A] to-[#001F5B] text-white px-5 py-4 flex items-center gap-3 shrink-0 overflow-hidden">
+              <div className="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-blue-400/20 blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-10 -left-6 w-32 h-32 rounded-full bg-fuchsia-400/15 blur-3xl pointer-events-none" />
+
+              <div className="relative w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-sm flex items-center justify-center shrink-0 ring-1 ring-white/20">
+                <BotAvatar size={36} />
               </div>
-              <div className="min-w-0 flex-1">
-                <div className="text-base font-black tracking-tight truncate">
-                  솔모봇 SolmoBot
+              <div className="relative min-w-0 flex-1">
+                <div className="font-display text-base font-bold tracking-tight truncate">
+                  솔모봇 <span className="font-mono text-white/70 text-sm">SolmoBot</span>
                 </div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-white/60 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-                  Online · 24/7
+                <div className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/60 flex items-center gap-1.5 mt-0.5">
+                  <span className="relative flex w-1.5 h-1.5">
+                    <span className="absolute inset-0 rounded-full bg-emerald-400 animate-ping opacity-60" />
+                    <span className="relative w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  </span>
+                  Online · 24/7 AI
                 </div>
               </div>
               <button
                 onClick={reset}
                 title="대화 초기화"
-                className="w-9 h-9 rounded-full hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all"
+                className="relative w-9 h-9 rounded-full hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all"
                 aria-label="대화 초기화"
               >
-                ↻
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M13 8a5 5 0 1 1-1.6-3.7M13 3v3h-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
               </button>
               <button
                 onClick={() => setOpen(false)}
                 aria-label="챗봇 닫기"
-                className="w-9 h-9 rounded-full hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all text-lg"
+                className="relative w-9 h-9 rounded-full hover:bg-white/10 flex items-center justify-center text-white/70 hover:text-white transition-all"
               >
-                ✕
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+                </svg>
               </button>
             </div>
 
+            {/* 메시지 영역 */}
             <div
               ref={scrollRef}
-              className="flex-1 overflow-y-auto px-4 py-5 space-y-4 bg-slate-50"
+              className="flex-1 overflow-y-auto px-4 py-5 space-y-4 bg-gradient-to-b from-slate-50 to-white"
             >
               {messages.map((m, i) => (
                 <Bubble key={i} role={m.role} content={m.content} />
               ))}
               {loading && <TypingDots />}
 
+              {/* 빠른 질문 — 환영 메시지 다음에만 표시 */}
               {messages.length <= 1 && !loading && (
-                <div className="pt-2">
-                  <div className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 px-1">
+                <div className="pt-3">
+                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em] mb-3 px-1">
                     빠른 질문
                   </div>
+
+                  {/* 카테고리 탭 */}
+                  <div className="flex gap-1 mb-3 p-1 bg-slate-100 rounded-2xl">
+                    {SUGGESTION_GROUPS.map((g) => (
+                      <button
+                        key={g.id}
+                        onClick={() => setActiveTab(g.id)}
+                        className={`flex-1 text-xs font-bold py-2 rounded-xl transition-all ${
+                          activeTab === g.id
+                            ? 'bg-white text-[#001F5B] shadow-sm'
+                            : 'text-slate-500 hover:text-slate-700'
+                        }`}
+                      >
+                        {g.label}
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* 활성 카테고리 힌트 */}
+                  <p className="text-[10px] font-medium text-slate-400 px-1 mb-2">
+                    {activeGroup.hint}
+                  </p>
+
+                  {/* 질문 리스트 */}
                   <div className="space-y-2">
-                    {SUGGESTIONS.map((s) => (
+                    {activeGroup.items.map((s) => (
                       <button
                         key={s}
                         onClick={() => send(s)}
-                        className="w-full text-left text-xs font-bold text-slate-700 bg-white border border-slate-200 rounded-2xl px-4 py-3 hover:border-blue-600 hover:text-blue-700 transition-all"
+                        className="group w-full text-left text-[13px] font-medium text-slate-700 bg-white border border-slate-200 rounded-2xl px-4 py-3 hover:border-[#001F5B]/40 hover:bg-blue-50/40 hover:text-[#001F5B] transition-all flex items-center justify-between gap-2"
                       >
-                        {s}
+                        <span className="break-keep">{s}</span>
+                        <span className="text-blue-400 text-sm opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all shrink-0">
+                          →
+                        </span>
                       </button>
                     ))}
                   </div>
@@ -276,6 +411,7 @@ export default function ChatBot() {
               )}
             </div>
 
+            {/* 입력 영역 */}
             <form
               onSubmit={handleSubmit}
               className="border-t border-slate-100 p-3 sm:p-4 bg-white shrink-0"
@@ -284,13 +420,13 @@ export default function ChatBot() {
               }}
             >
               <div className="flex gap-2 items-end">
-                <div className="flex-1 bg-slate-50 border border-slate-200 rounded-2xl focus-within:border-blue-600 transition-colors">
+                <div className="flex-1 bg-slate-50 border border-slate-200 rounded-2xl focus-within:border-[#001F5B]/40 focus-within:bg-white transition-all">
                   <textarea
                     ref={inputRef}
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    placeholder="무엇이든 물어보세요..."
+                    placeholder="무엇이든 편하게 물어보세요…"
                     rows={1}
                     maxLength={2000}
                     className="w-full bg-transparent resize-none px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 outline-none max-h-28"
@@ -299,14 +435,16 @@ export default function ChatBot() {
                 <button
                   type="submit"
                   disabled={!input.trim() || loading}
-                  className="shrink-0 w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white font-black flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:scale-105 transition-transform"
+                  className="shrink-0 w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white flex items-center justify-center disabled:opacity-30 disabled:cursor-not-allowed hover:scale-105 hover:shadow-lg hover:shadow-indigo-900/20 transition-all"
                   aria-label="전송"
                 >
-                  ➤
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <path d="M2 9l14-7-5 16-3-7-6-2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" fill="currentColor" fillOpacity="0.2" />
+                  </svg>
                 </button>
               </div>
-              <p className="text-[9px] font-bold text-slate-300 text-center mt-2 tracking-wide">
-                AI 응답은 부정확할 수 있습니다 · 정확한 상담은 02-402-8054
+              <p className="text-[10px] font-medium text-slate-400 text-center mt-2.5 tracking-tight">
+                AI 응답은 부정확할 수 있어요 · 정확한 상담은 <a href="tel:024028054" className="font-bold text-slate-600 hover:text-blue-600">02-402-8054</a>
               </p>
             </form>
           </div>
@@ -329,15 +467,15 @@ function Bubble({ role, content }: { role: Role; content: string }) {
   return (
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
       {!isUser && (
-        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white flex items-center justify-center text-xs shrink-0 mr-2 mt-0.5">
-          🤖
+        <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-indigo-600 to-[#001F5B] flex items-center justify-center shrink-0 mr-2 mt-0.5 ring-1 ring-white shadow-sm">
+          <BotAvatar size={24} />
         </div>
       )}
       <div
-        className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap break-words ${
+        className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap break-keep ${
           isUser
-            ? 'bg-[#001F5B] text-white rounded-br-md font-medium'
-            : 'bg-white border border-slate-200 text-slate-800 rounded-bl-md font-medium'
+            ? 'bg-gradient-to-br from-[#001F5B] to-[#0B1B3F] text-white rounded-br-md font-medium shadow-sm shadow-indigo-900/10'
+            : 'bg-white border border-slate-200 text-slate-800 rounded-bl-md font-medium shadow-sm'
         }`}
       >
         {content}
@@ -349,22 +487,22 @@ function Bubble({ role, content }: { role: Role; content: string }) {
 function TypingDots() {
   return (
     <div className="flex justify-start">
-      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white flex items-center justify-center text-xs shrink-0 mr-2 mt-0.5">
-        🤖
+      <div className="w-9 h-9 rounded-2xl bg-gradient-to-br from-indigo-600 to-[#001F5B] flex items-center justify-center shrink-0 mr-2 mt-0.5 ring-1 ring-white shadow-sm">
+        <BotAvatar size={24} />
       </div>
-      <div className="bg-white border border-slate-200 rounded-2xl rounded-bl-md px-5 py-4 flex gap-1.5 items-center">
+      <div className="bg-white border border-slate-200 rounded-2xl rounded-bl-md px-5 py-4 flex gap-1.5 items-center shadow-sm">
         <span
-          className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce"
+          className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-bounce"
           style={{ animationDelay: '0ms' }}
-        ></span>
+        />
         <span
-          className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce"
+          className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-bounce"
           style={{ animationDelay: '150ms' }}
-        ></span>
+        />
         <span
-          className="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce"
+          className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-bounce"
           style={{ animationDelay: '300ms' }}
-        ></span>
+        />
       </div>
     </div>
   );
