@@ -549,7 +549,7 @@ export default function Home() {
                   </div>
                   <div className="text-base tracking-tight">02-402-8054</div>
                 </div>
-                <span className="text-2xl">📞</span>
+                <span className="text-2xl text-blue-300">→</span>
               </a>
               <Link
                 href="/support/location"
@@ -563,7 +563,7 @@ export default function Home() {
                     서울 광진구 아차산로 309
                   </div>
                 </div>
-                <span className="text-2xl">📍</span>
+                <span className="text-2xl text-blue-300">→</span>
               </Link>
             </div>
           </div>
