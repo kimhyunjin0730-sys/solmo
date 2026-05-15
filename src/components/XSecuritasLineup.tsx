@@ -203,35 +203,19 @@ export function XSecuritasLineup({
         </div>
       </div>
 
-      {/* 그리드 — 카드를 세로형(아이콘 위 / 텍스트 아래 풀폭)으로 해서
-          좁은 폭에서도 단어가 깨지지 않도록 함 */}
-      <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-        {features.map((f, idx) => {
-          const meta = META[f.icon];
-          const style = meta ? VARIANT_STYLES[meta.variant] : null;
-          return (
-            <article
-              key={f.title}
-              className="group relative flex flex-col items-center text-center gap-3 bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 hover:border-[#001F5B]/40 hover:shadow-md transition-all duration-300"
-            >
-              <span className="absolute top-3 right-3 font-mono text-[10px] font-medium text-slate-300 tracking-widest">
-                0{idx + 1}
-              </span>
-              <DiamondChip iconKey={f.icon} />
-              <div className="w-full mt-1">
-                <h5 className="font-display text-[14px] sm:text-[15px] font-bold text-[#001F5B] tracking-tight leading-snug break-keep">
-                  {f.title}
-                </h5>
-                {style && (
-                  <div className={`h-0.5 w-8 ${style.accent} mx-auto mt-2 group-hover:w-12 transition-all duration-300`} />
-                )}
-                <p className="text-[12px] text-slate-500 font-medium mt-2 leading-relaxed break-keep">
-                  {f.description}
-                </p>
-              </div>
-            </article>
-          );
-        })}
+      {/* 그리드 — PPT 그대로: 칩 + 영문 제목 한 줄 미니멀 */}
+      <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+        {features.map((f) => (
+          <article
+            key={f.title}
+            className="group flex items-center gap-4 px-3 py-2.5 rounded-2xl hover:bg-white hover:shadow-sm transition-all duration-300"
+          >
+            <DiamondChip iconKey={f.icon} />
+            <h5 className="font-display text-[14px] sm:text-[15px] font-bold text-[#001F5B] tracking-tight leading-snug flex-1 min-w-0">
+              {f.title}
+            </h5>
+          </article>
+        ))}
       </div>
     </div>
   );
