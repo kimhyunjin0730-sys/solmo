@@ -289,30 +289,33 @@ export default function ChatBot() {
 
   return (
     <>
-      {/* 보안링스 AI 매칭 — 챗봇 위에 떠 있는 외부 링크 CTA */}
+      {/* 보안링스 AI 매칭 — 챗봇 위에 떠 있는 외부 링크 CTA (흰 배경) */}
       {!open && (
         <a
           href="https://bl-staging-web.apps.rtruesoft.kr/"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="보안검진 및 매칭서비스 — AI 보안링스 바로가기"
+          aria-label="보안검진 및 매칭 서비스 — AI 보안링스 바로가기"
           className="group fixed bottom-[100px] right-5 sm:bottom-[112px] sm:right-7 z-[60]"
         >
-          <span className="absolute inset-0 rounded-2xl bg-blue-500 opacity-10 group-hover:opacity-25 blur-lg transition-opacity" />
-          <span className="relative flex flex-col items-center gap-1 bg-gradient-to-br from-[#0B1B3F] to-[#001F5B] border border-white/10 text-white px-3.5 py-2 rounded-2xl shadow-md shadow-indigo-900/20 hover:border-blue-400/40 hover:-translate-y-0.5 transition-all">
-            <span className="bg-white rounded-md px-2 py-1 inline-flex items-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/boanlinks-logo.svg"
-                alt="BOANLINKS"
-                className="h-4 w-auto"
-              />
+          <span className="relative flex items-center gap-2 bg-white border border-slate-200 text-slate-900 pl-3 pr-3.5 py-2.5 rounded-full shadow-lg shadow-slate-900/10 hover:border-blue-400 hover:-translate-y-0.5 transition-all">
+            {/* 보안링스 체인 링크 아이콘 (블루) */}
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+              className="shrink-0"
+            >
+              <circle cx="9" cy="12" r="5.5" stroke="#2563EB" strokeWidth="2" />
+              <circle cx="15" cy="12" r="5.5" stroke="#60A5FA" strokeWidth="2" />
+            </svg>
+            <span className="font-display text-[12px] sm:text-[13px] font-bold tracking-tight whitespace-nowrap">
+              보안검진 · 매칭 서비스
             </span>
-            <span className="flex items-center gap-1 leading-none">
-              <span className="font-display text-[10px] sm:text-[11px] font-bold text-white/90 tracking-tight">
-                보안검진 · 매칭
-              </span>
-              <span className="text-blue-300/80 text-[10px]">↗</span>
+            <span className="text-blue-600 text-sm group-hover:translate-x-0.5 transition-transform shrink-0">
+              ↗
             </span>
           </span>
         </a>
