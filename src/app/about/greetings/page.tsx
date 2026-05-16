@@ -11,10 +11,9 @@ export default function GreetingsPage() {
     <div className="max-w-3xl mx-auto px-5 sm:px-8 pb-10 space-y-12">
       <section className="space-y-6">
         <h4 className="text-3xl sm:text-4xl font-bold text-slate-900 tracking-tight leading-[1.25]">
-          <span className="text-blue-600">초연결 및 AI 시대</span>, 정보보안은
-          기업의 생존과 경쟁력을 좌우합니다.
+          초연결 및 AI 시대, 정보보안은 기업의 생존과 경쟁력을 좌우합니다.
         </h4>
-        <div className="space-y-6 text-slate-500 font-bold text-[17px] leading-relaxed">
+        <div className="space-y-6 text-slate-900 font-medium text-[17px] leading-relaxed">
           <p>
             안녕하십니까. <br />
             솔모정보기술 대표이사 이병두입니다.
@@ -35,9 +34,7 @@ export default function GreetingsPage() {
           </p>
           <p>
             솔모정보기술은 단순한 보안기술 공급 회사를 넘어 고객의 안전한
-            비즈니스 성장을 함께하는{' '}
-            <span className="text-slate-900">전략적 파트너</span>가 되고자
-            합니다.
+            비즈니스 성장을 함께하는 전략적 파트너가 되고자 합니다.
           </p>
           <p>
             앞으로도 차별화된 기술 혁신과 책임감 있는 서비스를 바탕으로
@@ -47,7 +44,7 @@ export default function GreetingsPage() {
             끝으로 변함없는 관심과 성원을 보내주시는 고객 및 파트너 여러분께
             깊이 감사드립니다.
           </p>
-          <p className="text-slate-900 text-lg font-black pt-2">감사합니다.</p>
+          <p className="text-lg font-bold pt-2">감사합니다.</p>
         </div>
 
         {/* Signature */}
