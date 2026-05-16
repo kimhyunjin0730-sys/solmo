@@ -317,7 +317,7 @@ export default function ChatBot() {
                 보안 검진
               </span>
               <span className="font-display text-[14px] font-bold tracking-tight">
-                매칭 서비스
+                매칭서비스
               </span>
             </span>
             <span className="text-blue-600 text-base group-hover:translate-x-0.5 transition-transform shrink-0">
@@ -339,7 +339,7 @@ export default function ChatBot() {
             <span className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center text-white shrink-0">
               <ChatGlyph size={22} />
             </span>
-            <span className="font-display text-[14px] font-bold tracking-tight flex-1 text-center">
+            <span className="font-display text-[14px] font-bold tracking-tight flex-1 text-left">
               상담하기
             </span>
           </span>
