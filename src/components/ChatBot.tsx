@@ -289,7 +289,33 @@ export default function ChatBot() {
 
   return (
     <>
-      {/* FAB 토글 버튼 */}
+      {/* 보안링스 AI 매칭 — 챗봇 위에 떠 있는 외부 링크 CTA */}
+      {!open && (
+        <a
+          href="https://bl-staging-web.apps.rtruesoft.kr/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="보안검진 및 매칭서비스 — AI 보안링스 바로가기"
+          className="group fixed bottom-[88px] right-5 sm:bottom-[100px] sm:right-7 z-[60]"
+        >
+          <span className="absolute inset-0 rounded-full bg-blue-500 opacity-15 group-hover:opacity-30 blur-xl transition-opacity" />
+          <span className="relative flex items-center gap-3 bg-gradient-to-br from-[#0B1B3F] to-[#001F5B] border border-white/10 text-white pl-5 pr-4 py-3 rounded-full shadow-xl shadow-indigo-900/30 hover:border-blue-400/40 hover:-translate-y-0.5 transition-all">
+            <span className="flex flex-col leading-tight">
+              <span className="font-display text-[13px] sm:text-sm font-bold tracking-tight">
+                보안검진 및 매칭서비스
+              </span>
+              <span className="font-medium text-[10px] sm:text-[11px] text-blue-300/80 tracking-tight mt-0.5">
+                AI 보안링스 바로가기
+              </span>
+            </span>
+            <span className="text-blue-400 text-base group-hover:translate-x-0.5 transition-transform shrink-0">
+              ↗
+            </span>
+          </span>
+        </a>
+      )}
+
+      {/* FAB 토글 버튼 — 챗봇 */}
       {!open && (
         <button
           onClick={() => setOpen(true)}
@@ -301,7 +327,7 @@ export default function ChatBot() {
             <span className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center text-white">
               <ChatGlyph size={22} />
             </span>
-            <span className="text-sm font-bold tracking-tight pr-1 hidden sm:block">
+            <span className="font-display text-sm font-bold tracking-tight pr-1 hidden sm:block">
               상담하기
             </span>
           </span>
@@ -372,7 +398,7 @@ export default function ChatBot() {
               {/* 빠른 질문 — 환영 메시지 다음에만 표시 */}
               {messages.length <= 1 && !loading && (
                 <div className="pt-3">
-                  <div className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.25em] mb-3 px-1">
+                  <div className="font-mono text-[11px] font-bold text-slate-400 uppercase tracking-[0.25em] mb-3 px-1">
                     빠른 질문
                   </div>
 
@@ -382,7 +408,7 @@ export default function ChatBot() {
                       <button
                         key={g.id}
                         onClick={() => setActiveTab(g.id)}
-                        className={`flex-1 text-xs font-bold py-2 rounded-xl transition-all ${
+                        className={`flex-1 font-display text-[13px] font-bold py-2.5 rounded-xl tracking-tight transition-all ${
                           activeTab === g.id
                             ? 'bg-white text-[#001F5B] shadow-sm'
                             : 'text-slate-500 hover:text-slate-700'
@@ -394,7 +420,7 @@ export default function ChatBot() {
                   </div>
 
                   {/* 활성 카테고리 힌트 */}
-                  <p className="text-[10px] font-medium text-slate-400 px-1 mb-2">
+                  <p className="text-[11px] font-medium text-slate-400 px-1 mb-2.5">
                     {activeGroup.hint}
                   </p>
 
@@ -404,9 +430,9 @@ export default function ChatBot() {
                       <button
                         key={s}
                         onClick={() => send(s)}
-                        className="group w-full text-left text-[13px] font-medium text-slate-700 bg-white border border-slate-200 rounded-2xl px-4 py-3 hover:border-[#001F5B]/40 hover:bg-blue-50/40 hover:text-[#001F5B] transition-all flex items-center justify-between gap-2"
+                        className="group w-full text-left text-[13.5px] font-medium text-slate-700 bg-white border border-slate-200 rounded-2xl px-4 py-3 leading-relaxed hover:border-[#001F5B]/40 hover:bg-blue-50/40 hover:text-[#001F5B] transition-all flex items-center justify-between gap-2"
                       >
-                        <span className="break-keep">{s}</span>
+                        <span className="break-keep tracking-tight">{s}</span>
                         <span className="text-blue-400 text-sm opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all shrink-0">
                           →
                         </span>
@@ -435,7 +461,7 @@ export default function ChatBot() {
                     placeholder="무엇이든 편하게 물어보세요…"
                     rows={1}
                     maxLength={2000}
-                    className="w-full bg-transparent resize-none px-4 py-3 text-sm font-medium text-slate-900 placeholder:text-slate-400 outline-none max-h-28"
+                    className="w-full bg-transparent resize-none px-4 py-3 text-[14px] font-medium text-slate-900 placeholder:text-slate-400 placeholder:font-normal outline-none max-h-28 leading-relaxed tracking-tight"
                   />
                 </div>
                 <button
@@ -449,8 +475,8 @@ export default function ChatBot() {
                   </svg>
                 </button>
               </div>
-              <p className="text-[10px] font-medium text-slate-400 text-center mt-2.5 tracking-tight">
-                AI 응답은 부정확할 수 있어요 · 정확한 상담은 <a href="tel:024028054" className="font-bold text-slate-600 hover:text-blue-600">02-402-8054</a>
+              <p className="text-[11px] font-medium text-slate-400 text-center mt-2.5 tracking-tight">
+                AI 응답은 부정확할 수 있습니다 · 정확한 상담은 <a href="tel:024028054" className="font-bold text-slate-600 hover:text-blue-600">02-402-8054</a>
               </p>
             </form>
           </div>
@@ -478,7 +504,7 @@ function Bubble({ role, content }: { role: Role; content: string }) {
         </div>
       )}
       <div
-        className={`max-w-[78%] rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap break-keep ${
+        className={`max-w-[78%] rounded-2xl px-4 py-3 text-[14px] leading-[1.65] tracking-tight whitespace-pre-wrap break-keep ${
           isUser
             ? 'bg-gradient-to-br from-[#001F5B] to-[#0B1B3F] text-white rounded-br-md font-medium shadow-sm shadow-indigo-900/10'
             : 'bg-white border border-slate-200 text-slate-800 rounded-bl-md font-medium shadow-sm'
