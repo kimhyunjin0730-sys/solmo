@@ -295,7 +295,7 @@ export default function ChatBot() {
           href="https://bl-staging-web.apps.rtruesoft.kr/"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="보안검진 및 매칭 서비스 — AI 보안링스 바로가기"
+          aria-label="보안 검진 및 매칭 서비스 — AI 보안링스 바로가기"
           className="group fixed bottom-[100px] right-5 sm:bottom-[112px] sm:right-7 z-[60]"
         >
           <span className="relative flex items-center gap-3 bg-white border border-slate-200 text-slate-900 pl-3 pr-5 py-3 rounded-full shadow-lg shadow-slate-900/10 hover:border-blue-400 hover:-translate-y-0.5 transition-all w-[200px]">
@@ -314,7 +314,7 @@ export default function ChatBot() {
             </span>
             <span className="flex-1 flex flex-col leading-tight">
               <span className="font-display text-[13px] font-bold tracking-tight">
-                보안검진
+                보안 검진
               </span>
               <span className="font-display text-[13px] font-bold tracking-tight">
                 매칭 서비스

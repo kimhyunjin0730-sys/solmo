@@ -216,7 +216,7 @@ function localFallback(msg: string): string {
 
   // 보안링스 그룹 사이트
   if (t.includes('보안링스') || t.includes('ai 보안') || t.includes('그룹사'))
-    return '보안링스는 솔모 그룹 사이트입니다. 보안검진 및 매칭서비스(AI 보안링스)는 https://bl-staging-web.apps.rtruesoft.kr/ 에서 이용하실 수 있습니다.';
+    return '보안링스는 솔모 그룹 사이트입니다. 보안 검진 및 매칭 서비스(AI 보안링스)는 https://bl-staging-web.apps.rtruesoft.kr/ 에서 이용하실 수 있습니다.';
 
   // 가벼운 인사
   if (t.match(/^(ㅎㅇ|하이|안녕|헬로|hi|hello|좋은)/))
