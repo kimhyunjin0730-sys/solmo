@@ -289,24 +289,28 @@ export default function ChatBot() {
 
   return (
     <>
-      {/* 보안링스 AI 매칭 — 챗봇 위에 떠 있는 외부 링크 CTA (컴팩트) */}
+      {/* 보안링스 AI 매칭 — 챗봇 위에 떠 있는 외부 링크 CTA */}
       {!open && (
         <a
           href="https://bl-staging-web.apps.rtruesoft.kr/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="보안검진 및 매칭서비스 — AI 보안링스 바로가기"
-          className="group fixed bottom-[72px] right-5 sm:bottom-[80px] sm:right-7 z-[60]"
+          className="group fixed bottom-[78px] right-5 sm:bottom-[88px] sm:right-7 z-[60]"
         >
-          <span className="absolute inset-0 rounded-full bg-blue-500 opacity-10 group-hover:opacity-25 blur-lg transition-opacity" />
-          <span className="relative flex items-center gap-2 bg-gradient-to-br from-[#0B1B3F] to-[#001F5B] border border-white/10 text-white pl-3.5 pr-3 py-2 rounded-full shadow-md shadow-indigo-900/20 hover:border-blue-400/40 hover:-translate-y-0.5 transition-all">
-            <span className="flex flex-col leading-tight">
-              <span className="font-display text-[11px] sm:text-[12px] font-bold tracking-tight">
+          <span className="absolute inset-0 rounded-2xl bg-blue-500 opacity-10 group-hover:opacity-25 blur-lg transition-opacity" />
+          <span className="relative flex flex-col items-center gap-1 bg-gradient-to-br from-[#0B1B3F] to-[#001F5B] border border-white/10 text-white px-3.5 py-2 rounded-2xl shadow-md shadow-indigo-900/20 hover:border-blue-400/40 hover:-translate-y-0.5 transition-all">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/boanlinks-logo.svg"
+              alt="BOANLINKS"
+              className="h-7 w-auto brightness-0 invert opacity-90"
+            />
+            <span className="flex items-center gap-1 leading-none">
+              <span className="font-display text-[10px] sm:text-[11px] font-bold text-white/90 tracking-tight">
                 보안검진 · 매칭
               </span>
-              <span className="font-medium text-[9px] sm:text-[10px] text-blue-300/75 tracking-tight mt-px">
-                AI 보안링스 ↗
-              </span>
+              <span className="text-blue-300/80 text-[10px]">↗</span>
             </span>
           </span>
         </a>
