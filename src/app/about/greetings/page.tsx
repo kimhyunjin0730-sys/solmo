@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -65,37 +64,6 @@ export default function GreetingsPage() {
         </div>
       </section>
 
-      {/* CEO Message Card — moved to bottom */}
-      <aside className="relative aspect-[4/4] sm:aspect-[16/9] rounded-[3rem] overflow-hidden shadow-2xl group">
-        <Image
-          src="/office-bg.png"
-          alt="CEO Message"
-          fill
-          className="object-cover transition-transform duration-1000 group-hover:scale-110"
-        />
-        <div className="absolute inset-0 bg-[#001F5B]/40 backdrop-blur-[2px]" />
-        <div className="absolute inset-0 p-10 lg:p-14 flex flex-col justify-between">
-          <div>
-            <span className="font-mono text-blue-400 text-[10px] font-medium uppercase tracking-[0.5em] mb-4 block">
-              CEO Message
-            </span>
-            <h3 className="font-display text-white text-3xl lg:text-4xl font-bold leading-[1.25] tracking-tight">
-              &ldquo;고객과 함께 성장하는 <br />
-              최고의 보안 파트너가 <br />
-              되겠습니다.&rdquo;
-            </h3>
-          </div>
-          <div className="text-white">
-            <div className="w-12 h-1 bg-blue-500 mb-6 rounded-full" />
-            <p className="font-mono text-[10px] font-medium tracking-[0.3em] uppercase mb-1 opacity-80">
-              Representative Director
-            </p>
-            <p className="font-serif italic text-4xl font-medium">
-              Lee Byung-Doo
-            </p>
-          </div>
-        </div>
-      </aside>
     </div>
   );
 }
