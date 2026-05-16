@@ -300,12 +300,14 @@ export default function ChatBot() {
         >
           <span className="absolute inset-0 rounded-2xl bg-blue-500 opacity-10 group-hover:opacity-25 blur-lg transition-opacity" />
           <span className="relative flex flex-col items-center gap-1 bg-gradient-to-br from-[#0B1B3F] to-[#001F5B] border border-white/10 text-white px-3.5 py-2 rounded-2xl shadow-md shadow-indigo-900/20 hover:border-blue-400/40 hover:-translate-y-0.5 transition-all">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/boanlinks-logo.svg"
-              alt="BOANLINKS"
-              className="h-7 w-auto brightness-0 invert opacity-90"
-            />
+            <span className="bg-white rounded-md px-2 py-1 inline-flex items-center">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/boanlinks-logo.svg"
+                alt="BOANLINKS"
+                className="h-4 w-auto"
+              />
+            </span>
             <span className="flex items-center gap-1 leading-none">
               <span className="font-display text-[10px] sm:text-[11px] font-bold text-white/90 tracking-tight">
                 보안검진 · 매칭
