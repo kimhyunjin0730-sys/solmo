@@ -296,7 +296,7 @@ export default function ChatBot() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="보안검진 및 매칭서비스 — AI 보안링스 바로가기"
-          className="group fixed bottom-[78px] right-5 sm:bottom-[88px] sm:right-7 z-[60]"
+          className="group fixed bottom-[100px] right-5 sm:bottom-[112px] sm:right-7 z-[60]"
         >
           <span className="absolute inset-0 rounded-2xl bg-blue-500 opacity-10 group-hover:opacity-25 blur-lg transition-opacity" />
           <span className="relative flex flex-col items-center gap-1 bg-gradient-to-br from-[#0B1B3F] to-[#001F5B] border border-white/10 text-white px-3.5 py-2 rounded-2xl shadow-md shadow-indigo-900/20 hover:border-blue-400/40 hover:-translate-y-0.5 transition-all">
