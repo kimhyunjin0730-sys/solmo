@@ -164,10 +164,8 @@ export default function Home() {
             priority
             className="object-cover opacity-35"
           />
-          {/* 살짝 옅어진 오버레이 — 배경 이미지가 좀 더 비치게 */}
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-900/60 to-slate-900/25" />
-          <div className="absolute top-1/4 -left-32 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-indigo-600/15 rounded-full blur-[140px]" />
+          {/* 깔끔한 단색 오버레이 — 사진이 메인이 되도록 */}
+          <div className="absolute inset-0 bg-slate-950/70" />
           <div
             className="absolute inset-0 opacity-[0.04]"
             style={{
@@ -190,7 +188,7 @@ export default function Home() {
             <h1 className="font-display text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1.1] tracking-tight mb-5 sm:mb-6">
               미래를 보호하는
               <br />
-              <span className="bg-gradient-to-r from-blue-300 via-blue-400 to-indigo-400 bg-clip-text text-transparent">
+              <span className="text-blue-300">
                 지능형 보안의 기준.
               </span>
             </h1>
@@ -345,8 +343,6 @@ export default function Home() {
       </section>
 
       <section className="py-20 sm:py-28 lg:py-32 bg-slate-950 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none" />
         <div
           className="absolute inset-0 opacity-[0.04]"
           style={{
@@ -355,7 +351,6 @@ export default function Home() {
             backgroundSize: '80px 80px',
           }}
         />
-        <div className="absolute -bottom-40 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-gradient-to-t from-blue-600/20 to-transparent blur-[100px] pointer-events-none" />
 
         <div className="max-w-[1400px] mx-auto px-5 sm:px-8 relative z-10">
           <div className="grid lg:grid-cols-12 gap-8 mb-16 sm:mb-20">
@@ -366,7 +361,7 @@ export default function Home() {
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-[1.1]">
                 숫자로 증명하는
                 <br />
-                <span className="bg-gradient-to-r from-blue-300 to-indigo-400 bg-clip-text text-transparent">
+                <span className="text-blue-300">
                   솔모의 신뢰
                 </span>
               </h2>
@@ -508,8 +503,6 @@ export default function Home() {
 
       <section className="px-5 sm:px-8 pb-20 sm:pb-28">
         <div className="max-w-[1400px] mx-auto bg-gradient-to-br from-[#001F5B] via-[#001F5B] to-indigo-900 rounded-[2rem] sm:rounded-[3rem] p-10 sm:p-16 lg:p-20 text-white relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/20 rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-500/15 rounded-full blur-[120px] pointer-events-none" />
 
           <div className="relative z-10 grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             <div className="lg:col-span-7">
