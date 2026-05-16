@@ -59,9 +59,9 @@ const PHOTO_BY_ICON: Record<string, string> = {
   // 30+ workload protection — multi-cloud / data center 톤
   package:
     'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=1400',
-  // 빠르고 안정적인 복구 — long-exposure light trails (속도/복구)
+  // 빠르고 안정적인 복구 — 데이터센터 서버 랙 (속도·복원 톤)
   'refresh-ccw':
-    'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&q=80&w=1400',
+    'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1400',
   // File / users / camera
   'file-text':
     'https://images.unsplash.com/photo-1568667256549-094345857637?auto=format&fit=crop&q=80&w=1200',
