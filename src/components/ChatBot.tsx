@@ -298,23 +298,29 @@ export default function ChatBot() {
           aria-label="보안검진 및 매칭 서비스 — AI 보안링스 바로가기"
           className="group fixed bottom-[100px] right-5 sm:bottom-[112px] sm:right-7 z-[60]"
         >
-          <span className="relative flex items-center gap-2 bg-white border border-slate-200 text-slate-900 pl-3 pr-3.5 py-2.5 rounded-full shadow-lg shadow-slate-900/10 hover:border-blue-400 hover:-translate-y-0.5 transition-all">
+          <span className="relative flex items-center gap-3 bg-white border border-slate-200 text-slate-900 pl-3 pr-5 py-3 rounded-full shadow-lg shadow-slate-900/10 hover:border-blue-400 hover:-translate-y-0.5 transition-all w-[200px]">
             {/* 보안링스 체인 링크 아이콘 (블루) */}
-            <svg
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-              className="shrink-0"
-            >
-              <circle cx="9" cy="12" r="5.5" stroke="#2563EB" strokeWidth="2" />
-              <circle cx="15" cy="12" r="5.5" stroke="#60A5FA" strokeWidth="2" />
-            </svg>
-            <span className="font-display text-[12px] sm:text-[13px] font-bold tracking-tight whitespace-nowrap">
-              보안검진 · 매칭 서비스
+            <span className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+              <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <circle cx="9" cy="12" r="5.5" stroke="#2563EB" strokeWidth="2" />
+                <circle cx="15" cy="12" r="5.5" stroke="#60A5FA" strokeWidth="2" />
+              </svg>
             </span>
-            <span className="text-blue-600 text-sm group-hover:translate-x-0.5 transition-transform shrink-0">
+            <span className="flex-1 flex flex-col leading-tight">
+              <span className="font-display text-[13px] font-bold tracking-tight">
+                보안검진
+              </span>
+              <span className="font-display text-[13px] font-bold tracking-tight">
+                매칭 서비스
+              </span>
+            </span>
+            <span className="text-blue-600 text-base group-hover:translate-x-0.5 transition-transform shrink-0">
               ↗
             </span>
           </span>
@@ -329,11 +335,11 @@ export default function ChatBot() {
           className="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-[60] group"
         >
           <span className="absolute inset-0 rounded-full bg-blue-600 opacity-30 group-hover:opacity-50 blur-xl transition-opacity" />
-          <span className="relative flex items-center gap-3 bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white pl-3 pr-5 py-3 rounded-full shadow-2xl shadow-indigo-900/30 hover:scale-105 transition-transform">
-            <span className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center text-white">
+          <span className="relative flex items-center gap-3 bg-gradient-to-br from-indigo-600 to-[#001F5B] text-white pl-3 pr-5 py-3 rounded-full shadow-2xl shadow-indigo-900/30 hover:scale-105 transition-transform w-[200px]">
+            <span className="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center text-white shrink-0">
               <ChatGlyph size={22} />
             </span>
-            <span className="font-display text-sm font-bold tracking-tight pr-1 hidden sm:block">
+            <span className="font-display text-base font-bold tracking-tight flex-1 text-center">
               상담하기
             </span>
           </span>
