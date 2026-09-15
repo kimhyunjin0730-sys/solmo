@@ -292,7 +292,7 @@ export default function ChatBot() {
       {/* 보안링스 AI 매칭 — 챗봇 위에 떠 있는 외부 링크 CTA (흰 배경) */}
       {!open && (
         <a
-          href="https://bl-staging-web.apps.rtruesoft.kr/"
+          href="https://www.boanlinks.ai/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="보안 검진 및 매칭 서비스 — AI 보안링스 바로가기"

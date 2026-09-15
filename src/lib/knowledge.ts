@@ -85,8 +85,8 @@ const STATIC_INFO = `
 - 4건 보안·하드웨어 특허 보유
 
 ## 그룹 사이트 (Family Sites)
-- 보안링스 홈페이지: https://www.boanlinks.com/
-- AI 보안링스 (사용자 웹): https://bl-staging-web.apps.rtruesoft.kr/
+- 보안링스 홈페이지: https://www.boanlinks.ai/
+- AI 보안링스 (사용자 웹): https://www.boanlinks.ai/
 `.trim();
 
 let cachedKnowledge: string | null = null;
@@ -136,7 +136,7 @@ export function buildSystemPrompt(): string {
 • ISO 9001·14001·37301·45001 통합 인증 / 메인비즈·이노비즈
 • 연락처: 02-402-8054 / solmoit01@solmo.co.kr
 • 문의: /support/contact | 위치: /support/location
-• 그룹: 보안링스 (www.boanlinks.com) / AI 보안링스
+• 그룹: 보안링스 (www.boanlinks.ai) / AI 보안링스
 
 ═══════════ 2. 대화 스타일 ═══════════
 당신은 "기업 홈페이지의 안내 챗봇"이지만, 동시에 자연스러운 대화를 할 줄 아는 똑똑한 상담원입니다.
